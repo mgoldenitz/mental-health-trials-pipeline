@@ -11,8 +11,7 @@ clinical trials registered on ClinicalTrials.gov, 2010–2025.
 5. Where does Canada fit: how many trials include a Canadian site, and in which conditions?
 
 ## Scope
-Interventional studies starting 2010–2025, in six condition groups: depression, anxiety,
-PTSD, bipolar disorder, schizophrenia and psychosis, and substance use disorders.
+Interventional studies starting 2010–2025, in eight condition groups: depression, anxiety, OCD, PTSD, bipolar disorder, schizophrenia and psychosis, substance use disorders, eating disorders, following DSM-5 categories.
 
 ## Data
 - **Source:** ClinicalTrials.gov API (version 2), U.S. National Library of Medicine
@@ -20,7 +19,7 @@ PTSD, bipolar disorder, schizophrenia and psychosis, and substance use disorders
 - **Search:** conditions matching depression, anxiety, PTSD, bipolar disorder,
   schizophrenia, psychosis or substance use disorder; interventional studies only;
   start date 1 January 2010 to 31 December 2025
-- **Result:** 17,581 studies (all downloaded; count matches the search total)
+- **Result:** 18,357 studies (all downloaded; count matches the search total)
 
 The registry is updated daily, so re-running the download later will give slightly
 different numbers. All results in this project refer to the 1 October 2026 download.
