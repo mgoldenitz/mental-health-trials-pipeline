@@ -30,14 +30,14 @@ OCD and PTSD are separate groups because DSM-5 moved them out of the anxiety dis
 - **Downloaded:** 1 October 2026
 - **Search:** `query.cond` = depression OR anxiety OR PTSD OR "bipolar disorder" OR schizophrenia OR psychosis OR "substance use disorder" OR "obsessive-compulsive disorder" OR "eating disorder" OR "anorexia nervosa" OR "bulimia nervosa" OR "binge eating disorder"; study type = interventional; start date 2010-01-01 to 2025-12-31.
 - **Result:** 18,357 studies, downloaded 1 October 2026. The number of records downloaded matched the API's reported total.
-- **Analysis set:** 14,792 of the 18,357 trials (81%) list at least one grouped condition and are used in the analysis. The other 3,565 list only ungrouped conditions (e.g. pain, insomnia, healthy volunteers, or generic labels such as "Mental Disorder").
+- - **Analysis set:** 14,700 of the 18,357 trials (80%) list at least one grouped condition and are used in the analysis. The other 3,657 list only ungrouped conditions (e.g. pain, insomnia, healthy volunteers, or generic labels such as "Mental Disorder").
   
 The registry is updated daily, so re-running the download later will give slightly
 different numbers. All results in this project refer to the 1 October 2026 download.
 
 ## Condition grouping
 Each trial lists one or more conditions as free text. I assigned each listed condition to a group with keyword rules:
-1. **Exclusions are checked first.** Conditions that share a keyword but aren't psychiatric (respiratory or CNS depression, surgical, dental or procedural anxiety, traumatic brain injury) are left ungrouped.
+1. **Exclusions are checked first.** Conditions that share a keyword but aren't psychiatric (respiratory or CNS depression; pre-, peri- or postoperative, dental or procedural anxiety; kinesiophobia; traumatic brain injury) are left ungrouped.
 2. **The first matching group wins.** A condition such as "Depression and Anxiety" is counted under Depression.
 3. **A trial can belong to several groups** if it lists several conditions, so trial counts by group add up to more than the total.
 
@@ -46,21 +46,21 @@ Each trial lists one or more conditions as free text. I assigned each listed con
 | Group | Condition rows |
 |---|---|
 | Depression | 7,893 |
-| Anxiety | 4,763 |
+| Anxiety | 4,661 |
 | Schizophrenia & psychosis | 3,021 |
 | PTSD | 1,801 |
 | Substance use | 1,307 |
 | Eating disorders | 891 |
 | Bipolar disorder | 783 |
 | OCD | 449 |
-| Other (ungrouped) | 19,728 |
+| Other (ungrouped) | 19,830 |
 
 **Fixes made after checking the most common ungrouped conditions:**
 
 - PTSD: matched "Post Traumatic" written with a space or hyphen
 - Psychosis: whole words only, so "Psychosocial" no longer matches
 - OCD: removed "compulsive", which matched unrelated conditions
-- Anxiety: excluded presurgical, dental and procedural anxiety
+- Anxiety: excluded pre-, peri- and postoperative anxiety (in either word order), dental and procedural anxiety, and kinesiophobia (fear of movement in pain rehabilitation)
 - Substance use: narrowed "alcohol" to use-disorder terms, so "Alcohol Aftereffects" no longer matches
 
 **What stays in Other:**
