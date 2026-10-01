@@ -47,6 +47,7 @@ Each trial lists one or more conditions as free text. I assigned each listed con
 |---|---|
 | Depression | 7,893 |
 | Anxiety | 4,763 |
+| Schizophrenia & psychosis | 3,021 |
 | PTSD | 1,801 |
 | Substance use | 1,307 |
 | Eating disorders | 891 |
@@ -68,6 +69,7 @@ Each trial lists one or more conditions as free text. I assigned each listed con
 - Co-occurring conditions (pain, insomnia, stress, obesity)
 - Suicidal ideation, which may become a separate yes/no flag later
 - Conditions outside the search's scope
+  
 A possible upgrade is grouping by MeSH terms from the API (`conditionBrowseModule`) instead of keywords.
 
 ## Treatment flag
@@ -76,7 +78,9 @@ Each intervention is checked for psychedelic and ketamine treatments:
 - **Psychedelic / MDMA:** substance names (psilocybin, MDMA, LSD, DMT, 5-MeO-DMT, ayahuasca, ibogaine, mescaline and others) plus company drug codes, since industry trials often list only the code (e.g. COMP360, MM-120, CYB003, GH001, BPL-003, RE104, BMND08).
 - **Ketamine / esketamine:** flagged separately because both are already approved treatments, unlike psilocybin or MDMA.
 - Placebo arms named after a drug (e.g. "matched placebo") are excluded.
+  
 **Trials flagged (in scope):** 318 ketamine/esketamine, 165 psychedelic/MDMA. Out-of-scope trials removed: 25 ketamine (mostly anaesthesia, sedation and pain) and 7 psychedelic (healthy-volunteer studies, and two cancer trials that list only the cancer as the condition, even though anxiety is the focus).
+
 I checked the 40 most common flagged names by hand; all were genuine treatments.
 
 ## Data model
