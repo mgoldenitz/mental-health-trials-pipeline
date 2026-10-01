@@ -37,6 +37,8 @@ different numbers. All results in this project refer to the 1 October 2026 downl
 
 The raw download (`trials_raw.json`) and database (`trials.db`) aren't stored here because they're large; run the notebook to rebuild them.
 
+Run the notebook to rebuild the raw data and database.
+
 ## Condition grouping
 Each trial lists one or more conditions as free text. I assigned each listed condition to a group with keyword rules:
 1. **Exclusions are checked first.** Conditions that share a keyword but aren't psychiatric (respiratory or CNS depression; pre-, peri- or postoperative, dental or procedural anxiety; kinesiophobia; traumatic brain injury) are left ungrouped.
