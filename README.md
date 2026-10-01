@@ -14,6 +14,17 @@ clinical trials registered on ClinicalTrials.gov, 2010–2025.
 Interventional studies starting 2010–2025, in six condition groups: depression, anxiety,
 PTSD, bipolar disorder, schizophrenia and psychosis, and substance use disorders.
 
+## Data
+- **Source:** ClinicalTrials.gov API (version 2), U.S. National Library of Medicine
+- **Downloaded:** 1 October 2026
+- **Search:** conditions matching depression, anxiety, PTSD, bipolar disorder,
+  schizophrenia, psychosis or substance use disorder; interventional studies only;
+  start date 1 January 2010 to 31 December 2025
+- **Result:** 17,581 studies (all downloaded; count matches the search total)
+
+The registry is updated daily, so re-running the download later will give slightly
+different numbers. All results in this project refer to the 1 October 2026 download.
+
 ## Status
 In progress: data pull and SQL analysis (October 2026); AWS pipeline (November 2026).
 
