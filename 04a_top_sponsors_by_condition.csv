@@ -1,0 +1,42 @@
+condition_group,sponsor_name,sponsor_class,trials,rnk
+Anxiety,Karolinska Institutet,OTHER,54,1
+Anxiety,Massachusetts General Hospital,OTHER,49,2
+Anxiety,"University of California, Los Angeles",OTHER,41,3
+Anxiety,VA Office of Research and Development,FED,35,4
+Anxiety,Stanford University,OTHER,34,5
+Bipolar disorder,Massachusetts General Hospital,OTHER,29,1
+Bipolar disorder,Mclean Hospital,OTHER,18,2
+Bipolar disorder,VA Office of Research and Development,FED,16,3
+Bipolar disorder,University of Michigan,OTHER,13,4
+Bipolar disorder,Centre for Addiction and Mental Health,OTHER,12,5
+Depression,Massachusetts General Hospital,OTHER,126,1
+Depression,VA Office of Research and Development,FED,82,2
+Depression,Stanford University,OTHER,67,3
+Depression,"University of California, Los Angeles",OTHER,66,4
+Depression,Centre for Addiction and Mental Health,OTHER,65,5
+Eating disorders,Stanford University,OTHER,17,1
+Eating disorders,"University of California, San Diego",OTHER,16,2
+Eating disorders,King's College London,OTHER,15,3
+Eating disorders,Drexel University,OTHER,13,4
+Eating disorders,Massachusetts General Hospital,OTHER,13,4
+Eating disorders,Yale University,OTHER,13,4
+OCD,Shanghai Mental Health Center,OTHER,21,1
+OCD,Massachusetts General Hospital,OTHER,16,2
+OCD,New York State Psychiatric Institute,OTHER,16,2
+OCD,Karolinska Institutet,OTHER,14,4
+OCD,Baylor College of Medicine,OTHER,13,5
+PTSD,VA Office of Research and Development,FED,185,1
+PTSD,Medical University of South Carolina,OTHER,32,2
+PTSD,University of Washington,OTHER,28,3
+PTSD,Karolinska Institutet,OTHER,25,4
+PTSD,The University of Texas Health Science Center at San Antonio,OTHER,23,5
+Schizophrenia & psychosis,"Otsuka Pharmaceutical Development & Commercialization, Inc.",INDUSTRY,60,1
+Schizophrenia & psychosis,Centre for Addiction and Mental Health,OTHER,47,2
+Schizophrenia & psychosis,Shanghai Mental Health Center,OTHER,44,3
+Schizophrenia & psychosis,VA Office of Research and Development,FED,44,3
+Schizophrenia & psychosis,"University of Maryland, Baltimore",OTHER,33,5
+Substance use,VA Office of Research and Development,FED,47,1
+Substance use,Medical University of South Carolina,OTHER,31,2
+Substance use,Yale University,OTHER,26,3
+Substance use,Centre for Addiction and Mental Health,OTHER,24,4
+Substance use,"University of California, San Francisco",OTHER,16,5

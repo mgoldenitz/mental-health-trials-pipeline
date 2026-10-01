@@ -1,0 +1,129 @@
+start_year,condition_group,trials,prev_year,pct_change
+2010,Anxiety,80,,
+2011,Anxiety,85,80.0,6.3
+2012,Anxiety,102,85.0,20.0
+2013,Anxiety,99,102.0,-2.9
+2014,Anxiety,141,99.0,42.4
+2015,Anxiety,163,141.0,15.6
+2016,Anxiety,168,163.0,3.1
+2017,Anxiety,200,168.0,19.0
+2018,Anxiety,239,200.0,19.5
+2019,Anxiety,258,239.0,7.9
+2020,Anxiety,263,258.0,1.9
+2021,Anxiety,415,263.0,57.8
+2022,Anxiety,392,415.0,-5.5
+2023,Anxiety,477,392.0,21.7
+2024,Anxiety,540,477.0,13.2
+2025,Anxiety,518,540.0,-4.1
+2010,Bipolar disorder,50,,
+2011,Bipolar disorder,40,50.0,-20.0
+2012,Bipolar disorder,40,40.0,0.0
+2013,Bipolar disorder,42,40.0,5.0
+2014,Bipolar disorder,54,42.0,28.6
+2015,Bipolar disorder,36,54.0,-33.3
+2016,Bipolar disorder,33,36.0,-8.3
+2017,Bipolar disorder,48,33.0,45.5
+2018,Bipolar disorder,38,48.0,-20.8
+2019,Bipolar disorder,37,38.0,-2.6
+2020,Bipolar disorder,28,37.0,-24.3
+2021,Bipolar disorder,39,28.0,39.3
+2022,Bipolar disorder,52,39.0,33.3
+2023,Bipolar disorder,49,52.0,-5.8
+2024,Bipolar disorder,55,49.0,12.2
+2025,Bipolar disorder,48,55.0,-12.7
+2010,Depression,265,,
+2011,Depression,267,265.0,0.8
+2012,Depression,273,267.0,2.2
+2013,Depression,244,273.0,-10.6
+2014,Depression,304,244.0,24.6
+2015,Depression,326,304.0,7.2
+2016,Depression,368,326.0,12.9
+2017,Depression,367,368.0,-0.3
+2018,Depression,412,367.0,12.3
+2019,Depression,484,412.0,17.5
+2020,Depression,442,484.0,-8.7
+2021,Depression,621,442.0,40.5
+2022,Depression,581,621.0,-6.4
+2023,Depression,624,581.0,7.4
+2024,Depression,668,624.0,7.1
+2025,Depression,690,668.0,3.3
+2010,Eating disorders,17,,
+2011,Eating disorders,15,17.0,-11.8
+2012,Eating disorders,24,15.0,60.0
+2013,Eating disorders,20,24.0,-16.7
+2014,Eating disorders,24,20.0,20.0
+2015,Eating disorders,36,24.0,50.0
+2016,Eating disorders,38,36.0,5.6
+2017,Eating disorders,42,38.0,10.5
+2018,Eating disorders,44,42.0,4.8
+2019,Eating disorders,47,44.0,6.8
+2020,Eating disorders,43,47.0,-8.5
+2021,Eating disorders,62,43.0,44.2
+2022,Eating disorders,52,62.0,-16.1
+2023,Eating disorders,70,52.0,34.6
+2024,Eating disorders,70,70.0,0.0
+2025,Eating disorders,61,70.0,-12.9
+2010,OCD,11,,
+2011,OCD,20,11.0,81.8
+2012,OCD,20,20.0,0.0
+2013,OCD,19,20.0,-5.0
+2014,OCD,29,19.0,52.6
+2015,OCD,23,29.0,-20.7
+2016,OCD,25,23.0,8.7
+2017,OCD,23,25.0,-8.0
+2018,OCD,21,23.0,-8.7
+2019,OCD,31,21.0,47.6
+2020,OCD,21,31.0,-32.3
+2021,OCD,33,21.0,57.1
+2022,OCD,39,33.0,18.2
+2023,OCD,27,39.0,-30.8
+2024,OCD,42,27.0,55.6
+2025,OCD,36,42.0,-14.3
+2010,PTSD,71,,
+2011,PTSD,62,71.0,-12.7
+2012,PTSD,86,62.0,38.7
+2013,PTSD,74,86.0,-14.0
+2014,PTSD,67,74.0,-9.5
+2015,PTSD,77,67.0,14.9
+2016,PTSD,96,77.0,24.7
+2017,PTSD,89,96.0,-7.3
+2018,PTSD,85,89.0,-4.5
+2019,PTSD,121,85.0,42.4
+2020,PTSD,117,121.0,-3.3
+2021,PTSD,138,117.0,17.9
+2022,PTSD,143,138.0,3.6
+2023,PTSD,134,143.0,-6.3
+2024,PTSD,155,134.0,15.7
+2025,PTSD,159,155.0,2.6
+2010,Schizophrenia & psychosis,127,,
+2011,Schizophrenia & psychosis,136,127.0,7.1
+2012,Schizophrenia & psychosis,136,136.0,0.0
+2013,Schizophrenia & psychosis,128,136.0,-5.9
+2014,Schizophrenia & psychosis,155,128.0,21.1
+2015,Schizophrenia & psychosis,125,155.0,-19.4
+2016,Schizophrenia & psychosis,135,125.0,8.0
+2017,Schizophrenia & psychosis,127,135.0,-5.9
+2018,Schizophrenia & psychosis,134,127.0,5.5
+2019,Schizophrenia & psychosis,158,134.0,17.9
+2020,Schizophrenia & psychosis,121,158.0,-23.4
+2021,Schizophrenia & psychosis,141,121.0,16.5
+2022,Schizophrenia & psychosis,156,141.0,10.6
+2023,Schizophrenia & psychosis,165,156.0,5.8
+2024,Schizophrenia & psychosis,150,165.0,-9.1
+2025,Schizophrenia & psychosis,149,150.0,-0.7
+2010,Substance use,23,,
+2011,Substance use,26,23.0,13.0
+2012,Substance use,32,26.0,23.1
+2013,Substance use,35,32.0,9.4
+2014,Substance use,29,35.0,-17.1
+2015,Substance use,41,29.0,41.4
+2016,Substance use,36,41.0,-12.2
+2017,Substance use,63,36.0,75.0
+2018,Substance use,57,63.0,-9.5
+2019,Substance use,77,57.0,35.1
+2020,Substance use,66,77.0,-14.3
+2021,Substance use,83,66.0,25.8
+2022,Substance use,101,83.0,21.7
+2023,Substance use,88,101.0,-12.9
+2024,Substance use,85,88.0,-3.4
+2025,Substance use,113,85.0,32.9
