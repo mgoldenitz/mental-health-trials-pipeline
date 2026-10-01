@@ -30,10 +30,12 @@ OCD and PTSD are separate groups because DSM-5 moved them out of the anxiety dis
 - **Downloaded:** 1 October 2026
 - **Search:** `query.cond` = depression OR anxiety OR PTSD OR "bipolar disorder" OR schizophrenia OR psychosis OR "substance use disorder" OR "obsessive-compulsive disorder" OR "eating disorder" OR "anorexia nervosa" OR "bulimia nervosa" OR "binge eating disorder"; study type = interventional; start date 2010-01-01 to 2025-12-31.
 - **Result:** 18,357 studies, downloaded 1 October 2026. The number of records downloaded matched the API's reported total.
-- - **Analysis set:** 14,700 of the 18,357 trials (80%) list at least one grouped condition and are used in the analysis. The other 3,657 list only ungrouped conditions (e.g. pain, insomnia, healthy volunteers, or generic labels such as "Mental Disorder").
+- **Analysis set:** 14,713 of the 18,357 trials (80%) list at least one grouped condition and are used in the analysis. The other 3,644 list only ungrouped conditions (e.g. pain, insomnia, healthy volunteers, or generic labels such as "Mental Disorder").
   
 The registry is updated daily, so re-running the download later will give slightly
 different numbers. All results in this project refer to the 1 October 2026 download.
+
+The raw download (`trials_raw.json`) and database (`trials.db`) aren't stored here because they're large; run the notebook to rebuild them.
 
 ## Condition grouping
 Each trial lists one or more conditions as free text. I assigned each listed condition to a group with keyword rules:
@@ -50,10 +52,10 @@ Each trial lists one or more conditions as free text. I assigned each listed con
 | Schizophrenia & psychosis | 3,021 |
 | PTSD | 1,801 |
 | Substance use | 1,307 |
-| Eating disorders | 891 |
+| Eating disorders | 924 |
 | Bipolar disorder | 783 |
 | OCD | 449 |
-| Other (ungrouped) | 19,830 |
+| Other (ungrouped) | 19,797 |
 
 **Fixes made after checking the most common ungrouped conditions:**
 
@@ -62,6 +64,7 @@ Each trial lists one or more conditions as free text. I assigned each listed con
 - OCD: removed "compulsive", which matched unrelated conditions
 - Anxiety: excluded pre-, peri- and postoperative anxiety (in either word order), dental and procedural anxiety, and kinesiophobia (fear of movement in pain rehabilitation)
 - Substance use: narrowed "alcohol" to use-disorder terms, so "Alcohol Aftereffects" no longer matches
+- Eating disorders: added "disordered eating", ARFID written out in full ("avoidant restrictive food intake disorder") and "feeding disorder of infancy", found during validation
 
 **What stays in Other:**
 
@@ -94,11 +97,24 @@ The API's nested JSON is flattened into four tables, saved as CSV and loaded int
 
 All queries count `DISTINCT nct_id`, because joins repeat trials that have several conditions, treatments or countries.
 
+## Validation
+
+I compared my counts with searches on the ClinicalTrials.gov website (condition + Interventional + start year), run on 1 October 2026:
+
+| Check | My pipeline | Website | Result |
+|---|---|---|---|
+| Schizophrenia & psychosis, 2020 | 121 | 121 | Exact match |
+| PTSD, 2022 | 143 | 149 | 96%; the website expands "PTSD" to related terms such as subclinical PTSD |
+| Eating disorders, 2024 | 70 | 154 | See below |
+
+**Eating disorders:** I downloaded the website's 154 trials and compared trial IDs. 87 of them are obesity, weight, diet and metabolic studies that the website's synonym expansion links to "eating disorder". 67 of those weren't in my download, because my search used exact phrases, and 20 were in my data but correctly not grouped as eating disorders. The check also found three wordings my rules missed (disordered eating, ARFID written out in full, feeding disorder of infancy). After adding them, all 67 genuine eating disorder trials on the website are captured. My count of 70 includes 3 trials the website search doesn't return.
+
 ## Status
 - [x] Download from the ClinicalTrials.gov API (1 Oct 2026)
 - [x] Clean, group conditions, flag psychedelic and ketamine treatments
 - [x] Load into SQLite
-- [ ] SQL analysis (in progress)
+- [x] SQL analysis (11 queries in `sql/`, results in `results/`)
+- [x] Validate against ClinicalTrials.gov website searches
 - [ ] Power BI dashboard
 - [ ] AWS version (S3, Glue, Athena)
       
