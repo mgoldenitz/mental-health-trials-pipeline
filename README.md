@@ -3,6 +3,20 @@
 How is mental health treatment research changing? An analysis of interventional
 clinical trials registered on ClinicalTrials.gov, 2010–2025.
 
+## Key findings
+
+Based on 14,713 interventional trials that started 2010–2025 and list at least one of eight DSM-5-aligned conditions.
+
+- **Research on common disorders grew far faster than research on serious mental illness.** Comparing 2010–12 with 2023–25, anxiety trials grew 5.7×, eating disorders 3.6×, substance use 3.5× and depression 2.5×, while schizophrenia and bipolar disorder grew only 1.2×.
+- **Non-drug treatments now dominate.** Drug trials stayed roughly level (277 in 2010, 251 in 2025), but behavioural trials grew 3.4× (203 → 691) and device trials 10× (27 → 272), driven by brain stimulation (TMS, tDCS) and virtual reality. Drugs fell from 44% to 15% of treatment types.
+- **Universities and hospitals now sponsor nearly 9 in 10 trials.** Industry trials halved from 2010 to 2015 (134 → 69), then recovered to 126 by 2025, while academic trials grew 3.5× (366 → 1,269). Industry's share fell from 24% to 9%.
+- **Industry and academia stop trials for different reasons.** Industry trials stop early more often (15.9% vs 12.3%), mostly because of business decisions (27% of stated reasons) or lack of efficacy (17%). Academic trials stop because of recruitment (29%), funding (19%) and COVID-19 (14%). Safety was the stated reason in fewer than 1% of cases.
+- **Psychedelic trials surged after 2020.** 80% of the 165 psychedelic/MDMA trials started in 2021 or later, and they have outnumbered ketamine trials since 2023. Universities led the surge, but industry is overrepresented: it sponsors 23% of recent psychedelic trials, compared with about 9% of all trials.
+- **Canada ranks second.** 1,020 trials (6.9%) include a Canadian site, second only to the United States (6,438; 43.8%) in this registry, and roughly 25 trials per million people compared with about 19 in the US. Toronto's CAMH is a top-5 sponsor in four condition groups.
+- **COVID-19 left a clear mark.** In 2020, seven of eight condition groups started fewer trials; in 2021, all eight rose. Anxiety trials stepped up in 2021 and stayed higher, and COVID-specific trials explain only a small part of that rise.
+
+**Caveats:** ClinicalTrials.gov is US-based, so many European and Asian trials register elsewhere. Overall registration grew over this period, so comparisons between groups are more reliable than raw growth. Condition groups come from my own keyword rules (see Condition grouping and Validation below).
+
 ## Questions
 1. How has the number of mental health trials changed since 2010, by condition?
 2. Which treatment types are growing: drug, behavioural, device, or psychedelic-assisted?
