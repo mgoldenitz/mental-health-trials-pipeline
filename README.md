@@ -44,12 +44,9 @@ Each trial lists one or more conditions as free text. I assigned each listed con
 **Condition rows per group:**
 
 | Group | Condition rows |
-
 |---|---|
 | Depression | 7,893 |
 | Anxiety | 4,763 |
-
-| Schizophrenia & psychosis | 3,021 |
 | PTSD | 1,801 |
 | Substance use | 1,307 |
 | Eating disorders | 891 |
@@ -74,6 +71,7 @@ Each trial lists one or more conditions as free text. I assigned each listed con
 A possible upgrade is grouping by MeSH terms from the API (`conditionBrowseModule`) instead of keywords.
 
 ## Treatment flag
+
 Each intervention is checked for psychedelic and ketamine treatments:
 - **Psychedelic / MDMA:** substance names (psilocybin, MDMA, LSD, DMT, 5-MeO-DMT, ayahuasca, ibogaine, mescaline and others) plus company drug codes, since industry trials often list only the code (e.g. COMP360, MM-120, CYB003, GH001, BPL-003, RE104, BMND08).
 - **Ketamine / esketamine:** flagged separately because both are already approved treatments, unlike psilocybin or MDMA.
@@ -99,6 +97,5 @@ All queries count `DISTINCT nct_id`, because joins repeat trials that have sever
 - [ ] SQL analysis (in progress)
 - [ ] Power BI dashboard
 - [ ] AWS version (S3, Glue, Athena)
-In progress: data pull and SQL analysis (October 2026); AWS pipeline (November 2026).
-
-Data: ClinicalTrials.gov, U.S. National Library of Medicine.
+      
+Data: ClinicalTrials.gov, U.S. National Library of Medicine
