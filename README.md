@@ -3,6 +3,8 @@
 How is mental health treatment research changing? An analysis of interventional
 clinical trials registered on ClinicalTrials.gov, 2010–2025.
 
+![Overview page of the Power BI dashboard](images/overview.png)
+
 ## Key findings
 
 Based on 14,713 interventional trials that started 2010–2025 and list at least one of eight DSM-5-aligned conditions.
@@ -16,6 +18,26 @@ Based on 14,713 interventional trials that started 2010–2025 and list at least
 - **COVID-19 left a clear mark.** In 2020, seven of eight condition groups started fewer trials; in 2021, all eight rose. Anxiety trials stepped up in 2021 and stayed higher, and COVID-specific trials explain only a small part of that rise.
 
 **Caveats:** ClinicalTrials.gov is US-based, so many European and Asian trials register elsewhere. Overall registration grew over this period, so comparisons between groups are more reliable than raw growth. Condition groups come from my own keyword rules (see Condition grouping and Validation below).
+
+## Dashboard
+
+A five-page Power BI report built on the cleaned tables. A condition filter on every page focuses the whole report on one condition group.
+
+| Page | What it shows |
+|---|---|
+| **Overview** | Trials started per year by condition, with headline figures |
+| **Treatments** | Drug, behavioural and device trials per year; psychedelic vs ketamine trials |
+| **Sponsors & outcomes** | Sponsor mix over time, top 10 lead sponsors, stop rates, and why trials stop |
+| **Canada** | Top 10 countries, Canada's share by condition, and Canadian trials per year |
+| **Methods & caveats** | Data source, grouping rules, validation and limitations |
+
+- `Goldenitz_Mental_Health_Trials_Dashboard.pbix`: the Power BI file (open with Power BI Desktop)
+- `Goldenitz_Mental_Health_Trials_Dashboard.pdf`: a static copy of all five pages
+- `data/powerbi/`: the four tables the dashboard reads, exported by the notebook (step C5)
+
+![Treatments page](images/treatments.png)
+![Sponsors & outcomes page](images/sponsors-outcomes.png)
+![Canada page](images/canada.png)
 
 ## Questions
 1. How has the number of mental health trials changed since 2010, by condition?
@@ -50,8 +72,6 @@ The registry is updated daily, so re-running the download later will give slight
 different numbers. All results in this project refer to the 1 October 2026 download.
 
 The raw download (`trials_raw.json`) and database (`trials.db`) aren't stored here because they're large; run the notebook to rebuild them.
-
-Run the notebook to rebuild the raw data and database.
 
 ## Condition grouping
 Each trial lists one or more conditions as free text. I assigned each listed condition to a group with keyword rules:
@@ -131,7 +151,7 @@ I compared my counts with searches on the ClinicalTrials.gov website (condition 
 - [x] Load into SQLite
 - [x] SQL analysis (11 queries in `sql/`, results in `results/`)
 - [x] Validate against ClinicalTrials.gov website searches
-- [ ] Power BI dashboard
+- [x] Power BI dashboard (5 pages; `.pbix` and PDF in the repo)
 - [ ] AWS version (S3, Glue, Athena)
       
 Data: ClinicalTrials.gov, U.S. National Library of Medicine
