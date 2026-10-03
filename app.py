@@ -27,6 +27,14 @@ PHASE_LABELS = {
 }
 PHASE_ORDER = list(PHASE_LABELS.values()) + ["Not applicable"]
 
+# Outcome labels in sentence case, ordered from still running to finished
+OUTCOME_LABELS = {
+    "Ongoing or Unknown": "Ongoing or unknown",
+    "Completed": "Completed",
+    "Stopped Early": "Stopped early",
+}
+OUTCOME_ORDER = list(OUTCOME_LABELS.values())
+
 st.set_page_config(page_title="Mental Health Trial Tracker", page_icon="🧠", layout="wide")
 
 
@@ -51,6 +59,7 @@ def load_data():
     trials["in_canada"] = trials.index.isin(sites.loc[sites["country"] == "Canada", "nct_id"])
     trials["phase"] = trials["phase"].map(PHASE_LABELS).fillna("Not applicable")
     trials["status"] = trials["overall_status"].str.replace("_", " ").str.capitalize()
+    trials["outcome"] = trials["outcome"].map(OUTCOME_LABELS).fillna(trials["outcome"])
     trials["link"] = CTGOV + trials.index
     trials = trials.reset_index()
 
@@ -69,8 +78,12 @@ pick_groups = st.sidebar.multiselect("Condition", groups, placeholder="All condi
 treat_types = sorted(interventions["treatment_type"].dropna().unique())
 pick_treat = st.sidebar.multiselect("Treatment type", treat_types, placeholder="All treatment types")
 
-outcomes = sorted(trials["outcome"].dropna().unique())
-pick_outcome = st.sidebar.multiselect("Outcome", outcomes, placeholder="All outcomes")
+outcomes = [o for o in OUTCOME_ORDER if o in set(trials["outcome"])]
+pick_outcome = st.sidebar.multiselect("Outcome", outcomes, placeholder="All outcomes",
+                                      help="Ongoing or unknown covers trials still recruiting or running, "
+                                           "plus trials whose status hasn't been updated in two years. "
+                                           "Completed trials finished as planned. Stopped early covers "
+                                           "trials that were terminated, suspended or withdrawn.")
 
 phases = [p for p in PHASE_ORDER if p in set(trials["phase"])]
 pick_phase = st.sidebar.multiselect("Phase", phases, placeholder="All phases",
@@ -82,7 +95,7 @@ pick_phase = st.sidebar.multiselect("Phase", phases, placeholder="All phases",
 y_min, y_max = int(trials["start_year"].min()), int(trials["start_year"].max())
 years = st.sidebar.slider("Start year", y_min, y_max, (y_min, y_max))
 
-psy_only = st.sidebar.toggle("Psychedelic or ketamine trials only")
+psy_only = st.sidebar.toggle("Psychedelic & ketamine trials only")
 canada_only = st.sidebar.toggle("Trials in Canada")
 
 st.sidebar.caption("Data: ClinicalTrials.gov, trials starting 2010–2025, "
@@ -124,11 +137,11 @@ if view.empty:
 k1, k2, k3, k4 = st.columns(4)
 k1.metric("Trials", f"{len(view):,}")
 k2.metric("Recruiting now", f"{(view['overall_status'] == 'RECRUITING').sum():,}")
-k3.metric("Psychedelic or ketamine", f"{view['psychedelic_class'].notna().sum():,}")
+k3.metric("Psychedelic & ketamine", f"{view['psychedelic_class'].notna().sum():,}")
 k4.metric("In Canada", f"{view['in_canada'].sum():,}")
 
 tab_overview, tab_search, tab_psy, tab_canada = st.tabs(
-    ["Overview", "Find trials", "Psychedelics & ketamine", "Canada"])
+    ["Overview", "Find trials", "Psychedelic & ketamine", "Canada"])
 
 
 # ---------------------------------------------------------------- overview
@@ -162,7 +175,7 @@ with tab_overview:
 
     outc = view.groupby("outcome").size().reset_index(name="trials")
     fig = px.bar(outc, x="outcome", y="trials", labels={"trials": "Trials", "outcome": ""},
-                 title="Trial outcomes")
+                 category_orders={"outcome": OUTCOME_ORDER}, title="Trial outcomes")
     c4.plotly_chart(fig, width="stretch")
 
 
@@ -174,7 +187,12 @@ with tab_search:
         q = query.strip()
         table = view[view["title"].str.contains(q, case=False, na=False)
                      | view["sponsor_name"].str.contains(q, case=False, na=False)]
-    recruiting_first = st.checkbox("Show recruiting trials first", value=True)
+    can_recruit = not pick_outcome or "Ongoing or unknown" in pick_outcome
+    recruiting_first = st.checkbox(
+        "Show actively recruiting trials first", value=True, disabled=not can_recruit,
+        help=None if can_recruit else
+        "Recruiting trials are hidden by the Outcome filter. Add “Ongoing or unknown” to use this.")
+    recruiting_first = recruiting_first and can_recruit
     if recruiting_first:
         table = table.assign(_r=table["overall_status"].ne("RECRUITING")).sort_values(
             ["_r", "start_year"], ascending=[True, False])
@@ -208,7 +226,7 @@ with tab_search:
 with tab_psy:
     psy = view[view["psychedelic_class"].notna()]
     if psy.empty:
-        st.info("No psychedelic or ketamine trials match the current filters.")
+        st.info("No psychedelic & ketamine trials match the current filters.")
     else:
         st.write("Trials testing a classic psychedelic or MDMA, or ketamine / esketamine. "
                  "Classification comes from intervention names in the pipeline.")
@@ -220,7 +238,7 @@ with tab_psy:
                     .groupby(["start_year", "psychedelic_class"]).size().reset_index(name="trials"))
         fig = px.bar(psy_year, x="start_year", y="trials", color="psychedelic_class",
                      labels={"start_year": "Start year", "trials": "Trials", "psychedelic_class": ""},
-                     title="Psychedelic and ketamine trial starts per year")
+                     title="Psychedelic & ketamine trial starts per year")
         c1.plotly_chart(fig, width="stretch")
 
         psy_cond = (conditions[conditions["nct_id"].isin(psy["nct_id"])]
