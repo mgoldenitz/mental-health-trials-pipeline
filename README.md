@@ -2,8 +2,7 @@
 
    **Live app:** [mh-trials-tracker.streamlit.app](https://mh-trials-tracker.streamlit.app), where you can search and filter the trials interactively.
 
-How is mental health treatment research changing? An analysis of interventional
-clinical trials registered on ClinicalTrials.gov, 2010–2025.
+How is mental health treatment research changing? An analysis of interventional clinical trials registered on ClinicalTrials.gov, 2010–2025.
 
 ![Overview page of the Power BI dashboard](images/overview.png)
 
