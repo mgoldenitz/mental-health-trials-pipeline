@@ -1,6 +1,6 @@
 # Mental Health Clinical Trials Pipeline
 
-   **Live app:** [goldenitz-mh-trials-tracker.streamlit.app](https://mh-trials-tracker.streamlit.app), where you can search and filter the trials interactively.
+   **Live app:** [mh-trials-tracker.streamlit.app](https://mh-trials-tracker.streamlit.app), where you can search and filter the trials interactively.
 
 How is mental health treatment research changing? An analysis of interventional
 clinical trials registered on ClinicalTrials.gov, 2010–2025.
