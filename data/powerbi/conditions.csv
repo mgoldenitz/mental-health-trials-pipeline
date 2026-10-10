@@ -29,8 +29,9 @@ NCT04453865,Anxiety Disorders,Anxiety
 NCT06345963,Schizophrenia,Schizophrenia & psychosis
 NCT02757521,Treatment- Resistant Bipolar Disorder,Bipolar disorder
 NCT02757521,Bipolar Disorder,Bipolar disorder
-NCT02757521,Bipolar Depressive Disorder,Depression
+NCT02757521,Bipolar Depressive Disorder,Bipolar disorder
 NCT03036371,Anxiety,Anxiety
+NCT05731999,Drug Abuse,Substance use
 NCT06384521,Schizophrenia,Schizophrenia & psychosis
 NCT06384521,Major Depression,Depression
 NCT06384521,Bipolar Disorder,Bipolar disorder
@@ -178,6 +179,7 @@ NCT07130734,Depression - Major Depressive Disorder,Depression
 NCT07130734,Anxiety,Anxiety
 NCT04346771,Depressive Symptoms,Depression
 NCT06565429,Substance-Related Disorders,Substance use
+NCT06565429,Alcohol-Related Disorders,Substance use
 NCT03075657,Schizophrenia,Schizophrenia & psychosis
 NCT05571228,Schizophrenia,Schizophrenia & psychosis
 NCT05571228,Psychosis,Schizophrenia & psychosis
@@ -357,7 +359,7 @@ NCT03712462,Binge-Eating Disorder,Eating disorders
 NCT03712462,Binge Eating,Eating disorders
 NCT06105762,Depressive Disorder,Depression
 NCT06105762,Major Depressive Disorder,Depression
-NCT06105762,"Depression, Bipolar",Depression
+NCT06105762,"Depression, Bipolar",Bipolar disorder
 NCT06386588,Schizophrenia,Schizophrenia & psychosis
 NCT05136586,Performance Anxiety,Anxiety
 NCT04603235,Depression,Depression
@@ -503,7 +505,7 @@ NCT06443060,Anxiety,Anxiety
 NCT02593643,Major Depressive Disorder,Depression
 NCT02593643,Bipolar I Disorder,Bipolar disorder
 NCT02593643,Bipolar II Disorder,Bipolar disorder
-NCT02593643,Bipolar Depression,Depression
+NCT02593643,Bipolar Depression,Bipolar disorder
 NCT01739335,"Stress Disorders, Post-Traumatic",PTSD
 NCT05551468,Depressive Disorder,Depression
 NCT05551468,Anxiety Disorders,Anxiety
@@ -678,7 +680,7 @@ NCT03310112,Anxiety,Anxiety
 NCT03310112,Post Traumatic Stress Disorder,PTSD
 NCT03310112,Depression,Depression
 NCT03641300,Bipolar Disorder,Bipolar disorder
-NCT03641300,Bipolar Depression,Depression
+NCT03641300,Bipolar Depression,Bipolar disorder
 NCT03641300,Bipolar I Disorder,Bipolar disorder
 NCT03641300,Bipolar II Disorder,Bipolar disorder
 NCT02865629,Depression,Depression
@@ -701,7 +703,7 @@ NCT07151781,Paternal Postpartum Depression,Depression
 NCT06291467,Depression,Depression
 NCT06528067,Binge Eating,Eating disorders
 NCT01733602,Schizophrenia,Schizophrenia & psychosis
-NCT05849402,"Bipolar II Disorder, Most Recent Episode Major Depressive",Depression
+NCT05849402,"Bipolar II Disorder, Most Recent Episode Major Depressive",Bipolar disorder
 NCT05849402,Current Depressive Episode,Depression
 NCT05849402,Treatment Resistant Depression,Depression
 NCT01423253,Major Depressive Disorder,Depression
@@ -734,11 +736,13 @@ NCT03971097,Substance Use Disorders,Substance use
 NCT03971097,Opiate Dependence,Substance use
 NCT03971097,Opiate Withdrawal Syndrome,Substance use
 NCT03971097,Opioid-use Disorder,Substance use
+NCT03971097,Alcohol Withdrawal,Substance use
 NCT03971097,Alcohol Abuse,Substance use
 NCT03971097,Alcohol Use Disorder,Substance use
 NCT03971097,Cocaine Abuse,Substance use
 NCT03971097,Cocaine Use Disorder,Substance use
 NCT03971097,Cocaine Withdrawal,Substance use
+NCT03971097,Benzodiazepine Abuse,Substance use
 NCT03971097,Benzodiazepine Dependence,Substance use
 NCT03971097,Substance Abuse,Substance use
 NCT04041024,Bulimia Nervosa,Eating disorders
@@ -882,7 +886,7 @@ NCT05321602,Antipsychotic Agents,Schizophrenia & psychosis
 NCT05321602,Central Nervous System Depression,Depression
 NCT06374277,Depression,Depression
 NCT06374277,Anxiety,Anxiety
-NCT03567681,Bipolar Depression,Depression
+NCT03567681,Bipolar Depression,Bipolar disorder
 NCT04276012,Schizophrenia,Schizophrenia & psychosis
 NCT06231927,Depression,Depression
 NCT06231927,Anxiety,Anxiety
@@ -894,7 +898,7 @@ NCT01470469,"Anxiety, Separation",Anxiety
 NCT01470469,"Phobia, Social",Anxiety
 NCT04365972,Anxiety,Anxiety
 NCT01880957,Bipolar Disorder,Bipolar disorder
-NCT01880957,Bipolar Depression,Depression
+NCT01880957,Bipolar Depression,Bipolar disorder
 NCT01880957,Unipolar Depression,Depression
 NCT05625230,Depression,Depression
 NCT06695767,Major Depressive Disorder,Depression
@@ -943,6 +947,7 @@ NCT01204229,Anxiety,Anxiety
 NCT01204229,Depression,Depression
 NCT07716657,Depression Anxiety Disorder,Depression
 NCT05426057,"Depression, Anxiety",Depression
+NCT05426057,Drug Use,Substance use
 NCT03754712,MDD,Depression
 NCT06676228,Anxiety,Anxiety
 NCT06676228,Depression Not Otherwise Specified,Depression
@@ -970,8 +975,10 @@ NCT05410132,Depression,Depression
 NCT02909504,Bipolar Disorder,Bipolar disorder
 NCT01422447,Anxiety,Anxiety
 NCT01422447,Depression,Depression
+NCT01422447,Alcohol-abuse,Substance use
 NCT04443855,Maternal Depression,Depression
 NCT06126185,Anxiety,Anxiety
+NCT06119308,Benzodiazepine Use,Substance use
 NCT06119308,Anxiety,Anxiety
 NCT03808909,Substance Use Disorders,Substance use
 NCT02320799,Depression,Depression
@@ -1022,7 +1029,7 @@ NCT05818735,Depression,Depression
 NCT04686864,Eating Disorders,Eating disorders
 NCT06126198,Major Depressive Disorder,Depression
 NCT06126198,Unipolar Depression,Depression
-NCT06126198,Bipolar Depression,Depression
+NCT06126198,Bipolar Depression,Bipolar disorder
 NCT02741206,Post-partum Depression,Depression
 NCT05399784,Postpartum Depression,Depression
 NCT05839847,Anxiety,Anxiety
@@ -1066,7 +1073,7 @@ NCT02058693,Major Depressive Disorder,Depression
 NCT02026037,Posttraumatic Stress Disorder,PTSD
 NCT03433339,Major Depressive Disorder,Depression
 NCT01309581,Major Depression,Depression
-NCT01309581,Bipolar Depression,Depression
+NCT01309581,Bipolar Depression,Bipolar disorder
 NCT02106728,Eating Disorders,Eating disorders
 NCT05118828,Anxiety,Anxiety
 NCT05118828,Mild to Moderate Depression,Depression
@@ -1095,7 +1102,7 @@ NCT03924193,Binge-Eating Disorder,Eating disorders
 NCT01413932,Major Depressive Disorder (Part 2),Depression
 NCT02703363,Depression,Depression
 NCT02703363,Bipolar Disorder,Bipolar disorder
-NCT02703363,Bipolar Depression,Depression
+NCT02703363,Bipolar Depression,Bipolar disorder
 NCT05454293,Depressive Symptoms,Depression
 NCT05454293,Anxiety Disorders and Symptoms,Anxiety
 NCT02196506,Depressive Disorder,Depression
@@ -1149,6 +1156,7 @@ NCT06153004,Depressive Disorder,Depression
 NCT06372834,Major Depressive Disorder,Depression
 NCT06372834,Treatment-Resistant Depression,Depression
 NCT04394832,"Stress Disorders, Post-Traumatic",PTSD
+NCT04394832,"Stress Disorders, Traumatic",PTSD
 NCT07061132,Employment Anxiety,Anxiety
 NCT05513963,Depression,Depression
 NCT05513963,Anxiety,Anxiety
@@ -1168,7 +1176,7 @@ NCT07085143,Depression Disorders,Depression
 NCT04617015,Depression,Depression
 NCT05288699,Alcohol Abuse,Substance use
 NCT05288699,Anxiety,Anxiety
-NCT01213121,Bipolar Depression,Depression
+NCT01213121,Bipolar Depression,Bipolar disorder
 NCT03112304,Anxiety,Anxiety
 NCT03112304,Depression,Depression
 NCT02983058,Schizophrenia,Schizophrenia & psychosis
@@ -1207,7 +1215,7 @@ NCT05646732,Post Traumatic Stress Disorder,PTSD
 NCT05646732,PTSD,PTSD
 NCT04554121,Schizophrenia,Schizophrenia & psychosis
 NCT04554121,Schizoaffective Disorder,Schizophrenia & psychosis
-NCT05913947,"Depression, Bipolar",Depression
+NCT05913947,"Depression, Bipolar",Bipolar disorder
 NCT06775548,Depression Disorders,Depression
 NCT07129278,PTSD,PTSD
 NCT04642898,Anxiety Disorders,Anxiety
@@ -1225,7 +1233,7 @@ NCT06593847,Speech Anxiety,Anxiety
 NCT06922058,Anxiety,Anxiety
 NCT05950711,Major Depressive Disorder,Depression
 NCT03645811,Anxiety,Anxiety
-NCT01557192,Bipolar Depression,Depression
+NCT01557192,Bipolar Depression,Bipolar disorder
 NCT01557192,Unipolar Depression,Depression
 NCT05943171,Substance Use Disorders,Substance use
 NCT05943171,Alcohol Use Disorder,Substance use
@@ -1287,7 +1295,7 @@ NCT02803125,Posttraumatic Stress Disorder,PTSD
 NCT06850376,Anxiety Disorders,Anxiety
 NCT06850376,Depression,Depression
 NCT05518968,Depression,Depression
-NCT04998097,"Bipolar II Disorder, Most Recent Episode Major Depressive",Depression
+NCT04998097,"Bipolar II Disorder, Most Recent Episode Major Depressive",Bipolar disorder
 NCT07017478,Major Depressive Disorder,Depression
 NCT07017478,Depression,Depression
 NCT04328935,Post Traumatic Stress Disorder,PTSD
@@ -1408,6 +1416,7 @@ NCT02328833,Depression,Depression
 NCT06117033,Anxiety,Anxiety
 NCT02360033,Social Anxiety Disorder,Anxiety
 NCT06629064,Post-Traumatic Stress Disorders,PTSD
+NCT06629064,"Stress Disorders, Traumatic",PTSD
 NCT06629064,Post Traumatic Stress Disorder,PTSD
 NCT06629064,PTSD,PTSD
 NCT05012709,Psychotic Disorders,Schizophrenia & psychosis
@@ -1466,7 +1475,7 @@ NCT01102764,PTSD,PTSD
 NCT03243799,Depressive Disorder,Depression
 NCT02410616,"Depressive Disorder, Major",Depression
 NCT05026333,Anxiety,Anxiety
-NCT03427892,Bipolar Depression,Depression
+NCT03427892,Bipolar Depression,Bipolar disorder
 NCT07193563,Social Anxiety Disorder (SAD),Anxiety
 NCT06537921,Major Depressive Disorder,Depression
 NCT02765906,Anxiety,Anxiety
@@ -1549,6 +1558,8 @@ NCT03882541,Anxiety,Anxiety
 NCT06851741,Depression,Depression
 NCT03295305,Bipolar Disorder,Bipolar disorder
 NCT03665831,Major Depressive Disorder,Depression
+NCT06249542,Cannabis Abuse,Substance use
+NCT06249542,Drug Abuse,Substance use
 NCT06249542,Drug Use Disorders,Substance use
 NCT06249542,Opioid Use Disorder,Substance use
 NCT06249542,Opioid Abuse,Substance use
@@ -1653,8 +1664,8 @@ NCT01831440,Depressive Disorder,Depression
 NCT06624410,Anxiety,Anxiety
 NCT04643210,Bipolar Disorder,Bipolar disorder
 NCT04643210,"Affective Psychosis, Bipolar",Bipolar disorder
-NCT04643210,Manic-Depressive Psychosis,Depression
-NCT04643210,"Depression, Bipolar",Depression
+NCT04643210,Manic-Depressive Psychosis,Bipolar disorder
+NCT04643210,"Depression, Bipolar",Bipolar disorder
 NCT03194113,Post Traumatic Stress Disorder,PTSD
 NCT01613820,Major Depressive Disorder,Depression
 NCT06226779,Schizophrenia,Schizophrenia & psychosis
@@ -1674,7 +1685,7 @@ NCT03327259,Depressive Symptoms,Depression
 NCT03527459,Depression,Depression
 NCT03623880,Anxiety,Anxiety
 NCT02088580,Non-Psychotic Unipolar Depression,Depression
-NCT02088580,Bipolar Depression,Depression
+NCT02088580,Bipolar Depression,Bipolar disorder
 NCT01659320,Depression,Depression
 NCT05953779,Depression and/or Anxiety in the Mild-to-moderate Range,Depression
 NCT01699997,Schizophrenia,Schizophrenia & psychosis
@@ -1763,7 +1774,7 @@ NCT03707158,Anxiety Symptoms,Anxiety
 NCT03707158,"Anxiety, Mild to Moderate",Anxiety
 NCT03707158,Pediatric Anxiety Disorders,Anxiety
 NCT05564533,Depression,Depression
-NCT05375214,Bipolar Depression,Depression
+NCT05375214,Bipolar Depression,Bipolar disorder
 NCT05375214,Bipolar I Disorder,Bipolar disorder
 NCT02816684,Anxiety Disorders,Anxiety
 NCT07217652,Schizophrenia,Schizophrenia & psychosis
@@ -1888,7 +1899,7 @@ NCT01749098,Schizophrenia,Schizophrenia & psychosis
 NCT03176004,Anxiety,Anxiety
 NCT02837016,Anxiety,Anxiety
 NCT03058952,Depression,Depression
-NCT03402152,Bipolar Depression,Depression
+NCT03402152,Bipolar Depression,Bipolar disorder
 NCT05526833,Schizophrenia and Related Disorders,Schizophrenia & psychosis
 NCT03774433,Binge Eating,Eating disorders
 NCT06919133,Depression - Major Depressive Disorder,Depression
@@ -1906,7 +1917,7 @@ NCT06937892,Posttraumatic Stress Disorder (PTSD),PTSD
 NCT01803711,Major Depression,Depression
 NCT02840071,Anxiety,Anxiety
 NCT02840071,Depression,Depression
-NCT03395392,Bipolar Depression,Depression
+NCT03395392,Bipolar Depression,Bipolar disorder
 NCT02878928,Depression,Depression
 NCT02878928,Anxiety,Anxiety
 NCT04748367,Anxiety,Anxiety
@@ -2014,7 +2025,7 @@ NCT01949753,Obsessive-compulsive Disorder (OCD),OCD
 NCT00995553,Schizophrenia,Schizophrenia & psychosis
 NCT00995553,Schizoaffective Disorder,Schizophrenia & psychosis
 NCT05181995,PTSD,PTSD
-NCT06229977,Bipolar Depression,Depression
+NCT06229977,Bipolar Depression,Bipolar disorder
 NCT04441879,Postpartum Depression,Depression
 NCT04527627,Anxiety,Anxiety
 NCT04527627,Depression,Depression
@@ -2091,6 +2102,7 @@ NCT05530642,Posttraumatic Stress Disorder,PTSD
 NCT05530642,Major Depressive Disorder,Depression
 NCT05530642,Panic Disorder,Anxiety
 NCT05530642,Generalized Anxiety Disorder,Anxiety
+NCT05530642,Traumatic Stress Disorder,PTSD
 NCT01620086,Schizophrenia,Schizophrenia & psychosis
 NCT04656886,Remission in Depression,Depression
 NCT05865405,Depression,Depression
@@ -2228,6 +2240,7 @@ NCT06451965,Post-stroke Depression,Depression
 NCT05371665,Anxiety Disorder,Anxiety
 NCT05371665,Depressive Disorder,Depression
 NCT05103657,Post-Traumatic Stress Disorder,PTSD
+NCT06587139,Recreational Drug Use,Substance use
 NCT06587139,Depressive Symptoms,Depression
 NCT06587139,Anxiety,Anxiety
 NCT06462612,"Bipolar Disorder, Manic",Bipolar disorder
@@ -2364,7 +2377,7 @@ NCT06592573,Anxiety,Anxiety
 NCT06592573,Depressive Symptoms,Depression
 NCT06277973,Post-traumatic Stress Disorder,PTSD
 NCT06277973,Acute Stress Disorder,PTSD
-NCT02239094,Bipolar Depression,Depression
+NCT02239094,Bipolar Depression,Bipolar disorder
 NCT01323699,Anxiety,Anxiety
 NCT01323699,Depression,Depression
 NCT06988332,Anxiety Disorders,Anxiety
@@ -2394,11 +2407,11 @@ NCT03920384,Psychosis,Schizophrenia & psychosis
 NCT06256952,Alcohol Use Disorder,Substance use
 NCT06256952,Alcoholism,Substance use
 NCT06256952,Substance Use Disorders,Substance use
-NCT07246044,Bipolar Depression,Depression
-NCT07246044,Bipolar Disorder Depression,Depression
+NCT07246044,Bipolar Depression,Bipolar disorder
+NCT07246044,Bipolar Disorder Depression,Bipolar disorder
 NCT04182334,Anxiety,Anxiety
 NCT06706232,Bipolar II Disorder,Bipolar disorder
-NCT06706232,"Depression, Bipolar",Depression
+NCT06706232,"Depression, Bipolar",Bipolar disorder
 NCT06113887,Bipolar Disorder,Bipolar disorder
 NCT05849493,Generalized Anxiety Disorder,Anxiety
 NCT05730504,Substance Use Disorders,Substance use
@@ -2422,6 +2435,7 @@ NCT02452892,"Depressive Disorder, Treatment-resistant",Depression
 NCT02452892,"Depressive Disorder, Major",Depression
 NCT02545634,Anxiety,Anxiety
 NCT03869463,Depressive Symptoms,Depression
+NCT06419387,Traumatic Stress Disorder,PTSD
 NCT06391216,Depression,Depression
 NCT06391216,Anxiety,Anxiety
 NCT07203144,Depression - Major Depressive Disorder,Depression
@@ -2506,7 +2520,7 @@ NCT03327974,Current Major Depressive Disorder,Depression
 NCT07082790,Anxiety,Anxiety
 NCT02916810,Schizophrenia and Related Disorders,Schizophrenia & psychosis
 NCT05213013,Fear Anxiety,Anxiety
-NCT03658824,Bipolar Depression,Depression
+NCT03658824,Bipolar Depression,Bipolar disorder
 NCT03986827,Social Anxiety Disorder,Anxiety
 NCT02774642,Posttraumatic Stress Disorders,PTSD
 NCT02472470,Depressive Symptoms,Depression
@@ -2517,7 +2531,7 @@ NCT07149324,Disordered Eating Behaviors,Eating disorders
 NCT07149324,Disordered Eating,Eating disorders
 NCT05813080,Psychotic Disorders,Schizophrenia & psychosis
 NCT05643170,Schizophrenia,Schizophrenia & psychosis
-NCT06516991,Bipolar Depression,Depression
+NCT06516991,Bipolar Depression,Bipolar disorder
 NCT04075890,OCD,OCD
 NCT06530290,Anxiety,Anxiety
 NCT04657380,Psychosis; Episode,Schizophrenia & psychosis
@@ -2563,7 +2577,7 @@ NCT04706442,Postnatal Depression,Depression
 NCT04706442,Anxiety,Anxiety
 NCT03360942,Treatment Resistant Depression,Depression
 NCT03360942,"Depressive Disorder, Treatment-Resistant",Depression
-NCT03360942,"Depression, Bipolar",Depression
+NCT03360942,"Depression, Bipolar",Bipolar disorder
 NCT03012724,Major Depressive Disorder (MDD),Depression
 NCT07067424,Anxiety,Anxiety
 NCT03606759,Addictive Behavior,Substance use
@@ -2884,7 +2898,7 @@ NCT07380061,Perinatal Anxiety,Anxiety
 NCT03408873,Bipolar Disorder,Bipolar disorder
 NCT07150741,Anxiety State,Anxiety
 NCT03581305,Depression,Depression
-NCT01514422,Bipolar Depression,Depression
+NCT01514422,Bipolar Depression,Bipolar disorder
 NCT05974631,Post-traumatic Stress Disorder (PTSD),PTSD
 NCT01507753,Bipolar Disorder,Bipolar disorder
 NCT04173572,Schizophrenia,Schizophrenia & psychosis
@@ -2915,7 +2929,7 @@ NCT04333277,Depression,Depression
 NCT06066112,Schizophrenia,Schizophrenia & psychosis
 NCT03627195,Schizophrenia,Schizophrenia & psychosis
 NCT01228539,PTSD,PTSD
-NCT01986101,Bipolar Depression,Depression
+NCT01986101,Bipolar Depression,Bipolar disorder
 NCT03172728,Obsessive-Compulsive Disorder,OCD
 NCT05937867,Postpartum Depression,Depression
 NCT02170467,Anorexia Nervosa,Eating disorders
@@ -2949,7 +2963,7 @@ NCT05435508,Anxiety,Anxiety
 NCT06928740,Anxiety,Anxiety
 NCT05598450,Schizophrenia,Schizophrenia & psychosis
 NCT01799291,Bipolar Disorder,Bipolar disorder
-NCT01566591,Bipolar Depression,Depression
+NCT01566591,Bipolar Depression,Bipolar disorder
 NCT03765138,PTSD,PTSD
 NCT03765138,MDD,Depression
 NCT01497548,Depression,Depression
@@ -3014,7 +3028,7 @@ NCT02654366,Substance Use Disorders,Substance use
 NCT03871842,Depressive Symptoms,Depression
 NCT04769986,Alcohol Use Disorder,Substance use
 NCT04769986,Posttraumatic Stress Disorder,PTSD
-NCT06063369,Bipolar Depression,Depression
+NCT06063369,Bipolar Depression,Bipolar disorder
 NCT06063369,Major Depressive Disorder,Depression
 NCT05508854,Anxiety,Anxiety
 NCT01163266,"Depressive Disorder, Major",Depression
@@ -3047,7 +3061,7 @@ NCT02594696,Major Depression,Depression
 NCT02594696,Schizophrenia,Schizophrenia & psychosis
 NCT02594696,Bipolar Disorder,Bipolar disorder
 NCT03546946,Anxiety,Anxiety
-NCT06370988,Bipolar Depression,Depression
+NCT06370988,Bipolar Depression,Bipolar disorder
 NCT06370988,Bipolar Disorder,Bipolar disorder
 NCT06370988,Treatment- Resistant Bipolar Disorder,Bipolar disorder
 NCT06370988,Type 2 Bipolar Disorder,Bipolar disorder
@@ -3137,7 +3151,7 @@ NCT02456896,Bipolar Disorder,Bipolar disorder
 NCT05168696,Anxiety,Anxiety
 NCT02552108,Generalized Anxiety Disorder,Anxiety
 NCT03219008,Depressive Disorder,Depression
-NCT06022913,Bipolar Depression,Depression
+NCT06022913,Bipolar Depression,Bipolar disorder
 NCT06542224,Obsessive-Compulsive Disorder,OCD
 NCT01599624,Anxiety,Anxiety
 NCT01599624,Depression,Depression
@@ -3263,6 +3277,11 @@ NCT05534568,"Alcohol Use Complicating Pregnancy, Third Trimester",Substance use
 NCT05534568,"Alcohol Use Complicating Pregnancy, Unspecified Trimester",Substance use
 NCT05534568,"Alcohol Use Complicating Pregnancy, Childbirth, and the Puerperium",Substance use
 NCT05534568,Drug Use Disorders,Substance use
+NCT05534568,"Drug Use Complicating Pregnancy, First Trimester",Substance use
+NCT05534568,"Drug Use Complicating Pregnancy, Second Trimester",Substance use
+NCT05534568,"Drug Use Complicating Pregnancy, Third Trimester",Substance use
+NCT05534568,"Drug Use Complicating Pregnancy, Unspecified Trimester",Substance use
+NCT05534568,"Drug Use Complicating Pregnancy, Childbirth, and the Puerperium",Substance use
 NCT02467374,Obsessive Compulsive Disorder,OCD
 NCT02986490,Schizophrenia,Schizophrenia & psychosis
 NCT02986490,Schizoaffective Disorder,Schizophrenia & psychosis
@@ -3315,7 +3334,7 @@ NCT05383313,Treatment Resistant Depression,Depression
 NCT05148260,Postnatal Depression,Depression
 NCT01175135,Schizophrenia,Schizophrenia & psychosis
 NCT03907917,Anxiety Disorders,Anxiety
-NCT02640950,Bipolar Depression,Depression
+NCT02640950,Bipolar Depression,Bipolar disorder
 NCT03609190,Major Depressive Disorder,Depression
 NCT06858189,"Depression, Anxiety",Depression
 NCT01588717,Depression,Depression
@@ -3585,6 +3604,7 @@ NCT03574155,Anxiety Disorders,Anxiety
 NCT03265015,Obsessive-Compulsive Disorder,OCD
 NCT02335125,Posttraumatic Stress Disorder,PTSD
 NCT02335125,Depression,Depression
+NCT02335125,Alcohol-Related Disorders,Substance use
 NCT02335125,Substance-Related Disorders,Substance use
 NCT04889976,Major Depressive Disorder,Depression
 NCT04889976,Unipolar Depression,Depression
@@ -3690,7 +3710,7 @@ NCT05908565,Depression,Depression
 NCT05908565,Anxiety,Anxiety
 NCT05337800,Clinical Anxiety,Anxiety
 NCT02719392,Bipolar Disorder,Bipolar disorder
-NCT02719392,Bipolar Depression,Depression
+NCT02719392,Bipolar Depression,Bipolar disorder
 NCT05964036,Depression,Depression
 NCT05964036,Major Depressive Disorder,Depression
 NCT05964036,Severe Depression,Depression
@@ -3757,7 +3777,7 @@ NCT03995420,Schizophrenia,Schizophrenia & psychosis
 NCT03209882,Post-traumatic Stress Disorder (PTSD),PTSD
 NCT05364450,Anxiety,Anxiety
 NCT05138068,Social Anxiety Disorder,Anxiety
-NCT04121091,"Depression, Bipolar",Depression
+NCT04121091,"Depression, Bipolar",Bipolar disorder
 NCT04121091,"Depression, Unipolar",Depression
 NCT04121091,Dysthymia,Depression
 NCT04121091,Anhedonia,Depression
@@ -3881,7 +3901,7 @@ NCT07039305,Post-stroke Depression,Depression
 NCT04183205,Posttraumatic Stress Disorder,PTSD
 NCT04183205,Major Depressive Disorder,Depression
 NCT01427894,Maternal Anxiety,Anxiety
-NCT02600494,Bipolar Depression,Depression
+NCT02600494,Bipolar Depression,Bipolar disorder
 NCT01765829,Psychosis Nos/Other,Schizophrenia & psychosis
 NCT04781231,Anxiety,Anxiety
 NCT02705898,Alcohol Dependence,Substance use
@@ -4317,7 +4337,7 @@ NCT04959695,Posttraumatic Stress Disorder,PTSD
 NCT06901739,Anxiety,Anxiety
 NCT06901739,Depressive Disorder,Depression
 NCT02667353,Depression,Depression
-NCT04427137,Bipolar Depression,Depression
+NCT04427137,Bipolar Depression,Bipolar disorder
 NCT01552772,Schizophrenia,Schizophrenia & psychosis
 NCT04747249,Post Traumatic Stress Disorder,PTSD
 NCT06026826,Anxiety Disorder,Anxiety
@@ -4459,7 +4479,7 @@ NCT01239173,Posttraumatic Stress Disorder,PTSD
 NCT05032469,Anxiety,Anxiety
 NCT07065669,Obsessive-Compulsive Disorder,OCD
 NCT04932369,Anxiety,Anxiety
-NCT01807741,Bipolar Depression,Depression
+NCT01807741,Bipolar Depression,Bipolar disorder
 NCT02148354,Internet-based Treatment for Depression,Depression
 NCT05165654,Psychosis,Schizophrenia & psychosis
 NCT03434405,Schizophrenia and Disorders With Psychotic Feature,Schizophrenia & psychosis
@@ -4508,7 +4528,7 @@ NCT01982422,Anxiety,Anxiety
 NCT04469322,Depression,Depression
 NCT04469322,Depressive Disorder,Depression
 NCT04469322,"Depressive Disorder, Major",Depression
-NCT04469322,"Depression, Bipolar",Depression
+NCT04469322,"Depression, Bipolar",Bipolar disorder
 NCT04469322,Depressive Episode,Depression
 NCT04291196,Anxiety,Anxiety
 NCT04291196,Depression,Depression
@@ -4642,7 +4662,7 @@ NCT04537195,Anxiety,Anxiety
 NCT04537195,Depression,Depression
 NCT04595539,"Depression, Anxiety",Depression
 NCT07108257,Treatment-Resistant Depression,Depression
-NCT07108257,Bipolar Depression,Depression
+NCT07108257,Bipolar Depression,Bipolar disorder
 NCT01126801,Menopausal Depression,Depression
 NCT02507219,Major Depressive Disorder,Depression
 NCT04845230,Post Partum Depression,Depression
@@ -4665,6 +4685,7 @@ NCT02702154,Depression,Depression
 NCT03711266,PTSD,PTSD
 NCT04394156,Post Traumatic Stress Disorder,PTSD
 NCT04394156,"Stress Disorders, Post-Traumatic",PTSD
+NCT04394156,"Stress Disorders, Traumatic",PTSD
 NCT02538445,Schizophrenia,Schizophrenia & psychosis
 NCT06559501,Depression,Depression
 NCT06559501,Anxiety,Anxiety
@@ -4723,6 +4744,7 @@ NCT01702220,Generalized Anxiety Disorder,Anxiety
 NCT01702220,Anxiety Disorder NOS,Anxiety
 NCT03881449,Schizophrenia,Schizophrenia & psychosis
 NCT03881449,Major Depressive Disorder,Depression
+NCT03881449,Bi-Polar Disorder,Bipolar disorder
 NCT03881449,Schizo Affective Disorder,Schizophrenia & psychosis
 NCT03327038,Depression,Depression
 NCT03327038,Anxiety,Anxiety
@@ -4739,7 +4761,7 @@ NCT05018260,Social Anxiety Disorder (Social Phobia),Anxiety
 NCT05018260,Social Anxiety,Anxiety
 NCT05018260,Social Anxiety Disorder,Anxiety
 NCT02176824,Major Depressive Disorder,Depression
-NCT02176824,Bipolar Depression,Depression
+NCT02176824,Bipolar Depression,Bipolar disorder
 NCT01583023,Bipolar Disorder,Bipolar disorder
 NCT07713225,Fear Anxiety,Anxiety
 NCT01826240,"Monopolar Depression, Single Episode or Unspecified",Depression
@@ -4823,6 +4845,7 @@ NCT05340504,Bipolar I Disorder,Bipolar disorder
 NCT05340504,Bipolar II Disorder,Bipolar disorder
 NCT02180984,Binge Eating,Eating disorders
 NCT06978257,Mild to Moderate Anxiety and Depression,Depression
+NCT01273701,Amphetamine Abuse,Substance use
 NCT01273701,Amphetamine Dependence,Substance use
 NCT01273701,Methamphetamine Abuse,Substance use
 NCT01273701,Methamphetamine Dependence,Substance use
@@ -5033,11 +5056,11 @@ NCT02565316,Anxiety,Anxiety
 NCT06510504,Social Anxiety Disorder,Anxiety
 NCT04939649,Major Depressive Episode,Depression
 NCT04939649,Unipolar Depression,Depression
-NCT04939649,Bipolar Depression,Depression
+NCT04939649,Bipolar Depression,Bipolar disorder
 NCT06835855,Depression - Major Depressive Disorder,Depression
 NCT04836533,Depression in Old Age,Depression
 NCT04836533,Depression,Depression
-NCT01396447,"Depression, Bipolar",Depression
+NCT01396447,"Depression, Bipolar",Bipolar disorder
 NCT06766526,Depression - Major Depressive Disorder,Depression
 NCT06766526,Anxiety,Anxiety
 NCT04273685,Psychosis,Schizophrenia & psychosis
@@ -5080,7 +5103,7 @@ NCT05440955,Psychotic Disorder,Schizophrenia & psychosis
 NCT01762943,Postpartum Depression,Depression
 NCT03229915,"Stress Disorders, Post-Traumatic",PTSD
 NCT03400813,Post-Traumatic Stress Disorder,PTSD
-NCT05436613,"Depression, Bipolar",Depression
+NCT05436613,"Depression, Bipolar",Bipolar disorder
 NCT05436613,Bipolar Disorder,Bipolar disorder
 NCT06929442,Psychotic Disorders,Schizophrenia & psychosis
 NCT06929442,Anxiety Disorders,Anxiety
@@ -5117,6 +5140,7 @@ NCT04117789,Major Depressive Disorder,Depression
 NCT05648591,Schizophrenia,Schizophrenia & psychosis
 NCT05648591,Bipolar I Disorder,Bipolar disorder
 NCT04925596,Anxiety,Anxiety
+NCT04925596,Prescription Drug Abuse and Dependency,Substance use
 NCT04015596,Anxiety Disorder,Anxiety
 NCT04015596,Obsessive-Compulsive Disorder,OCD
 NCT02269527,Anxiety,Anxiety
@@ -5235,7 +5259,7 @@ NCT03498599,Phobia,Anxiety
 NCT03957798,Opioid Use,Substance use
 NCT02408198,Schizophrenia-spectrum Diagnosis,Schizophrenia & psychosis
 NCT01881763,Unipolar Depression,Depression
-NCT01881763,Bipolar Depression,Depression
+NCT01881763,Bipolar Depression,Bipolar disorder
 NCT04605393,Schizophrenia,Schizophrenia & psychosis
 NCT04605393,Cannabis Use,Substance use
 NCT04468893,Anxiety,Anxiety
@@ -5243,16 +5267,17 @@ NCT04468893,Depression,Depression
 NCT06289621,Anxiety Disorders,Anxiety
 NCT06289621,Post-traumatic Stress Disorder,PTSD
 NCT07056816,Fear Anxiety,Anxiety
+NCT07056816,Inhalant Use,Substance use
 NCT05770947,Bulimia Nervosa,Eating disorders
 NCT04037085,Postpartum Depression,Depression
 NCT04037085,Opioid Use,Substance use
 NCT06099301,Depressive Symptoms,Depression
 NCT06099301,Anxiety,Anxiety
 NCT05108701,Major Depressive Disorder,Depression
-NCT03349528,Bipolar Depression,Depression
+NCT03349528,Bipolar Depression,Bipolar disorder
 NCT05996900,Major Depressive Disorder,Depression
 NCT07720336,Anxiety,Anxiety
-NCT02009371,Depressive Episodes of Bipolar Disorder,Depression
+NCT02009371,Depressive Episodes of Bipolar Disorder,Bipolar disorder
 NCT05783063,Schizophrenia,Schizophrenia & psychosis
 NCT02724787,Chronic Post-Traumatic Stress Disorder,PTSD
 NCT05925816,Depressive Symptoms,Depression
@@ -5306,7 +5331,7 @@ NCT02800733,Patients With Mild to Moderate GAD,Anxiety
 NCT04769999,Post Traumatic Stress Disorder,PTSD
 NCT02320032,Schizophrenia,Schizophrenia & psychosis
 NCT03310593,Bipolar Disorder,Bipolar disorder
-NCT03310593,Bipolar Depression,Depression
+NCT03310593,Bipolar Depression,Bipolar disorder
 NCT03310593,Bipolar Affective Disorder,Bipolar disorder
 NCT03387033,Anxiety,Anxiety
 NCT03387033,Depression,Depression
@@ -5316,7 +5341,7 @@ NCT05109507,Depression,Depression
 NCT05109507,Anxiety,Anxiety
 NCT05695209,Depression,Depression
 NCT02103621,Obsessive Compulsive Disorder,OCD
-NCT06656416,Bipolar Disorder I or II With a Major Depressive Episode,Depression
+NCT06656416,Bipolar Disorder I or II With a Major Depressive Episode,Bipolar disorder
 NCT02285504,Postpartum Depression,Depression
 NCT02801084,Anorexia Nervosa,Eating disorders
 NCT04559633,Anxious School Refusal,Anxiety
@@ -5338,7 +5363,7 @@ NCT06984198,PTSD - Post Traumatic Stress Disorder,PTSD
 NCT01641263,Depression,Depression
 NCT05643716,PTSD,PTSD
 NCT04998773,"Resistant Depression, Treatment",Depression
-NCT04998773,Bipolar Depression,Depression
+NCT04998773,Bipolar Depression,Bipolar disorder
 NCT04230369,Anxiety,Anxiety
 NCT04479683,Early Onset Anorexia Nervosa,Eating disorders
 NCT01558154,Depression,Depression
@@ -5505,7 +5530,7 @@ NCT04610697,Substance Use Disorders,Substance use
 NCT04610697,Anxiety,Anxiety
 NCT04610697,Depression,Depression
 NCT04610697,Schizophrenia,Schizophrenia & psychosis
-NCT03902613,Bipolar Depression,Depression
+NCT03902613,Bipolar Depression,Bipolar disorder
 NCT04086160,Schizophrenia,Schizophrenia & psychosis
 NCT04086160,Psychosis,Schizophrenia & psychosis
 NCT01031979,Post-Traumatic Stress Disorder,PTSD
@@ -5545,6 +5570,8 @@ NCT02566356,Schizophrenia,Schizophrenia & psychosis
 NCT01493622,Schizophrenia,Schizophrenia & psychosis
 NCT06876129,Depression,Depression
 NCT04907045,Drug Use Disorders,Substance use
+NCT04907045,Illicit Drug Use,Substance use
+NCT04907045,Alcohol-Related Disorders,Substance use
 NCT02597439,Ultra High Risk for Psychosis,Schizophrenia & psychosis
 NCT04840173,Depressive Symptoms,Depression
 NCT06979154,Antenatal Depression,Depression
@@ -5689,7 +5716,7 @@ NCT04366258,Major Depressive Disorder,Depression
 NCT05858255,Schizophrenia; Psychosis,Schizophrenia & psychosis
 NCT04030143,Schizophrenia,Schizophrenia & psychosis
 NCT04030143,Bipolar I Disorder,Bipolar disorder
-NCT04383691,Bipolar I Depression,Depression
+NCT04383691,Bipolar I Depression,Bipolar disorder
 NCT01216891,Schizophrenia,Schizophrenia & psychosis
 NCT01216891,Schizoaffective Disorder,Schizophrenia & psychosis
 NCT01216891,Schizophreniform Disorder,Schizophrenia & psychosis
@@ -5706,7 +5733,7 @@ NCT03659591,Depressive Symptoms,Depression
 NCT06038721,Anxiety Disorder,Anxiety
 NCT06038721,Depressive Disorder,Depression
 NCT03507647,Bipolar Disorder,Bipolar disorder
-NCT02152878,"Depression, Bipolar",Depression
+NCT02152878,"Depression, Bipolar",Bipolar disorder
 NCT01911585,Posttraumatic Stress Disorder,PTSD
 NCT01911585,PTSD,PTSD
 NCT06262178,PTSD,PTSD
@@ -5781,7 +5808,7 @@ NCT04126564,"Depression, Anxiety",Depression
 NCT07275034,Subthreshold Depression,Depression
 NCT05720793,Obsessive-Compulsive Disorder,OCD
 NCT05471921,Alcohol and Substance-Related Mental Disorders,Substance use
-NCT04210804,Bipolar Depression,Depression
+NCT04210804,Bipolar Depression,Bipolar disorder
 NCT02089984,Anxiety Disorders,Anxiety
 NCT02089984,Obsessive Compulsive Disorder,OCD
 NCT02089984,PTSD,PTSD
@@ -5878,7 +5905,7 @@ NCT04597450,PTSD,PTSD
 NCT04708691,Depression,Depression
 NCT03872310,Schizophrenia,Schizophrenia & psychosis
 NCT03543410,Depressive Episode,Depression
-NCT03543410,Bipolar 1 Depression,Depression
+NCT03543410,Bipolar 1 Depression,Bipolar disorder
 NCT07101120,Major Depressive Disorder (MDD),Depression
 NCT02187224,Alcohol Dependence,Substance use
 NCT02187224,Post-Traumatic Stress Disorder (PTSD),PTSD
@@ -5889,7 +5916,7 @@ NCT05999578,Anxiety,Anxiety
 NCT02018185,Obsessive Compulsive Disorder,OCD
 NCT02477280,Substance Use Disorder,Substance use
 NCT04057378,"Depressive Disorder, Major",Depression
-NCT04057378,"Depression, Bipolar",Depression
+NCT04057378,"Depression, Bipolar",Bipolar disorder
 NCT05842278,Moderate Depression,Depression
 NCT05842278,Major Depressive Disorder,Depression
 NCT05842278,Severe Depression,Depression
@@ -5903,7 +5930,7 @@ NCT06740890,Schizoaffective Disorder,Schizophrenia & psychosis
 NCT06740890,Bipolar Disorder I or II,Bipolar disorder
 NCT06740890,Bipolar Disorder NOS,Bipolar disorder
 NCT07653035,Anxiety Depression,Depression
-NCT01962350,Bipolar Depression,Depression
+NCT01962350,Bipolar Depression,Bipolar disorder
 NCT03769350,Major Depressive Disorder,Depression
 NCT05145582,Depression,Depression
 NCT05145582,Anxiety,Anxiety
@@ -5969,6 +5996,8 @@ NCT04544124,Methamphetamine-dependence,Substance use
 NCT04544124,Substance Use,Substance use
 NCT04544124,Substance Abuse,Substance use
 NCT04544124,Substance Use Disorders,Substance use
+NCT04544124,Drug Use,Substance use
+NCT04544124,Drug Abuse,Substance use
 NCT07085923,Schizophrenia and Schizophrenia Spectrum Psychosis,Schizophrenia & psychosis
 NCT07085923,Bipolar Disease Type I,Bipolar disorder
 NCT03485391,"Stress Disorders, Post-Traumatic",PTSD
@@ -6031,7 +6060,7 @@ NCT04874974,Other Psychotic Disorder Not Due to A Substance or Known Physiologic
 NCT04874974,Unspecified Psychosis Not Due to a Substance or Known Physiological Condition,Schizophrenia & psychosis
 NCT04874974,"Manic Episode, Severe With Psychotic Symptoms",Bipolar disorder
 NCT04874974,"Bipolar Disorder, Current Episode Manic Severe With Psychotic Features",Bipolar disorder
-NCT04874974,"Bipolar Disorder, Current Episode Depressed, Severe, With Psychotic Features",Depression
+NCT04874974,"Bipolar Disorder, Current Episode Depressed, Severe, With Psychotic Features",Bipolar disorder
 NCT04874974,"Major Depressive Disorder, Single Episode, Severe With Psychotic Features",Depression
 NCT04874974,"Major Depressive Disorder, Recurrent, Severe With Psychotic Symptoms",Depression
 NCT05372185,Anxiety Disorders,Anxiety
@@ -6070,7 +6099,7 @@ NCT02294591,Bipolar Disorder,Bipolar disorder
 NCT06601920,Depression Anxiety Disorder,Depression
 NCT02330679,Major Depressive Disorder,Depression
 NCT02800161,Bipolar Disorder,Bipolar disorder
-NCT02800161,Bipolar Depression,Depression
+NCT02800161,Bipolar Depression,Bipolar disorder
 NCT07600970,Eating Disorders,Eating disorders
 NCT07600970,Eating Disorders Symptoms,Eating disorders
 NCT07423273,Post Stroke Depression,Depression
@@ -6154,6 +6183,8 @@ NCT03243396,Post Traumatic Stress Disorder,PTSD
 NCT03243396,Depression,Depression
 NCT04510298,Schizophrenia,Schizophrenia & psychosis
 NCT06317987,Drug Use Disorders,Substance use
+NCT06317987,Illicit Drug Use,Substance use
+NCT06317987,Alcohol-Related Disorders,Substance use
 NCT07610421,Climate Anxiety,Anxiety
 NCT01207414,Schizophrenia,Schizophrenia & psychosis
 NCT02209233,Anxiety,Anxiety
@@ -6256,6 +6287,7 @@ NCT03403153,Parenting Behaviors and PTSD Symptoms,PTSD
 NCT02850445,Schizophrenia,Schizophrenia & psychosis
 NCT02475265,Anorexia Nervosa,Eating disorders
 NCT02974400,Schizophrenia,Schizophrenia & psychosis
+NCT06235411,Alcohol-Related Disorders,Substance use
 NCT06235411,Depressive Disorder,Depression
 NCT06235411,Addiction,Substance use
 NCT04751071,Major Depressive Disorder,Depression
@@ -6285,9 +6317,12 @@ NCT01510834,Post Traumatic Stress Disorder,PTSD
 NCT01510834,Anxiety,Anxiety
 NCT01510834,Depression,Depression
 NCT07842263,Anxiety,Anxiety
+NCT06044363,Drug Abuse,Substance use
 NCT04897295,Alcohol Use Disorder (AUD),Substance use
 NCT04897295,Alcohol Abuse,Substance use
 NCT04897295,Alcohol Dependence,Substance use
+NCT04897295,Alcohol-Related Disorders,Substance use
+NCT04897295,Drug Abuse,Substance use
 NCT04897295,Substance Use Disorders,Substance use
 NCT02290639,Post-Traumatic Stress Disorder,PTSD
 NCT07246239,Anxiety and Depression,Depression
@@ -6360,7 +6395,7 @@ NCT05107765,Alcohol Use Disorder,Substance use
 NCT02769936,Schizophrenia,Schizophrenia & psychosis
 NCT03984344,Anorexia Nervosa,Eating disorders
 NCT02778256,Bipolar Disorder,Bipolar disorder
-NCT02778256,"Depression, Bipolar",Depression
+NCT02778256,"Depression, Bipolar",Bipolar disorder
 NCT04354922,Depressive Symptoms,Depression
 NCT03749629,Major Depressive Disorder,Depression
 NCT05282329,Schizophrenia,Schizophrenia & psychosis
@@ -6461,7 +6496,7 @@ NCT06915207,Depression,Depression
 NCT02945111,Anxiety,Anxiety
 NCT04072185,Depression,Depression
 NCT04072185,Anxiety,Anxiety
-NCT02778035,Depression; Bipolar Disorder,Depression
+NCT02778035,Depression; Bipolar Disorder,Bipolar disorder
 NCT03924908,Anxiety,Anxiety
 NCT05183568,Depressive Symptoms,Depression
 NCT05183568,Anxiety,Anxiety
@@ -6570,7 +6605,7 @@ NCT04287374,Depressive Symptoms,Depression
 NCT04287374,Anxiety,Anxiety
 NCT07249723,Anxiety,Anxiety
 NCT05025579,Depression,Depression
-NCT04211961,Bipolar Disorder Depression,Depression
+NCT04211961,Bipolar Disorder Depression,Bipolar disorder
 NCT05322161,Postpartum Depression,Depression
 NCT05322161,Anxiety,Anxiety
 NCT05322161,Depression,Depression
@@ -6615,6 +6650,7 @@ NCT03535805,Anxiety Disorders,Anxiety
 NCT03535805,Depressive Symptoms,Depression
 NCT03535805,Depressive Disorders,Depression
 NCT05799794,Anxiety Depression,Depression
+NCT04124380,"Alcohol; Use, Problem",Substance use
 NCT04124380,Posttraumatic Stress Disorder,PTSD
 NCT05082246,Anxiety,Anxiety
 NCT05082246,Depression,Depression
@@ -6771,6 +6807,7 @@ NCT06236919,Anxiety,Anxiety
 NCT06236919,Depression,Depression
 NCT06849830,Anorexia Nervosa,Eating disorders
 NCT06057337,Depression,Depression
+NCT06057337,Drug Use,Substance use
 NCT05302375,Depression,Depression
 NCT03564067,Major Depressive Disorder,Depression
 NCT03873922,Psychosis; Acute,Schizophrenia & psychosis
@@ -6780,6 +6817,7 @@ NCT03873922,Schizophrenia,Schizophrenia & psychosis
 NCT04825756,Anxiety,Anxiety
 NCT04825756,Anxiety Disorder,Anxiety
 NCT03678051,Substance Use Disorders,Substance use
+NCT03678051,Drug Abuse,Substance use
 NCT03678051,Drug Addiction,Substance use
 NCT03678051,Substance Abuse,Substance use
 NCT03678051,Drug Use Disorders,Substance use
@@ -6824,7 +6862,9 @@ NCT05836090,Depressive Symptoms,Depression
 NCT05836090,Anxiety Disorders and Symptoms,Anxiety
 NCT05836090,Substance Use,Substance use
 NCT02417025,PTSD,PTSD
+NCT02417025,"Stress Disorders, Post - Traumatic",PTSD
 NCT02417025,Anxiety Disorders,Anxiety
+NCT02417025,"Stress Disorders, Traumatic",PTSD
 NCT03380117,Depression,Depression
 NCT01457391,"Stress Disorders, Post-Traumatic",PTSD
 NCT01457391,Substance-Related Disorders,Substance use
@@ -6945,7 +6985,7 @@ NCT01849029,Substance Use Disorders,Substance use
 NCT01856127,Major Depressive Disorder,Depression
 NCT03715127,"Depressive Disorder, Major",Depression
 NCT03603561,Bipolar Disorder,Bipolar disorder
-NCT03603561,Bipolar Depression,Depression
+NCT03603561,Bipolar Depression,Bipolar disorder
 NCT03603561,Bipolar I Disorder,Bipolar disorder
 NCT03603561,Bipolar II Disorder,Bipolar disorder
 NCT03603561,Depression,Depression
@@ -7066,7 +7106,7 @@ NCT06506435,Anxiety,Anxiety
 NCT03156335,Obsessive-Compulsive Disorder,OCD
 NCT06270108,Treatment-resistant Schizophrenia,Schizophrenia & psychosis
 NCT06270108,Treatment-responsive Schizophrenia,Schizophrenia & psychosis
-NCT05169710,"Depressive Episodes, Bipolar I Depression",Depression
+NCT05169710,"Depressive Episodes, Bipolar I Depression",Bipolar disorder
 NCT01752010,Depression,Depression
 NCT01752010,PTSD Symptoms,PTSD
 NCT03133013,Depression,Depression
@@ -7307,6 +7347,7 @@ NCT05193318,Major Depressive Disorder,Depression
 NCT06874790,Anxiety,Anxiety
 NCT06874790,Depression,Depression
 NCT02838290,Anxiety,Anxiety
+NCT02838290,Drug Use,Substance use
 NCT04455360,Post Traumatic Stress Disorder,PTSD
 NCT04455360,Anxiety Disorders,Anxiety
 NCT04455360,Depression,Depression
@@ -7381,7 +7422,7 @@ NCT02504151,Schizophrenia,Schizophrenia & psychosis
 NCT02504151,Schizoaffective Disorder,Schizophrenia & psychosis
 NCT04846829,Major Depressive Disorder,Depression
 NCT05593029,Major Depressive Disorder,Depression
-NCT01479829,Bipolar Depression,Depression
+NCT01479829,Bipolar Depression,Bipolar disorder
 NCT04741529,"Depression, Anxiety",Depression
 NCT01911429,Schizophrenia,Schizophrenia & psychosis
 NCT05964023,Major Depression,Depression
@@ -7441,7 +7482,7 @@ NCT05410561,Substance Dependence,Substance use
 NCT02156973,Anxiety,Anxiety
 NCT07151573,Anxiety Depression,Depression
 NCT05263440,Depression,Depression
-NCT03249376,Bipolar Depression,Depression
+NCT03249376,Bipolar Depression,Bipolar disorder
 NCT05732740,Depression,Depression
 NCT05732740,Depressive Disorder,Depression
 NCT04796389,Anxiety,Anxiety
@@ -7542,7 +7583,7 @@ NCT05705063,Bipolar Disorder I,Bipolar disorder
 NCT05705063,Bipolar II Disorder,Bipolar disorder
 NCT05705063,Bipolar I Disorder,Bipolar disorder
 NCT05705063,Bipolar Disorder,Bipolar disorder
-NCT05705063,Bipolar Depression,Depression
+NCT05705063,Bipolar Depression,Bipolar disorder
 NCT05705063,Bipolar and Related Disorders,Bipolar disorder
 NCT05705063,"Bipolar Disorder, Type 1",Bipolar disorder
 NCT05705063,"Bipolar Disorder, Type 2",Bipolar disorder
@@ -7583,7 +7624,7 @@ NCT03737474,Major Depressive Disorder,Depression
 NCT02943213,Anti-Psychotic,Schizophrenia & psychosis
 NCT02943213,Management of Manifestations of Psychotic Disorders,Schizophrenia & psychosis
 NCT02943213,Treatment of Schizophrenia,Schizophrenia & psychosis
-NCT02943213,Control Manifestations of the Manic Type of Mani-depressive Illness,Depression
+NCT02943213,Control Manifestations of the Manic Type of Mani-depressive Illness,Bipolar disorder
 NCT07771413,Depression,Depression
 NCT05441124,Anxiety,Anxiety
 NCT05705323,"Depression, Anxiety",Depression
@@ -7611,6 +7652,7 @@ NCT06390540,Postpartum Depression,Depression
 NCT06755710,PTSD,PTSD
 NCT06755710,Depression Disorders,Depression
 NCT04523610,"Depression, Anxiety",Depression
+NCT04210713,Alcohol-Related Disorders,Substance use
 NCT04210713,Alcoholism,Substance use
 NCT04210713,Substance-Related Disorders,Substance use
 NCT02169960,Depression,Depression
@@ -7673,7 +7715,7 @@ NCT07193914,Substance Use Disorders,Substance use
 NCT01663649,Depression,Depression
 NCT06526078,Depression,Depression
 NCT02526355,Maternal Depression,Depression
-NCT04285515,Bipolar Depression,Depression
+NCT04285515,Bipolar Depression,Bipolar disorder
 NCT04285515,Major Depressive Disorder,Depression
 NCT05869708,Depression,Depression
 NCT05869708,Anhedonia,Depression
@@ -7973,7 +8015,7 @@ NCT04342494,Depression,Depression
 NCT04342494,Addiction,Substance use
 NCT04342494,Anxiety,Anxiety
 NCT05573672,Generalized Anxiety Disorder,Anxiety
-NCT01543139,Bipolar Depression,Depression
+NCT01543139,Bipolar Depression,Bipolar disorder
 NCT04305977,PTSD,PTSD
 NCT04305977,Depression,Depression
 NCT06289842,Suicide and Depression,Depression
@@ -8034,7 +8076,7 @@ NCT04480021,Depression,Depression
 NCT05965401,Depression in Adolescence,Depression
 NCT04279028,Depression,Depression
 NCT04640636,"Depression, Unipolar",Depression
-NCT04640636,"Depression, Bipolar",Depression
+NCT04640636,"Depression, Bipolar",Bipolar disorder
 NCT01610011,Schizophrenia,Schizophrenia & psychosis
 NCT01610011,Psychotic Disorders,Schizophrenia & psychosis
 NCT02665611,Schizophrenia,Schizophrenia & psychosis
@@ -8099,6 +8141,7 @@ NCT04806165,Eating Disorders,Eating disorders
 NCT07319936,Eating Disorders,Eating disorders
 NCT02751632,Psychotic Disorders,Schizophrenia & psychosis
 NCT02874898,Chronic Post-Traumatic Stress Disorder,PTSD
+NCT02874898,Marijuana Abuse,Substance use
 NCT05116514,Psychotic Episode,Schizophrenia & psychosis
 NCT03471806,Bulimia Nervosa,Eating disorders
 NCT07097636,Anxiety,Anxiety
@@ -8250,7 +8293,7 @@ NCT05683431,Bipolar Disorder,Bipolar disorder
 NCT05683431,Bipolar I Disorder,Bipolar disorder
 NCT05683431,Bipolar Affective Disorder,Bipolar disorder
 NCT05683431,Bipolar Disorder I,Bipolar disorder
-NCT05683431,Bipolar Depression,Depression
+NCT05683431,Bipolar Depression,Bipolar disorder
 NCT04830839,Post-traumatic Stress Disorder,PTSD
 NCT04436757,Schizophrenia,Schizophrenia & psychosis
 NCT04436757,Bipolar Disorder,Bipolar disorder
@@ -8276,7 +8319,7 @@ NCT06235177,Bipolar Disorder,Bipolar disorder
 NCT06235177,Anxiety,Anxiety
 NCT01788657,Major Depression,Depression
 NCT02731612,Bipolar Disorder,Bipolar disorder
-NCT01929681,Bipolar Depression,Depression
+NCT01929681,Bipolar Depression,Bipolar disorder
 NCT02374567,Depression,Depression
 NCT02374567,Schizophrenia,Schizophrenia & psychosis
 NCT02374567,Anxiety Disorders,Anxiety
@@ -8291,7 +8334,7 @@ NCT04651075,Anxiety,Anxiety
 NCT01407575,Depression,Depression
 NCT01407575,Depressive Disorder,Depression
 NCT01407575,"Depressive Disorder, Major",Depression
-NCT05228457,Bipolar Depression,Depression
+NCT05228457,Bipolar Depression,Bipolar disorder
 NCT05228457,Treatment Resistant Depression,Depression
 NCT05128981,Cardiac Anxiety,Anxiety
 NCT04807530,Schizophrenia,Schizophrenia & psychosis
@@ -8371,7 +8414,7 @@ NCT01553669,Depression,Depression
 NCT02860741,Depressive Symptoms,Depression
 NCT01408654,Depression,Depression
 NCT03846154,Posttraumatic Stress Disorder,PTSD
-NCT06524505,Bipolar Depression,Depression
+NCT06524505,Bipolar Depression,Bipolar disorder
 NCT04551794,Depressive Symptoms,Depression
 NCT02145429,Depression,Depression
 NCT02145429,Anxiety Disorder,Anxiety
@@ -8397,6 +8440,7 @@ NCT07262151,Anxiety,Anxiety
 NCT04317170,Anxiety,Anxiety
 NCT02655354,Posttraumatic Stress Disorder,PTSD
 NCT02655354,Depression,Depression
+NCT02655354,Alcohol-Related Disorders,Substance use
 NCT02655354,Substance-Related Disorders,Substance use
 NCT06007105,Schizophrenia,Schizophrenia & psychosis
 NCT06007105,Schizoaffective Disorder,Schizophrenia & psychosis
@@ -8494,7 +8538,7 @@ NCT07216222,PTSD,PTSD
 NCT03652922,"Stress Disorders, Post-Traumatic",PTSD
 NCT03176953,PTSD and Alcohol Use Disorder,PTSD
 NCT02253472,Obsessive-Compulsive Disorder,OCD
-NCT02155972,Bipolar Depression,Depression
+NCT02155972,Bipolar Depression,Bipolar disorder
 NCT02501239,Depression,Depression
 NCT01349439,Posttraumatic Stress Disorder,PTSD
 NCT01420575,Schizophrenia,Schizophrenia & psychosis
@@ -8520,6 +8564,7 @@ NCT02970305,Schizophrenia,Schizophrenia & psychosis
 NCT06991166,Post Partum Depression,Depression
 NCT07344766,Post Traumatic Stress Disorder PTSD,PTSD
 NCT05776056,Posttraumatic Stress Disorder (PTSD),PTSD
+NCT00946322,Alcohol-related Disorders,Substance use
 NCT00946322,Post-traumatic Stress Disorder,PTSD
 NCT05605002,Major Depressive Disorder,Depression
 NCT01837953,Binge Eating Disorder,Eating disorders
@@ -8602,6 +8647,7 @@ NCT06187272,Test Anxiety,Anxiety
 NCT03277339,Generalized Anxious Disorders,Anxiety
 NCT03736577,Depression,Depression
 NCT03736577,Anxiety,Anxiety
+NCT03736577,Drug Use,Substance use
 NCT06671977,Major Depression Disorder,Depression
 NCT06671977,Depression,Depression
 NCT06497101,Anorexia Nervosa,Eating disorders
@@ -8675,6 +8721,7 @@ NCT04821960,Anxiety and Fear,Anxiety
 NCT03653923,Phobic Disorders,Anxiety
 NCT02105259,Social Anxiety Disorder,Anxiety
 NCT01569659,Schizophrenia,Schizophrenia & psychosis
+NCT01227980,Alcohol-Related Disorders,Substance use
 NCT01227980,Alcohol Dependence,Substance use
 NCT01227980,Alcoholism,Substance use
 NCT01227980,Anxiety Disorder,Anxiety
@@ -8695,7 +8742,7 @@ NCT04498897,"Depressive Disorder, Major",Depression
 NCT04498897,Alcoholism,Substance use
 NCT06186960,Anxiety,Anxiety
 NCT07127913,Bipolar II Disorder,Bipolar disorder
-NCT07127913,"Bipolar II Disorder, Most Recent Episode Major Depressive",Depression
+NCT07127913,"Bipolar II Disorder, Most Recent Episode Major Depressive",Bipolar disorder
 NCT05260060,Anxiety Disorders,Anxiety
 NCT05260060,Depression,Depression
 NCT00183482,Depression,Depression
@@ -8713,10 +8760,10 @@ NCT01954680,Pediatric Bipolar Disorder,Bipolar disorder
 NCT01954680,Childhood-onset Bipolar Disorder,Bipolar disorder
 NCT05882227,Anxiety,Anxiety
 NCT06790186,Schizophrenia,Schizophrenia & psychosis
-NCT04399070,"Depression, Bipolar",Depression
+NCT04399070,"Depression, Bipolar",Bipolar disorder
 NCT04399070,"Depression, Unipolar",Depression
 NCT04399070,Major Depressive Disorder,Depression
-NCT04399070,Manic-Depressive - Now Depressed,Depression
+NCT04399070,Manic-Depressive - Now Depressed,Bipolar disorder
 NCT06267313,Anxiety,Anxiety
 NCT03915613,Major Depressive Disorder,Depression
 NCT03915613,Bipolar Disorder,Bipolar disorder
@@ -8842,7 +8889,7 @@ NCT05351866,Depressive Symptoms,Depression
 NCT05351866,Depressive Episode,Depression
 NCT05393622,Depression Severe,Depression
 NCT06131268,Major Depressive Disorder,Depression
-NCT06131268,"Bipolar Affective Disorder, Currently Depressed, Moderate",Depression
+NCT06131268,"Bipolar Affective Disorder, Currently Depressed, Moderate",Bipolar disorder
 NCT03669640,"Schizophrenia, Schizoaffective Disorder",Schizophrenia & psychosis
 NCT02427568,Anxiety,Anxiety
 NCT04531774,Anxiety,Anxiety
@@ -8893,6 +8940,7 @@ NCT03813355,Anorexia Nervosa,Eating disorders
 NCT02308826,Anxiety,Anxiety
 NCT06319378,MDD,Depression
 NCT04546178,Psychotic Disorders,Schizophrenia & psychosis
+NCT04546178,"Stress Disorders, Traumatic",PTSD
 NCT04546178,Substance Use,Substance use
 NCT05045378,Treatment-resistant Depression,Depression
 NCT05045378,Major Depressive Disorder,Depression
@@ -8927,7 +8975,7 @@ NCT05873517,Substance-Related Disorders,Substance use
 NCT05873517,Substance Use,Substance use
 NCT05873517,Substance Use Disorders,Substance use
 NCT02810717,Treatment Resistant Depression,Depression
-NCT03598868,Bipolar Disorder Depression,Depression
+NCT03598868,Bipolar Disorder Depression,Bipolar disorder
 NCT02783118,Mild Depression,Depression
 NCT01363310,Depression With Prominent Agitation,Depression
 NCT06813313,Treatment of Resistant Depression,Depression
@@ -8944,7 +8992,7 @@ NCT06748716,Bipolar Disorder (BD),Bipolar disorder
 NCT06748716,Mania,Bipolar disorder
 NCT03071484,Schizophrenia,Schizophrenia & psychosis
 NCT02549547,Major Depressive Disorder,Depression
-NCT02549547,"Bipolar, Depression",Depression
+NCT02549547,"Bipolar, Depression",Bipolar disorder
 NCT07330648,Generalized Anxiety Disorder,Anxiety
 NCT04607226,Major Depressive Disorder,Depression
 NCT06234176,Major Depressive Disorder,Depression
@@ -9100,6 +9148,7 @@ NCT06261177,MDD,Depression
 NCT01243957,Major Depressive Disorder,Depression
 NCT03881657,Depression,Depression
 NCT01267019,Psychosis,Schizophrenia & psychosis
+NCT06296030,"Stress Disorders, Traumatic",PTSD
 NCT06296030,Anxiety,Anxiety
 NCT06296030,Anxiety Disorders,Anxiety
 NCT05869630,Depression,Depression
@@ -9173,7 +9222,7 @@ NCT01940237,Depression,Depression
 NCT04701866,"Depressive Disorder, Treatment-Resistant",Depression
 NCT04701866,"Depressive Disorder, Major",Depression
 NCT04701866,Unipolar Depression,Depression
-NCT04701866,"Depression, Bipolar",Depression
+NCT04701866,"Depression, Bipolar",Bipolar disorder
 NCT05966766,Anxiety,Anxiety
 NCT06236451,Schizophrenia,Schizophrenia & psychosis
 NCT04316572,Depression,Depression
@@ -9192,6 +9241,8 @@ NCT07036354,Anxiety,Anxiety
 NCT04708522,Anxiety Disorders and Symptoms,Anxiety
 NCT04708522,Depressive Symptoms,Depression
 NCT01769729,Depression,Depression
+NCT04785677,"Stress Disorders, Traumatic",PTSD
+NCT04785677,"Stress Disorders, Traumatic, Acute",PTSD
 NCT04785677,Depressive Symptoms,Depression
 NCT04785677,Anxiety,Anxiety
 NCT04785677,Substance Use,Substance use
@@ -9280,6 +9331,7 @@ NCT02970279,Depression,Depression
 NCT03464162,First Episode Psychosis,Schizophrenia & psychosis
 NCT03464162,Schizophrenia,Schizophrenia & psychosis
 NCT03812146,"Stress Disorders, Post-Traumatic",PTSD
+NCT03812146,Alcohol-Related Disorders,Substance use
 NCT02579642,Depressive Disorder,Depression
 NCT01861769,Posttraumatic Stress Disorder,PTSD
 NCT06748274,Major Depression,Depression
@@ -9346,6 +9398,7 @@ NCT07053111,Anxiety,Anxiety
 NCT07053111,Depression Not Otherwise Specified,Depression
 NCT05442099,Anxiety State,Anxiety
 NCT06546163,Eating Disorders,Eating disorders
+NCT06546163,"Eating, Binge",Eating disorders
 NCT06546163,Anorexia Nervosa/Bulimia,Eating disorders
 NCT06546163,Eating Disorder Binge,Eating disorders
 NCT02375321,Depressive Symptoms,Depression
@@ -9494,6 +9547,7 @@ NCT02420561,Substance-Related Disorders,Substance use
 NCT02765542,Depression,Depression
 NCT05904483,Anxiety,Anxiety
 NCT03973541,Social Anxiety,Anxiety
+NCT01372254,Drug Use,Substance use
 NCT02380066,Major Depressive Disorder (MDD),Depression
 NCT01503151,Social Phobia,Anxiety
 NCT02872051,Generalized Anxiety,Anxiety
@@ -9595,14 +9649,14 @@ NCT07632989,Bipolar Disorder (BD),Bipolar disorder
 NCT07632989,Schizophrenia Spectrum Disorders (SSD),Schizophrenia & psychosis
 NCT02542891,Depressive Disorder,Depression
 NCT05339074,Bipolar Disorder,Bipolar disorder
-NCT05339074,Bipolar Depression,Depression
+NCT05339074,Bipolar Depression,Bipolar disorder
 NCT05339074,Bipolar I Disorder,Bipolar disorder
 NCT05339074,Bipolar II Disorder,Bipolar disorder
 NCT04293874,Depression,Depression
 NCT06461260,Major Depressive Disorder,Depression
 NCT04663724,Social Anxiety Disorder,Anxiety
 NCT02118623,Bipolar Disorder,Bipolar disorder
-NCT05568823,"Depression, Bipolar",Depression
+NCT05568823,"Depression, Bipolar",Bipolar disorder
 NCT05568823,Major Depressive Disorder,Depression
 NCT05568823,Bipolar Disorder,Bipolar disorder
 NCT03153579,Anxiety Disorders,Anxiety
@@ -9618,6 +9672,7 @@ NCT04994470,"Depressive Disorder, Major",Depression
 NCT06103370,Substance Use Disorders,Substance use
 NCT06103370,Addiction,Substance use
 NCT06103370,Opioid Use,Substance use
+NCT06103370,Drug Use,Substance use
 NCT05838573,Schizophrenia,Schizophrenia & psychosis
 NCT04672551,Posttraumatic Stress Disorder,PTSD
 NCT06795451,Depression - Major Depressive Disorder,Depression
@@ -9733,6 +9788,7 @@ NCT03899194,Major Depressive Disorder,Depression
 NCT06942494,Obsessive - Compulsive Disorder,OCD
 NCT04175366,Psychosis,Schizophrenia & psychosis
 NCT05554094,PTSD,PTSD
+NCT05554094,"Stress Disorders, Traumatic",PTSD
 NCT05554094,"Stress Disorders, Post-Traumatic",PTSD
 NCT03163056,Tobacco Use Disorder,Substance use
 NCT03795051,"Depressive Disorder, Major",Depression
@@ -9910,7 +9966,7 @@ NCT06002087,Anxiety,Anxiety
 NCT02435784,Schizophrenia,Schizophrenia & psychosis
 NCT02901249,Depression,Depression
 NCT01056458,Anxiety,Anxiety
-NCT04569448,Bipolar Depression,Depression
+NCT04569448,Bipolar Depression,Bipolar disorder
 NCT04579185,Depression,Depression
 NCT03093415,Substance Use Disorders,Substance use
 NCT03093415,"Substance Abuse, Intravenous",Substance use
@@ -10170,7 +10226,7 @@ NCT04183842,Anxiety,Anxiety
 NCT01454141,Depression,Depression
 NCT06589505,"Post-Traumatic Stress Disorder, PTSD",PTSD
 NCT03449394,Depression,Depression
-NCT01587066,Bipolar Depression,Depression
+NCT01587066,Bipolar Depression,Bipolar disorder
 NCT03499756,Postnatal Depression,Depression
 NCT05800522,Anxiety Symptoms,Anxiety
 NCT05800522,Depressive Symptoms,Depression
@@ -10178,7 +10234,7 @@ NCT04356820,Anxiety Acute,Anxiety
 NCT07365982,Schizophrenia,Schizophrenia & psychosis
 NCT01887782,Major Depressive Disorder,Depression
 NCT06721559,Depression,Depression
-NCT02625779,"Depression, Bipolar",Depression
+NCT02625779,"Depression, Bipolar",Bipolar disorder
 NCT02855762,Bipolar Disorder,Bipolar disorder
 NCT06364488,Depression,Depression
 NCT06364488,"Depression, Postpartum",Depression
@@ -10233,6 +10289,7 @@ NCT05977582,Eating Disorders,Eating disorders
 NCT05603923,Depression,Depression
 NCT05603923,Anxiety,Anxiety
 NCT07552623,Substance Use Disorder (SUD),Substance use
+NCT07552623,Drug Abuse,Substance use
 NCT03240380,Schizophrenia,Schizophrenia & psychosis
 NCT03240380,Bipolar Disorder,Bipolar disorder
 NCT03240380,Schizoaffective Disorder,Schizophrenia & psychosis
@@ -10295,7 +10352,7 @@ NCT06996067,Postpartum Anxiety,Anxiety
 NCT06996067,Postpartum Depression (PPD),Depression
 NCT03575728,Bipolar Disorder,Bipolar disorder
 NCT01919892,Bipolar Disorder,Bipolar disorder
-NCT01919892,Bipolar Depression,Depression
+NCT01919892,Bipolar Depression,Bipolar disorder
 NCT06971692,Posttraumatic Stress Disorder (PTSD),PTSD
 NCT06971692,Generalized Anxiety Disorder (GAD),Anxiety
 NCT06971692,Social Anxiety Disorder (SAD),Anxiety
@@ -10558,6 +10615,7 @@ NCT04810988,Anxiety,Anxiety
 NCT03488927,Post-traumatic Stress Disorder,PTSD
 NCT03488927,Depression,Depression
 NCT03488927,Alcohol Abuse,Substance use
+NCT03488927,Alcohol; Harmful Use,Substance use
 NCT05994261,Anxiety,Anxiety
 NCT05841017,Obsessive-Compulsive Disorder,OCD
 NCT02850523,Perinatal Anxiety,Anxiety
@@ -10638,6 +10696,7 @@ NCT02453880,Anxiety,Anxiety
 NCT01875796,Cannabis Dependence,Substance use
 NCT01875796,Anxiety Disorders,Anxiety
 NCT01875796,Cannabis Use Disorder,Substance use
+NCT01875796,Cannabis Abuse,Substance use
 NCT02435225,"Bipolar Disorder, NOS",Bipolar disorder
 NCT05770089,Anorexia Nervosa,Eating disorders
 NCT03379597,Schizophrenia,Schizophrenia & psychosis
@@ -10668,7 +10727,7 @@ NCT06005766,Psychotic Disorders,Schizophrenia & psychosis
 NCT06005766,Psychotic Depression,Depression
 NCT07780331,Anxiety,Anxiety
 NCT05056831,Anxiety Disorder,Anxiety
-NCT06740331,Bipolar Disorder and Major Depressive Disorder,Depression
+NCT06740331,Bipolar Disorder and Major Depressive Disorder,Bipolar disorder
 NCT06004531,Anxiety,Anxiety
 NCT07179172,Depression,Depression
 NCT05682677,Depression,Depression
@@ -10731,7 +10790,7 @@ NCT04411979,Schizophrenia,Schizophrenia & psychosis
 NCT07239362,Depression Anxiety Disorder,Depression
 NCT07050927,Food Neophobia,Anxiety
 NCT07027761,Perinatal Depression,Depression
-NCT02046369,Bipolar I Depression,Depression
+NCT02046369,Bipolar I Depression,Bipolar disorder
 NCT05786066,Depressive Disorder,Depression
 NCT05786066,Major Depressive Disorder,Depression
 NCT05786066,Bipolar Disorder,Bipolar disorder
@@ -10771,9 +10830,9 @@ NCT01337713,Generalized Anxiety Disorder,Anxiety
 NCT04808713,Post Traumatic Stress Disorder,PTSD
 NCT04808713,Depression,Depression
 NCT01403662,Bipolar Disorder,Bipolar disorder
-NCT01403662,Bipolar Depression,Depression
-NCT01403662,Bipolar I Depression,Depression
-NCT01403662,Bipolar II Depression,Depression
+NCT01403662,Bipolar Depression,Bipolar disorder
+NCT01403662,Bipolar I Depression,Bipolar disorder
+NCT01403662,Bipolar II Depression,Bipolar disorder
 NCT06496646,Depression,Depression
 NCT02470988,Chronic Depression,Depression
 NCT06154369,Depression,Depression
@@ -11043,7 +11102,7 @@ NCT01065311,Chronic Major Depression,Depression
 NCT05817344,"Stress Disorders, Post-Traumatic",PTSD
 NCT05817344,Opioid Use Disorder,Substance use
 NCT03465371,Psychosis,Schizophrenia & psychosis
-NCT06372964,Bipolar Depression,Depression
+NCT06372964,Bipolar Depression,Bipolar disorder
 NCT02415387,Depression,Depression
 NCT06874452,Oral Anxiolytic,Anxiety
 NCT05615948,Treatment Resistant Depression,Depression
@@ -11073,7 +11132,9 @@ NCT03896438,Schizoaffective Disorder,Schizophrenia & psychosis
 NCT03230864,Treatment-resistant Schizophrenia,Schizophrenia & psychosis
 NCT07750899,Depression Symptoms,Depression
 NCT06704399,Panic Disorder,Anxiety
+NCT04494633,Alcohol; Harmful Use,Substance use
 NCT04494633,Depression,Depression
+NCT04494633,Drug Use,Substance use
 NCT06255548,Anxiety,Anxiety
 NCT04069819,Major Depressive Disorder,Depression
 NCT05755100,PTSD,PTSD
@@ -11117,7 +11178,7 @@ NCT02864576,Schizophrenia,Schizophrenia & psychosis
 NCT05267340,Depression Mild,Depression
 NCT05267340,Depression Moderate,Depression
 NCT05267340,"Depression, Teen",Depression
-NCT01390389,Bipolar Depression,Depression
+NCT01390389,Bipolar Depression,Bipolar disorder
 NCT02746510,Schizophrenia,Schizophrenia & psychosis
 NCT01592110,Schizophrenia,Schizophrenia & psychosis
 NCT03968159,Adjunctive Treatment of Major Depressive Disorder,Depression
@@ -11214,7 +11275,7 @@ NCT06063265,Anxiety,Anxiety
 NCT06891300,Major Depressive Disorder (MDD),Depression
 NCT05860257,Anxiety Depression,Depression
 NCT07113119,Psychotic Disorder,Schizophrenia & psychosis
-NCT02600507,Bipolar Depression,Depression
+NCT02600507,Bipolar Depression,Bipolar disorder
 NCT02519400,Depression,Depression
 NCT05508919,Anxiety,Anxiety
 NCT06958692,Major Depressive Disorder (MDD),Depression
@@ -11242,7 +11303,7 @@ NCT05833529,Cocaine Use Disorder,Substance use
 NCT03485131,Schizophrenia,Schizophrenia & psychosis
 NCT05055037,Post Traumatic Stress Disorder,PTSD
 NCT03287037,"Depressive Disorder, Major",Depression
-NCT03287037,"Depression, Bipolar",Depression
+NCT03287037,"Depression, Bipolar",Bipolar disorder
 NCT03720145,Depression,Depression
 NCT06012045,Disordered Eating Behaviors,Eating disorders
 NCT06012045,Binge Eating,Eating disorders
@@ -11263,6 +11324,7 @@ NCT01573598,Major Depressive Disorder,Depression
 NCT06262958,Alcoholism,Substance use
 NCT06262958,Substance Abuse,Substance use
 NCT06262958,Alcohol Dependence,Substance use
+NCT06262958,Alcohol-Related Disorders,Substance use
 NCT06262958,Substance Use Disorders,Substance use
 NCT06038955,Bipolar Disorder,Bipolar disorder
 NCT06038955,Depression,Depression
@@ -11296,7 +11358,7 @@ NCT04721249,Major Depressive Disorder,Depression
 NCT04143243,Post Traumatic Stress Disorder,PTSD
 NCT04143243,Depression,Depression
 NCT04143243,Anxiety,Anxiety
-NCT03965871,Bipolar Depression,Depression
+NCT03965871,Bipolar Depression,Bipolar disorder
 NCT03084744,Chronic Depressive Disorder,Depression
 NCT03084744,Dysthymic Disorder,Depression
 NCT06899607,Anxiety,Anxiety
@@ -11388,6 +11450,7 @@ NCT03376633,Anxiety,Anxiety
 NCT03376633,Anxiety Disorders,Anxiety
 NCT03376633,Depression,Depression
 NCT03376633,"Stress Disorders, Post-Traumatic",PTSD
+NCT03376633,"Stress Disorders, Traumatic",PTSD
 NCT06539949,Anxiety,Anxiety
 NCT01323478,Major Depressive Disorder,Depression
 NCT01624298,Post Traumatic Stress Disorder,PTSD
@@ -11464,6 +11527,7 @@ NCT05293691,Depressive Symptoms,Depression
 NCT05293691,Depression,Depression
 NCT03463590,Obsessive-Compulsive Disorder,OCD
 NCT01066897,Depression,Depression
+NCT03404713,"Eating, Binge",Eating disorders
 NCT01567124,Schizophrenia,Schizophrenia & psychosis
 NCT05450224,Posttraumatic Stress Disorder,PTSD
 NCT03495024,Schizophrenia,Schizophrenia & psychosis
@@ -11567,7 +11631,7 @@ NCT04072510,Eating Disorders,Eating disorders
 NCT02747160,Anxiety,Anxiety
 NCT02747160,Depression,Depression
 NCT05004896,Bipolar Disorder,Bipolar disorder
-NCT05004896,Bipolar Depression,Depression
+NCT05004896,Bipolar Depression,Bipolar disorder
 NCT05004896,Bipolar I Disorder,Bipolar disorder
 NCT05004896,Bipolar II Disorder,Bipolar disorder
 NCT03501862,Recent-onset Psychosis,Schizophrenia & psychosis
@@ -11592,7 +11656,7 @@ NCT05243160,Psychosis,Schizophrenia & psychosis
 NCT05243160,Psychotic Disorders,Schizophrenia & psychosis
 NCT04231643,Bipolar Disorder,Bipolar disorder
 NCT05465915,Major Depressive Disorder,Depression
-NCT05465915,Bipolar Depression,Depression
+NCT05465915,Bipolar Depression,Bipolar disorder
 NCT06576076,Cannabis Use,Substance use
 NCT06576076,Depression,Depression
 NCT05525689,Depression,Depression
@@ -11975,6 +12039,7 @@ NCT04432077,Anxiety Disorder,Anxiety
 NCT04487171,Postpartum Depression,Depression
 NCT02604277,Depression,Depression
 NCT02604277,Alcoholism,Substance use
+NCT02604277,Drug Abuse,Substance use
 NCT01935375,Postpartum Depression,Depression
 NCT04453475,Anxiety,Anxiety
 NCT03062267,Schizoaffective Disorder,Schizophrenia & psychosis
@@ -12025,7 +12090,7 @@ NCT04302181,"Stress Disorders, Post-Traumatic",PTSD
 NCT04400630,Bipolar Disorder,Bipolar disorder
 NCT06666400,Postpartum Depression (PPD),Depression
 NCT03674671,"Depressive Disorder, Major",Depression
-NCT03674671,Bipolar Depression,Depression
+NCT03674671,Bipolar Depression,Bipolar disorder
 NCT06549777,Post Traumatic Stress Disorder,PTSD
 NCT06549777,Complex Post-Traumatic Stress Disorder,PTSD
 NCT03779477,Depression,Depression
@@ -12043,6 +12108,7 @@ NCT05870501,Bipolar Disorder II,Bipolar disorder
 NCT05870501,Anhedonia,Depression
 NCT03203707,Bipolar Disorder,Bipolar disorder
 NCT06339112,Anxiety,Anxiety
+NCT06339112,Inhalant Use,Substance use
 NCT05800119,Depression,Depression
 NCT06146530,Generalized Anxiety,Anxiety
 NCT01583400,"Depressive Disorder, Major",Depression
@@ -12161,6 +12227,7 @@ NCT04430309,Schizophrenia,Schizophrenia & psychosis
 NCT01234298,Negative Symptoms of Schizophrenia,Schizophrenia & psychosis
 NCT02438163,Depression,Depression
 NCT04007666,Substance Use Disorders,Substance use
+NCT04007666,Drug Abuse,Substance use
 NCT04007666,Alcohol Abuse,Substance use
 NCT04007666,Posttraumatic Stress Disorder,PTSD
 NCT04007666,PTSD,PTSD
@@ -12543,7 +12610,7 @@ NCT05389787,Schizophrenia,Schizophrenia & psychosis
 NCT04857593,Postnatal Depression,Depression
 NCT03175887,Depression,Depression
 NCT03175887,Treatment Resistant Depression,Depression
-NCT06869187,Bipolar Disorder Depression,Depression
+NCT06869187,Bipolar Disorder Depression,Bipolar disorder
 NCT04171193,"Depressive Disorder, Major",Depression
 NCT04171193,Treatment Resistant Depression,Depression
 NCT04171193,Depressive Episode,Depression
@@ -12555,6 +12622,7 @@ NCT06100406,Anxiety,Anxiety
 NCT06100406,Anxiety Generalized,Anxiety
 NCT06100406,Anxiety State,Anxiety
 NCT04121884,Depressive Symptoms,Depression
+NCT04121884,"Stress Disorder, Acute",PTSD
 NCT04121884,Alcohol Abuse,Substance use
 NCT04121884,"Stress Disorders, Post-Traumatic",PTSD
 NCT02096484,Generalized Anxiety Disorder,Anxiety
@@ -12712,7 +12780,7 @@ NCT03692988,Depressive Disorder,Depression
 NCT02986126,Depressive Symptoms,Depression
 NCT04776226,Depression,Depression
 NCT05743543,Post Traumatic Stress Disorder,PTSD
-NCT01051440,Bipolar Depression,Depression
+NCT01051440,Bipolar Depression,Bipolar disorder
 NCT06313918,Schizophrenia and Related Disorders,Schizophrenia & psychosis
 NCT06313918,Bipolar Disorder,Bipolar disorder
 NCT06110897,Major Depressive Disorder,Depression
@@ -12868,7 +12936,7 @@ NCT01882608,Dysthymia,Depression
 NCT04712968,Unipolar Depression,Depression
 NCT05387291,Anxiety,Anxiety
 NCT03868774,Depression,Depression
-NCT06986460,Bipolar Depression Depressed Phase,Depression
+NCT06986460,Bipolar Depression Depressed Phase,Bipolar disorder
 NCT05716555,"Depressive Disorder, Major",Depression
 NCT05227625,Eating Disorders,Eating disorders
 NCT03825640,Bipolar Disorder,Bipolar disorder
@@ -12916,6 +12984,7 @@ NCT04852770,Posttraumatic Stress Disorder,PTSD
 NCT03688373,Specific Phobia,Anxiety
 NCT03045341,Binge-eating Disorder,Eating disorders
 NCT02944994,Anxiety,Anxiety
+NCT02944994,Traumatic Stress Disorders,PTSD
 NCT02944994,Depression,Depression
 NCT04790162,Depression,Depression
 NCT04790162,Anxiety,Anxiety
@@ -12952,7 +13021,7 @@ NCT04850573,"Stress Disorders, Post-Traumatic",PTSD
 NCT05911269,Anxiety,Anxiety
 NCT01885923,Relapse Schizophrenia,Schizophrenia & psychosis
 NCT07145203,Anxiety,Anxiety
-NCT05973786,Bipolar Depression,Depression
+NCT05973786,Bipolar Depression,Bipolar disorder
 NCT07831135,Addiction Disorders,Substance use
 NCT04816708,Anxiety,Anxiety
 NCT04816708,Depressive Symptoms,Depression
@@ -12978,7 +13047,7 @@ NCT03068286,Depression,Depression
 NCT03068286,Anxiety,Anxiety
 NCT04071886,MDD,Depression
 NCT02608086,PTSD,PTSD
-NCT03423680,"Depression, Bipolar",Depression
+NCT03423680,"Depression, Bipolar",Bipolar disorder
 NCT04634396,Anxiety,Anxiety
 NCT04634396,Anxiety Disorders and Symptoms,Anxiety
 NCT06127342,PTSD,PTSD
@@ -13090,7 +13159,7 @@ NCT05383248,Anhedonia,Depression
 NCT05383248,Depression,Depression
 NCT04033978,Schizophrenia,Schizophrenia & psychosis
 NCT01884844,Bipolar Disorder,Bipolar disorder
-NCT01884844,Bipolar Depression,Depression
+NCT01884844,Bipolar Depression,Bipolar disorder
 NCT05344144,Anxiety,Anxiety
 NCT06540664,Post-stroke Depression,Depression
 NCT02334332,Anxiety,Anxiety
@@ -13140,6 +13209,7 @@ NCT04595084,Depression,Depression
 NCT04595084,Anxiety,Anxiety
 NCT04595084,Substance Use,Substance use
 NCT04595084,"Alcohol Use, Unspecified",Substance use
+NCT04595084,Drug Use,Substance use
 NCT05038033,Anxiety,Anxiety
 NCT05038033,Feeding and Eating Disorders,Eating disorders
 NCT05562752,Anxiety,Anxiety
@@ -13163,6 +13233,7 @@ NCT02778074,Depression,Depression
 NCT02329418,Post Traumatic Stress Disorder,PTSD
 NCT06751784,Mild to Moderate Depression,Depression
 NCT01686438,Post-Traumatic Stress Disorders,PTSD
+NCT02588885,"Stress Disorders, Traumatic",PTSD
 NCT05427708,Anxiety Disorders,Anxiety
 NCT05427708,Generalized Anxiety Disorder,Anxiety
 NCT05427708,Panic Disorder,Anxiety
@@ -13284,7 +13355,7 @@ NCT06030154,Depression,Depression
 NCT03158805,Bipolar Disorder,Bipolar disorder
 NCT07175402,Depression/Anxiety,Depression
 NCT03668457,Depressive Disorder,Depression
-NCT06560957,Bipolar Depression,Depression
+NCT06560957,Bipolar Depression,Bipolar disorder
 NCT06560957,Bipolar I Disorder,Bipolar disorder
 NCT06560957,Bipolar II Disorder,Bipolar disorder
 NCT05385783,Major Depressive Disorder,Depression
@@ -13294,6 +13365,7 @@ NCT06794983,Substance Use Disorder (SUD),Substance use
 NCT04366531,Substance Use Disorder,Substance use
 NCT03171753,Anxiety State,Anxiety
 NCT04934553,Alcoholism,Substance use
+NCT04934553,Alcohol-Related Disorders,Substance use
 NCT04934553,Substance-Related Disorders,Substance use
 NCT04934553,Anxiety,Anxiety
 NCT04934553,Depression,Depression
@@ -13382,7 +13454,7 @@ NCT01706731,Major Depressive Disorder,Depression
 NCT05052853,Prodromal Schizophrenia,Schizophrenia & psychosis
 NCT06417437,Depression,Depression
 NCT06417437,Major Depressive Disorder,Depression
-NCT06417437,Bipolar Depression,Depression
+NCT06417437,Bipolar Depression,Bipolar disorder
 NCT01625845,Major Depressive Disorder,Depression
 NCT01625845,Depression,Depression
 NCT01625845,Depressive Symptoms,Depression
@@ -13409,6 +13481,7 @@ NCT04126694,Bulimia Nervosa,Eating disorders
 NCT04126694,Binge Eating,Eating disorders
 NCT04431856,Anxiety,Anxiety
 NCT04431856,Depression,Depression
+NCT04431856,Traumatic Stress Disorder,PTSD
 NCT02004288,Anorexia Nervosa,Eating disorders
 NCT03190161,Schizophrenia,Schizophrenia & psychosis
 NCT03190161,Nicotine Dependence,Substance use
@@ -13527,7 +13600,7 @@ NCT05246332,"Depression, Anxiety",Depression
 NCT07568093,Anxiety After Surgery,Anxiety
 NCT07033052,Anxiety,Anxiety
 NCT07033052,Depression,Depression
-NCT02740244,Bipolar Depression,Depression
+NCT02740244,Bipolar Depression,Bipolar disorder
 NCT05474534,Post-traumatic Stress Disorder,PTSD
 NCT05149534,Post Traumatic Stress Disorder,PTSD
 NCT06847399,Binge Eating Disorder,Eating disorders
@@ -13681,7 +13754,7 @@ NCT03541031,Bipolar Disorder,Bipolar disorder
 NCT02427737,Claustrophobia,Anxiety
 NCT04695145,"Depressive Disorder, Major",Depression
 NCT05227339,Substance Use Disorders,Substance use
-NCT01256177,Bipolar Depression,Depression
+NCT01256177,Bipolar Depression,Bipolar disorder
 NCT06723977,Schizophrenia,Schizophrenia & psychosis
 NCT05905601,Psychosis,Schizophrenia & psychosis
 NCT04659161,Schizophrenia,Schizophrenia & psychosis
@@ -13709,7 +13782,7 @@ NCT02781688,Depression,Depression
 NCT01126827,Bipolar Disorder,Bipolar disorder
 NCT05274061,Posttraumatic Stress Disorder,PTSD
 NCT05767073,"Depression, Unipolar",Depression
-NCT05767073,"Depression, Bipolar",Depression
+NCT05767073,"Depression, Bipolar",Bipolar disorder
 NCT02096783,Anxiety Disorder,Anxiety
 NCT04136054,Anxiety Disorders,Anxiety
 NCT01555554,Post-traumatic Stress Disorder,PTSD
@@ -13909,6 +13982,7 @@ NCT02672150,Substance Use Disorders,Substance use
 NCT03135990,Social Anxiety,Anxiety
 NCT03135990,Social Anxiety Disorder,Anxiety
 NCT03135990,Social Anxiety Disorder of Childhood,Anxiety
+NCT04038190,"Alcohol; Use, Problem",Substance use
 NCT04038190,Binge Eating,Eating disorders
 NCT04038190,Depression,Depression
 NCT04133597,"Smartphone Users, Smartphone Addiction, Anxiety, and Skin Conductance",Anxiety
@@ -13932,7 +14006,7 @@ NCT05352568,Schizophrenia,Schizophrenia & psychosis
 NCT05352568,Schizoaffective,Schizophrenia & psychosis
 NCT03628391,Intensive Care Psychosis,Schizophrenia & psychosis
 NCT01153490,Cannabis Dependence,Substance use
-NCT02974010,Bipolar Depression,Depression
+NCT02974010,Bipolar Depression,Bipolar disorder
 NCT02963220,Avoidant/Restrictive Food Intake Disorder (ARFID),Eating disorders
 NCT03095820,Major Depressive Disorder,Depression
 NCT06256380,Feeding and Eating Disorders,Eating disorders
@@ -13957,8 +14031,8 @@ NCT05190926,Anorexia Nervosa,Eating disorders
 NCT06769243,Obsessive-Compulsive Disorder,OCD
 NCT03241225,Depression,Depression
 NCT01805440,Bipolar Disorder,Bipolar disorder
-NCT01805440,Bipolar Depression,Depression
-NCT01805440,Manic Depression,Depression
+NCT01805440,Bipolar Depression,Bipolar disorder
+NCT01805440,Manic Depression,Bipolar disorder
 NCT07217340,Anxiety,Anxiety
 NCT07349368,Antenatal Depression,Depression
 NCT07349368,Antenatal Anxiety,Anxiety
@@ -13974,6 +14048,7 @@ NCT06923423,PTSD and Alcohol Use Disorder,PTSD
 NCT06923423,PTSD and Trauma-related Symptoms,PTSD
 NCT06923423,Substance Use Disorder (SUD),Substance use
 NCT06923423,Depression,Depression
+NCT06923423,Traumatic Stress Disorder,PTSD
 NCT06923423,Post Traumatic Stress Symptoms,PTSD
 NCT06531980,Anxiety,Anxiety
 NCT06531980,Anxiety and Fear,Anxiety
@@ -14053,7 +14128,7 @@ NCT03995173,Alcohol Use Disorder,Substance use
 NCT03995173,Post-traumatic Stress Disorder,PTSD
 NCT03918954,Anxiety State,Anxiety
 NCT03918954,Depression,Depression
-NCT03918954,Bipolar Depression,Depression
+NCT03918954,Bipolar Depression,Bipolar disorder
 NCT02904005,Depression,Depression
 NCT06899594,Methamphetamine Use Disorder,Substance use
 NCT04548622,Schizophrenia,Schizophrenia & psychosis
@@ -14186,7 +14261,7 @@ NCT03510741,Schizophreniform Disorders,Schizophrenia & psychosis
 NCT03510741,Schizoaffective Disorder,Schizophrenia & psychosis
 NCT07636694,Depression - Major Depressive Disorder,Depression
 NCT03484494,Bipolar Disorder,Bipolar disorder
-NCT03484494,Bipolar Depression,Depression
+NCT03484494,Bipolar Depression,Bipolar disorder
 NCT03484494,Bipolar I Disorder,Bipolar disorder
 NCT03484494,Bipolar II Disorder,Bipolar disorder
 NCT04839822,"Depressive; Episode, Major",Depression
@@ -14345,7 +14420,7 @@ NCT05731414,Psychotic Disorders,Schizophrenia & psychosis
 NCT05731414,Schizophrenia; Psychosis,Schizophrenia & psychosis
 NCT02760004,Depression,Depression
 NCT01562184,Unipolar Depression,Depression
-NCT01562184,Bipolar Depression,Depression
+NCT01562184,Bipolar Depression,Bipolar disorder
 NCT03708549,Schizophrenia,Schizophrenia & psychosis
 NCT02886858,Depression,Depression
 NCT03649685,Obsessive-Compulsive Disorder,OCD
@@ -14491,6 +14566,7 @@ NCT05543083,Depressive Disorder,Depression
 NCT06138054,Schizophrenia Spectrum Disorders,Schizophrenia & psychosis
 NCT06138054,Psychotic Affective Disorders,Schizophrenia & psychosis
 NCT06138054,Psychotic Mood Disorders,Schizophrenia & psychosis
+NCT02059005,Drug Use,Substance use
 NCT02059005,Alcohol Use,Substance use
 NCT07000994,Intraoperative Myocardial Depression,Depression
 NCT05714956,Perinatal Depression,Depression
@@ -14579,6 +14655,7 @@ NCT06035731,Anxiety Depression,Depression
 NCT03458702,Generalized Anxiety Disorder,Anxiety
 NCT03709472,Depression,Depression
 NCT06729957,Drug Use Disorders,Substance use
+NCT06729957,Alcohol-Related Disorders,Substance use
 NCT06729957,Substance Use Disorder (SUD),Substance use
 NCT05776719,Post Traumatic Stress Disorder,PTSD
 NCT04278365,Anxiety,Anxiety
@@ -14985,6 +15062,7 @@ NCT05252026,Anxiety Disorders and Symptoms,Anxiety
 NCT05252026,Depressive Symptoms,Depression
 NCT04289415,Substance Use Disorders,Substance use
 NCT01595568,Alcohol Abuse,Substance use
+NCT01595568,Drug Abuse,Substance use
 NCT01595568,Anxiety Disorder,Anxiety
 NCT06648668,Cocaine Use Disorder,Substance use
 NCT03262350,Eating Disorder,Eating disorders
@@ -14993,6 +15071,7 @@ NCT02954250,"Depression, Anxiety",Depression
 NCT02847533,Depression,Depression
 NCT04929938,Psychosis,Schizophrenia & psychosis
 NCT02520726,Post-traumatic Stress Disorder,PTSD
+NCT05264415,"Stress Disorders, Traumatic",PTSD
 NCT05264415,Anxiety,Anxiety
 NCT05264415,Depression,Depression
 NCT05344625,Depressive Symptoms,Depression
@@ -15023,12 +15102,12 @@ NCT01413854,Depression Suicidal,Depression
 NCT05380466,Anxiety,Anxiety
 NCT02286466,Anxiety,Anxiety
 NCT02977403,Binge Eating,Eating disorders
-NCT04235686,Bipolar Depression,Depression
+NCT04235686,Bipolar Depression,Bipolar disorder
 NCT05597241,Major Depressive Disorder,Depression
 NCT04638231,Major Depressive Disorder,Depression
 NCT01312922,Major Depressive Disorder,Depression
 NCT04486222,"Depressive Disorder, Major",Depression
-NCT06429722,Major Depressive Episode Associated With Bipolar II Disorder,Depression
+NCT06429722,Major Depressive Episode Associated With Bipolar II Disorder,Bipolar disorder
 NCT04694261,Perinatal Depression,Depression
 NCT04694261,Anxiety,Anxiety
 NCT04250441,Depression,Depression
@@ -15040,6 +15119,7 @@ NCT06894394,Anxiety Disorders,Anxiety
 NCT06894394,Depressive Disorder,Depression
 NCT05142683,Major Depressive Disorder,Depression
 NCT06278922,PTSD,PTSD
+NCT06278922,"Alcohol; Use, Problem",Substance use
 NCT03608137,Schizophrenia,Schizophrenia & psychosis
 NCT05186272,Post Partum Depression,Depression
 NCT05186272,Perinatal Depression,Depression
@@ -15095,7 +15175,7 @@ NCT07550556,PTSD - Post Traumatic Stress Disorder,PTSD
 NCT06882629,Anxiety Disorder of Childhood,Anxiety
 NCT03256162,Major Depressive Episode,Depression
 NCT03256162,Unipolar Depression,Depression
-NCT03256162,Bipolar Depression,Depression
+NCT03256162,Bipolar Depression,Bipolar disorder
 NCT01561742,Schizophrenia,Schizophrenia & psychosis
 NCT03995186,Depression,Depression
 NCT03995186,Depressive Disorder,Depression
@@ -15402,6 +15482,7 @@ NCT03448523,Depression,Depression
 NCT02274688,Post Traumatic Concerns,PTSD
 NCT02274688,Post Traumatic Stress Disorder,PTSD
 NCT02274688,Depression and Suicide Ideation,Depression
+NCT02274688,Alcohol and Drug Use,Substance use
 NCT03024203,Psychotic Disorders,Schizophrenia & psychosis
 NCT03490903,Anxiety,Anxiety
 NCT04226742,"Depression, Anxiety",Depression
@@ -15462,6 +15543,7 @@ NCT04815681,Anxiety,Anxiety
 NCT02153281,Major Depressive Disorder,Depression
 NCT01449981,Alcohol Abuse,Substance use
 NCT01449981,Alcohol Dependence,Substance use
+NCT01449981,Drug Abuse,Substance use
 NCT01449981,Drug Dependence,Substance use
 NCT06623981,Depression,Depression
 NCT06788119,Anxiety Disorders,Anxiety
@@ -15508,7 +15590,7 @@ NCT01658228,Depression,Depression
 NCT06518642,Major Depressive Disorder,Depression
 NCT05555186,Depression,Depression
 NCT03468686,Major Depressive Disorder,Depression
-NCT03468686,Bipolar Depression,Depression
+NCT03468686,Bipolar Depression,Bipolar disorder
 NCT01081769,Schizophrenia,Schizophrenia & psychosis
 NCT02395094,"Preoperative, Anxiety",Anxiety
 NCT03719651,Post-traumatic Stress Disorder,PTSD
@@ -15581,7 +15663,7 @@ NCT06249386,Alcohol Use Disorder,Substance use
 NCT06249386,Posttraumatic Stress Disorder,PTSD
 NCT03630783,"Phobia, Social",Anxiety
 NCT01914393,Schizophrenia,Schizophrenia & psychosis
-NCT01914393,Bipolar Depression,Depression
+NCT01914393,Bipolar Depression,Bipolar disorder
 NCT04988516,Anxiety,Anxiety
 NCT05188547,Anxiety,Anxiety
 NCT06856148,Substance Abuse,Substance use
@@ -15610,7 +15692,7 @@ NCT06748833,Anxiety,Anxiety
 NCT06112652,Moderate Depression,Depression
 NCT06112652,Major Depressive Disorder,Depression
 NCT06112652,Severe Depression,Depression
-NCT02363738,Bipolar Depression,Depression
+NCT02363738,Bipolar Depression,Bipolar disorder
 NCT06698848,Depression,Depression
 NCT05986578,Cocaine Use Disorder,Substance use
 NCT05537285,MDD,Depression
@@ -15685,7 +15767,7 @@ NCT02749253,Post Traumatic Stress Disorder,PTSD
 NCT05336253,Eating Disorder Symptom,Eating disorders
 NCT02880995,Schizophrenia,Schizophrenia & psychosis
 NCT06372639,Post Traumatic Stress Disorder,PTSD
-NCT05481957,Bipolar Depression,Depression
+NCT05481957,Bipolar Depression,Bipolar disorder
 NCT05942495,Depressive Symptoms,Depression
 NCT05942495,Anxiety Disorders,Anxiety
 NCT05942495,Anxiety Depression,Depression
@@ -15791,6 +15873,7 @@ NCT04386798,Anxiety,Anxiety
 NCT02136212,Social Anxiety Disorder,Anxiety
 NCT02950636,Depression,Depression
 NCT02950636,Anxiety,Anxiety
+NCT03737864,Alcohol Withdrawal,Substance use
 NCT03737864,Substance Use Disorders,Substance use
 NCT05204264,Anxiety,Anxiety
 NCT06072209,Depression Mild,Depression
@@ -15866,7 +15949,7 @@ NCT03281044,Major Depressive Disorder,Depression
 NCT06359314,Benzodiazepine Dependence,Substance use
 NCT06359314,Anxiety Disorders,Anxiety
 NCT05341804,Schizophrenia,Schizophrenia & psychosis
-NCT04133233,Bipolar Depression,Depression
+NCT04133233,Bipolar Depression,Bipolar disorder
 NCT03065933,"Bipolar Disorder, Mania",Bipolar disorder
 NCT06153628,Anxiety,Anxiety
 NCT03541707,Depression,Depression
@@ -15916,6 +15999,7 @@ NCT06288711,Opioid Use Disorder,Substance use
 NCT06288711,Posttraumatic Stress Disorder,PTSD
 NCT01532999,Posttraumatic Stress Disorder,PTSD
 NCT01639872,Schizophrenia,Schizophrenia & psychosis
+NCT01639872,Cannabis Abuse,Substance use
 NCT01639872,Cannabis Dependence,Substance use
 NCT06273995,Depression,Depression
 NCT06273995,Depression in Adolescence,Depression
@@ -15943,7 +16027,7 @@ NCT03414619,Generalized Anxiety Disorder,Anxiety
 NCT03414619,Major Depressive Disorder,Depression
 NCT04471207,PTSD,PTSD
 NCT06910592,Binge-Eating Disorder,Eating disorders
-NCT03396744,Bipolar Depression,Depression
+NCT03396744,Bipolar Depression,Bipolar disorder
 NCT04695132,Psychotic Disorders,Schizophrenia & psychosis
 NCT04695132,Substance Use Disorders,Substance use
 NCT04076839,Post-traumatic Stress Disorder,PTSD
@@ -15971,7 +16055,7 @@ NCT04319445,Anxiety,Anxiety
 NCT04225130,Posttraumatic Stress Disorder,PTSD
 NCT06462300,Eating Disorder Symptom,Eating disorders
 NCT02022111,Depression,Depression
-NCT06088732,Bipolar Depression,Depression
+NCT06088732,Bipolar Depression,Bipolar disorder
 NCT01521013,Depression,Depression
 NCT02502513,Posttraumatic Stress Disorder,PTSD
 NCT02502513,Acute Stress Disorder,PTSD
@@ -16106,6 +16190,7 @@ NCT01133587,Schizophrenia,Schizophrenia & psychosis
 NCT01133587,Bipolar Disorder,Bipolar disorder
 NCT04598906,Schizophrenia,Schizophrenia & psychosis
 NCT04598906,Depression,Depression
+NCT05097352,Traumatic Stress Disorder,PTSD
 NCT05097352,Post Traumatic Stress Disorder,PTSD
 NCT03043833,Major Depression,Depression
 NCT03043833,Anxiety Disorders,Anxiety
@@ -16462,7 +16547,7 @@ NCT04714164,Social Anxiety Disorder,Anxiety
 NCT04714164,Panic Disorder,Anxiety
 NCT07003763,Depression,Depression
 NCT02081287,Bipolar Disorder,Bipolar disorder
-NCT02081287,Manic Depression,Depression
+NCT02081287,Manic Depression,Bipolar disorder
 NCT07550387,SCHIZOPHRENIA 1 (Disorder),Schizophrenia & psychosis
 NCT06455293,Depression,Depression
 NCT04506216,Eating Disorders,Eating disorders
@@ -16544,7 +16629,7 @@ NCT05725785,Schizo Affective Disorder,Schizophrenia & psychosis
 NCT03833063,Major Depressive Disorder,Depression
 NCT03833063,Major Depressive Episode,Depression
 NCT03833063,Treatment Resistant Depression,Depression
-NCT04417049,Bipolar Depression,Depression
+NCT04417049,Bipolar Depression,Bipolar disorder
 NCT05944926,Depression,Depression
 NCT05944926,Depressive Disorder,Depression
 NCT06449326,Posttraumatic Stress Disorder,PTSD
@@ -16630,7 +16715,7 @@ NCT04811014,Opioid Overdose,Substance use
 NCT04811014,Opioid Use,Substance use
 NCT04811014,Substance Use Disorders,Substance use
 NCT04155736,PTSD,PTSD
-NCT05227209,"Depressive Episodes, Bipolar I Depression",Depression
+NCT05227209,"Depressive Episodes, Bipolar I Depression",Bipolar disorder
 NCT03006393,Depression,Depression
 NCT04148014,Eating Disorders,Eating disorders
 NCT02785614,Depression,Depression
@@ -16695,9 +16780,9 @@ NCT06230107,Eating Disorder,Eating disorders
 NCT05716464,Depression,Depression
 NCT01078298,Depression,Depression
 NCT02307019,Performance Anxiety,Anxiety
-NCT06506019,Bipolar Depression,Depression
+NCT06506019,Bipolar Depression,Bipolar disorder
 NCT05095428,Post-traumatic Stress Disorder,PTSD
-NCT01768767,Bipolar Depression,Depression
+NCT01768767,Bipolar Depression,Bipolar disorder
 NCT04453709,Anxiety,Anxiety
 NCT04453709,Depression,Depression
 NCT02008773,Schizophrenia,Schizophrenia & psychosis
@@ -16724,7 +16809,7 @@ NCT06159595,Major Depressive Disorder,Depression
 NCT02481895,Bipolar Disorder,Bipolar disorder
 NCT02637895,Post-Traumatic Stress Disorder,PTSD
 NCT06208839,Substance-Related Disorders,Substance use
-NCT02362412,Bipolar Depression,Depression
+NCT02362412,Bipolar Depression,Bipolar disorder
 NCT07000201,Anxiety,Anxiety
 NCT07000201,Anxiety Disorder (Panic Disorder or GAD),Anxiety
 NCT04670081,Treatment-resistant Depression,Depression
@@ -16775,7 +16860,7 @@ NCT07198542,Anxiety,Anxiety
 NCT07198542,Depression,Depression
 NCT01574742,Unipolar Depression,Depression
 NCT05384405,Major Depressive Disorder,Depression
-NCT05384405,Bipolar Depression,Depression
+NCT05384405,Bipolar Depression,Bipolar disorder
 NCT01772394,Anorexia Nervosa (DSM-IV Revised Criteria),Eating disorders
 NCT04040829,Psychotic Disorders,Schizophrenia & psychosis
 NCT03458039,Depression,Depression
@@ -17022,7 +17107,7 @@ NCT03999359,Anxiety,Anxiety
 NCT03338179,Schizophrenia,Schizophrenia & psychosis
 NCT06824415,Major Depression,Depression
 NCT05958940,"Depression, Unipolar",Depression
-NCT05958940,"Depression, Bipolar",Depression
+NCT05958940,"Depression, Bipolar",Bipolar disorder
 NCT03383874,Mania (Neurotic),Bipolar disorder
 NCT04556890,Major Depressive Disorder,Depression
 NCT06028997,Depression,Depression
@@ -17112,6 +17197,8 @@ NCT02661789,Major Depressive Disorder,Depression
 NCT02661789,Postpartum Psychosis,Schizophrenia & psychosis
 NCT02661789,Schizophrenia,Schizophrenia & psychosis
 NCT05160233,Drug Use Disorders,Substance use
+NCT05160233,Illicit Drug Use,Substance use
+NCT05160233,Alcohol-Related Disorders,Substance use
 NCT05160233,Opioid Use Disorder,Substance use
 NCT03837340,Schizophrenia,Schizophrenia & psychosis
 NCT03837340,Bipolar Disorder,Bipolar disorder
@@ -17171,7 +17258,7 @@ NCT06382194,Depression,Depression
 NCT06350760,Anxiety Disorders and Symptoms,Anxiety
 NCT06350760,Depressive Symptoms,Depression
 NCT03679962,"Depressive Disorder, Major",Depression
-NCT03679962,Bipolar Depression,Depression
+NCT03679962,Bipolar Depression,Bipolar disorder
 NCT01281527,Schizophrenia,Schizophrenia & psychosis
 NCT02423824,Bipolar Disorder,Bipolar disorder
 NCT02423824,Major Depressive Disorder,Depression
@@ -17209,6 +17296,7 @@ NCT07060066,Schizophrenia and Related Disorders,Schizophrenia & psychosis
 NCT04786951,Anorexia Nervosa,Eating disorders
 NCT02781051,Depression,Depression
 NCT04426565,Substance Use Disorders,Substance use
+NCT04426565,Illicit Drug Use,Substance use
 NCT02240173,Schizophrenia and Disorders With Psychotic Features,Schizophrenia & psychosis
 NCT04410341,Major Depressive Disorder,Depression
 NCT01685294,Major Depressive Disorder,Depression
@@ -17271,6 +17359,7 @@ NCT05712928,Schizophrenia,Schizophrenia & psychosis
 NCT05712928,Schizoaffective Disorder,Schizophrenia & psychosis
 NCT06765967,Anxiety State,Anxiety
 NCT04071600,"Stress Disorders, Post-Traumatic",PTSD
+NCT04071600,"Stress Disorders, Traumatic, Acute",PTSD
 NCT04214600,Depression,Depression
 NCT03028792,Anxiety,Anxiety
 NCT04099771,"Depressive Disorder, Major",Depression
@@ -17340,7 +17429,7 @@ NCT06962527,Intolerance of Uncertainty; Anxiety,Anxiety
 NCT06962527,"Depression, Anxiety",Depression
 NCT02320370,Anxiety,Anxiety
 NCT04992494,Depression,Depression
-NCT07121894,Bipolar Depression,Depression
+NCT07121894,Bipolar Depression,Bipolar disorder
 NCT02826629,Schizophrenia,Schizophrenia & psychosis
 NCT03918837,Obsessive Compulsive Disorder,OCD
 NCT01955954,Panic Disorder,Anxiety
@@ -17502,7 +17591,7 @@ NCT02942251,Major Depressive Disorders,Depression
 NCT06994637,Anxiety and Fear,Anxiety
 NCT02593695,Anorexia Nervosa,Eating disorders
 NCT04664257,Bipolar Disorder,Bipolar disorder
-NCT04664257,Bipolar Depression,Depression
+NCT04664257,Bipolar Depression,Bipolar disorder
 NCT06922812,Major Depressive Disorder (MDD),Depression
 NCT04637581,Substance-Related Disorders,Substance use
 NCT04637581,Depression,Depression
@@ -17560,6 +17649,7 @@ NCT00960375,Schizophrenia,Schizophrenia & psychosis
 NCT00960375,"Affective Psychosis, Bipolar",Bipolar disorder
 NCT00960375,"Affective Disorders, Psychotic",Schizophrenia & psychosis
 NCT03182075,Obsessive Compulsive Disorder,OCD
+NCT03438175,"Stress Disorders, Traumatic, Acute",PTSD
 NCT03438175,"Stress Disorders, Post-Traumatic",PTSD
 NCT06456775,Depression,Depression
 NCT03288675,"Depressive Disorder, Major",Depression
@@ -17819,7 +17909,7 @@ NCT03338673,Schizophrenia,Schizophrenia & psychosis
 NCT03113669,Binge-Eating Disorder,Eating disorders
 NCT03539341,"Depression, Anxiety",Depression
 NCT06885866,Eating Disorders,Eating disorders
-NCT05296356,Bipolar Depression,Depression
+NCT05296356,Bipolar Depression,Bipolar disorder
 NCT02039479,Depression,Depression
 NCT07279246,Drug Craving Levels Among Individuals With Substance Addiction,Substance use
 NCT07279246,Depression Levels Among Individuals With Substance Addiction,Depression
@@ -17841,7 +17931,7 @@ NCT02942459,Schizophrenia,Schizophrenia & psychosis
 NCT03333603,Schizophrenia,Schizophrenia & psychosis
 NCT02151162,Depressive Disorder,Depression
 NCT02151162,Anxiety Disorders,Anxiety
-NCT06599099,Bipolar Depression,Depression
+NCT06599099,Bipolar Depression,Bipolar disorder
 NCT04931199,Anxiety,Anxiety
 NCT04931199,Depression,Depression
 NCT04931199,Posttraumatic Stress Disorder,PTSD
@@ -17878,7 +17968,7 @@ NCT05061225,Depressive Symptoms,Depression
 NCT05061225,Anxiety Disorders and Symptoms,Anxiety
 NCT05492825,Substance Use Disorders,Substance use
 NCT05492825,Opioid Use Disorder,Substance use
-NCT02707276,Bipolar Depression Depressed Phase,Depression
+NCT02707276,Bipolar Depression Depressed Phase,Bipolar disorder
 NCT05209789,Post Partum Depression,Depression
 NCT05164068,Anxiety ; Dental,Anxiety
 NCT06055322,Depression,Depression
@@ -18279,7 +18369,7 @@ NCT03490747,Anxiety,Anxiety
 NCT03490747,Depression,Depression
 NCT03573349,Major Depressive Disorder,Depression
 NCT03573349,Treatment Resistant Depression,Depression
-NCT03573349,Bipolar Depression,Depression
+NCT03573349,Bipolar Depression,Bipolar disorder
 NCT06779838,Anorexia Nervosa,Eating disorders
 NCT06779838,Bulimia,Eating disorders
 NCT06779838,Binge Eating Disorder,Eating disorders
@@ -18339,7 +18429,7 @@ NCT01192685,Depression,Depression
 NCT01749215,Alcohol Dependence,Substance use
 NCT01749215,Posttraumatic Stress Disorder (PTSD),PTSD
 NCT02358343,Depression,Depression
-NCT01284517,Bipolar Depression,Depression
+NCT01284517,Bipolar Depression,Bipolar disorder
 NCT02268487,Major Depressive Disorder,Depression
 NCT04871087,Anxiety,Anxiety
 NCT06977087,Social Anxiety,Anxiety
@@ -18350,6 +18440,7 @@ NCT03864614,Major Depressive Disorder,Depression
 NCT01395355,Binge Eating/Loss of Control Eating,Eating disorders
 NCT04536935,Depression,Depression
 NCT04536935,Anxiety,Anxiety
+NCT03328208,Drug Use,Substance use
 NCT03328208,Opioid Use,Substance use
 NCT05165576,Anxiety,Anxiety
 NCT02647216,Anxiety,Anxiety
@@ -18443,6 +18534,7 @@ NCT05570344,"Depressive Disorder, Treatment-Resistant",Depression
 NCT03997864,Posttraumatic Stress Disorder,PTSD
 NCT06390293,PTSD,PTSD
 NCT06758206,Depressive Symptoms,Depression
+NCT05886504,Drug Use,Substance use
 NCT01370733,Major Depressive Disorder,Depression
 NCT06786247,Depression,Depression
 NCT01217658,Postpartum Depression,Depression
@@ -18461,6 +18553,7 @@ NCT05340348,Schizophrenia,Schizophrenia & psychosis
 NCT01829048,Schizophrenia,Schizophrenia & psychosis
 NCT02153567,Anxiety,Anxiety
 NCT02153567,Depression,Depression
+NCT04598100,"Stress Disorders, Traumatic",PTSD
 NCT04598100,Anxiety,Anxiety
 NCT04598100,Depression,Depression
 NCT04431765,Post-traumatic Stress Disorder,PTSD
@@ -18478,7 +18571,7 @@ NCT03507114,Dysthymic Disorder,Depression
 NCT03507114,Panic Disorder,Anxiety
 NCT03507114,Social Phobia,Anxiety
 NCT03507114,Generalized Anxiety Disorder,Anxiety
-NCT02749006,Bipolar Depression,Depression
+NCT02749006,Bipolar Depression,Bipolar disorder
 NCT05304104,Binge-Eating Disorder,Eating disorders
 NCT05304104,Bulimia Nervosa,Eating disorders
 NCT04269252,Anxiety,Anxiety
@@ -18494,6 +18587,7 @@ NCT06886607,Schizophrenia Disorders,Schizophrenia & psychosis
 NCT04601064,Substance Use Disorders,Substance use
 NCT04601064,Addiction,Substance use
 NCT04601064,Opioid Use,Substance use
+NCT04601064,Drug Use,Substance use
 NCT06266364,"PTSD, Post Traumatic Stress Disorder",PTSD
 NCT05646264,Schizophrenia,Schizophrenia & psychosis
 NCT05646264,Negative Symptoms in Schizophrenia,Schizophrenia & psychosis
@@ -18558,7 +18652,7 @@ NCT03102736,Depression,Depression
 NCT02491034,Depression,Depression
 NCT05228964,Depression,Depression
 NCT05228964,Anxiety Disorders,Anxiety
-NCT05228964,Bipolar Depression,Depression
+NCT05228964,Bipolar Depression,Bipolar disorder
 NCT05228964,Ptsd,PTSD
 NCT06922409,Post Stroke Depression,Depression
 NCT05437809,Food Addiction,Substance use
@@ -18568,10 +18662,10 @@ NCT00864630,Depression,Depression
 NCT03167307,Depression,Depression
 NCT04777292,Obsessive-Compulsive Disorder,OCD
 NCT05054699,Major Depressive Disorder,Depression
-NCT05054699,Bipolar Depression,Depression
+NCT05054699,Bipolar Depression,Bipolar disorder
 NCT01894932,Unipolar Depression,Depression
 NCT07172516,Bipolar Disorder,Bipolar disorder
-NCT07172516,Bipolar Depression,Depression
+NCT07172516,Bipolar Depression,Bipolar disorder
 NCT07172516,Bipolar I Disorder,Bipolar disorder
 NCT07172516,Bipolar II Disorder,Bipolar disorder
 NCT01888406,Binge Eating Disorder,Eating disorders
@@ -18600,7 +18694,7 @@ NCT02576171,Social Anxiety Disorder,Anxiety
 NCT04821544,Postpartum Depression,Depression
 NCT02417064,Treatment-resistant Depression,Depression
 NCT02839798,Major Depressive Episode,Depression
-NCT02839798,Bipolar Depression,Depression
+NCT02839798,Bipolar Depression,Bipolar disorder
 NCT02839798,Bipolar Disorder,Bipolar disorder
 NCT02591498,Schizophrenia,Schizophrenia & psychosis
 NCT02497287,Treatment-resistant Depression,Depression
@@ -18655,7 +18749,7 @@ NCT02431806,Major Depressive Disorder,Depression
 NCT06797804,Depression,Depression
 NCT05603104,Schizophrenia and Related Disorders,Schizophrenia & psychosis
 NCT05603104,Major Depressive Disorder,Depression
-NCT05603104,Bipolar Depression,Depression
+NCT05603104,Bipolar Depression,Bipolar disorder
 NCT06528938,Depression,Depression
 NCT06528938,"Depressive Disorder, Major",Depression
 NCT04404478,Depressive Symptoms,Depression
@@ -18750,12 +18844,13 @@ NCT02431845,Obsessive-Compulsive Disorder,OCD
 NCT02764294,Anxiety,Anxiety
 NCT06042166,Postpartum Depression,Depression
 NCT06042166,Postpartum Anxiety,Anxiety
-NCT01429272,Bipolar Disorder Depression,Depression
+NCT01429272,Bipolar Disorder Depression,Bipolar disorder
 NCT05394545,Anxiety,Anxiety
 NCT05394545,Depression,Depression
 NCT03790345,Schizophrenia,Schizophrenia & psychosis
 NCT03970057,Anxiety,Anxiety
 NCT03970057,Perinatal Depression,Depression
+NCT02823457,"Patient Adherence, Chronic Hepatitis C, Alcohol-related Disorders",Substance use
 NCT05056454,Depression,Depression
 NCT05056454,Perinatal Depression,Depression
 NCT05056454,Anxiety,Anxiety
@@ -18763,7 +18858,7 @@ NCT06076954,Anxiety Disorders,Anxiety
 NCT04392856,Anxiety,Anxiety
 NCT04392856,Depression,Depression
 NCT06860451,Post-stroke Depression,Depression
-NCT03522545,Treatment-resistant Bipolar Depression,Depression
+NCT03522545,Treatment-resistant Bipolar Depression,Bipolar disorder
 NCT05606172,Post-Traumatic Stress Disorder in Children,PTSD
 NCT05606172,Post-traumatic Stress Disorder,PTSD
 NCT01142596,Schizophrenia,Schizophrenia & psychosis
@@ -18783,8 +18878,8 @@ NCT05138120,Depressive Symptoms,Depression
 NCT05138120,Anxiety,Anxiety
 NCT02383862,Anxiety,Anxiety
 NCT02383862,Depression,Depression
-NCT06620042,Bipolar Depression,Depression
-NCT06620042,Treatment Resistant Bipolar Depression,Depression
+NCT06620042,Bipolar Depression,Bipolar disorder
+NCT06620042,Treatment Resistant Bipolar Depression,Bipolar disorder
 NCT03247270,Anxiety Disorders,Anxiety
 NCT05328297,Bipolar Disorder,Bipolar disorder
 NCT06661460,ANXIETY DISORDERS (or Anxiety and Phobic Neuroses),Anxiety
@@ -18859,7 +18954,7 @@ NCT04651296,Depression,Depression
 NCT04283188,Bipolar Disorder,Bipolar disorder
 NCT02056483,Anxiety,Anxiety
 NCT02056483,Depression,Depression
-NCT05939115,Bipolar Depression,Depression
+NCT05939115,Bipolar Depression,Bipolar disorder
 NCT04104568,Depressive Symptoms,Depression
 NCT04104568,Anxiety Symptoms,Anxiety
 NCT03648268,Schizophrenia,Schizophrenia & psychosis
@@ -18891,7 +18986,7 @@ NCT01953237,Schizophrenia,Schizophrenia & psychosis
 NCT02697045,Schizophrenia,Schizophrenia & psychosis
 NCT06575972,Anxiety,Anxiety
 NCT03977675,Major Depressive Disorder,Depression
-NCT05747612,To Determine the Incidence of Depression in Subjects Affected by Bipolar Disorder,Depression
+NCT05747612,To Determine the Incidence of Depression in Subjects Affected by Bipolar Disorder,Bipolar disorder
 NCT01465919,Depression,Depression
 NCT04579354,Anxiety,Anxiety
 NCT02058251,Alcohol Use Disorders,Substance use
@@ -18936,6 +19031,7 @@ NCT02411695,Schizophrenia,Schizophrenia & psychosis
 NCT05388539,Major Depressive Disorder,Depression
 NCT05388539,Unipolar Depression,Depression
 NCT04533230,Benzodiazepine Dependence,Substance use
+NCT04533230,Benzodiazepine Abuse,Substance use
 NCT04533230,Substance Use Disorders,Substance use
 NCT03432065,Anxiety,Anxiety
 NCT02787122,Schizophrenia,Schizophrenia & psychosis
@@ -18965,7 +19061,7 @@ NCT03051256,"Depressive Disorder, Treatment-Resistant",Depression
 NCT04846010,Anxiety Disorders,Anxiety
 NCT04846010,Depression,Depression
 NCT04846010,"Depression, Anxiety",Depression
-NCT04846010,"Depression, Bipolar",Depression
+NCT04846010,"Depression, Bipolar",Bipolar disorder
 NCT01190423,Anorexia Nervosa,Eating disorders
 NCT03586427,"Depressive Disorder, Major",Depression
 NCT04845542,"Depression, Anxiety",Depression
@@ -19011,7 +19107,7 @@ NCT02330627,Depression,Depression
 NCT04437173,Anxiety,Anxiety
 NCT04129866,Anxiety Sensitivity,Anxiety
 NCT02339844,Schizophrenia,Schizophrenia & psychosis
-NCT07217860,Bipolar Depression,Depression
+NCT07217860,Bipolar Depression,Bipolar disorder
 NCT07217860,Bipolar I Disorder,Bipolar disorder
 NCT07217860,Bipolar Disorder,Bipolar disorder
 NCT07217860,Bipolar II Disorder,Bipolar disorder
@@ -19204,7 +19300,7 @@ NCT05973110,Schizophrenia,Schizophrenia & psychosis
 NCT05973110,Schizo Affective Disorder,Schizophrenia & psychosis
 NCT06943560,PTSD,PTSD
 NCT03748446,Major Depressive Disorder,Depression
-NCT03748446,Bipolar Depression,Depression
+NCT03748446,Bipolar Depression,Bipolar disorder
 NCT01124188,Depression,Depression
 NCT06672588,Treatment Resistant Schizophrenia,Schizophrenia & psychosis
 NCT06672588,Schizophrenia,Schizophrenia & psychosis
@@ -19262,14 +19358,14 @@ NCT04146025,Postpartum Depression,Depression
 NCT02504476,Schizophrenia or Schizoaffective Disorder,Schizophrenia & psychosis
 NCT02796417,Schizophrenia,Schizophrenia & psychosis
 NCT06448117,Depressive Symptoms,Depression
-NCT04456868,Bipolar Anhedonic Depression,Depression
+NCT04456868,Bipolar Anhedonic Depression,Bipolar disorder
 NCT04138368,Postpartum Depression,Depression
 NCT04572750,Benzodiazepine Dependence,Substance use
 NCT05949190,Postpartum Depression,Depression
 NCT05949190,Antepartum Depression,Depression
 NCT03230097,Psychotic Disorders,Schizophrenia & psychosis
 NCT00923078,Schizophrenia,Schizophrenia & psychosis
-NCT03148535,the Use of Antidepressants in Patients With Bipolar Depression,Depression
+NCT03148535,the Use of Antidepressants in Patients With Bipolar Depression,Bipolar disorder
 NCT06573125,Depression,Depression
 NCT02870725,Depression,Depression
 NCT06556576,Depressive Symptoms,Depression
@@ -19325,7 +19421,7 @@ NCT02202915,Obsessive Compulsive Disorder,OCD
 NCT04671225,Bipolar Disorder,Bipolar disorder
 NCT07098208,Exam Anxiety,Anxiety
 NCT06285708,PTSD,PTSD
-NCT07021508,Bipolar Depression,Depression
+NCT07021508,Bipolar Depression,Bipolar disorder
 NCT03640325,Anxiety,Anxiety
 NCT03640325,Depression,Depression
 NCT02336568,PTSD,PTSD
@@ -19385,7 +19481,7 @@ NCT03868839,Schizophrenia,Schizophrenia & psychosis
 NCT03868839,Schizo Affective Disorder,Schizophrenia & psychosis
 NCT03868839,Treatment-resistant Schizophrenia,Schizophrenia & psychosis
 NCT04072575,Schizophrenia,Schizophrenia & psychosis
-NCT03396601,Bipolar Depression,Depression
+NCT03396601,Bipolar Depression,Bipolar disorder
 NCT01431001,Major Depressive Disorder,Depression
 NCT01182012,Schizophrenia,Schizophrenia & psychosis
 NCT01182012,Bipolar Disorder,Bipolar disorder
@@ -19500,7 +19596,7 @@ NCT06740760,Depression - Major Depressive Disorder,Depression
 NCT06740760,Anxiety,Anxiety
 NCT02565524,Schizophrenia,Schizophrenia & psychosis
 NCT01670123,Bipolar Disorder,Bipolar disorder
-NCT04430959,Bipolar Disorder Depression,Depression
+NCT04430959,Bipolar Disorder Depression,Bipolar disorder
 NCT05841680,Anxiety Disorders,Anxiety
 NCT03179696,Schizophrenia,Schizophrenia & psychosis
 NCT03179696,Schizoaffective Disorder,Schizophrenia & psychosis
@@ -19511,6 +19607,7 @@ NCT01944969,Major Depressive Disorder,Depression
 NCT06224894,Anxiety,Anxiety
 NCT07053345,"Depressive Disorder, Treatment-Resistant",Depression
 NCT04968275,Psychotic Disorder,Schizophrenia & psychosis
+NCT04968275,Marijuana Use,Substance use
 NCT05040581,Postpartum Depression,Depression
 NCT06039228,Depressive Symptoms,Depression
 NCT06039228,Anxiety,Anxiety
@@ -19558,7 +19655,7 @@ NCT01995123,PTSD,PTSD
 NCT04634903,Depression,Depression
 NCT02398227,PTSD,PTSD
 NCT07026461,Depression - Major Depressive Disorder,Depression
-NCT07026461,Depression Bipolar,Depression
+NCT07026461,Depression Bipolar,Bipolar disorder
 NCT04585061,Anxiety,Anxiety
 NCT05880719,Psychotic Episode,Schizophrenia & psychosis
 NCT03739632,Major Depressive Disorder,Depression
@@ -19598,7 +19695,7 @@ NCT04220645,Substance Use Disorders,Substance use
 NCT05776901,Depression,Depression
 NCT05776901,Anxiety,Anxiety
 NCT03711019,Depression,Depression
-NCT03711019,Bipolar Depression,Depression
+NCT03711019,Bipolar Depression,Bipolar disorder
 NCT03711019,Unipolar Depression,Depression
 NCT03711019,Treatment Resistant Depression,Depression
 NCT04639765,Depressive Symptoms,Depression
@@ -19606,14 +19703,15 @@ NCT05637320,Anxiety Disorders,Anxiety
 NCT05637320,Depressive Disorder,Depression
 NCT07794696,Anxiety,Anxiety
 NCT02319746,First-episode Psychosis,Schizophrenia & psychosis
+NCT02319746,Cannabis Abuse,Substance use
 NCT02880462,Schizophrenia,Schizophrenia & psychosis
 NCT06361342,Anxiety,Anxiety
 NCT05340686,Bipolar Disorder,Bipolar disorder
-NCT05340686,Bipolar Depression,Depression
+NCT05340686,Bipolar Depression,Bipolar disorder
 NCT05340686,Bipolar I Disorder,Bipolar disorder
 NCT05340686,Bipolar II Disorder,Bipolar disorder
 NCT05340686,Bipolar Affective Disorder; Remission in,Bipolar disorder
-NCT05340686,"Bipolar Affective Disorder, Currently Depressed, Moderate",Depression
+NCT05340686,"Bipolar Affective Disorder, Currently Depressed, Moderate",Bipolar disorder
 NCT05702086,Depressive Symptoms,Depression
 NCT06621394,"Depressive Disorder, Major",Depression
 NCT02026622,Major Depressive Disorder,Depression
@@ -19645,9 +19743,10 @@ NCT06163651,Alcohol Use Disorder,Substance use
 NCT06163651,Substance Use Disorders,Substance use
 NCT06163651,"Alcohol Use Complicating Pregnancy, Unspecified Trimester",Substance use
 NCT06163651,Drug Use Disorders,Substance use
+NCT06163651,"Drug Use Complicating Pregnancy, Unspecified Trimester",Substance use
 NCT01898429,Treatment Resistant Depression,Depression
 NCT01898429,"Depressive Disorder, Treatment-Resistant",Depression
-NCT01898429,"Depression, Bipolar",Depression
+NCT01898429,"Depression, Bipolar",Bipolar disorder
 NCT06970431,Anxiety,Anxiety
 NCT01248195,Schizophrenia,Schizophrenia & psychosis
 NCT01248195,Schizophreniform Disorder,Schizophrenia & psychosis
@@ -19738,6 +19837,7 @@ NCT05033002,Depressive Symptoms,Depression
 NCT03190772,Major Depressive Episode,Depression
 NCT04792775,"Stress Disorders, Post-Traumatic",PTSD
 NCT04792775,Anxiety Disorders,Anxiety
+NCT04792775,Traumatic Stress Disorder,PTSD
 NCT02784301,Anxiety,Anxiety
 NCT06239181,Anxiety,Anxiety
 NCT05410119,Depression,Depression
@@ -19894,7 +19994,7 @@ NCT05543720,Mental Health (Depression),Depression
 NCT03213782,Anxiety,Anxiety
 NCT04862624,"Depression, Anxiety",Depression
 NCT03339596,Unipolar Depression,Depression
-NCT03339596,Bipolar Depression,Depression
+NCT03339596,Bipolar Depression,Bipolar disorder
 NCT06188962,Anxiety,Anxiety
 NCT06188962,Depression,Depression
 NCT06769503,Anxiety,Anxiety
@@ -20006,6 +20106,7 @@ NCT03571464,Obsessive Thoughts,OCD
 NCT04957498,Anorexia Nervosa,Eating disorders
 NCT03972293,Depression,Depression
 NCT04619121,Major Depressive Disorder,Depression
+NCT03778216,Avoidant / Restrictive Food Intake Disorder,Eating disorders
 NCT04281134,Obsessive-Compulsive Disorder,OCD
 NCT03874793,Post Traumatic Stress Disorder,PTSD
 NCT04654884,Anxiety Disorders,Anxiety
@@ -20262,7 +20363,7 @@ NCT02889211,Depression,Depression
 NCT06960109,Anxiety,Anxiety
 NCT06194799,Alzheimer's Disease Psychosis,Schizophrenia & psychosis
 NCT02333487,Schizophrenia,Schizophrenia & psychosis
-NCT01586793,Bipolar Depression,Depression
+NCT01586793,Bipolar Depression,Bipolar disorder
 NCT02916121,Schizophrenia,Schizophrenia & psychosis
 NCT05481736,Anorexia Nervosa,Eating disorders
 NCT04065334,Substance Use Disorders,Substance use
@@ -20298,6 +20399,7 @@ NCT05527509,Posttraumatic Stress Disorder,PTSD
 NCT05527509,Major Depressive Disorder,Depression
 NCT05527509,Panic Disorder,Anxiety
 NCT05527509,Generalized Anxiety Disorder,Anxiety
+NCT05527509,Traumatic Stress Disorder,PTSD
 NCT01879709,Schizophrenia,Schizophrenia & psychosis
 NCT01623219,"Post Traumatic Stress Disorder, PTSD",PTSD
 NCT03990064,"Stress Disorder, Post Traumatic",PTSD
@@ -20356,10 +20458,11 @@ NCT04661410,Binge-Eating Disorder,Eating disorders
 NCT05927324,Post-traumatic Stress Disorder,PTSD
 NCT06839859,Depression,Depression
 NCT06839859,Anxiety,Anxiety
+NCT06839859,Drug Use,Substance use
 NCT07033780,Major Depressive Disorder (MDD),Depression
 NCT05952674,Treatment Resistant Depression (TRD),Depression
 NCT04812418,Sleep Troubles Associated With Anxiety,Anxiety
-NCT05357313,Bipolar Depression,Depression
+NCT05357313,Bipolar Depression,Bipolar disorder
 NCT07734623,"Opioid Use Disorder, Severe",Substance use
 NCT07734623,Amphetamine Use Disorder,Substance use
 NCT04228146,Depression,Depression
@@ -20386,7 +20489,7 @@ NCT05300204,Depression in Adolescence,Depression
 NCT06278649,Anxiety,Anxiety
 NCT01502449,PTSD,PTSD
 NCT06682299,Treatment Resistant Depression (TRD),Depression
-NCT01093963,Bipolar Depression,Depression
+NCT01093963,Bipolar Depression,Bipolar disorder
 NCT03032952,Depression,Depression
 NCT03032952,Anxiety,Anxiety
 NCT04723433,Ventilatory Depression,Depression
@@ -20531,10 +20634,11 @@ NCT02573168,Schizoaffective Disorder,Schizophrenia & psychosis
 NCT04610268,Depression,Depression
 NCT06517589,Depression,Depression
 NCT06517589,Anxiety Disorder,Anxiety
+NCT05737550,Drug Abuse,Substance use
 NCT06027489,"Symptom, Depressive",Depression
 NCT03671317,Anxiety State,Anxiety
 NCT07157176,Post Traumatic Stress Disorders,PTSD
-NCT03396068,Bipolar Depression,Depression
+NCT03396068,Bipolar Depression,Bipolar disorder
 NCT03903068,Post-stroke Depression,Depression
 NCT04754750,Schizophrenics,Schizophrenia & psychosis
 NCT03001245,Depressive Disorder,Depression
@@ -20586,7 +20690,7 @@ NCT05575128,Depression,Depression
 NCT05575128,Anxiety,Anxiety
 NCT05814458,Anorexia Nervosa,Eating disorders
 NCT05393648,Bipolar Disorder,Bipolar disorder
-NCT05393648,Bipolar Depression,Depression
+NCT05393648,Bipolar Depression,Bipolar disorder
 NCT06472726,Depression,Depression
 NCT04507243,Major Depressive Disorder,Depression
 NCT05546658,Obsessive-Compulsive Disorder,OCD
@@ -20696,6 +20800,7 @@ NCT04623814,Major Depressive Disorder,Depression
 NCT01625416,Posttraumatic Stress Disorder,PTSD
 NCT01625416,Depression,Depression
 NCT01625416,Alcohol Use,Substance use
+NCT01625416,Drug Use,Substance use
 NCT01201304,Anxiety Sensitivity,Anxiety
 NCT06175104,Anxiety in Pregnancy,Anxiety
 NCT06175104,"Depression, Postpartum",Depression
@@ -20721,6 +20826,7 @@ NCT05685758,Depression,Depression
 NCT05685758,Depressive Disorder,Depression
 NCT05685758,Clinical Depression,Depression
 NCT05685758,Major Depressive Disorder,Depression
+NCT07404943,Bi-Polar Disorder,Bipolar disorder
 NCT06433843,Posttraumatic Stress Disorder,PTSD
 NCT05462340,Schizophrenia,Schizophrenia & psychosis
 NCT02161718,Schizophrenia,Schizophrenia & psychosis
@@ -20821,7 +20927,7 @@ NCT05968560,Clinical High Risk for Psychosis (CHR),Schizophrenia & psychosis
 NCT06704282,Anxiety,Anxiety
 NCT06704282,Depression,Depression
 NCT04509882,Major Depressive Disorder,Depression
-NCT03279224,Bipolar Depression,Depression
+NCT03279224,Bipolar Depression,Bipolar disorder
 NCT04364880,Depression,Depression
 NCT06138678,Depression,Depression
 NCT06276725,Posttraumatic Stress Disorder,PTSD

@@ -50,6 +50,7 @@ NCT06345963,DEVICE,active H-coil delivered rTMS,,Device
 NCT02757521,DRUG,Nitrous Oxide,,Drug
 NCT02757521,DRUG,Placebo,,Drug
 NCT03036371,BEHAVIORAL,High Intensity Interval Exercise,,Behavioural
+NCT05731999,DEVICE,Previct Drugs,,Device
 NCT06384521,BEHAVIORAL,Lifestyle MIND,,Behavioural
 NCT03618121,DEVICE,Biofeedback plus gaming (Nevermind),,Device
 NCT03618121,DEVICE,Biofeedback only (The Pip),,Device
@@ -3064,6 +3065,8 @@ NCT02545634,DIETARY_SUPPLEMENT,L. helveticus R0052 and B. longum R0175,,Other
 NCT02545634,OTHER,Placebo,,Other
 NCT03869463,OTHER,Computerized Cognitive Training,,Other
 NCT03869463,OTHER,Control,,Other
+NCT06419387,DEVICE,Self-Therapy Mobile App,,Device
+NCT06419387,OTHER,Psycho-education Videos,,Other
 NCT06391216,DIETARY_SUPPLEMENT,Lactobacillus helveticus R0052 and Bifidobacterium longum R0175,,Other
 NCT06391216,DIETARY_SUPPLEMENT,Placebo,,Other
 NCT07203144,DRUG,selenium yeast supplementation,,Drug
@@ -7899,6 +7902,7 @@ NCT06716034,OTHER,Personalized Nutrition Plan and Support,,Other
 NCT01510834,BEHAVIORAL,"Multibehavioral, Computerized Tailored Intervention STR2IVE",,Behavioural
 NCT07842263,BEHAVIORAL,Pop-it Game,,Behavioural
 NCT07842263,BEHAVIORAL,Stress Ball,,Behavioural
+NCT06044363,OTHER,Satir group,,Other
 NCT04897295,DEVICE,Active transcranial Direct Current Stimulation,,Device
 NCT04897295,DEVICE,Sham transcranial Direct Current Stimulation,,Device
 NCT02290639,BEHAVIORAL,Brief Cognitive Behavioral Treatment,,Behavioural
@@ -12062,6 +12066,9 @@ NCT02765542,OTHER,Automated disease assessment & self-care support phone calls,,
 NCT05904483,OTHER,PFA,,Other
 NCT03973541,BEHAVIORAL,Cognitive Behavioral Therapy with Exposure therapy,,Behavioural
 NCT03973541,BEHAVIORAL,Relaxation Therapy,,Behavioural
+NCT01372254,BEHAVIORAL,Standard Treatment,,Behavioural
+NCT01372254,BEHAVIORAL,BAD-AS,,Behavioural
+NCT01372254,DRUG,Transdermal Nicotine Patch,,Drug
 NCT02380066,DRUG,Anyu Peibo,,Drug
 NCT01503151,BEHAVIORAL,Attention Bias Modification Treatment (ABMT),,Behavioural
 NCT01503151,BEHAVIORAL,Interpretation Bias Modification (IBM),,Behavioural
@@ -14563,6 +14570,8 @@ NCT05293691,BEHAVIORAL,"Body, Breath & Mind",,Behavioural
 NCT05293691,BEHAVIORAL,Moodgym,,Behavioural
 NCT03463590,DEVICE,Bilateral surgical implantation of DBS system to habenula,,Device
 NCT01066897,DRUG,Pramipexole,,Drug
+NCT03404713,BEHAVIORAL,Pathways to Health,,Behavioural
+NCT03404713,BEHAVIORAL,Be4U,,Behavioural
 NCT01567124,DRUG,Moxonidine,,Drug
 NCT01567124,DRUG,Placebo,,Drug
 NCT01567124,DRUG,Moxonidine,,Drug
@@ -16747,6 +16756,7 @@ NCT02329418,OTHER,Explaining withholding and withdrawing life-sustaining therapi
 NCT06751784,DRUG,Fampridine SR,,Drug
 NCT06751784,OTHER,Placebo,,Other
 NCT01686438,BEHAVIORAL,Cognitive behavioral therapy for insomnia,,Behavioural
+NCT02588885,BEHAVIORAL,Trauma-sensitive Care,,Behavioural
 NCT05427708,DEVICE,Capnometry-Guided Respiratory Intervention,,Device
 NCT05427708,BEHAVIORAL,Psycho-Education,,Behavioural
 NCT04606485,OTHER,Acupressure,,Other
@@ -23353,6 +23363,7 @@ NCT06390293,BEHAVIORAL,Group-delivered guided written exposure therapy,,Behaviou
 NCT06390293,BEHAVIORAL,Waiting-List (WL) condition,,Behavioural
 NCT06758206,BEHAVIORAL,Flywheel Resistance Training,,Behavioural
 NCT06758206,BEHAVIORAL,Traditional resistance training,,Behavioural
+NCT05886504,OTHER,Community-based psychiatric intervention,,Other
 NCT01370733,DEVICE,NEST-1 (NeoSync EEG Synchronized TMS),,Device
 NCT01370733,DEVICE,SHAM,,Device
 NCT06786247,BEHAVIORAL,ActivaTeen,,Behavioural
@@ -23768,6 +23779,7 @@ NCT03790345,DRUG,Cobalamin,,Drug
 NCT03790345,DRUG,Placebo Oral Tablet,,Drug
 NCT03970057,BEHAVIORAL,Internet-based Cognitive Behavioural Therapy,,Behavioural
 NCT03970057,OTHER,Usual Care,,Other
+NCT02823457,BEHAVIORAL,VBMI,,Behavioural
 NCT05056454,BEHAVIORAL,Online therapy with coaching within STAND,,Behavioural
 NCT05056454,BEHAVIORAL,Clinical care within STAND,,Behavioural
 NCT05056454,OTHER,Perinatal Psychiatric Care,,Other
@@ -25350,6 +25362,7 @@ NCT03972293,BEHAVIORAL,Intern Health Study behavioral change mobile notification
 NCT03972293,BEHAVIORAL,Intern Health Study mobile app,,Behavioural
 NCT04619121,DEVICE,NIR-tPBM,,Device
 NCT04619121,DEVICE,Sham device,,Device
+NCT03778216,BEHAVIORAL,Family Based Treatment,,Behavioural
 NCT04281134,DEVICE,Summit RC+S System,,Device
 NCT04281134,OTHER,One Month Blinded Discontinuation Period:,,Other
 NCT03874793,BEHAVIORAL,Mindfulness-Based Cognitive Therapy,,Behavioural
@@ -26010,6 +26023,7 @@ NCT02573168,OTHER,Treatment as Usual (TAU),,Other
 NCT04610268,DEVICE,transcranial direct current stimulation,,Device
 NCT06517589,OTHER,Process-based Cognitive Behavioral Therapy (PBT),,Other
 NCT06517589,OTHER,Cognitive Behavioral Therapy (CBT),,Other
+NCT05737550,DEVICE,Previct Drugs,,Device
 NCT06027489,BEHAVIORAL,Music,,Behavioural
 NCT06027489,BEHAVIORAL,Drawing Group,,Behavioural
 NCT03671317,BEHAVIORAL,Medical Clowning,,Behavioural
@@ -26265,6 +26279,7 @@ NCT04680910,DIAGNOSTIC_TEST,Slow-Wave Activity,,Other
 NCT06968949,BEHAVIORAL,Unadapted Brief Intervention for School Clinicians (BRISC; BR-O),,Behavioural
 NCT06968949,BEHAVIORAL,Brief Intervention for School Clinicians (BRISC) with Implementation Strategies Adapted for School-Employed Practitioners (BR-A),,Behavioural
 NCT05685758,OTHER,FTP-based therapeutic mobile-app,,Other
+NCT07404943,BEHAVIORAL,telenursing,,Behavioural
 NCT06433843,BEHAVIORAL,Dialectical behavioral therapy for the treatment of posttraumatic stress disorder (DBT-PTSD),,Behavioural
 NCT05462340,DRUG,[18F]ASEM,,Drug
 NCT05462340,DRUG,[18F]AZAN,,Drug
