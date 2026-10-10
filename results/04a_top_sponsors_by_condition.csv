@@ -4,17 +4,18 @@ Anxiety,Massachusetts General Hospital,OTHER,49,2
 Anxiety,"University of California, Los Angeles",OTHER,41,3
 Anxiety,VA Office of Research and Development,FED,35,4
 Anxiety,Stanford University,OTHER,34,5
-Bipolar disorder,Massachusetts General Hospital,OTHER,29,1
-Bipolar disorder,Mclean Hospital,OTHER,18,2
+Bipolar disorder,Massachusetts General Hospital,OTHER,30,1
+Bipolar disorder,Mclean Hospital,OTHER,22,2
 Bipolar disorder,VA Office of Research and Development,FED,16,3
-Bipolar disorder,University of Michigan,OTHER,13,4
-Bipolar disorder,Centre for Addiction and Mental Health,OTHER,12,5
-Depression,Massachusetts General Hospital,OTHER,126,1
+Bipolar disorder,Centre for Addiction and Mental Health,OTHER,14,4
+Bipolar disorder,New York State Psychiatric Institute,OTHER,13,5
+Bipolar disorder,University of Michigan,OTHER,13,5
+Depression,Massachusetts General Hospital,OTHER,125,1
 Depression,VA Office of Research and Development,FED,82,2
-Depression,Stanford University,OTHER,67,3
-Depression,"University of California, Los Angeles",OTHER,66,4
-Depression,Centre for Addiction and Mental Health,OTHER,65,5
-Eating disorders,Stanford University,OTHER,17,1
+Depression,Stanford University,OTHER,66,3
+Depression,"University of California, Los Angeles",OTHER,66,3
+Depression,Centre for Addiction and Mental Health,OTHER,62,5
+Eating disorders,Stanford University,OTHER,18,1
 Eating disorders,"University of California, San Diego",OTHER,16,2
 Eating disorders,King's College London,OTHER,15,3
 Eating disorders,Drexel University,OTHER,13,4
@@ -35,8 +36,9 @@ Schizophrenia & psychosis,Centre for Addiction and Mental Health,OTHER,47,2
 Schizophrenia & psychosis,Shanghai Mental Health Center,OTHER,44,3
 Schizophrenia & psychosis,VA Office of Research and Development,FED,44,3
 Schizophrenia & psychosis,"University of Maryland, Baltimore",OTHER,33,5
-Substance use,VA Office of Research and Development,FED,47,1
+Substance use,VA Office of Research and Development,FED,48,1
 Substance use,Medical University of South Carolina,OTHER,31,2
 Substance use,Yale University,OTHER,26,3
 Substance use,Centre for Addiction and Mental Health,OTHER,24,4
 Substance use,"University of California, San Francisco",OTHER,16,5
+Substance use,University of Washington,OTHER,16,5

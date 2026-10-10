@@ -15,38 +15,38 @@ start_year,condition_group,trials,prev_year,pct_change
 2023,Anxiety,477,392.0,21.7
 2024,Anxiety,540,477.0,13.2
 2025,Anxiety,518,540.0,-4.1
-2010,Bipolar disorder,50,,
-2011,Bipolar disorder,40,50.0,-20.0
-2012,Bipolar disorder,40,40.0,0.0
-2013,Bipolar disorder,42,40.0,5.0
-2014,Bipolar disorder,54,42.0,28.6
-2015,Bipolar disorder,36,54.0,-33.3
-2016,Bipolar disorder,33,36.0,-8.3
-2017,Bipolar disorder,48,33.0,45.5
-2018,Bipolar disorder,38,48.0,-20.8
-2019,Bipolar disorder,37,38.0,-2.6
-2020,Bipolar disorder,28,37.0,-24.3
-2021,Bipolar disorder,39,28.0,39.3
-2022,Bipolar disorder,52,39.0,33.3
-2023,Bipolar disorder,49,52.0,-5.8
-2024,Bipolar disorder,55,49.0,12.2
-2025,Bipolar disorder,48,55.0,-12.7
-2010,Depression,265,,
-2011,Depression,267,265.0,0.8
-2012,Depression,273,267.0,2.2
-2013,Depression,244,273.0,-10.6
-2014,Depression,304,244.0,24.6
-2015,Depression,326,304.0,7.2
-2016,Depression,368,326.0,12.9
-2017,Depression,367,368.0,-0.3
-2018,Depression,412,367.0,12.3
-2019,Depression,484,412.0,17.5
-2020,Depression,442,484.0,-8.7
-2021,Depression,621,442.0,40.5
-2022,Depression,581,621.0,-6.4
-2023,Depression,624,581.0,7.4
-2024,Depression,668,624.0,7.1
-2025,Depression,690,668.0,3.3
+2010,Bipolar disorder,59,,
+2011,Bipolar disorder,46,59.0,-22.0
+2012,Bipolar disorder,43,46.0,-6.5
+2013,Bipolar disorder,50,43.0,16.3
+2014,Bipolar disorder,61,50.0,22.0
+2015,Bipolar disorder,43,61.0,-29.5
+2016,Bipolar disorder,42,43.0,-2.3
+2017,Bipolar disorder,53,42.0,26.2
+2018,Bipolar disorder,49,53.0,-7.5
+2019,Bipolar disorder,49,49.0,0.0
+2020,Bipolar disorder,38,49.0,-22.4
+2021,Bipolar disorder,50,38.0,31.6
+2022,Bipolar disorder,67,50.0,34.0
+2023,Bipolar disorder,53,67.0,-20.9
+2024,Bipolar disorder,66,53.0,24.5
+2025,Bipolar disorder,59,66.0,-10.6
+2010,Depression,258,,
+2011,Depression,260,258.0,0.8
+2012,Depression,271,260.0,4.2
+2013,Depression,236,271.0,-12.9
+2014,Depression,298,236.0,26.3
+2015,Depression,320,298.0,7.4
+2016,Depression,359,320.0,12.2
+2017,Depression,362,359.0,0.8
+2018,Depression,401,362.0,10.8
+2019,Depression,478,401.0,19.2
+2020,Depression,434,478.0,-9.2
+2021,Depression,616,434.0,41.9
+2022,Depression,569,616.0,-7.6
+2023,Depression,619,569.0,8.8
+2024,Depression,659,619.0,6.5
+2025,Depression,677,659.0,2.7
 2010,Eating disorders,17,,
 2011,Eating disorders,15,17.0,-11.8
 2012,Eating disorders,24,15.0,60.0
@@ -54,9 +54,9 @@ start_year,condition_group,trials,prev_year,pct_change
 2014,Eating disorders,24,20.0,20.0
 2015,Eating disorders,36,24.0,50.0
 2016,Eating disorders,38,36.0,5.6
-2017,Eating disorders,42,38.0,10.5
-2018,Eating disorders,44,42.0,4.8
-2019,Eating disorders,47,44.0,6.8
+2017,Eating disorders,43,38.0,13.2
+2018,Eating disorders,45,43.0,4.7
+2019,Eating disorders,47,45.0,4.4
 2020,Eating disorders,43,47.0,-8.5
 2021,Eating disorders,62,43.0,44.2
 2022,Eating disorders,52,62.0,-16.1
@@ -83,18 +83,18 @@ start_year,condition_group,trials,prev_year,pct_change
 2011,PTSD,62,71.0,-12.7
 2012,PTSD,86,62.0,38.7
 2013,PTSD,74,86.0,-14.0
-2014,PTSD,67,74.0,-9.5
-2015,PTSD,77,67.0,14.9
-2016,PTSD,96,77.0,24.7
+2014,PTSD,69,74.0,-6.8
+2015,PTSD,78,69.0,13.0
+2016,PTSD,96,78.0,23.1
 2017,PTSD,89,96.0,-7.3
 2018,PTSD,85,89.0,-4.5
 2019,PTSD,121,85.0,42.4
-2020,PTSD,117,121.0,-3.3
-2021,PTSD,138,117.0,17.9
-2022,PTSD,143,138.0,3.6
+2020,PTSD,118,121.0,-2.5
+2021,PTSD,142,118.0,20.3
+2022,PTSD,143,142.0,0.7
 2023,PTSD,134,143.0,-6.3
-2024,PTSD,155,134.0,15.7
-2025,PTSD,159,155.0,2.6
+2024,PTSD,156,134.0,16.4
+2025,PTSD,159,156.0,1.9
 2010,Schizophrenia & psychosis,127,,
 2011,Schizophrenia & psychosis,136,127.0,7.1
 2012,Schizophrenia & psychosis,136,136.0,0.0
@@ -111,19 +111,19 @@ start_year,condition_group,trials,prev_year,pct_change
 2023,Schizophrenia & psychosis,165,156.0,5.8
 2024,Schizophrenia & psychosis,150,165.0,-9.1
 2025,Schizophrenia & psychosis,149,150.0,-0.7
-2010,Substance use,23,,
-2011,Substance use,26,23.0,13.0
-2012,Substance use,32,26.0,23.1
-2013,Substance use,35,32.0,9.4
-2014,Substance use,29,35.0,-17.1
-2015,Substance use,41,29.0,41.4
-2016,Substance use,36,41.0,-12.2
-2017,Substance use,63,36.0,75.0
-2018,Substance use,57,63.0,-9.5
-2019,Substance use,77,57.0,35.1
-2020,Substance use,66,77.0,-14.3
-2021,Substance use,83,66.0,25.8
-2022,Substance use,101,83.0,21.7
-2023,Substance use,88,101.0,-12.9
-2024,Substance use,85,88.0,-3.4
-2025,Substance use,113,85.0,32.9
+2010,Substance use,25,,
+2011,Substance use,27,25.0,8.0
+2012,Substance use,32,27.0,18.5
+2013,Substance use,36,32.0,12.5
+2014,Substance use,30,36.0,-16.7
+2015,Substance use,41,30.0,36.7
+2016,Substance use,38,41.0,-7.3
+2017,Substance use,65,38.0,71.1
+2018,Substance use,58,65.0,-10.8
+2019,Substance use,79,58.0,36.2
+2020,Substance use,66,79.0,-16.5
+2021,Substance use,85,66.0,28.8
+2022,Substance use,104,85.0,22.4
+2023,Substance use,92,104.0,-11.5
+2024,Substance use,89,92.0,-3.3
+2025,Substance use,115,89.0,29.2

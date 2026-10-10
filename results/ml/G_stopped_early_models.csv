@@ -1,5 +1,5 @@
 model,cv_average_precision,test_roc_auc,test_average_precision,test_balanced_accuracy,best_settings
 "Baseline (always ""completed"" rate)",0.082,0.5,0.081,0.5,{'strategy': 'prior'}
-Logistic regression,0.153,0.659,0.14,0.62,{'C': 0.1}
-Gradient boosting,0.171,0.673,0.151,0.63,"{'max_depth': 2, 'min_samples_leaf': 20}"
-Neural network (MLP),0.161,0.67,0.15,0.5,"{'alpha': 0.1, 'hidden_layer_sizes': (16,)}"
+Logistic regression,0.162,0.651,0.138,0.616,{'C': 0.1}
+Gradient boosting,0.175,0.664,0.139,0.617,"{'max_depth': 3, 'min_samples_leaf': 100}"
+Neural network (MLP),0.166,0.673,0.145,0.5,"{'alpha': 0.1, 'hidden_layer_sizes': (16,)}"

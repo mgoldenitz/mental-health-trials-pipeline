@@ -1,13 +1,13 @@
 ,precision,recall,f1-score,support
-Anxiety,0.92,0.96,0.94,251.0
-Bipolar disorder,0.97,0.985,0.977,65.0
-Depression,0.985,0.975,0.98,397.0
-Eating disorders,0.776,0.971,0.863,68.0
+Anxiety,0.927,0.96,0.943,251.0
+Bipolar disorder,1.0,0.968,0.984,94.0
+Depression,0.981,0.97,0.975,369.0
+Eating disorders,0.8,0.971,0.877,70.0
 OCD,0.955,0.875,0.913,24.0
-Other,0.995,0.987,0.991,6246.0
-PTSD,0.903,0.977,0.939,86.0
-Schizophrenia & psychosis,0.986,0.991,0.989,221.0
-Substance use,0.862,0.977,0.916,173.0
-accuracy,0.985,0.985,0.985,0.985
-macro avg,0.928,0.966,0.945,7531.0
-weighted avg,0.986,0.985,0.985,7531.0
+Other,0.996,0.987,0.992,6213.0
+PTSD,0.899,0.967,0.932,92.0
+Schizophrenia & psychosis,0.973,0.991,0.982,221.0
+Substance use,0.861,0.975,0.914,197.0
+accuracy,0.984,0.984,0.984,0.984
+macro avg,0.932,0.963,0.946,7531.0
+weighted avg,0.985,0.984,0.985,7531.0
