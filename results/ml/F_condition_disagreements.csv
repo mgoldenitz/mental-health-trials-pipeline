@@ -1,0 +1,117 @@
+condition,n_trials,rule_group,model_group,model_prob
+Dental Anxiety,167,Other,Anxiety,0.989
+Preoperative Anxiety,60,Other,Anxiety,0.918
+Anhedonia,53,Depression,Other,0.953
+Kinesiophobia,50,Other,Anxiety,0.845
+Procedural Anxiety,45,Other,Anxiety,0.998
+MDD,39,Depression,Other,0.976
+Respiratory Depression,36,Other,Depression,0.909
+OCD,25,OCD,Other,0.517
+Alcoholism,22,Substance use,Other,0.955
+Eating Behavior,18,Other,Eating disorders,0.941
+Acute Stress Disorder,16,PTSD,Other,0.794
+Anxiety Postoperative,15,Other,Anxiety,0.964
+Alcohol-Related Disorders,15,Other,Substance use,0.906
+Drug Use,15,Other,Substance use,0.748
+Dysthymic Disorder,15,Depression,Other,0.368
+"Stress Disorders, Traumatic",12,Other,PTSD,0.574
+Perioperative Anxiety,11,Other,Anxiety,0.977
+Anorexia,11,Other,Eating disorders,0.856
+Tobacco Use,10,Other,Substance use,0.887
+Mobile Phone Use,9,Other,Substance use,0.705
+Traumatic Stress Disorder,7,Other,PTSD,0.973
+Feeding Disorder,7,Other,Eating disorders,0.7
+Anxiety Preoperative,7,Other,Anxiety,0.631
+Postoperative Anxiety,6,Other,Anxiety,0.974
+Dental Fear and Anxiety,5,Other,Anxiety,0.984
+Traumatic Stress,5,Other,PTSD,0.885
+Dental Anxiety in Children,5,Other,Anxiety,0.819
+"Anxiety, Preoperative",4,Other,Anxiety,0.914
+Cannabis Abuse,4,Other,Substance use,0.792
+"Alcohol; Use, Problem",3,Other,Substance use,0.897
+GAD,3,Anxiety,Other,0.753
+Eating Habit,3,Other,Eating disorders,0.748
+Alcohol Consumption,3,Other,Substance use,0.679
+Eating Pathology,3,Other,Eating disorders,0.58
+"Stress Disorders, Traumatic, Acute",3,Other,PTSD,0.51
+"Eating, Binge",2,Other,Eating disorders,0.995
+Orthorexia Nervosa,2,Other,Eating disorders,0.985
+Inhalant Use,2,Other,Substance use,0.97
+Picky Eating,2,Other,Eating disorders,0.966
+Alcohol; Harmful Use,2,Other,Substance use,0.956
+Alcohol Withdrawal,2,Other,Substance use,0.901
+Bi-Polar Disorder,2,Other,Bipolar disorder,0.834
+Time Restricted Eating,2,Other,Eating disorders,0.806
+Emotional Eating,2,Other,Eating disorders,0.755
+Children's Dental Anxiety,2,Other,Anxiety,0.649
+"Bipolar Affective Disorder, Currently Depressed, Moderate",2,Depression,Bipolar disorder,0.553
+Oral Anxiolytic,2,Anxiety,Other,0.503
+Psychosomatic Disorder,2,Other,Schizophrenia & psychosis,0.503
+Opioid Induced Respiratory Depression,2,Other,Depression,0.425
+CNS Depression,1,Other,Depression,1.0
+Presurgical Anxiety,1,Other,Anxiety,1.0
+Eating,1,Other,Eating disorders,0.999
+Comorbid Post-Traumatic Stress Disorder and OCD,1,OCD,PTSD,0.997
+"Stress Disorders, Post - Traumatic",1,Other,PTSD,0.997
+E Cig Use,1,Other,Substance use,0.988
+Avoidant / Restrictive Food Intake Disorder,1,Other,Eating disorders,0.985
+Surgical Anxiety,1,Other,Anxiety,0.973
+Anhedonia in Healthy Volunteers,1,Depression,Other,0.972
+Music on Postoperative Anxiety,1,Other,Anxiety,0.959
+ARFID,1,Eating disorders,Other,0.955
+Eating Behavior Disorders,1,Other,Eating disorders,0.943
+Nicotine Use,1,Other,Substance use,0.937
+Hispanic Americans,1,Anxiety,Other,0.931
+Eating Behaviours,1,Other,Eating disorders,0.923
+Chronic Cannabis Users,1,Substance use,Other,0.916
+Alcohol and Drug Use,1,Other,Substance use,0.913
+"Behavior, Eating",1,Other,Eating disorders,0.901
+Compulsive Disorder,1,Other,OCD,0.884
+"Feeding Disorder, Infancy or Early Childhood",1,Eating disorders,Other,0.878
+Pre Surgical Anxiety,1,Other,Anxiety,0.877
+Healthy Eating,1,Other,Eating disorders,0.875
+Post Operative Anxiety,1,Other,Anxiety,0.854
+"Stress Disorder, Acute",1,Other,PTSD,0.85
+"Risk Factors (Rejection, Bullying/Cyberbullying, Addictions, Healthy Lifestyle Habits, Exam Stress Management, Ecoanxiety, Expressed Emotion)",1,Anxiety,Other,0.848
+Alcohol-abuse,1,Other,Substance use,0.846
+Marijuana Use,1,Other,Substance use,0.831
+Depression Levels Among Individuals With Substance Addiction,1,Depression,Substance use,0.828
+"Drug Use Complicating Pregnancy, First Trimester",1,Other,Substance use,0.828
+Binge Drinking,1,Substance use,Other,0.826
+Traumatic Disorder,1,Other,PTSD,0.825
+"Sodium-glucose Transport Protein Two Inhibitor (SGLT2),Metabolic Deficits Caused by Antipsychotics",1,Schizophrenia & psychosis,Other,0.819
+Hispanic or Latino,1,Anxiety,Other,0.817
+Problematic Use of Alcohol or Other Drugs,1,Other,Substance use,0.808
+Benzodiazepine Use,1,Other,Substance use,0.802
+"Drug Use Complicating Pregnancy, Second Trimester",1,Other,Substance use,0.801
+Amphetamine Abuse,1,Other,Substance use,0.771
+"Preoperative, Anxiety",1,Anxiety,Other,0.755
+Preoperative Anxiety (Ameliyat Öncesi Anksiyete),1,Other,Anxiety,0.749
+"Drug Use Complicating Pregnancy, Childbirth, and the Puerperium",1,Other,Substance use,0.747
+Loss of Control Eating,1,Other,Eating disorders,0.747
+Traumatic Stress Disorders,1,Other,PTSD,0.73
+Preoperative Anxiety Score,1,Other,Anxiety,0.714
+Anxiety-comorbidity to Schizophrenia,1,Anxiety,Schizophrenia & psychosis,0.686
+Surgical Anxiety Scale for Adult Patients,1,Other,Anxiety,0.683
+"Anxiety, Surgical Preparation, and Recovery Process in Colorectal Cancer Surgery",1,Anxiety,Other,0.678
+Deprescribing,1,Other,Depression,0.67
+Anxiety in Those Patients With Anorexia Nervosa,1,Anxiety,Eating disorders,0.666
+"Smartphone Users, Smartphone Addiction, Anxiety, and Skin Conductance",1,Anxiety,Substance use,0.652
+Tricyclic Antidepressant Poisoning,1,Depression,Other,0.64
+"Drug Use Complicating Pregnancy, Third Trimester",1,Other,Substance use,0.631
+"Diabetes, Depression, Cardiovascular Disease,Hypercholesterolemia, Osteoporosis",1,Depression,Other,0.629
+Foetal Differences Between Healthy and Schizophernic Parents,1,Schizophrenia & psychosis,Other,0.59
+Opiate Induced Respiratory Depression,1,Other,Depression,0.567
+"Social Functioning, Alexithymia and Sense of Coherence , Bipolar Disorders",1,Bipolar disorder,Other,0.562
+Psychoterapy,1,Other,Schizophrenia & psychosis,0.557
+Ability to Use a Smartphone,1,Other,Substance use,0.556
+Pharmacogenetic Testing to Determine Pharmacological Treatment in PTSD,1,PTSD,Other,0.554
+Stimulant-Related Disorder,1,Other,Substance use,0.543
+"Alcohol Consumption, Youth",1,Other,Substance use,0.541
+Ketamine; Depressive Symptom; Neurosurgery; Perioperative Period,1,Depression,Other,0.535
+"Sleep Quality, Depression, Postnatal Care, Single-Blind Method, Fatigue, Social Support",1,Depression,Other,0.533
+Night Eating Syndrome,1,Other,Eating disorders,0.514
+Mobility and Independence,1,Substance use,Other,0.511
+Post-operative Anxiety,1,Other,Anxiety,0.49
+Opioid-induced Respiratory Depression,1,Other,Depression,0.448
+Patient Diagnosed With OCD and Resistant to SSRI Treatment,1,OCD,Other,0.312
