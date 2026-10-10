@@ -8,14 +8,15 @@ How is mental health treatment research changing? An analysis of interventional 
 
 ## Key findings
 
-Based on 14,713 interventional trials that started 2010–2025 and list at least one of eight DSM-5-aligned conditions.
+Based on 14,724 interventional trials that started 2010–2025 and list at least one of eight DSM-5-aligned conditions.
 
 - **Research on common disorders grew far faster than research on serious mental illness.** Comparing 2010–12 with 2023–25, anxiety trials grew 5.7×, eating disorders 3.6×, substance use 3.5× and depression 2.5×, while schizophrenia and bipolar disorder grew only 1.2×.
 - **Non-drug treatments now dominate.** Drug trials stayed roughly level (277 in 2010, 251 in 2025), but behavioural trials grew 3.4× (203 → 691) and device trials 10× (27 → 272), driven by brain stimulation (TMS, tDCS) and virtual reality. Drugs fell from 44% to 15% of treatment types.
 - **Universities and hospitals now sponsor nearly 9 in 10 trials.** Industry trials halved from 2010 to 2015 (134 → 69), then recovered to 126 by 2025, while academic trials grew 3.5× (366 → 1,269). Industry's share fell from 24% to 9%.
 - **Industry and academia stop trials for different reasons.** Industry trials stop early more often (15.9% vs 12.3%), mostly because of business decisions (27% of stated reasons) or lack of efficacy (17%). Academic trials stop because of recruitment (29%), funding (19%) and COVID-19 (14%). Safety was the stated reason in fewer than 1% of cases.
 - **Psychedelic trials surged after 2020.** 80% of the 165 psychedelic/MDMA trials started in 2021 or later, and they have outnumbered ketamine trials since 2023. Universities led the surge, but industry is overrepresented: it sponsors 23% of recent psychedelic trials, compared with about 9% of all trials.
-- **Canada ranks second.** 1,020 trials (6.9%) include a Canadian site, second only to the United States (6,438; 43.8%) in this registry, and roughly 25 trials per million people compared with about 19 in the US. Toronto's CAMH is a top-5 sponsor in four condition groups.
+- **Canada ranks second.** 1,020 trials (6.9%) include a Canadian site, second only to the United States (6,442; 43.8%) in this registry, and roughly 25 trials per million people compared with about 19 in the US. Toronto's CAMH is a top-5 sponsor in four condition groups.
+- **Trial termination is hard to predict, and virtual reality is the fastest-growing treatment topic.** Machine learning models predicted which trials would be terminated only modestly better than chance (ROC AUC 0.66), and topic modelling of trial titles showed virtual reality rising from 0.5% to 5.2% of trials (see Machine learning below).
 - **COVID-19 left a clear mark.** In 2020, seven of eight condition groups started fewer trials; in 2021, all eight rose. Anxiety trials stepped up in 2021 and stayed higher, and COVID-specific trials explain only a small part of that rise.
 
 **Caveats:** ClinicalTrials.gov is US-based, so many European and Asian trials register elsewhere. Overall registration grew over this period, so comparisons between groups are more reliable than raw growth. Condition groups come from my own keyword rules (see Condition grouping and Validation below).
@@ -67,7 +68,7 @@ OCD and PTSD are separate groups because DSM-5 moved them out of the anxiety dis
 - **Downloaded:** 1 October 2026
 - **Search:** `query.cond` = depression OR anxiety OR PTSD OR "bipolar disorder" OR schizophrenia OR psychosis OR "substance use disorder" OR "obsessive-compulsive disorder" OR "eating disorder" OR "anorexia nervosa" OR "bulimia nervosa" OR "binge eating disorder"; study type = interventional; start date 2010-01-01 to 2025-12-31.
 - **Result:** 18,357 studies, downloaded 1 October 2026. The number of records downloaded matched the API's reported total.
-- **Analysis set:** 14,713 of the 18,357 trials (80%) list at least one grouped condition and are used in the analysis. The other 3,644 list only ungrouped conditions (e.g. pain, insomnia, healthy volunteers, or generic labels such as "Mental Disorder").
+- **Analysis set:** 14,724 of the 18,357 trials (80%) list at least one grouped condition and are used in the analysis. The other 3,633 list only ungrouped conditions (e.g. pain, insomnia, healthy volunteers, or generic labels such as "Mental Disorder").
   
 The registry is updated daily, so re-running the download later will give slightly
 different numbers. All results in this project refer to the 1 October 2026 download.
@@ -77,22 +78,22 @@ The raw download (`trials_raw.json`) and database (`trials.db`) aren't stored he
 ## Condition grouping
 Each trial lists one or more conditions as free text. I assigned each listed condition to a group with keyword rules:
 1. **Exclusions are checked first.** Conditions that share a keyword but aren't psychiatric (respiratory or CNS depression; pre-, peri- or postoperative, dental or procedural anxiety; kinesiophobia; traumatic brain injury) are left ungrouped.
-2. **The first matching group wins.** A condition such as "Depression and Anxiety" is counted under Depression.
+2. **The first matching group wins.** A condition such as "Depression and Anxiety" is counted under Depression. Bipolar disorder is checked before Depression, so "Bipolar Depression" counts as bipolar disorder.
 3. **A trial can belong to several groups** if it lists several conditions, so trial counts by group add up to more than the total.
 
 **Condition rows per group:**
 
 | Group | Condition rows |
 |---|---|
-| Depression | 7,893 |
+| Depression | 7,713 |
 | Anxiety | 4,661 |
 | Schizophrenia & psychosis | 3,021 |
-| PTSD | 1,801 |
-| Substance use | 1,307 |
-| Eating disorders | 924 |
-| Bipolar disorder | 783 |
+| PTSD | 1,826 |
+| Substance use | 1,383 |
+| Bipolar disorder | 965 |
+| Eating disorders | 927 |
 | OCD | 449 |
-| Other (ungrouped) | 19,797 |
+| Other (ungrouped) | 19,691 |
 
 **Fixes made after checking the most common ungrouped conditions:**
 
@@ -102,6 +103,15 @@ Each trial lists one or more conditions as free text. I assigned each listed con
 - Anxiety: excluded pre-, peri- and postoperative anxiety (in either word order), dental and procedural anxiety, and kinesiophobia (fear of movement in pain rehabilitation)
 - Substance use: narrowed "alcohol" to use-disorder terms, so "Alcohol Aftereffects" no longer matches
 - Eating disorders: added "disordered eating", ARFID written out in full ("avoidant restrictive food intake disorder") and "feeding disorder of infancy", found during validation
+
+**Fixes found by a text classifier** (`02_machine_learning.ipynb`, part F; 286 condition rows changed group):
+
+- Bipolar disorder: now checked before Depression. Before this, "Bipolar Depression" (118 trials) and similar names were counted as Depression, leaving 139 trials outside the Bipolar group. Also matches "Bi-Polar".
+- PTSD: matches MeSH-style word order ("Stress Disorders, Traumatic", "Stress Disorder, Acute") and "Post - Traumatic" with spaces
+- Substance use: adds "Alcohol-Related Disorders", "Alcohol-abuse", "Alcohol Withdrawal" and drug, cannabis, amphetamine, benzodiazepine and inhalant use or abuse
+- Eating disorders: adds "Eating, Binge" and ARFID written with a slash
+
+The fixes grew the analysis set from 14,713 to 14,724 trials; headline results barely moved (bipolar growth ×1.17 → ×1.20). Tobacco and nicotine use stay out of scope, as the search didn't target them.
 
 **What stays in Other:**
 
@@ -146,6 +156,33 @@ I compared my counts with searches on the ClinicalTrials.gov website (condition 
 
 **Eating disorders:** I downloaded the website's 154 trials and compared trial IDs. 87 of them are obesity, weight, diet and metabolic studies that the website's synonym expansion links to "eating disorder". 67 of those weren't in my download, because my search used exact phrases, and 20 were in my data but correctly not grouped as eating disorders. The check also found three wordings my rules missed (disordered eating, ARFID written out in full, feeding disorder of infancy). After adding them, all 67 genuine eating disorder trials on the website are captured. My count of 70 includes 3 trials the website search doesn't return.
 
+## Machine learning
+
+`02_machine_learning.ipynb` applies scikit-learn to the clean tables. All three parts are exploratory.
+
+**F. Checking the grouping rules.** A text classifier (TF-IDF word and character n-grams with logistic regression, 5-fold cross-validation) learned the rule-based groups from condition names alone and agreed on 98.5% of 7,531 distinct names. Its 116 disagreements were deliberate exclusions (e.g. dental anxiety), model errors (e.g. "MDD", "healthy eating") and genuine rule gaps, which were fixed in the pipeline (see Condition grouping above). The most consequential, a rule-order problem affecting 139 bipolar trials, surfaced from a single low-frequency disagreement.
+
+**G. Predicting which trials are terminated.** Logistic regression, gradient boosting and a neural network (MLP) were trained on registration details: phase, sponsor type, start year, condition groups, treatment types and countries. Preprocessing ran inside a pipeline (`ColumnTransformer`, `OneHotEncoder`, `SimpleImputer`), with an 80/20 stratified split, 5-fold tuning and balanced class weights, since only 8% of the 9,473 completed or terminated trials were terminated.
+
+| Model | Test ROC AUC | Test average precision |
+|---|---|---|
+| Baseline | 0.50 | 0.08 |
+| Logistic regression | 0.65 | 0.14 |
+| Gradient boosting | 0.66 | 0.14 |
+| Neural network (MLP) | 0.67 | 0.15 |
+
+- Termination is only weakly predictable from registration details, and all three models tied.
+- Drug treatments, later-phase designs and a US site went with more terminations; behavioural treatments with fewer. Trials without a US site are far more often left with "Unknown" status (23% vs 5%), so part of the US effect is probably under-reporting elsewhere.
+- **Leakage check:** Adding enrollment raised the ROC AUC to 0.81, because for ended trials it is the actual number enrolled (median 17 terminated vs 71 completed). It reveals the outcome rather than predicting it, so it is excluded.
+
+![Stopped-early models](images/ml/stopped_early.png)
+
+**H. Topics in trial titles.** Non-negative matrix factorisation (NMF) on title text, with condition names removed, found 16 treatment topics. Virtual reality grew fastest (0.5% of trials in 2010–12 to 5.2% in 2023–25), followed by pain and procedure-related studies (2.3% to 4.9%) and guided self-help, online and mobile approaches (3.0% to 5.0%). Drug-development wording (tolerability, pharmacokinetics, adjunctive) fell from 9.6% to 4.1%. Psychedelic trials were too few to form their own topic, so the keyword flag remains the better way to track them.
+
+![Title topics](images/ml/title_topics.png)
+
+Results tables are in `results/ml/`.
+
 ## Status
 - [x] Download from the ClinicalTrials.gov API (1 Oct 2026)
 - [x] Clean, group conditions, flag psychedelic and ketamine treatments
@@ -153,6 +190,7 @@ I compared my counts with searches on the ClinicalTrials.gov website (condition 
 - [x] SQL analysis (11 queries in `sql/`, results in `results/`)
 - [x] Validate against ClinicalTrials.gov website searches
 - [x] Power BI dashboard (5 pages; `.pbix` and PDF in the repo)
+- [x] Machine learning: rule checking, termination prediction, title topics (`02_machine_learning.ipynb`)
 - [ ] AWS version (S3, Glue, Athena)
       
 Data: ClinicalTrials.gov, U.S. National Library of Medicine
