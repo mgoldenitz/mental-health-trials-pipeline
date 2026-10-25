@@ -1,9 +1,9 @@
 """
-Mental Health & Psychedelic Trial Tracker (version 1)
+Mental health & psychedelic trial tracker (version 1)
 Michael Goldenitz
 
-A Streamlit app built on the cleaned outputs of the Mental Health Clinical
-Trials Pipeline (data/powerbi). Run locally with:  streamlit run app.py
+A Streamlit app built on the cleaned outputs of the mental health clinical
+trials pipeline (data/powerbi). Run locally with:  streamlit run app.py
 """
 
 from pathlib import Path
@@ -35,7 +35,7 @@ OUTCOME_LABELS = {
 }
 OUTCOME_ORDER = list(OUTCOME_LABELS.values())
 
-st.set_page_config(page_title="Mental Health Trial Tracker", page_icon="🧠", layout="wide")
+st.set_page_config(page_title="Mental health trial tracker", layout="wide")
 
 
 # ---------------------------------------------------------------- data
@@ -99,7 +99,7 @@ psy_only = st.sidebar.toggle("Psychedelic & ketamine trials only")
 canada_only = st.sidebar.toggle("Trials in Canada")
 
 st.sidebar.caption("Data: ClinicalTrials.gov, trials starting 2010–2025, "
-                   "processed by the Mental Health Clinical Trials Pipeline.")
+                   "processed by the mental health clinical trials pipeline.")
 
 
 def apply_filters(df):
@@ -126,7 +126,7 @@ ids = set(view["nct_id"])
 
 
 # ---------------------------------------------------------------- header
-st.title("Mental Health & Psychedelic Trial Tracker")
+st.title("Mental health & psychedelic trial tracker")
 st.caption("Search and explore mental health clinical trials registered on ClinicalTrials.gov. "
            "Use the filters on the left; every chart and table updates with them.")
 
@@ -191,7 +191,7 @@ with tab_search:
     recruiting_first = st.checkbox(
         "Show actively recruiting trials first", value=True, disabled=not can_recruit,
         help=None if can_recruit else
-        "Recruiting trials are hidden by the Outcome filter. Add “Ongoing or unknown” to use this.")
+        "Recruiting trials are hidden by the Outcome filter. Add \"Ongoing or unknown\" to use this.")
     recruiting_first = recruiting_first and can_recruit
     if recruiting_first:
         table = table.assign(_r=table["overall_status"].ne("RECRUITING")).sort_values(
