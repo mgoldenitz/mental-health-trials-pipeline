@@ -2,6 +2,8 @@
 
    **Live app:** [mh-trials-tracker.streamlit.app](https://mh-trials-tracker.streamlit.app), where you can search and filter the trials interactively.
 
+   A scheduled GitHub Actions workflow (`.github/workflows/keep-app-awake.yml`) opens the app every 6 hours so Streamlit Community Cloud does not put it to sleep.
+
 How is mental health treatment research changing? An analysis of interventional clinical trials registered on ClinicalTrials.gov, 2010–2025.
 
 ![Overview page of the Power BI dashboard](images/overview.png)
