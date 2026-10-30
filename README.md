@@ -185,6 +185,17 @@ I compared my counts with searches on the ClinicalTrials.gov website (condition 
 
 Results tables are in `results/ml/`.
 
+## Weekly refresh on AWS
+
+Every number above comes from the download of 1 October 2026 and stays fixed. A separate weekly job on AWS downloads the same search again so the app can show how the registry has changed since then.
+
+- `src/pipeline/`: the download, cleaning, condition grouping and drug flags from the notebook (parts B and C) as plain Python with no third-party packages. Rebuilt from the 1 October 2026 download, it reproduces all four tables in `data/powerbi/` value for value (`tools/check_against_published.py`).
+- `template.yaml`: an AWS SAM template. EventBridge Scheduler runs the Lambda function every Monday at 06:00 Toronto time. Each run saves the raw API pages, the four tables and a counts file to its own dated folder in S3, checks that every study the API reported was downloaded, and refuses a snapshot that lost more than 10% of trials since the last one. A failed run sends an email through CloudWatch and SNS.
+- `data/baseline/counts_2026-10-01.csv`: the published counts in the same format, so each refresh can be compared with them.
+- The app's Latest refresh tab shows the newest counts beside the published ones for trials that started 2010–2025, and lists trials starting after 2025 separately because many of those start dates are still estimates.
+
+Setup steps for a personal AWS account are in `docs/aws-setup.md`.
+
 ## Status
 - [x] Download from the ClinicalTrials.gov API (1 Oct 2026)
 - [x] Clean, group conditions, flag psychedelic and ketamine treatments
@@ -193,6 +204,6 @@ Results tables are in `results/ml/`.
 - [x] Validate against ClinicalTrials.gov website searches
 - [x] Power BI dashboard (5 pages; `.pbix` and PDF in the repo)
 - [x] Machine learning: rule checking, termination prediction, title topics (`02_machine_learning.ipynb`)
-- [ ] AWS version (S3, Glue, Athena)
+- [ ] Weekly refresh on AWS (Lambda, S3, EventBridge Scheduler): code in the repo, not yet deployed
       
 Data: ClinicalTrials.gov, U.S. National Library of Medicine

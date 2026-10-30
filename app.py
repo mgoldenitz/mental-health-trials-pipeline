@@ -13,6 +13,7 @@ import plotly.express as px
 import streamlit as st
 
 DATA = Path(__file__).parent / "data" / "powerbi"
+BASELINE = Path(__file__).parent / "data" / "baseline" / "counts_2026-10-01.csv"
 CTGOV = "https://clinicaltrials.gov/study/"
 
 # Readable phase names, in the order trials move through them
@@ -98,7 +99,7 @@ years = st.sidebar.slider("Start year", y_min, y_max, (y_min, y_max))
 psy_only = st.sidebar.toggle("Psychedelic & ketamine trials only")
 canada_only = st.sidebar.toggle("Trials in Canada")
 
-st.sidebar.caption("Data: ClinicalTrials.gov, trials starting 2010–2025, "
+st.sidebar.caption("Data: ClinicalTrials.gov, downloaded 1 October 2026, trials starting 2010–2025, "
                    "processed by the mental health clinical trials pipeline.")
 
 
@@ -140,8 +141,8 @@ k2.metric("Recruiting now", f"{(view['overall_status'] == 'RECRUITING').sum():,}
 k3.metric("Psychedelic & ketamine", f"{view['psychedelic_class'].notna().sum():,}")
 k4.metric("In Canada", f"{view['in_canada'].sum():,}")
 
-tab_overview, tab_search, tab_psy, tab_canada = st.tabs(
-    ["Overview", "Find trials", "Psychedelic & ketamine", "Canada"])
+tab_overview, tab_search, tab_psy, tab_canada, tab_latest = st.tabs(
+    ["Overview", "Find trials", "Psychedelic & ketamine", "Canada", "Latest refresh"])
 
 
 # ---------------------------------------------------------------- overview
@@ -292,3 +293,94 @@ with tab_canada:
                     "sponsor_name": "Sponsor",
                 },
                 hide_index=True, width="stretch")
+
+
+# ---------------------------------------------------------------- latest refresh
+@st.cache_data(ttl=6 * 3600)
+def load_refresh():
+    """Counts from the newest weekly download in S3, or None if the app has no AWS secrets."""
+    try:
+        cfg = st.secrets["aws"]
+    except Exception:
+        return None
+    import io
+    import json
+    import boto3
+
+    s3 = boto3.client("s3", aws_access_key_id=cfg["access_key_id"],
+                      aws_secret_access_key=cfg["secret_access_key"], region_name=cfg["region"])
+
+    def read(key):
+        return s3.get_object(Bucket=cfg["bucket"], Key=key)["Body"].read()
+
+    latest = pd.read_csv(io.BytesIO(read("latest/counts.csv")))
+    manifest = json.loads(read("latest/manifest.json"))
+    history = pd.read_csv(io.BytesIO(read("history/counts.csv")))
+    return latest, manifest, history
+
+
+def compare(baseline, latest, metric):
+    """Published and latest values of one metric side by side."""
+    b = baseline[baseline["metric"] == metric].set_index("category")["value"]
+    l = latest[latest["metric"] == metric].set_index("category")["value"]
+    out = pd.DataFrame({"Published": b, "Latest": l}).fillna(0).astype(int)
+    out["Change"] = out["Latest"] - out["Published"]
+    out.index.name = None
+    return out
+
+
+with tab_latest:
+    try:
+        refresh = load_refresh()
+    except Exception as e:
+        refresh = None
+        st.error(f"Could not read the latest refresh from S3: {e}")
+    if refresh is None:
+        st.info("This tab shows counts from the latest weekly download next to the published "
+                "counts from 1 October 2026. The scheduled refresh is not connected yet.")
+    else:
+        latest, manifest, history = refresh
+        baseline = pd.read_csv(BASELINE)
+        st.caption(f"Latest download: {manifest['snapshot_date']}. Published analysis: 1 October 2026. "
+                   "Both count trials that started 2010–2025, so a change means records were added, "
+                   "removed or edited in the registry. The sidebar filters do not apply to this tab.")
+
+        def one(df, metric, category="All"):
+            row = df[(df["metric"] == metric) & (df["category"] == category)]
+            return int(row["value"].iloc[0]) if len(row) else 0
+
+        k1, k2, k3, k4 = st.columns(4)
+        for col, label, metric, category in [
+                (k1, "Trials", "trials", "All"),
+                (k2, "Psychedelic / MDMA", "trials_by_drug_class", "Psychedelic / MDMA"),
+                (k3, "Ketamine / esketamine", "trials_by_drug_class", "Ketamine / esketamine"),
+                (k4, "With a Canadian site", "trials_with_canadian_site", "All")]:
+            now, then = one(latest, metric, category), one(baseline, metric, category)
+            col.metric(label, f"{now:,}", f"{now - then:+,} since publication", delta_color="off")
+
+        c1, c2 = st.columns(2)
+        by_year = compare(baseline, latest, "trials_by_year").reset_index(names="start_year")
+        by_year["start_year"] = by_year["start_year"].astype(int)
+        fig = px.line(by_year.melt(id_vars="start_year", value_vars=["Published", "Latest"]),
+                      x="start_year", y="value", color="variable", markers=True,
+                      labels={"start_year": "Start year", "value": "Trials", "variable": ""},
+                      title="Trials started per year")
+        c1.plotly_chart(fig, width="stretch")
+
+        c2.markdown("Trials by condition")
+        c2.dataframe(compare(baseline, latest, "trials_by_condition"), width="stretch")
+        c2.markdown("Trials by outcome")
+        c2.dataframe(compare(baseline, latest, "trials_by_outcome"), width="stretch")
+
+        later = latest[latest["metric"] == "started_after_window"]
+        if len(later):
+            st.write("Trials starting after 2025 (outside the published analysis): " +
+                     ", ".join(f"{r.category}: {r.value:,}" for r in later.itertuples()) +
+                     ". Many of these start dates are still estimates.")
+
+        totals = history[(history["metric"] == "trials") & (history["category"] == "All")]
+        if len(totals) > 1:
+            fig = px.line(totals, x="snapshot_date", y="value", markers=True,
+                          labels={"snapshot_date": "Download date", "value": "Trials started 2010–2025"},
+                          title="Trials in the analysis window at each weekly download")
+            st.plotly_chart(fig, width="stretch")
