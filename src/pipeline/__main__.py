@@ -7,6 +7,9 @@ Run the pipeline on your own computer, without AWS.
   python -m pipeline --fetch --out ../out/today
       download fresh data and report how long the download took
 
+Add --parquet to also write each table as Parquet, as the Lambda function does
+for Athena (needs pyarrow).
+
 Run from the src/ folder.
 """
 
@@ -27,6 +30,7 @@ def main():
     ap.add_argument("--end", default=f"{date.today().year}-12-31",
                     help="last start date to download (default: end of this year)")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--parquet", action="store_true", help="also write <table>.parquet (needs pyarrow)")
     args = ap.parse_args()
 
     out = Path(args.out)
@@ -50,6 +54,9 @@ def main():
     pb = transform.powerbi(tables)
     for name, rows in pb.items():
         (out / f"{name}.csv").write_text(transform.to_csv(rows, transform.COLUMNS[name]), encoding="utf-8")
+        if args.parquet:
+            from . import parquet
+            (out / f"{name}.parquet").write_bytes(parquet.to_parquet(rows, name))
         print(f"{name:14s} {len(rows):>8,} rows")
     (out / "counts.csv").write_text(
         transform.to_csv(transform.counts(pb), ["metric", "category", "value"]), encoding="utf-8")
