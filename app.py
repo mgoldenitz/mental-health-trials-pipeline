@@ -296,13 +296,18 @@ with tab_canada:
 
 
 # ---------------------------------------------------------------- latest refresh
-@st.cache_data(ttl=6 * 3600)
-def load_refresh():
-    """Counts from the newest weekly download in S3, or None if the app has no AWS secrets."""
+def aws_secrets():
+    """The [aws] block of the app's secrets, or None if it has none."""
     try:
-        cfg = st.secrets["aws"]
+        return dict(st.secrets["aws"])
     except Exception:
         return None
+
+
+# Takes the secrets as an argument so a missing-secrets result is never cached.
+@st.cache_data(ttl=6 * 3600)
+def load_refresh(cfg):
+    """Counts from the newest weekly download in S3."""
     import io
     import json
     import boto3
@@ -330,8 +335,9 @@ def compare(baseline, latest, metric):
 
 
 with tab_latest:
+    cfg = aws_secrets()
     try:
-        refresh = load_refresh()
+        refresh = load_refresh(cfg) if cfg else None
     except Exception as e:
         refresh = None
         st.error(f"Could not read the latest refresh from S3: {e}")
