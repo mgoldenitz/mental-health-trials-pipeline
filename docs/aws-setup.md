@@ -80,6 +80,41 @@ bucket = "THE_BUCKET_NAME"
 
 Never commit these keys to the repository.
 
+## 9. Query the tables with Athena
+
+Each refresh writes the four tables as Parquet to `athena/latest/` in the bucket. Glue Data Catalog tables (defined in `template.yaml`, so no crawler is needed) let Athena read them:
+
+| Glue database | Holds |
+|---|---|
+| `mental_health_trials` | the newest weekly refresh |
+| `mental_health_trials_published` | the published download of 1 October 2026 |
+
+1. After deploying, load the published tables once, from the repository root:
+
+```
+uv run --with boto3 --with pyarrow python tools/upload_published_parquet.py BUCKET_NAME --profile personal
+```
+
+2. Check that Athena reproduces the published results (all 11 queries should say "matches results/"):
+
+```
+uv run --with boto3 --with pandas python tools/run_athena.py --database mental_health_trials_published --compare --profile personal
+```
+
+3. Run the same queries on the newest refresh. The CSV files go to `out/athena/mental_health_trials/`:
+
+```
+uv run --with boto3 python tools/run_athena.py --profile personal
+```
+
+The `mental_health_trials` tables are empty until the function has run once with this version of the template, so after the first deploy invoke it as in step 7.
+
+To query by hand, open the Athena console, choose the `trials-refresh` workgroup (top right of the query editor), pick a database, and paste a query from `athena/`. The workgroup saves results to `athena-results/` in the bucket, which deletes them after 30 days.
+
+Cost: Athena charges USD 5 per TB scanned, with a 10 MB minimum per query, so each query costs USD 0.00005. The workgroup cancels any query that would scan more than 100 MB.
+
+The queries in `athena/` differ from `sql/` in three ways. The tables hold only in-scope trials (the `data/powerbi/` tables), so `in_scope = 1` and `condition_group <> 'Other'` are gone. Every query keeps trials that started 2010 to 2025, because a refresh also downloads trials starting this year. Athena has no true-equals-1 shortcut, so `SUM(x = 'A')` became `COUNT_IF(x = 'A')`, and percentages use `100.0E0` so the division is in floating point, as in SQLite.
+
 ## What runs and when
 
 | Piece | Setting |
@@ -90,5 +125,6 @@ Never commit these keys to the repository.
 | Storage | S3, public access blocked; raw pages move to Standard-IA after 30 days |
 | Alerts | any function error emails `AlertEmail` |
 | Logs | CloudWatch, kept 90 days |
+| Athena | Parquet tables in `athena/latest/`, workgroup `trials-refresh`, 100 MB scan limit per query |
 
 To pause the refresh, disable the schedule in the EventBridge Scheduler console. To remove everything except the bucket, run `sam delete --stack-name trials-refresh`; the bucket is kept so snapshots are not lost, and can be emptied and deleted in the S3 console.
