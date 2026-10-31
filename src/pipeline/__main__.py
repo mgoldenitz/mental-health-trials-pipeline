@@ -35,7 +35,7 @@ def main():
     manifest = {}
 
     if args.raw:
-        with open(args.raw) as f:
+        with open(args.raw, encoding="utf-8") as f:
             tables = transform.flatten(json.load(f))
         manifest["source"] = args.raw
     else:
@@ -49,11 +49,11 @@ def main():
 
     pb = transform.powerbi(tables)
     for name, rows in pb.items():
-        (out / f"{name}.csv").write_text(transform.to_csv(rows, transform.COLUMNS[name]))
+        (out / f"{name}.csv").write_text(transform.to_csv(rows, transform.COLUMNS[name]), encoding="utf-8")
         print(f"{name:14s} {len(rows):>8,} rows")
     (out / "counts.csv").write_text(
-        transform.to_csv(transform.counts(pb), ["metric", "category", "value"]))
-    (out / "manifest.json").write_text(json.dumps(manifest, indent=2))
+        transform.to_csv(transform.counts(pb), ["metric", "category", "value"]), encoding="utf-8")
+    (out / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(f"Done in {time.time() - began:.0f} s; files in {out}")
 
 
