@@ -339,12 +339,12 @@ with tab_latest:
     try:
         refresh = load_refresh(cfg) if cfg else None
     except Exception as e:
-        refresh = None
+        refresh = False
         st.error(f"Could not read the latest refresh from S3: {e}")
     if refresh is None:
         st.info("This tab shows counts from the latest weekly download next to the published "
                 "counts from 1 October 2026. The scheduled refresh is not connected yet.")
-    else:
+    elif refresh:
         latest, manifest, history = refresh
         baseline = pd.read_csv(BASELINE)
         st.caption(f"Latest download: {manifest['snapshot_date']}. Published analysis: 1 October 2026. "
