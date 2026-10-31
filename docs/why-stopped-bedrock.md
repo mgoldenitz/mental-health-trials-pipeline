@@ -52,3 +52,27 @@ uv run --with boto3 python tools/classify_why_stopped.py --run --trials out/tria
 The script also prints the share of trials where the two agree and how many fall in "Other / unclear" under each method.
 
 The keyword rules in the script are a copy of the CASE expression in `sql/05b_why_stopped_grouped.sql` and reproduce its published counts exactly (332 Recruitment, 307 Other / unclear, 197 Funding, 146 COVID-19, 112 Investigator / staff, 62 Sponsor / business decision, 46 Efficacy / futility, 11 Safety). If the SQL changes, change `keyword_group()` to match.
+
+## Results (run of 31 October 2026)
+
+All 1,213 reasons were labelled in about 30 seconds for USD 0.002, after two prompt revisions (PRs #10 and #11) that fixed errors found by reading the disagreements. The labels in `data/llm/` come from the final prompt.
+
+The model and the keyword rules give the same group for 850 of 1,213 trials (70.1%). The largest change is in "Other / unclear", which falls from 307 trials (25.3%) to 133 (11.0%). Of the 307 trials the keywords could not place, the model moved 44 to Logistics / drug supply, 33 to Study design change, 30 to Sponsor / business decision, 25 to Recruitment, 24 to Regulatory / ethics, 19 each to Efficacy / futility and Investigator / staff, and 9 to Funding. It left 97 as Other / unclear.
+
+| Group | Model | Keywords |
+|---|---|---|
+| Recruitment | 313 | 332 |
+| Funding | 191 | 197 |
+| COVID-19 | 135 | 146 |
+| Other / unclear | 133 | 307 |
+| Investigator / staff | 123 | 112 |
+| Sponsor / business decision | 113 | 62 |
+| Efficacy / futility | 58 | 46 |
+| Logistics / drug supply | 58 | 0 |
+| Study design change | 43 | 0 |
+| Regulatory / ethics | 34 | 0 |
+| Safety | 12 | 11 |
+
+Sponsor / business decision almost doubles (62 to 113), and 73 of the 113 are industry trials. The keyword rules miss phrasings such as "company decided not to move forward" and "terminated by sponsor for administrative reasons".
+
+Known errors in the final labels: 14 of the 146 reasons that mention COVID-19 or the pandemic are not labelled COVID-19, mostly "recruitment challenges due to COVID-19" labelled Recruitment, although the prompt tells the model to choose COVID-19. Some reasons that name a departed investigator without the letters "PI" (for example "Dr. Rabheru left VCH") are labelled Other / unclear. A hand check of 40 disagreements from the first full run found the model's label better in about 28, the keyword group better in 4, and the rest arguable either way; that check was one reader's judgement, not a formal validation.

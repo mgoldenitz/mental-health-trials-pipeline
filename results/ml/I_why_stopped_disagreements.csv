@@ -1,0 +1,364 @@
+nct_id,why_stopped,keyword_group,llm_category
+NCT03889756,No more funding available to continue since we could not recruit throughout the pandemic.,COVID-19,Funding
+NCT04432064,Covid pandemic restrictions delayed data collection and led to loss of funding.,COVID-19,Funding
+NCT04948996,"Due to COVID, recruitment in primary care was not possible, alternative proposed hotline recruitment methods yielded population that did not meet inclusion criteria and were too acutely ill to be eligible for study.",COVID-19,Logistics / drug supply
+NCT05151666,"Initially the study failed to start due to Covid concerns. As this is an immunocompromised patient population, this concern has persisted and study initiation was further complicated by a demographic and availability change in research team members.",COVID-19,Other / unclear
+NCT03291431,Recruitment difficulties due to Covid-19 pandemic,COVID-19,Recruitment
+NCT03602716,"Study was recruited slowly due to the imapct of some uncontrollable factors, such as COVID19.",COVID-19,Recruitment
+NCT03838484,Recruitment challenges due to Covid19.,COVID-19,Recruitment
+NCT03887390,"First the study failed to recruit the required sample size. Second, we no longer have acess to the clinics, due to the coronavirus outbreak",COVID-19,Recruitment
+NCT04039542,COVID-19 restrictions limited recruitment,COVID-19,Recruitment
+NCT04188288,Due to low enrollment from the COVID interruption.,COVID-19,Recruitment
+NCT04394156,"Due to recruitment delays in the Covid-19 pandemic, alongside the need to submit the doctoral thesis this study was conducted for in a limited time frame, recruitment was halted prematurely (note that our recruitment aim was up to 13 participants).",COVID-19,Recruitment
+NCT04847921,Delays in recruitment due to COVID-19 and higher than acceptable loss to followup.,COVID-19,Recruitment
+NCT05299190,Recruitment challenges due to COVID-19 pandemic,COVID-19,Recruitment
+NCT04654130,"Due to challenges with the COVID-19 pandemic, our team has had to prioritize certain studies, which means we can no longer pursue this study at our site.",COVID-19,Sponsor / business decision
+NCT06483789,Decision to terminate study due to a lack of efficacy in this study population. There were no safety concerns identified that contributed to this decision.,Efficacy / futility,COVID-19
+NCT03420456,Sponsor withdrew funding for reasons unrelated to safety or efficacy,Efficacy / futility,Funding
+NCT06219681,"Terminated due to PI resignation. Not related to safety, efficacy, or administrative mandate.",Efficacy / futility,Investigator / staff
+NCT03841773,Interim Analysis results,Efficacy / futility,Other / unclear
+NCT03953521,Interim analysis indicated no statistical difference between treatment arms.,Efficacy / futility,Recruitment
+NCT01900522,Business Decision; No Safety or Efficacy Concerns,Efficacy / futility,Sponsor / business decision
+NCT02216097,The study stopped based on Pfizer portfolio prioritization and not due to safety and/or efficacy concern or change in benefit:risk assessment of PF-04457845.,Efficacy / futility,Sponsor / business decision
+NCT02310568,"Study recruitment was terminated on 24 June 2015, due to a Pfizer business decision. This study was not terminated for reasons of safety or efficacy",Efficacy / futility,Sponsor / business decision
+NCT04855747,Study REL-1017-302 was terminated early by the Sponsor following the prespecified interim analysis for sample size re-estimation at approximately 75% enrollment of the planned sample size (N=280). Safety data were collected.,Efficacy / futility,Sponsor / business decision
+NCT05344365,Study was terminated for business reasons; not due to safety or efficacy concerns.,Efficacy / futility,Sponsor / business decision
+NCT06011577,Study REL-1017-304 was terminated early by the Sponsor following the prespecified interim analysis for sample size re-estimation conducted in study REL-1017-302. Safety assessments were performed in both studies in accordance with the study protocols,Efficacy / futility,Sponsor / business decision
+NCT04712968,Interim analysis of preliminary results indicated a need for protocol re-design.,Efficacy / futility,Study design change
+NCT01478113,PI left the institution and was no funding to continue study.,Funding,Investigator / staff
+NCT05050123,Study stopped due to lack of personnel and budget.,Funding,Investigator / staff
+NCT05981794,"PI left institution and changed to new PI, there was no funding secured for this study.",Funding,Investigator / staff
+NCT03436121,Ketamine shortage during the funding period of the trial,Funding,Logistics / drug supply
+NCT04102475,lack of human and financial resources,Funding,Logistics / drug supply
+NCT07012200,"The study was terminated due to reduced bed capacity in the cardiology ward, insufficient nursing manpower, hospital accreditation preparation, and exhaustion of platform budget. 112 participants were recruited; final analysis included 108.",Funding,Logistics / drug supply
+NCT01080105,This is withdrawn because we started working on studies that are funded.,Funding,Other / unclear
+NCT02552797,Changes to scope of project and funding,Funding,Other / unclear
+NCT02983058,To obtain funding for a larger study,Funding,Other / unclear
+NCT03050632,"With change of personnel and lab resources, this study was not feasible without independent funding",Funding,Other / unclear
+NCT05605028,I needed it to have the position of professor at the university and by the time the professorship was given it was too late for the grant therefore there is no funding and the study was never started.,Funding,Other / unclear
+NCT01355523,Inclusion rate not as expected. Not financially possible to involve other centres.,Funding,Recruitment
+NCT02235064,"Low recruitment, completion of funding cycle",Funding,Recruitment
+NCT02629068,No participants were enrolled in the pilot phase of the study due to lack of interest from parents. Completion dates reflect the end of funding for the study.,Funding,Recruitment
+NCT03367234,Study experienced delays due to site recruitment. Funder terminated contract.,Funding,Recruitment
+NCT05012124,Study closed to accrual before meeting accrual goal due to enrollment challenges and end of funding.,Funding,Recruitment
+NCT06404450,The trial has experienced accrual difficulties and is halted pending additional funding for study recruitment and operations.,Funding,Recruitment
+NCT06733558,"NIGMS, the funding agency, does not consider this study a clinical trial and they asked to remove from the system.",Funding,Regulatory / ethics
+NCT01337609,"Because the study sponsor chose to discontinue funding for this protocol following a change in leadership, the study was terminated early.",Funding,Sponsor / business decision
+NCT02654405,Nathan Kline Institute (NKI) decided not to accept study grant from Stanley Medical Research Foundation. because of budget considerations.,Funding,Sponsor / business decision
+NCT03010865,sponsor withdrew the funds because the smell of sodium butyrate made blinding impossible,Funding,Sponsor / business decision
+NCT04205890,Sponsor is no longer interested in funding the study,Funding,Sponsor / business decision
+NCT04496557,The investigators received funding for a near-identical FDA regulated trial before opening this study to enrollment - the IRB requested closure of the unfunded pilot trial to create a new submission.,Funding,Sponsor / business decision
+NCT05268497,due to budget decision and wanting to pursue other research priorities,Funding,Sponsor / business decision
+NCT05606172,We secured funding to run a cluster randomized trial and approval from the sponsor to transfer the money for this project to the new larger trial.,Funding,Study design change
+NCT01162382,Grant support ended following which the key personnel (PI) left the institution.,Investigator / staff,Funding
+NCT05380115,The investigators were running out of time on a 1 year pilot grant and had to prioritize other parts of the study.,Investigator / staff,Funding
+NCT01465074,Limited staff and operating resources,Investigator / staff,Logistics / drug supply
+NCT02953444,Insufficient personnel to complete the study.,Investigator / staff,Other / unclear
+NCT03077347,Per request of the study PI (fyi: NOT due to adverse events).,Investigator / staff,Other / unclear
+NCT03243149,Insufficient staff and equipment challenges,Investigator / staff,Other / unclear
+NCT04021017,PI Workload,Investigator / staff,Other / unclear
+NCT05056831,PI Request,Investigator / staff,Other / unclear
+NCT05938816,PI change of career,Investigator / staff,Other / unclear
+NCT02382224,insufficient study staff,Investigator / staff,Recruitment
+NCT00979693,"The study was suspended because the PI was unable to get permission from his department to submit the protocol to the local IRB?""",Investigator / staff,Regulatory / ethics
+NCT02223299,The study was never approved by the IRB and the PI left the VA,Investigator / staff,Regulatory / ethics
+NCT01804270,"Study \& IDE was converted to Industry held, as opposed to initial investigator held.",Investigator / staff,Sponsor / business decision
+NCT01804296,"Study \& IDE was converted to Industry held, as opposed to initial investigator held.",Investigator / staff,Sponsor / business decision
+NCT02886858,investigator and sponsor decided by mutual agreement to stop study prematurely,Investigator / staff,Sponsor / business decision
+NCT03537547,Per sponsor and PI institution discussions,Investigator / staff,Sponsor / business decision
+NCT03738046,We had a change in staffing that precluded pursing this project,Investigator / staff,Sponsor / business decision
+NCT05911334,The ROADE grant was terminated early by C\&G and the PI left the institution.,Investigator / staff,Sponsor / business decision
+NCT06786637,"PI transferred to a different research institution and local institution would not allow to continue the study. Transfer of the study to a different study site not possible because of unique requirements of resources (e.g., nociceptin anatagonist)",Investigator / staff,Sponsor / business decision
+NCT01748708,The protocol has undergone significant changes and the investigator feels that it is reasonable to submit a new protocol for review and approval.,Investigator / staff,Study design change
+NCT04317495,New data has caused the principal investigator to decide that the study no longer makes sense to conduct as it is designed. This is not a suspension of IRB approval.,Investigator / staff,Study design change
+NCT04185727,Corona.,Other / unclear,COVID-19
+NCT06557759,Conference canceled due to hurricane,Other / unclear,COVID-19
+NCT01361555,Failure to meet primary endpoint,Other / unclear,Efficacy / futility
+NCT01372722,"Other stimulation target (slMFB) more efficacious, unethical to continue with Nucleus Accumbens",Other / unclear,Efficacy / futility
+NCT01834638,Study endpoint in preceding base study M10-855 not met.,Other / unclear,Efficacy / futility
+NCT01957410,Clinical Team decision to terminate the study after the results from Cohort 1 did not support conducting Cohort 2.,Other / unclear,Efficacy / futility
+NCT02479906,The results did not demonstrate sufficient clinical benefit induced specifically by the active treatment to justify continuation of the trial.,Other / unclear,Efficacy / futility
+NCT02623504,No apparent therapeutic effects that was superior to placebo,Other / unclear,Efficacy / futility
+NCT02863380,"The research objectives are achieved, demonstrating the feasibility and superiority of the personalized approach. It was no longer justified to continue the inclusions in this 'proof of concept' type study.",Other / unclear,Efficacy / futility
+NCT02968121,Part A of study was completed per protocol. Conduct of Part B of the study (confirmatory phase) was not necessary.,Other / unclear,Efficacy / futility
+NCT03777189,benefits of treatment less than expected,Other / unclear,Efficacy / futility
+NCT03892889,Study has stopped for having met the primary endpoint.,Other / unclear,Efficacy / futility
+NCT04109950,"Study terminated early, main goals achieved",Other / unclear,Efficacy / futility
+NCT04232878,Sufficient data has been obtained to meet current objectives,Other / unclear,Efficacy / futility
+NCT04404712,Ligand was not effective.,Other / unclear,Efficacy / futility
+NCT04465136,1\. The results showed significant improvement after CES; 2. Run out of study grant.,Other / unclear,Efficacy / futility
+NCT04618263,Reached biomarker endpoint,Other / unclear,Efficacy / futility
+NCT04663321,Voluntarily terminated due to benefit/risk assessment,Other / unclear,Efficacy / futility
+NCT05182476,Failed to meet the primary endpoint,Other / unclear,Efficacy / futility
+NCT05601648,Due to negative results in similar trials using 11C-UCB-J,Other / unclear,Efficacy / futility
+NCT05708586,Preliminary findings showed no significant difference between virtual reality and distraction techniques.,Other / unclear,Efficacy / futility
+NCT01363310,Termination of sponsorship,Other / unclear,Funding
+NCT02130037,no grants,Other / unclear,Funding
+NCT02898233,Pilot study was halted due to lack of resources.,Other / unclear,Funding
+NCT02955654,Loss of finacial support,Other / unclear,Funding
+NCT04977271,study never opened,Other / unclear,Funding
+NCT05610969,terminated due to lack of resources,Other / unclear,Funding
+NCT05776901,Grant termination without continuation.,Other / unclear,Funding
+NCT05967988,lack of resources,Other / unclear,Funding
+NCT06442527,Study never initiaed.,Other / unclear,Funding
+NCT01504659,Administrative issues,Other / unclear,Investigator / staff
+NCT01583998,UTSW Family Medicine refused to comply with agreement to implement study after department head left university. Attempts to implement elsewhere failed.,Other / unclear,Investigator / staff
+NCT01909167,CI had other commitments,Other / unclear,Investigator / staff
+NCT01948999,Missing ressources. The study official has left and will not be replaced,Other / unclear,Investigator / staff
+NCT02234687,"The original PI, Alexander Neumeister, left NYULMC. No data was analyzed.",Other / unclear,Investigator / staff
+NCT02652832,le Professeur Emmanuel POULET investigateur principal ayant quitté le Centre hospitalier Le Vinatier .,Other / unclear,Investigator / staff
+NCT02699138,Research fellow left institution,Other / unclear,Investigator / staff
+NCT03043430,Research manpower shortage,Other / unclear,Investigator / staff
+NCT03425851,Administrative issues precluded conducting the study.,Other / unclear,Investigator / staff
+NCT03924908,Not enough human resources,Other / unclear,Investigator / staff
+NCT03943836,"PI, who was a Resident, graduated, and the project was not pursued further.",Other / unclear,Investigator / staff
+NCT04317001,Researcher leading the study moved institutions study not feasible,Other / unclear,Investigator / staff
+NCT04548622,Dr. Ralph Hoffman unexpectedly passed away.,Other / unclear,Investigator / staff
+NCT04781231,Study coordinator's decision,Other / unclear,Investigator / staff
+NCT04804358,The person in charge of the clinical study had to leave the hospital prematurely.,Other / unclear,Investigator / staff
+NCT05263440,The study never started because one of the collaborators was not able to attend to the study requirements.,Other / unclear,Investigator / staff
+NCT05605041,Not enough resources to proceed with the study,Other / unclear,Investigator / staff
+NCT05675800,Resident who was tasked with coordinating this study is no longer able to do so.,Other / unclear,Investigator / staff
+NCT06296030,"Original PI, Dr. Jennifer Payne Shepard, transferred to another university. Study was discontinued.",Other / unclear,Investigator / staff
+NCT01192685,Neuronavigation system equipment failure caused unreliable data,Other / unclear,Logistics / drug supply
+NCT02012335,Methodologicals and logistics issues.,Other / unclear,Logistics / drug supply
+NCT02024620,The mobile phone app upon which the study was based was not available.,Other / unclear,Logistics / drug supply
+NCT02098148,Withdrawn. Unable to set up appropriate infrastructure to support study.,Other / unclear,Logistics / drug supply
+NCT02238730,Resources not available for the study,Other / unclear,Logistics / drug supply
+NCT02258711,Logistical problems.,Other / unclear,Logistics / drug supply
+NCT02315781,Resources to conduct study withdrawn,Other / unclear,Logistics / drug supply
+NCT02458105,Required resources not available at the moment.,Other / unclear,Logistics / drug supply
+NCT02746965,Problems of the MST device,Other / unclear,Logistics / drug supply
+NCT02933684,Unable to access components necessary to be able to run the study.,Other / unclear,Logistics / drug supply
+NCT02953691,Lack of Study Substance,Other / unclear,Logistics / drug supply
+NCT03016104,The problems of MST device,Other / unclear,Logistics / drug supply
+NCT03051945,Unable to perform brain imaging,Other / unclear,Logistics / drug supply
+NCT03061136,Delays in equipment procurement prevented the start of the study in time,Other / unclear,Logistics / drug supply
+NCT03068247,Institution was unable to manufacture radiotracer that was central to the protocol. Study transferred to another institution.,Other / unclear,Logistics / drug supply
+NCT03068676,Paused due to technical issues,Other / unclear,Logistics / drug supply
+NCT03254017,logistics reasons,Other / unclear,Logistics / drug supply
+NCT03271645,logistics,Other / unclear,Logistics / drug supply
+NCT03327974,"Problem on the app, questioned the feasability of the study",Other / unclear,Logistics / drug supply
+NCT03548519,Study stopped due to technical reasons,Other / unclear,Logistics / drug supply
+NCT03736291,There are two reasons why the study was stopped. One is that the machine to opreate MRI was damaged and we could not fix it. The second reason is the main reasearch fellow has graduated and there is no one else to conitune this project.,Other / unclear,Logistics / drug supply
+NCT03936946,Resources not secured,Other / unclear,Logistics / drug supply
+NCT03948217,changes to buildings why study was terminated prematurely,Other / unclear,Logistics / drug supply
+NCT03955718,The study stopped because of delays in the development of the smartphone app intervention,Other / unclear,Logistics / drug supply
+NCT03994965,Drug supply withdrawn (dec 2019),Other / unclear,Logistics / drug supply
+NCT04054973,Study was unable to be started due to unavailability of study medication.,Other / unclear,Logistics / drug supply
+NCT04104568,There were issues with the technical service provider of the platform iSupport-Portugal; the platform and its backoffice should be implemented by another service provider. A pilot study was conducted following the protocol of the full trial.,Other / unclear,Logistics / drug supply
+NCT04159012,Logistical reasons,Other / unclear,Logistics / drug supply
+NCT04195308,Logistical constraints,Other / unclear,Logistics / drug supply
+NCT04316559,Drug availability,Other / unclear,Logistics / drug supply
+NCT04367636,Due to technical difficulties with the online intervention,Other / unclear,Logistics / drug supply
+NCT04678128,"Unable to establish contract with Dance For Healing platform, so had to withdraw study",Other / unclear,Logistics / drug supply
+NCT05146427,Equipment for slow wave enhancement is no longer available,Other / unclear,Logistics / drug supply
+NCT05422612,The trial has been temporarily suspended due to administrative issues,Other / unclear,Logistics / drug supply
+NCT05567848,Paused for data analysis,Other / unclear,Logistics / drug supply
+NCT05723328,Resource Limitations,Other / unclear,Logistics / drug supply
+NCT05771909,medical device not available,Other / unclear,Logistics / drug supply
+NCT05933148,Technical problem with the MRI machine post processing in real-time. A new 7T MRI scanner will be installed by January 2027.,Other / unclear,Logistics / drug supply
+NCT05948540,The trial has been temporarily suspended due to administrative issues,Other / unclear,Logistics / drug supply
+NCT05957484,Study device no longer available.,Other / unclear,Logistics / drug supply
+NCT06118606,For logistical reasons at one study site.,Other / unclear,Logistics / drug supply
+NCT06213298,Drug expiration testing,Other / unclear,Logistics / drug supply
+NCT06979154,Due to lack of resources the study was terminated.,Other / unclear,Logistics / drug supply
+NCT07191340,Withdrew study equipment issue.,Other / unclear,Logistics / drug supply
+NCT01413854,Not enough recources.,Other / unclear,Recruitment
+NCT01670071,The study was terminated due to insufficient sample size and protocol compliance issue.,Other / unclear,Recruitment
+NCT01671033,The drop-out rate was too high.,Other / unclear,Recruitment
+NCT02042573,The study population is no longer accessible to the investigating team.,Other / unclear,Recruitment
+NCT02378415,Discrepancies in medication orders,Other / unclear,Recruitment
+NCT02472483,Difficult for recruting,Other / unclear,Recruitment
+NCT02512367,lack of inclusion,Other / unclear,Recruitment
+NCT02657941,inclusion problem,Other / unclear,Recruitment
+NCT02846740,No finding at halfway point of the study,Other / unclear,Recruitment
+NCT03206463,Feasibility pilot was completed,Other / unclear,Recruitment
+NCT03318640,low inclusion rates,Other / unclear,Recruitment
+NCT03407950,The study stopped due to major feasibility issues and the notices was expired.,Other / unclear,Recruitment
+NCT03471754,"Administrative reasons, and did not meet sample size requirements",Other / unclear,Recruitment
+NCT03811041,The decision was made not to extend the inclusions due to the low inclusion rate since the beginning of the study. The last inclusion took place on 06/22/2020.,Other / unclear,Recruitment
+NCT03813355,lack of inclusion to meet the evaluation criteria,Other / unclear,Recruitment
+NCT03868774,Lack of ressources,Other / unclear,Recruitment
+NCT04461327,no more inclusion,Other / unclear,Recruitment
+NCT04464148,Feasibility study was not initiated.,Other / unclear,Recruitment
+NCT04496505,Unable to receive clearance from HCA administration,Other / unclear,Recruitment
+NCT04586309,Feasibility,Other / unclear,Recruitment
+NCT04587661,We were unable to obtain the intended sample size.,Other / unclear,Recruitment
+NCT04652362,Lead researcher off sick,Other / unclear,Recruitment
+NCT04714164,We had difficulty with participation in the study for our initial Zoom CBT group.,Other / unclear,Recruitment
+NCT05448118,This Pilot implementation Trial was never started because no providers were found who would agree to use saliva-based toxicology tests in care,Other / unclear,Recruitment
+NCT06001372,Challenges with feasibility,Other / unclear,Recruitment
+NCT01128452,Evotec has indicated that this study was discontinued due to a clinical hold issued by the FDA,Other / unclear,Regulatory / ethics
+NCT02242578,IRB approval expired and study ceased.,Other / unclear,Regulatory / ethics
+NCT02398136,FDA and IRB recommended different mode of medication administration,Other / unclear,Regulatory / ethics
+NCT02492074,"No documents were ever submitted to the Ethics Committee or the competent authority because it was not possible to establish the planned PET measurements in Germany. Therefore, the study never started.",Other / unclear,Regulatory / ethics
+NCT03209882,IRB approval terminated,Other / unclear,Regulatory / ethics
+NCT03593213,FDA Released Allergan from this post marketing requirement,Other / unclear,Regulatory / ethics
+NCT03836846,Study was not initiated because it was not approved by KPSC IRB.,Other / unclear,Regulatory / ethics
+NCT03909685,Application withdrawn from the IRB.,Other / unclear,Regulatory / ethics
+NCT03924297,eIRB withdrew study for concerns,Other / unclear,Regulatory / ethics
+NCT04172909,Expired IRB approval 12/12/2020,Other / unclear,Regulatory / ethics
+NCT04197102,"Suspended (The UT IRB determined that CBD oil is being used as a drug as defined by the FDA. Therefore, an IND must be obtained for the use of CBD oil in this research study in accordance with FDA regulations, 21 CFR 312.)",Other / unclear,Regulatory / ethics
+NCT04603781,"Suspended (The UT IRB determined that CBD oil is being used as a drug as defined by the FDA. Therefore, an IND must be obtained for the use of CBD oil in this research study in accordance with FDA regulations, 21 CFR 312.)",Other / unclear,Regulatory / ethics
+NCT04893395,Does not meet criteria for a clinical trial per IRB review.,Other / unclear,Regulatory / ethics
+NCT04921982,The study could not begin within the period of validity of the authorizations. The project has been abandoned in its initially authorized form. The final study report will not be produced.,Other / unclear,Regulatory / ethics
+NCT04989972,GCP VIOLATIONS FROM THE SPONSORS,Other / unclear,Regulatory / ethics
+NCT05326074,IRB Concerns,Other / unclear,Regulatory / ethics
+NCT05401019,This clinical trial was not approved by the regulatory entities. It was reviewed and a new trial was re-submitted.,Other / unclear,Regulatory / ethics
+NCT05708066,Never approved by the Albert Einstein College of Medicine IRB,Other / unclear,Regulatory / ethics
+NCT05892276,"The UT IRB determined that CBD oil is being used as a drug as defined by the FDA. Therefore, an IND must be obtained for the use of CBD oil in this research study in accordance with FDA regulations, 21 CFR 312.",Other / unclear,Regulatory / ethics
+NCT05910749,The study was not carried out because it was not approved by NIH.,Other / unclear,Regulatory / ethics
+NCT06123325,IRB approval has lapsed. Study has submitted continuing review report for re-certification. Awaiting IRB re-approval.,Other / unclear,Regulatory / ethics
+NCT06135064,IRB administrative closure,Other / unclear,Regulatory / ethics
+NCT06353282,Under review with FDA,Other / unclear,Regulatory / ethics
+NCT06654414,The study was terminated prematurely by NIH action with the stated reason that the goals of the study no longer effectuate NIH priorities.,Other / unclear,Regulatory / ethics
+NCT01403441,Potential AE,Other / unclear,Safety
+NCT01568216,Toxic Epidermal Necrolysis,Other / unclear,Safety
+NCT01568229,Toxic Epidermal Necrolysis,Other / unclear,Safety
+NCT02049385,Severe side effects \& lack of target engagement,Other / unclear,Safety
+NCT02796144,The FDA advised of a possible health risk associated with lorcaserin and the drug is being withdrawn.,Other / unclear,Safety
+NCT01040208,Study terminated by Sponsor for administrative reasons prior to completion,Other / unclear,Sponsor / business decision
+NCT01131559,Sponsor halted study.,Other / unclear,Sponsor / business decision
+NCT01239173,Study stopped by promoter for lack of inclusion,Other / unclear,Sponsor / business decision
+NCT01841502,"Telaprevir will not be used in NL, no more inclusions are expected.",Other / unclear,Sponsor / business decision
+NCT01944969,The study was terminated because the lead-in study (14571A) in elderly was terminated; see Detailed Description.,Other / unclear,Sponsor / business decision
+NCT02261519,due to commercial strategy,Other / unclear,Sponsor / business decision
+NCT02334644,drug expired,Other / unclear,Sponsor / business decision
+NCT03767491,"Study must be registered under the sponsor instead of the site, so we have created a new posting in the sponsor's account.",Other / unclear,Sponsor / business decision
+NCT03769350,"Study must be registered under the sponsor instead of the site, so we have created a new posting in the sponsor's account.",Other / unclear,Sponsor / business decision
+NCT03852160,"New design was developed to better fit company strategy, a new study has replaced 5413541TRD3011 study",Other / unclear,Sponsor / business decision
+NCT04184206,"Moved institutions, study terminated",Other / unclear,Sponsor / business decision
+NCT04273191,Sage Therapeutics has decided not to proceed with this study at this time,Other / unclear,Sponsor / business decision
+NCT04286594,Terminated by sponsor,Other / unclear,Sponsor / business decision
+NCT04457271,"Unfortunately, we have had to prioritize other studies and we do not have the resources required to carry out this study.",Other / unclear,Sponsor / business decision
+NCT04493320,Study terminated by sponsor (NIMH),Other / unclear,Sponsor / business decision
+NCT04650217,Study terminated by sponsor (NIMH),Other / unclear,Sponsor / business decision
+NCT04722666,Terminated by Novartis,Other / unclear,Sponsor / business decision
+NCT04968938,Sponsor decided not to pursue the study. Study ended prior to study start.,Other / unclear,Sponsor / business decision
+NCT05097040,The research team decided not to implement this study.,Other / unclear,Sponsor / business decision
+NCT05134103,Sponsor pulled out of study,Other / unclear,Sponsor / business decision
+NCT05252598,The sponsor no longer wishes to pursue the methods outlined in the protocol.,Other / unclear,Sponsor / business decision
+NCT05260541,No longer developing for this indication,Other / unclear,Sponsor / business decision
+NCT05438758,Withdrawn by Sponsor,Other / unclear,Sponsor / business decision
+NCT05440721,Change of company's priority; learning from a separate CT-101-CLS-001 (NCT04857515) is deemed sufficient,Other / unclear,Sponsor / business decision
+NCT05518149,The study was Early Terminated as per Sponsor's decision (communicated to sites on 06Mar2025),Other / unclear,Sponsor / business decision
+NCT05645042,The sponsor made a decision to terminate the study.,Other / unclear,Sponsor / business decision
+NCT05956600,Action of PI. Loss of sponsor,Other / unclear,Sponsor / business decision
+NCT06036511,"Per PI, this trial will not be started at UNM due to change in institutional responsibilities of the PI",Other / unclear,Sponsor / business decision
+NCT06878833,Sponsor stopped operations,Other / unclear,Sponsor / business decision
+NCT06949657,the sponsor has determined that access to the full dataset is no longer available,Other / unclear,Sponsor / business decision
+NCT01770600,"never initiated, did different study",Other / unclear,Study design change
+NCT01809340,study team decision because of IP supply issue and necessary amendment to protocol,Other / unclear,Study design change
+NCT01979796,We worked on a new dedicated protocolol GENESIS study,Other / unclear,Study design change
+NCT01981811,The trial was terminated because it was determined that the usability of the MIND1 System in the intended population was necessary before conducting this trial.,Other / unclear,Study design change
+NCT02124187,We started with a dedicated protocolol GENESIS RCT,Other / unclear,Study design change
+NCT02402738,We chose to maximize this iterative treatment development study by terminating the pilot RCT in favor of enhancing an initial open trial (increased N 12 to 14),Other / unclear,Study design change
+NCT02435225,Change in goals of PI,Other / unclear,Study design change
+NCT02505178,Substantial changes were made to the study protocol and a new ethics application will be submitted.,Other / unclear,Study design change
+NCT02757833,A larger study collecting the same outcomes is currently being conducted by the study team.,Other / unclear,Study design change
+NCT02790710,Study has been withdrawn due to reconsideration of study design.,Other / unclear,Study design change
+NCT02947243,Major changes to protocol (new study design and comparator),Other / unclear,Study design change
+NCT03164642,Determined feasibility was needed before conducting this trial,Other / unclear,Study design change
+NCT03175887,PI's discretion due to needing to modify study protocol.,Other / unclear,Study design change
+NCT03749278,This record was a placeholder created before trial was conducted. Trial is now described in NCT03545282.,Other / unclear,Study design change
+NCT03978182,replaced by other study,Other / unclear,Study design change
+NCT04018521,inventional part of the study is registered under NCT05195489,Other / unclear,Study design change
+NCT04020549,"In collaboration with community partners, we determined that the reading level required for the intervention did not make it suitable for the adolescents.",Other / unclear,Study design change
+NCT04248010,Modifications in methodology had to be made that make the current registration invalid.,Other / unclear,Study design change
+NCT04277936,Study was redesigned and submitted as a new protocol (NCT04559529).,Other / unclear,Study design change
+NCT04436952,Change in Protocol,Other / unclear,Study design change
+NCT04760938,Failure of comparison group to provide adequate comparison and appropriate comparison,Other / unclear,Study design change
+NCT04944758,We received a grant for an expanded feasibility trial that superseded this one.,Other / unclear,Study design change
+NCT05088915,The study site preferred to conduct a non-randomized QI project,Other / unclear,Study design change
+NCT05120765,Change in study design was implemented and the study design no longer follows a pilot randomized controlled trial.,Other / unclear,Study design change
+NCT05212116,Development Plan Amended,Other / unclear,Study design change
+NCT05299398,"This study was pivoted to be a randomized control trial of trazodone versus quetiapine, under a new NTC identification number (study protocol number 125638).",Other / unclear,Study design change
+NCT05344625,Study team is not moving forward with protocol,Other / unclear,Study design change
+NCT05518968,We changed our plan.,Other / unclear,Study design change
+NCT05899322,Begun collaborating with a new community partner and will submit a new study with that partner.,Other / unclear,Study design change
+NCT05921929,a new trial should be designed,Other / unclear,Study design change
+NCT06039293,"Study underwent some protocol re-design that prompted a new IRB, thus this study never commenced.",Other / unclear,Study design change
+NCT06105294,decided to shift to a new design and measures,Other / unclear,Study design change
+NCT06451549,"The study has been withdrawn due to significant changes in its scope, which no longer align with the original protocol.",Other / unclear,Study design change
+NCT03272555,"Failed study, participants showed no improvements",Recruitment,Efficacy / futility
+NCT01805479,Unable to enroll participants. Sponsor requested study closure.,Recruitment,Funding
+NCT02123485,recruiting of patients difficult combined by lack of money,Recruitment,Funding
+NCT03768726,Pfizer has decided to perform the pre-specified final analysis at the current enrollment using a re-estimation of the sample size.,Recruitment,Funding
+NCT03872492,The study was stopped prematurely because the total number of analyzable patients for the primary objective to be included was reached.,Recruitment,Funding
+NCT01228890,no one enrolled; PI left institution,Recruitment,Investigator / staff
+NCT01312844,"This was an inpatient study, but PI left inpatient service at MGH",Recruitment,Investigator / staff
+NCT01703039,"PI departure, slow recruitment",Recruitment,Investigator / staff
+NCT02443194,principle investigator decision due to many adverse events in patients,Recruitment,Investigator / staff
+NCT03271814,PI moved to another institution before enrollment could start.,Recruitment,Investigator / staff
+NCT03621397,"We are no longer recruiting research participants for this study. Also, a co-investigator is no longer working at this institution and is no longer a part of this study.",Recruitment,Investigator / staff
+NCT04921332,Study was stopped secondary to principal investigator needing to analyze data and present prior to graduating. Target enrollment not able to be reached prior to this.,Recruitment,Investigator / staff
+NCT05724953,"Staff turnover and trouble with recruitment, staffing, and paying invoices.",Recruitment,Investigator / staff
+NCT06310720,"Due to limited staffing, recruitment for this study was stopped.",Recruitment,Investigator / staff
+NCT01598896,low enrollment due to limited resources,Recruitment,Logistics / drug supply
+NCT02535780,Study procedures and time not feasible due to patient schedule,Recruitment,Logistics / drug supply
+NCT02857088,unavailable recording device and difficulty of patient inclusions,Recruitment,Logistics / drug supply
+NCT03368794,Practical difficulties in starting active recruitment.,Recruitment,Logistics / drug supply
+NCT03832478,Technical difficulty with sending device home with patients,Recruitment,Logistics / drug supply
+NCT03898843,Patient enrollment and logistical problems,Recruitment,Logistics / drug supply
+NCT04497909,The online mindfulness is no longer being offered and recruitment can no longer happen.,Recruitment,Logistics / drug supply
+NCT05161546,Malfunctions of the Retinaute® but no adverse effects on participants. Study interrupted for BioSerenity to make technical corrections. Long immobilization of the device and conditions for reusing it not adapted to the continuation of the study.,Recruitment,Logistics / drug supply
+NCT05167396,Malfunctions of the Retinaute® but no adverse effects on participants. Study interrupted for BioSerenity to make technical corrections. Long immobilization of the device and conditions for reusing it not adapted to the continuation of the study.,Recruitment,Logistics / drug supply
+NCT01356667,Study period is over and recruitment was stopped due to time constraints.,Recruitment,Other / unclear
+NCT01817387,Due to participants not completing the cognitive training requirement.,Recruitment,Other / unclear
+NCT02192099,Patients from this study were rolled into RAP-MD-99.,Recruitment,Other / unclear
+NCT02398318,A pilot study is recruiting,Recruitment,Other / unclear
+NCT03116165,Organisational changes in hospital which changed recruitment rates,Recruitment,Other / unclear
+NCT03374605,"This small mechanistic pilot study was ended prior to first enrollment after considering factors related to feasibility (e.g., available time and resources).",Recruitment,Other / unclear
+NCT03487198,"In consideration of the progress now and the expected enrollment in the next few years,the NDA will not be acquired before the patent went out.",Recruitment,Other / unclear
+NCT03898648,the follow up of the last patient has been done,Recruitment,Other / unclear
+NCT03952494,"Due to some administrative issues, the study had to be stopped. There were 0 subjects enrolled.",Recruitment,Other / unclear
+NCT04283812,"Per PI discretion, study closed and no participants enrolled",Recruitment,Other / unclear
+NCT04456868,Inability to include additional patients in the arms with depression,Recruitment,Other / unclear
+NCT04632498,Phase I enrolment and testing completed. Future Phase II enrolment/testing is anticipated.,Recruitment,Other / unclear
+NCT04786548,"The NYSPI site is currently paused and has been paused since an institutional pause on human subjects research on March 14, 2024.",Recruitment,Other / unclear
+NCT06021236,We have successfully reached the required sample size for this study. Participant recruitment has been completed.,Recruitment,Other / unclear
+NCT03930251,"U.S. Department of Health and Human Services OHRP issued an FWA restriction on NYSPI research that included a pause of human subjects research as of June 23, 2023.",Recruitment,Regulatory / ethics
+NCT04640636,"The U.S. Department of Health and Human Services (HHS) Office of Human Research Protections (OHRP) issued an FWA restriction on NYSPI research that also included a pause of human subjects research as of June 23, 2023.",Recruitment,Regulatory / ethics
+NCT04664907,Denied by Human Subjects Protection Board,Recruitment,Regulatory / ethics
+NCT04973930,NYSPI paused human subjects research (HSR) 6/23. The US Dept. of Health and Human Services Office of Human Research Protections issued an FWA restriction pausing such research 6/23/23. The IO and IRB paused HSR 6/12/23. Hence no current enrolling.,Recruitment,Regulatory / ethics
+NCT05046353,"U.S. Department of Health and Human Services OHRP issued an FWA restriction on NYSPI research that included a pause of human subjects research as of June 23, 2023. NKI site is open for enrollment.",Recruitment,Regulatory / ethics
+NCT05427981,"U.S. Department of Health and Human Services OHRP issued an FWA restriction on NYSPI research that included a pause of human subjects research as of June 23, 2023. This study will not resume recruitment after the resumption of research.",Recruitment,Regulatory / ethics
+NCT02206776,poor tolerability and low enrollment rate,Recruitment,Safety
+NCT02566759,The study was terminated by Takeda due to the discomfort observed in the study participants from the CSF collection procedure in Part 3 of the study.,Recruitment,Safety
+NCT03281044,"Although not observed in our patients (4 enrolled), SAEs have been reported in other patients receiving the same product.",Recruitment,Safety
+NCT01543139,The research project has been cancelled before any participants were enrolled.,Recruitment,Sponsor / business decision
+NCT01543724,The research project has been cancelled before any participants were enrolled.,Recruitment,Sponsor / business decision
+NCT01664260,The research project has been cancelled before any participants were enrolled.,Recruitment,Sponsor / business decision
+NCT02151331,Sponsor requested termination due to low recruitment numbers,Recruitment,Sponsor / business decision
+NCT02625779,The research project has been cancelled before any participants were enrolled.,Recruitment,Sponsor / business decision
+NCT02757521,Study sponsor ended trial due to low recruitment,Recruitment,Sponsor / business decision
+NCT03210480,Sponsor's decision due to slow enrollment rate.,Recruitment,Sponsor / business decision
+NCT04569760,Project cancelled prior to commencing recruitment,Recruitment,Sponsor / business decision
+NCT05169710,Company decided not to move forward with further accrual.,Recruitment,Sponsor / business decision
+NCT05227209,Company decided not to move forward with further accrual.,Recruitment,Sponsor / business decision
+NCT05941442,Sponsor terminated due to significant enrollment and study design challenges,Recruitment,Sponsor / business decision
+NCT02075047,"Based on recent input from FDA, the pre-specified final analysis will be performed at the current enrollment using a re-estimation of the sample size.",Recruitment,Study design change
+NCT03449771,Inclusion of the last patient,Recruitment,Study design change
+NCT03923361,Change in study design based on phase 1 data collection; patient burden was not feasible,Recruitment,Study design change
+NCT04504149,"Findings from Aims 1 and 2 clarified that any future trial should involve provider- or clinic-level randomization, not patient-level randomization.",Recruitment,Study design change
+NCT04582071,"After further review and discussion, the scope of the study is being changed to better suit the patient population. No subjects were enrolled in the study.",Recruitment,Study design change
+NCT05386862,"This study protocol was revised, which required closing it and submitting a new application. Since recruitment launched for this protocol, no participants were enrolled and run in this study protocol.",Recruitment,Study design change
+NCT01122927,The trial was terminated early as the objective of the Aripiprazole Pediatric Investigational Plan was met and provided 2 years of safety data.,Safety,Efficacy / futility
+NCT01436175,SPD489 failed to demonstrate a benefit as adjunctive treatment to antidepressants. Termination was not related to any new safety findings.,Safety,Efficacy / futility
+NCT01928446,terminated early due to non-safety related DMC recommendations,Safety,Other / unclear
+NCT02758067,This study was withdrawn for administrative reasons. There were no safety concerns.,Safety,Other / unclear
+NCT05189977,"The decision to terminate the trial early was not based on safety concerns. The trial was terminated early due to some implausible blood pressure values being captured, which was the primary endpoint of the study.",Safety,Other / unclear
+NCT05155280,"The sponsor received the following instruction from the ANSM : ""The sponsor shall conduct toxicity studies in accordance with the applicable guidelines, in particular "" ICH guideline M3 (R2) on non-clinical safety studies for the conduct of human cli",Safety,Regulatory / ethics
+NCT04784143,"The study was terminated early by the sponsor due to administrative, non-safety related reasons.",Safety,Sponsor / business decision
+NCT04007367,Internal company decision,Sponsor / business decision,Efficacy / futility
+NCT05551195,Internal company decision,Sponsor / business decision,Efficacy / futility
+NCT05274061,"Nonrandomized, open-label study terminated at the end of the program's funding cycle.",Sponsor / business decision,Funding
+NCT01741142,Decision based on strategic determination; not safety.,Sponsor / business decision,Other / unclear
+NCT02476331,Student no longer enrolled in program.,Sponsor / business decision,Other / unclear
+NCT04040829,A feasibility study will be conducted to assess the online administration of the cognitive remediation program CIRCuiTS.,Sponsor / business decision,Other / unclear
+NCT04268914,The AR technology we were using is now out of business and we are trying to use a different device.,Sponsor / business decision,Other / unclear
+NCT04634669,This study was terminated once overall program objectives were met.,Sponsor / business decision,Other / unclear
+NCT04951609,"Following discussion on pediatric strategy with HAs, it was determined that we have sufficient data to inform next steps for the seltorexant pediatric program.",Sponsor / business decision,Other / unclear
+NCT04499729,The recruitment site (Rush University Medical Center Collaborative Care Program) redefined their service objectives such that IntelliCare was no longer a good fit.,Sponsor / business decision,Recruitment
+NCT06420232,"challenges with recruitment and attrition, and PI graduated from UTMB PPOTD program",Sponsor / business decision,Recruitment

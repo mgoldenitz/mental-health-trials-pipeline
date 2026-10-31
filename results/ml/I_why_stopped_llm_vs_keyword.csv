@@ -1,0 +1,62 @@
+keyword_group,llm_category,trials
+Recruitment,Recruitment,269
+Funding,Funding,172
+COVID-19,COVID-19,132
+Other / unclear,Other / unclear,97
+Investigator / staff,Investigator / staff,91
+Sponsor / business decision,Sponsor / business decision,51
+Other / unclear,Logistics / drug supply,44
+Efficacy / futility,Efficacy / futility,34
+Other / unclear,Study design change,33
+Other / unclear,Sponsor / business decision,30
+Other / unclear,Recruitment,25
+Other / unclear,Regulatory / ethics,24
+Other / unclear,Efficacy / futility,19
+Other / unclear,Investigator / staff,19
+Recruitment,Other / unclear,14
+Recruitment,Sponsor / business decision,11
+COVID-19,Recruitment,9
+Other / unclear,Funding,9
+Recruitment,Investigator / staff,9
+Recruitment,Logistics / drug supply,9
+Investigator / staff,Sponsor / business decision,7
+Efficacy / futility,Sponsor / business decision,6
+Funding,Recruitment,6
+Funding,Sponsor / business decision,6
+Investigator / staff,Other / unclear,6
+Recruitment,Regulatory / ethics,6
+Recruitment,Study design change,6
+Sponsor / business decision,Other / unclear,6
+Funding,Other / unclear,5
+Other / unclear,Safety,5
+Recruitment,Funding,4
+Safety,Safety,4
+Funding,Investigator / staff,3
+Funding,Logistics / drug supply,3
+Recruitment,Safety,3
+Safety,Other / unclear,3
+COVID-19,Funding,2
+Investigator / staff,Funding,2
+Investigator / staff,Regulatory / ethics,2
+Investigator / staff,Study design change,2
+Other / unclear,COVID-19,2
+Safety,Efficacy / futility,2
+Sponsor / business decision,Efficacy / futility,2
+Sponsor / business decision,Recruitment,2
+COVID-19,Logistics / drug supply,1
+COVID-19,Other / unclear,1
+COVID-19,Sponsor / business decision,1
+Efficacy / futility,COVID-19,1
+Efficacy / futility,Funding,1
+Efficacy / futility,Investigator / staff,1
+Efficacy / futility,Other / unclear,1
+Efficacy / futility,Recruitment,1
+Efficacy / futility,Study design change,1
+Funding,Regulatory / ethics,1
+Funding,Study design change,1
+Investigator / staff,Logistics / drug supply,1
+Investigator / staff,Recruitment,1
+Recruitment,Efficacy / futility,1
+Safety,Regulatory / ethics,1
+Safety,Sponsor / business decision,1
+Sponsor / business decision,Funding,1
