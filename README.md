@@ -193,6 +193,7 @@ Every number above comes from the download of 1 October 2026 and stays fixed. A 
 
 - `src/pipeline/`: the download, cleaning, condition grouping and drug flags from the notebook (parts B and C) as plain Python with no third-party packages. Rebuilt from the 1 October 2026 download, it reproduces all four tables in `data/powerbi/` value for value (`tools/check_against_published.py`).
 - `template.yaml`: an AWS SAM template. EventBridge Scheduler runs the Lambda function every Monday at 06:00 Toronto time. Each run saves the raw API pages, the four tables and a counts file to its own dated folder in S3, checks that every study the API reported was downloaded, and refuses a snapshot that lost more than 10% of trials since the last one. A failed run sends an email through CloudWatch and SNS.
+- PostgreSQL on RDS: after each refresh, a second Lambda function (`src/pipeline/load_rds.py`) replaces the `trials`, `conditions`, `interventions` and `sites` tables, plus a `snapshot_counts` history, in one transaction. It runs inside the database's VPC, reads S3 through a gateway endpoint and signs in with an IAM token. Power BI connects as a read-only user from one home IP address.
 - `data/baseline/counts_2026-10-01.csv`: the published counts in the same format, so each refresh can be compared with them.
 - The app's Latest refresh tab shows the newest counts beside the published ones for trials that started 2010–2025, and lists trials starting after 2025 separately because many of those start dates are still estimates.
 
