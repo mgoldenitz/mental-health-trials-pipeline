@@ -2,13 +2,18 @@ AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
   Weekly refresh of the mental health clinical trials pipeline. A Lambda function
-  downloads trials from ClinicalTrials.gov, saves a dated snapshot to S3, loads
-  it into PostgreSQL on RDS and emails you if a run fails.
+  downloads trials from ClinicalTrials.gov, saves a dated snapshot to S3,
+  refreshes the Parquet tables that Athena queries, loads the snapshot into
+  PostgreSQL on RDS, and emails you if a run fails.
 
 Parameters:
   AlertEmail:
     Type: String
     Description: Email address for failure alerts (confirm the subscription email AWS sends)
+  PandasLayerArn:
+    Type: String
+    Description: AWS SDK for pandas Lambda layer, which provides pyarrow for writing Parquet
+    Default: arn:aws:lambda:us-east-2:336392948345:layer:AWSSDKPandas-Python312:32
   HomeIpCidr:
     Type: String
     Description: Your home IP address with /32 (for example 203.0.113.7/32). Only this address can reach the database from the internet.
@@ -44,6 +49,10 @@ Resources:
             Transitions:
               - StorageClass: STANDARD_IA
                 TransitionInDays: 30
+          - Id: expire-athena-results
+            Status: Enabled
+            Prefix: athena-results/
+            ExpirationInDays: 30
 
   RefreshFunction:
     Type: AWS::Serverless::Function
@@ -53,6 +62,8 @@ Resources:
       Runtime: python3.12
       MemorySize: 1536
       Timeout: 900
+      Layers:
+        - !Ref PandasLayerArn
       Environment:
         Variables:
           BUCKET: !Ref DataBucket
@@ -104,6 +115,220 @@ Resources:
       TreatMissingData: notBreaching
       AlarmActions:
         - !Ref AlertTopic
+
+  # Athena: SQL over Parquet copies of the four tables. Two Glue databases hold
+  # tables with the same names, so the queries in athena/ run unchanged on either:
+  #   mental_health_trials            the newest weekly refresh (written by RefreshFunction)
+  #   mental_health_trials_published  the published download of 1 October 2026
+  #                                   (uploaded once with tools/upload_published_parquet.py)
+  LatestDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: mental_health_trials
+        Description: Newest weekly refresh of the trials tables
+
+  PublishedDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: mental_health_trials_published
+        Description: Trials tables behind the published analysis (download of 1 October 2026)
+
+  LatestTrialsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref LatestDatabase
+      TableInput:
+        Name: trials
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/latest/trials/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: title, Type: string}
+            - {Name: start_year, Type: int}
+            - {Name: overall_status, Type: string}
+            - {Name: why_stopped, Type: string}
+            - {Name: phase, Type: string}
+            - {Name: enrollment, Type: bigint}
+            - {Name: sponsor_name, Type: string}
+            - {Name: sponsor_class, Type: string}
+            - {Name: sponsor_type, Type: string}
+            - {Name: outcome, Type: string}
+  LatestConditionsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref LatestDatabase
+      TableInput:
+        Name: conditions
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/latest/conditions/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: condition, Type: string}
+            - {Name: condition_group, Type: string}
+  LatestInterventionsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref LatestDatabase
+      TableInput:
+        Name: interventions
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/latest/interventions/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: intervention_type, Type: string}
+            - {Name: intervention_name, Type: string}
+            - {Name: psychedelic_class, Type: string}
+            - {Name: treatment_type, Type: string}
+  LatestSitesTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref LatestDatabase
+      TableInput:
+        Name: sites
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/latest/sites/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: country, Type: string}
+  PublishedTrialsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref PublishedDatabase
+      TableInput:
+        Name: trials
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/published/trials/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: title, Type: string}
+            - {Name: start_year, Type: int}
+            - {Name: overall_status, Type: string}
+            - {Name: why_stopped, Type: string}
+            - {Name: phase, Type: string}
+            - {Name: enrollment, Type: bigint}
+            - {Name: sponsor_name, Type: string}
+            - {Name: sponsor_class, Type: string}
+            - {Name: sponsor_type, Type: string}
+            - {Name: outcome, Type: string}
+  PublishedConditionsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref PublishedDatabase
+      TableInput:
+        Name: conditions
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/published/conditions/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: condition, Type: string}
+            - {Name: condition_group, Type: string}
+  PublishedInterventionsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref PublishedDatabase
+      TableInput:
+        Name: interventions
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/published/interventions/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: intervention_type, Type: string}
+            - {Name: intervention_name, Type: string}
+            - {Name: psychedelic_class, Type: string}
+            - {Name: treatment_type, Type: string}
+  PublishedSitesTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref PublishedDatabase
+      TableInput:
+        Name: sites
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/published/sites/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: country, Type: string}
+  AthenaWorkGroup:
+    Type: AWS::Athena::WorkGroup
+    Properties:
+      Name: !Ref AWS::StackName
+      Description: Queries on the trials tables; each query may scan at most 100 MB
+      RecursiveDeleteOption: true
+      WorkGroupConfiguration:
+        EnforceWorkGroupConfiguration: true
+        PublishCloudWatchMetricsEnabled: true
+        BytesScannedCutoffPerQuery: 100000000
+        EngineVersion:
+          SelectedEngineVersion: Athena engine version 3
+        ResultConfiguration:
+          OutputLocation: !Sub s3://${DataBucket}/athena-results/
 
   # Read-only user for the Streamlit app. Create its access key in the IAM console.
   AppReader:
@@ -391,6 +616,9 @@ Outputs:
     Value: !Ref DataBucket
   FunctionName:
     Value: !Ref RefreshFunction
+  AthenaWorkGroup:
+    Description: Choose this workgroup in the Athena query editor
+    Value: !Ref AthenaWorkGroup
   AppReaderUser:
     Description: IAM user whose access key goes in the Streamlit app's secrets
     Value: !Ref AppReader
