@@ -21,6 +21,7 @@ in rules.GROUPS, the same rules used for the ClinicalTrials.gov tables.
 """
 
 import json
+import re
 import time
 import urllib.request
 
@@ -51,6 +52,12 @@ SCHEMAS = {
                  ("manufacturer_name", "string"), ("psychedelic_class", "string")],
 }
 
+# Health Canada condition names that the shared rules would put in a mental health group
+# but that are not mental health: post-traumatic headaches and joint contractures
+# (PTSD rule), opioid-induced constipation (substance use rule). Found in the
+# 2026-10-31 download; kept here so the ClinicalTrials.gov tables stay as published.
+HC_EXCLUDE = r"post\W*traumatic(?!\W*stress)|opioid\W*induced"
+
 USER_AGENT = "mental-health-trials-pipeline (github.com/mgoldenitz/mental-health-trials-pipeline)"
 
 
@@ -79,10 +86,17 @@ def download():
     return {name: get_json(name) for name in ENDPOINTS}
 
 
+def condition_group(name):
+    """rules.group_of, plus the Health Canada exclusions above."""
+    if isinstance(name, str) and re.search(HC_EXCLUDE, name.lower()):
+        return "Other"
+    return group_of(name)
+
+
 def _first_group(conditions):
     """The first mental health group among a trial's conditions, or None."""
     for c in conditions:
-        grp = group_of(c)
+        grp = condition_group(c)
         if grp != "Other":
             return grp
     return None
@@ -125,7 +139,7 @@ def build(raw):
         })
         for c in conditions:
             tables["hc_conditions"].append(
-                {"control_number": control, "condition": c, "condition_group": group_of(c)})
+                {"control_number": control, "condition": c, "condition_group": condition_group(c)})
         for d in trial_drugs:
             tables["hc_drugs"].append({
                 "control_number": control, "brand_name": d.get("brand_name"),

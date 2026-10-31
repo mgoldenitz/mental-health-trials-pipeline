@@ -12,13 +12,19 @@ The function calls three endpoints, each of which returns every record in one re
 | --- | --- | --- |
 | `protocol` | one row per trial: control number, titles, dates, status code, conditions | 9,757 rows, 5.9 MB |
 | `drugproduct` | one row per drug in a trial: brand name, manufacturer | 9,816 rows, 1.7 MB |
-| `status` | names for the protocol's status codes | 3 rows |
+| `status` | names for the protocol's status codes: Ongoing, Closed, Pending | 3 rows |
 
 The API has no trial phase, sites or ClinicalTrials.gov ID. The portal's CSV export has those (plus text statuses such as Recruiting and Closed), but Health Canada builds it as a background job that took 826 seconds on 2026-10-31, too close to Lambda's 900-second limit to run in one call. The portal's control number equals the API's `submission_no`, so the two can be joined later.
 
 ## Mental health filter
 
-A trial is kept when any of its Health Canada condition names matches one of the groups in `src/pipeline/rules.py`, the same rules the ClinicalTrials.gov tables use. The trial's `condition_group` is the first matching group. `psychedelic_class` uses the same drug rules, checked against the drug brand names and then the title.
+A trial is kept when any of its Health Canada condition names matches one of the eight groups in `src/pipeline/rules.py`, the same rules the ClinicalTrials.gov tables use. The trial's `condition_group` is the first matching group; `hc_conditions` keeps every condition with its own group. `psychedelic_class` uses the same drug rules, checked against the drug brand names and then the title.
+
+On the 2026-10-31 download the shared rules matched 263 of 9,757 trials. Three condition names were false matches, so `HC_EXCLUDE` in `src/pipeline/health_canada.py` removes them: ACUTE POST-TRAUMATIC HEADACHES, POSTTRAUMATIC JOINT CONTRACTURES and OPIOID-INDUCED CONSTIPATION (6 trials). The exclusion lives in the Health Canada module so the ClinicalTrials.gov tables still reproduce the published numbers.
+
+Names outside the eight groups stay out, matching the published scope. On 2026-10-31 these included AUTISM SPECTRUM DISORDER (18 trials), ADHD (15), INSOMNIA (18), ANOREXIA (9, of which 8 are anorexia nervosa; the shared rule needs the word "nervosa"), SUICIDALITY (6) and ALZHEIMER'S DISEASE (150).
+
+Ketamine is flagged wherever it is listed as a drug, as in the ClinicalTrials.gov tables. In three Health Canada trials (191742, 206348, 183146) it is the anaesthetic for ECT, not the treatment under test.
 
 ## Output
 
