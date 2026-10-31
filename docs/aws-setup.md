@@ -89,22 +89,24 @@ Each refresh writes the four tables as Parquet to `athena/latest/` in the bucket
 | `mental_health_trials` | the newest weekly refresh |
 | `mental_health_trials_published` | the published download of 1 October 2026 |
 
+`botocore[crt]` in the commands below lets boto3 use the sign-in from `aws login`.
+
 1. After deploying, load the published tables once, from the repository root:
 
 ```
-uv run --with boto3 --with pyarrow python tools/upload_published_parquet.py BUCKET_NAME --profile personal
+uv run --with boto3 --with "botocore[crt]" --with pyarrow python tools/upload_published_parquet.py BUCKET_NAME --profile personal
 ```
 
 2. Check that Athena reproduces the published results (all 11 queries should say "matches results/"):
 
 ```
-uv run --with boto3 --with pandas python tools/run_athena.py --database mental_health_trials_published --compare --profile personal
+uv run --with boto3 --with "botocore[crt]" --with pandas python tools/run_athena.py --database mental_health_trials_published --compare --profile personal
 ```
 
 3. Run the same queries on the newest refresh. The CSV files go to `out/athena/mental_health_trials/`:
 
 ```
-uv run --with boto3 python tools/run_athena.py --profile personal
+uv run --with boto3 --with "botocore[crt]" python tools/run_athena.py --profile personal
 ```
 
 The `mental_health_trials` tables are empty until the function has run once with this version of the template, so after the first deploy invoke it as in step 7.
@@ -155,7 +157,7 @@ Database users: `trials_admin` (password in Secrets Manager, used only by the se
 3. Create the database users and load the newest snapshot:
 
 ```
-uv run --with boto3 --with pg8000 python tools/setup_database.py --profile personal
+uv run --with boto3 --with "botocore[crt]" --with pg8000 python tools/setup_database.py --profile personal
 ```
 
 The script starts the database if it is stopped, creates `loader` and `powerbi`, saves the `powerbi` password, runs the load function and prints the row counts. If it fails to connect, your IP has probably changed (step 1).
