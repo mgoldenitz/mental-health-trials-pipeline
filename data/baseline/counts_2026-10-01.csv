@@ -1,0 +1,178 @@
+metric,category,value
+trials,All,14724
+trials_by_year,2010,554
+trials_by_year,2011,553
+trials_by_year,2012,594
+trials_by_year,2013,573
+trials_by_year,2014,680
+trials_by_year,2015,703
+trials_by_year,2016,751
+trials_by_year,2017,802
+trials_by_year,2018,843
+trials_by_year,2019,1007
+trials_by_year,2020,899
+trials_by_year,2021,1251
+trials_by_year,2022,1269
+trials_by_year,2023,1339
+trials_by_year,2024,1453
+trials_by_year,2025,1453
+trials_by_condition,Anxiety,4140
+trials_by_condition,Bipolar disorder,828
+trials_by_condition,Depression,6817
+trials_by_condition,Eating disorders,667
+trials_by_condition,OCD,420
+trials_by_condition,PTSD,1683
+trials_by_condition,Schizophrenia & psychosis,2243
+trials_by_condition,Substance use,982
+trials_by_condition_year,Anxiety|2010,80
+trials_by_condition_year,Anxiety|2011,85
+trials_by_condition_year,Anxiety|2012,102
+trials_by_condition_year,Anxiety|2013,99
+trials_by_condition_year,Anxiety|2014,141
+trials_by_condition_year,Anxiety|2015,163
+trials_by_condition_year,Anxiety|2016,168
+trials_by_condition_year,Anxiety|2017,200
+trials_by_condition_year,Anxiety|2018,239
+trials_by_condition_year,Anxiety|2019,258
+trials_by_condition_year,Anxiety|2020,263
+trials_by_condition_year,Anxiety|2021,415
+trials_by_condition_year,Anxiety|2022,392
+trials_by_condition_year,Anxiety|2023,477
+trials_by_condition_year,Anxiety|2024,540
+trials_by_condition_year,Anxiety|2025,518
+trials_by_condition_year,Bipolar disorder|2010,59
+trials_by_condition_year,Bipolar disorder|2011,46
+trials_by_condition_year,Bipolar disorder|2012,43
+trials_by_condition_year,Bipolar disorder|2013,50
+trials_by_condition_year,Bipolar disorder|2014,61
+trials_by_condition_year,Bipolar disorder|2015,43
+trials_by_condition_year,Bipolar disorder|2016,42
+trials_by_condition_year,Bipolar disorder|2017,53
+trials_by_condition_year,Bipolar disorder|2018,49
+trials_by_condition_year,Bipolar disorder|2019,49
+trials_by_condition_year,Bipolar disorder|2020,38
+trials_by_condition_year,Bipolar disorder|2021,50
+trials_by_condition_year,Bipolar disorder|2022,67
+trials_by_condition_year,Bipolar disorder|2023,53
+trials_by_condition_year,Bipolar disorder|2024,66
+trials_by_condition_year,Bipolar disorder|2025,59
+trials_by_condition_year,Depression|2010,258
+trials_by_condition_year,Depression|2011,260
+trials_by_condition_year,Depression|2012,271
+trials_by_condition_year,Depression|2013,236
+trials_by_condition_year,Depression|2014,298
+trials_by_condition_year,Depression|2015,320
+trials_by_condition_year,Depression|2016,359
+trials_by_condition_year,Depression|2017,362
+trials_by_condition_year,Depression|2018,401
+trials_by_condition_year,Depression|2019,478
+trials_by_condition_year,Depression|2020,434
+trials_by_condition_year,Depression|2021,616
+trials_by_condition_year,Depression|2022,569
+trials_by_condition_year,Depression|2023,619
+trials_by_condition_year,Depression|2024,659
+trials_by_condition_year,Depression|2025,677
+trials_by_condition_year,Eating disorders|2010,17
+trials_by_condition_year,Eating disorders|2011,15
+trials_by_condition_year,Eating disorders|2012,24
+trials_by_condition_year,Eating disorders|2013,20
+trials_by_condition_year,Eating disorders|2014,24
+trials_by_condition_year,Eating disorders|2015,36
+trials_by_condition_year,Eating disorders|2016,38
+trials_by_condition_year,Eating disorders|2017,43
+trials_by_condition_year,Eating disorders|2018,45
+trials_by_condition_year,Eating disorders|2019,47
+trials_by_condition_year,Eating disorders|2020,43
+trials_by_condition_year,Eating disorders|2021,62
+trials_by_condition_year,Eating disorders|2022,52
+trials_by_condition_year,Eating disorders|2023,70
+trials_by_condition_year,Eating disorders|2024,70
+trials_by_condition_year,Eating disorders|2025,61
+trials_by_condition_year,OCD|2010,11
+trials_by_condition_year,OCD|2011,20
+trials_by_condition_year,OCD|2012,20
+trials_by_condition_year,OCD|2013,19
+trials_by_condition_year,OCD|2014,29
+trials_by_condition_year,OCD|2015,23
+trials_by_condition_year,OCD|2016,25
+trials_by_condition_year,OCD|2017,23
+trials_by_condition_year,OCD|2018,21
+trials_by_condition_year,OCD|2019,31
+trials_by_condition_year,OCD|2020,21
+trials_by_condition_year,OCD|2021,33
+trials_by_condition_year,OCD|2022,39
+trials_by_condition_year,OCD|2023,27
+trials_by_condition_year,OCD|2024,42
+trials_by_condition_year,OCD|2025,36
+trials_by_condition_year,PTSD|2010,71
+trials_by_condition_year,PTSD|2011,62
+trials_by_condition_year,PTSD|2012,86
+trials_by_condition_year,PTSD|2013,74
+trials_by_condition_year,PTSD|2014,69
+trials_by_condition_year,PTSD|2015,78
+trials_by_condition_year,PTSD|2016,96
+trials_by_condition_year,PTSD|2017,89
+trials_by_condition_year,PTSD|2018,85
+trials_by_condition_year,PTSD|2019,121
+trials_by_condition_year,PTSD|2020,118
+trials_by_condition_year,PTSD|2021,142
+trials_by_condition_year,PTSD|2022,143
+trials_by_condition_year,PTSD|2023,134
+trials_by_condition_year,PTSD|2024,156
+trials_by_condition_year,PTSD|2025,159
+trials_by_condition_year,Schizophrenia & psychosis|2010,127
+trials_by_condition_year,Schizophrenia & psychosis|2011,136
+trials_by_condition_year,Schizophrenia & psychosis|2012,136
+trials_by_condition_year,Schizophrenia & psychosis|2013,128
+trials_by_condition_year,Schizophrenia & psychosis|2014,155
+trials_by_condition_year,Schizophrenia & psychosis|2015,125
+trials_by_condition_year,Schizophrenia & psychosis|2016,135
+trials_by_condition_year,Schizophrenia & psychosis|2017,127
+trials_by_condition_year,Schizophrenia & psychosis|2018,134
+trials_by_condition_year,Schizophrenia & psychosis|2019,158
+trials_by_condition_year,Schizophrenia & psychosis|2020,121
+trials_by_condition_year,Schizophrenia & psychosis|2021,141
+trials_by_condition_year,Schizophrenia & psychosis|2022,156
+trials_by_condition_year,Schizophrenia & psychosis|2023,165
+trials_by_condition_year,Schizophrenia & psychosis|2024,150
+trials_by_condition_year,Schizophrenia & psychosis|2025,149
+trials_by_condition_year,Substance use|2010,25
+trials_by_condition_year,Substance use|2011,27
+trials_by_condition_year,Substance use|2012,32
+trials_by_condition_year,Substance use|2013,36
+trials_by_condition_year,Substance use|2014,30
+trials_by_condition_year,Substance use|2015,41
+trials_by_condition_year,Substance use|2016,38
+trials_by_condition_year,Substance use|2017,65
+trials_by_condition_year,Substance use|2018,58
+trials_by_condition_year,Substance use|2019,79
+trials_by_condition_year,Substance use|2020,66
+trials_by_condition_year,Substance use|2021,85
+trials_by_condition_year,Substance use|2022,104
+trials_by_condition_year,Substance use|2023,92
+trials_by_condition_year,Substance use|2024,89
+trials_by_condition_year,Substance use|2025,115
+trials_by_outcome,Completed,8701
+trials_by_outcome,Ongoing or Unknown,4749
+trials_by_outcome,Stopped Early,1274
+trials_by_status,ACTIVE_NOT_RECRUITING,505
+trials_by_status,COMPLETED,8701
+trials_by_status,ENROLLING_BY_INVITATION,141
+trials_by_status,NOT_YET_RECRUITING,270
+trials_by_status,RECRUITING,1726
+trials_by_status,SUSPENDED,58
+trials_by_status,TERMINATED,772
+trials_by_status,UNKNOWN,2107
+trials_by_status,WITHDRAWN,444
+trials_by_sponsor_type,Companies,1587
+trials_by_sponsor_type,Other,26
+trials_by_sponsor_type,Other governments,334
+trials_by_sponsor_type,US Federal,525
+trials_by_sponsor_type,Universities & Hospitals,12252
+trials_by_treatment_type,Behavioural,6798
+trials_by_treatment_type,Device,2125
+trials_by_treatment_type,Drug,3593
+trials_by_treatment_type,Other,3943
+trials_by_drug_class,Ketamine / esketamine,318
+trials_by_drug_class,Psychedelic / MDMA,165
+trials_with_canadian_site,All,1020

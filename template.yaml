@@ -1,0 +1,115 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Weekly refresh of the mental health clinical trials pipeline. A Lambda function
+  downloads trials from ClinicalTrials.gov, saves a dated snapshot to S3 and
+  emails you if a run fails.
+
+Parameters:
+  AlertEmail:
+    Type: String
+    Description: Email address for failure alerts (confirm the subscription email AWS sends)
+
+Resources:
+  DataBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: raw-pages-to-infrequent-access
+            Status: Enabled
+            Prefix: raw/
+            Transitions:
+              - StorageClass: STANDARD_IA
+                TransitionInDays: 30
+
+  RefreshFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: pipeline.lambda_function.handler
+      Runtime: python3.12
+      MemorySize: 1536
+      Timeout: 900
+      Environment:
+        Variables:
+          BUCKET: !Ref DataBucket
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref DataBucket
+      EventInvokeConfig:
+        MaximumRetryAttempts: 0
+      Events:
+        Weekly:
+          Type: ScheduleV2
+          Properties:
+            # Mondays at 06:00 Toronto time
+            ScheduleExpression: cron(0 6 ? * MON *)
+            ScheduleExpressionTimezone: America/Toronto
+            RetryPolicy:
+              MaximumRetryAttempts: 0
+
+  RefreshLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${RefreshFunction}
+      RetentionInDays: 90
+
+  AlertTopic:
+    Type: AWS::SNS::Topic
+
+  AlertSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref AlertTopic
+      Protocol: email
+      Endpoint: !Ref AlertEmail
+
+  RefreshFailedAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: The weekly trials refresh failed; see the function's CloudWatch logs
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref RefreshFunction
+      Statistic: Sum
+      Period: 3600
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlertTopic
+
+  # Read-only user for the Streamlit app. Create its access key in the IAM console.
+  AppReader:
+    Type: AWS::IAM::User
+    Properties:
+      Policies:
+        - PolicyName: read-latest-counts
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: s3:GetObject
+                Resource:
+                  - !Sub ${DataBucket.Arn}/latest/*
+                  - !Sub ${DataBucket.Arn}/history/*
+
+Outputs:
+  BucketName:
+    Value: !Ref DataBucket
+  FunctionName:
+    Value: !Ref RefreshFunction
+  AppReaderUser:
+    Description: IAM user whose access key goes in the Streamlit app's secrets
+    Value: !Ref AppReader
