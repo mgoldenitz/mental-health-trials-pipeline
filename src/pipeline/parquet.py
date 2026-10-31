@@ -37,10 +37,14 @@ def _value(v, kind):
     return int(float(v))   # pandas wrote enrollment as "120.0" in the published CSV files
 
 
-def to_parquet(rows, name):
-    """Return one table as Parquet bytes (Snappy-compressed)."""
-    schema = pa.schema([(col, ARROW[kind]) for col, kind in SCHEMAS[name]])
-    columns = {col: [_value(r.get(col), kind) for r in rows] for col, kind in SCHEMAS[name]}
+def to_parquet(rows, name, schemas=SCHEMAS):
+    """Return one table as Parquet bytes (Snappy-compressed).
+
+    schemas defaults to the four ClinicalTrials.gov tables; health_canada.SCHEMAS
+    holds the Health Canada ones.
+    """
+    schema = pa.schema([(col, ARROW[kind]) for col, kind in schemas[name]])
+    columns = {col: [_value(r.get(col), kind) for r in rows] for col, kind in schemas[name]}
     buf = io.BytesIO()
     pq.write_table(pa.Table.from_pydict(columns, schema=schema), buf, compression="snappy")
     return buf.getvalue()

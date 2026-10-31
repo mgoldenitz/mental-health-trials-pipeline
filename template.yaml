@@ -316,6 +316,135 @@ Resources:
           Columns:
             - {Name: nct_id, Type: string}
             - {Name: country, Type: string}
+  # ---------------------------------------------------------------------------
+  # Health Canada clinical trials: a second weekly function, 30 minutes after the
+  # ClinicalTrials.gov refresh. It downloads the Clinical Trials Database API, keeps
+  # the mental health trials and writes under health-canada/ and athena/health_canada/.
+  # Its three tables sit in the mental_health_trials Glue database as hc_*.
+  # ---------------------------------------------------------------------------
+  HealthCanadaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: pipeline.health_canada_lambda.handler
+      Runtime: python3.12
+      MemorySize: 1024
+      Timeout: 900
+      Layers:
+        - !Ref PandasLayerArn
+      Environment:
+        Variables:
+          BUCKET: !Ref DataBucket
+          METRICS_NAMESPACE: !Ref AWS::StackName
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref DataBucket
+      EventInvokeConfig:
+        MaximumRetryAttempts: 0
+      Events:
+        Weekly:
+          Type: ScheduleV2
+          Properties:
+            # Mondays at 06:30 Toronto time
+            ScheduleExpression: cron(30 6 ? * MON *)
+            ScheduleExpressionTimezone: America/Toronto
+            RetryPolicy:
+              MaximumRetryAttempts: 0
+
+  HealthCanadaLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${HealthCanadaFunction}
+      RetentionInDays: 90
+
+  HealthCanadaFailedAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: The weekly Health Canada refresh failed; see the function's CloudWatch logs
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref HealthCanadaFunction
+      Statistic: Sum
+      Period: 3600
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlertTopic
+
+  HcTrialsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref LatestDatabase
+      TableInput:
+        Name: hc_trials
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/health_canada/hc_trials/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: control_number, Type: string}
+            - {Name: protocol_id, Type: bigint}
+            - {Name: protocol_number, Type: string}
+            - {Name: title, Type: string}
+            - {Name: approved_date, Type: string}
+            - {Name: approved_year, Type: int}
+            - {Name: start_date, Type: string}
+            - {Name: end_date, Type: string}
+            - {Name: status, Type: string}
+            - {Name: sponsor_name, Type: string}
+            - {Name: condition_group, Type: string}
+            - {Name: psychedelic_class, Type: string}
+  HcConditionsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref LatestDatabase
+      TableInput:
+        Name: hc_conditions
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/health_canada/hc_conditions/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: control_number, Type: string}
+            - {Name: condition, Type: string}
+            - {Name: condition_group, Type: string}
+  HcDrugsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref LatestDatabase
+      TableInput:
+        Name: hc_drugs
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/health_canada/hc_drugs/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: control_number, Type: string}
+            - {Name: brand_name, Type: string}
+            - {Name: manufacturer_name, Type: string}
+            - {Name: psychedelic_class, Type: string}
   AthenaWorkGroup:
     Type: AWS::Athena::WorkGroup
     Properties:
@@ -368,7 +497,7 @@ Resources:
               "type": "alarm", "x": 18, "y": 2, "width": 6, "height": 4,
               "properties": {
                 "title": "Failure alarms (email you)",
-                "alarms": ["${RefreshFailedAlarm.Arn}", "${LoadFailedAlarm.Arn}"]
+                "alarms": ["${RefreshFailedAlarm.Arn}", "${LoadFailedAlarm.Arn}", "${HealthCanadaFailedAlarm.Arn}"]
               }
             },
             {
@@ -753,3 +882,5 @@ Outputs:
     Value: !Ref DatabaseSecret
   LoadFunctionName:
     Value: !Ref LoadFunction
+  HealthCanadaFunctionName:
+    Value: !Ref HealthCanadaFunction
