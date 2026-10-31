@@ -80,11 +80,112 @@ bucket = "THE_BUCKET_NAME"
 
 Never commit these keys to the repository.
 
-## 9. Check the dashboard
+## 9. Query the tables with Athena
 
-Open the `DashboardUrl` output (or CloudWatch, Dashboards, `trials-refresh`). The top row has the latest run's trials in the 2010-2025 window, the change since the previous run, the API's total, the run time and the state of the failure alarm. Below that are charts of trials per run against the published 14,724, the change per run, run time against the 15-minute timeout, and Lambda runs, errors and throttles per day. The last two panels list recent runs (read from the manifest line each run logs) and recent failures.
+Each refresh writes the four tables as Parquet to `athena/latest/` in the bucket. Glue Data Catalog tables (defined in `template.yaml`, so no crawler is needed) let Athena read them:
 
-The four custom metrics (`TrialsInWindow`, `TrialsChange`, `ApiTotal`, `RunSeconds`, namespace `trials-refresh`) come from one line in CloudWatch embedded metric format that the function prints at the end of a successful run, so the charts fill in from the first run after this deploy. `TrialsChange` needs a previous snapshot to compare against. A failed run emits no custom metrics; it shows up in Errors, the alarm and the failures table.
+| Glue database | Holds |
+|---|---|
+| `mental_health_trials` | the newest weekly refresh |
+| `mental_health_trials_published` | the published download of 1 October 2026 |
+
+1. After deploying, load the published tables once, from the repository root:
+
+```
+uv run --with boto3 --with pyarrow python tools/upload_published_parquet.py BUCKET_NAME --profile personal
+```
+
+2. Check that Athena reproduces the published results (all 11 queries should say "matches results/"):
+
+```
+uv run --with boto3 --with pandas python tools/run_athena.py --database mental_health_trials_published --compare --profile personal
+```
+
+3. Run the same queries on the newest refresh. The CSV files go to `out/athena/mental_health_trials/`:
+
+```
+uv run --with boto3 python tools/run_athena.py --profile personal
+```
+
+The `mental_health_trials` tables are empty until the function has run once with this version of the template, so after the first deploy invoke it as in step 7.
+
+To query by hand, open the Athena console, choose the `trials-refresh` workgroup (top right of the query editor), pick a database, and paste a query from `athena/`. The workgroup saves results to `athena-results/` in the bucket, which deletes them after 30 days.
+
+Cost: Athena charges USD 5 per TB scanned, with a 10 MB minimum per query, so each query costs USD 0.00005. The workgroup cancels any query that would scan more than 100 MB.
+
+The queries in `athena/` differ from `sql/` in three ways. The tables hold only in-scope trials (the `data/powerbi/` tables), so `in_scope = 1` and `condition_group <> 'Other'` are gone. Every query keeps trials that started 2010 to 2025, because a refresh also downloads trials starting this year. Athena has no true-equals-1 shortcut, so `SUM(x = 'A')` became `COUNT_IF(x = 'A')`, and percentages use `100.0E0` so the division is in floating point, as in SQLite.
+
+## 10. Add the PostgreSQL database
+
+The stack also creates a PostgreSQL 17 database on RDS (db.t4g.micro, 20 GB gp3, one zone, one day of backups). After each refresh, the load function copies the newest snapshot into it, and Power BI can read it.
+
+### What it costs
+
+Approximate us-east-2 list prices, per month:
+
+| Item | Always on | Weekly window (default) |
+|---|---|---|
+| db.t4g.micro instance | USD 11.68 (730 h) | about USD 0.18 (2.5 h each Monday) |
+| 20 GB gp3 storage | USD 2.30 | USD 2.30 |
+| Public IPv4 address, charged while running | USD 3.65 | about USD 0.06 |
+| Secrets Manager secret (admin password) | USD 0.40 | USD 0.40 |
+| VPC, S3 gateway endpoint, load function, SSM parameter | 0 | 0 |
+| Total | about USD 18 | about USD 3, plus USD 0.02 per hour you run it by hand |
+
+If the account's free tier includes RDS (750 hours of db.t4g.micro and 20 GB of storage a month), the instance and storage lines are free. On the Free plan, charges come out of the credits. Check Billing and Cost Management, Free Tier, a day after deploying.
+
+There is no NAT gateway (about USD 33 a month). The load function has no internet access and does not need it.
+
+`DatabaseHours` picks the schedule. `weekly-window` starts the database Mondays at 05:00 and stops it at 07:30 Toronto time, which covers the 06:00 refresh and the load that follows. `always-on` leaves it running. RDS starts a stopped database by itself after 7 days; the Monday schedule stops it again.
+
+### Who can reach it
+
+| From | How |
+|---|---|
+| Your home IP (`HomeIpCidr`) | port 5432, TLS required; used by Power BI and the setup script |
+| The load function | port 5432 inside the VPC, IAM token instead of a password |
+| Anyone else | blocked by the security group |
+
+Database users: `trials_admin` (password in Secrets Manager, used only by the setup script), `loader` (IAM sign-in only; replaces the tables), `powerbi` (read-only; password in SSM Parameter Store at `/trials-refresh/powerbi-password`).
+
+### Deploy it
+
+1. Find your home IP address at https://checkip.amazonaws.com.
+2. From the repository root, run `sam build`, then `sam deploy --guided --profile personal`. Keep the saved answers, enter your IP with `/32` for `HomeIpCidr` (for example `203.0.113.7/32`), and press Enter for `DatabaseHours` to keep `weekly-window`. The first deploy with the database takes about 15 minutes.
+3. Create the database users and load the newest snapshot:
+
+```
+uv run --with boto3 --with pg8000 python tools/setup_database.py --profile personal
+```
+
+The script starts the database if it is stopped, creates `loader` and `powerbi`, saves the `powerbi` password, runs the load function and prints the row counts. If it fails to connect, your IP has probably changed (step 1).
+
+From then on, each Monday refresh loads the database by itself. A failed load emails `AlertEmail`, like a failed refresh.
+
+To check the database engine version is still offered before a first deploy: `aws rds describe-db-engine-versions --engine postgres --engine-version 17.9 --profile personal`. If the list is empty, change `EngineVersion` in `template.yaml` to a 17.x version that is listed.
+
+### Connect Power BI
+
+Power BI only connects to a server whose certificate it trusts, and RDS uses its own certificate authority.
+
+1. Download https://truststore.pki.rds.amazonaws.com/us-east-2/us-east-2-bundle.p7b.
+2. In PowerShell: `Import-Certificate -FilePath $HOME\Downloads\us-east-2-bundle.p7b -CertStoreLocation Cert:\CurrentUser\Root`, and answer Yes to each prompt.
+3. With the weekly window, start the database first: `aws rds start-db-instance --db-instance-identifier DATABASE_ID --profile personal` (the `DatabaseId` output), and wait about 5 minutes.
+4. Get the password: `aws ssm get-parameter --name /trials-refresh/powerbi-password --with-decryption --query Parameter.Value --output text --profile personal`.
+5. In Power BI Desktop, choose Get data, PostgreSQL database. Server: the `DatabaseEndpoint` output. Database: `trials`. Data connectivity mode: Import. On the credentials screen, choose Database and enter `powerbi` and the password.
+6. Pick the tables. Power BI finds the relationships from the foreign keys on `nct_id`.
+
+Use a new report or a copy of the `.pbix`, so the published report keeps reading the 1 October 2026 CSV files. Stop the database when you are done (`aws rds stop-db-instance` with the same identifier), or the Monday schedule stops it.
+
+### When your home IP changes
+
+Run `sam deploy --guided --profile personal` again and enter the new address for `HomeIpCidr`. Only the security group rule changes.
+
+## 11. Check the dashboard
+
+Open the `DashboardUrl` output (or CloudWatch, Dashboards, `trials-refresh`). The top row has the latest run's trials in the 2010-2025 window, the change since the previous run, the API's total, the run time and the state of the two failure alarms (refresh and database load). Below that are charts of trials per run against the published 14,724, the change per run, run time against the 15-minute timeout, and refresh runs, database loads and errors per day. The last two panels list recent runs (read from the manifest line each run logs) and recent failures from either function.
+
+The four custom metrics (`TrialsInWindow`, `TrialsChange`, `ApiTotal`, `RunSeconds`, namespace `trials-refresh`) come from one line in CloudWatch embedded metric format that the function prints at the end of a successful run, so the charts fill in from the first run after this deploy. `TrialsChange` needs a previous snapshot to compare against. A failed run emits no custom metrics; it shows up in the errors chart, the alarms and the failures table.
 
 The free tier covers 3 dashboards and 10 custom metrics, so this leaves 6 metrics for later additions. The two log tables run a CloudWatch Logs Insights query each time the dashboard loads, at USD 0.005 per GB scanned; the function writes a few KB per run, so a view costs a small fraction of a cent.
 
@@ -99,5 +200,7 @@ The free tier covers 3 dashboards and 10 custom metrics, so this leaves 6 metric
 | Alerts | any function error emails `AlertEmail` |
 | Logs | CloudWatch, kept 90 days |
 | Dashboard | CloudWatch dashboard `trials-refresh`: run counts, run time, errors, recent runs and failures |
+| Athena | Parquet tables in `athena/latest/`, workgroup `trials-refresh`, 100 MB scan limit per query |
+| Database | PostgreSQL 17 on RDS db.t4g.micro, loaded after each refresh; Mondays 05:00 to 07:30 only with `DatabaseHours=weekly-window` |
 
-To pause the refresh, disable the schedule in the EventBridge Scheduler console. To remove everything except the bucket, run `sam delete --stack-name trials-refresh`; the bucket is kept so snapshots are not lost, and can be emptied and deleted in the S3 console.
+To pause the refresh, disable the schedule in the EventBridge Scheduler console. To remove everything except the bucket, run `sam delete --stack-name trials-refresh`; the database is deleted without a final snapshot (every table can be rebuilt from S3), and the bucket is kept so snapshots are not lost, and can be emptied and deleted in the S3 console.

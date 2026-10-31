@@ -2,13 +2,30 @@ AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
   Weekly refresh of the mental health clinical trials pipeline. A Lambda function
-  downloads trials from ClinicalTrials.gov, saves a dated snapshot to S3 and
-  emails you if a run fails.
+  downloads trials from ClinicalTrials.gov, saves a dated snapshot to S3,
+  refreshes the Parquet tables that Athena queries, loads the snapshot into
+  PostgreSQL on RDS, and emails you if a run fails.
 
 Parameters:
   AlertEmail:
     Type: String
     Description: Email address for failure alerts (confirm the subscription email AWS sends)
+  PandasLayerArn:
+    Type: String
+    Description: AWS SDK for pandas Lambda layer, which provides pyarrow for writing Parquet
+    Default: arn:aws:lambda:us-east-2:336392948345:layer:AWSSDKPandas-Python312:32
+  HomeIpCidr:
+    Type: String
+    Description: Your home IP address with /32 (for example 203.0.113.7/32). Only this address can reach the database from the internet.
+    AllowedPattern: ^(\d{1,3}\.){3}\d{1,3}/(3[0-2]|[12]?\d)$
+  DatabaseHours:
+    Type: String
+    Default: weekly-window
+    AllowedValues: [weekly-window, always-on]
+    Description: weekly-window starts the database Mondays 05:00 and stops it 07:30 Toronto time (start it by hand for Power BI); always-on leaves it running
+
+Conditions:
+  WeeklyWindow: !Equals [!Ref DatabaseHours, weekly-window]
 
 Resources:
   DataBucket:
@@ -21,6 +38,9 @@ Resources:
         BlockPublicPolicy: true
         IgnorePublicAcls: true
         RestrictPublicBuckets: true
+      NotificationConfiguration:
+        EventBridgeConfiguration:
+          EventBridgeEnabled: true   # lets the load function start when a refresh finishes
       LifecycleConfiguration:
         Rules:
           - Id: raw-pages-to-infrequent-access
@@ -29,6 +49,10 @@ Resources:
             Transitions:
               - StorageClass: STANDARD_IA
                 TransitionInDays: 30
+          - Id: expire-athena-results
+            Status: Enabled
+            Prefix: athena-results/
+            ExpirationInDays: 30
 
   RefreshFunction:
     Type: AWS::Serverless::Function
@@ -38,6 +62,8 @@ Resources:
       Runtime: python3.12
       MemorySize: 1536
       Timeout: 900
+      Layers:
+        - !Ref PandasLayerArn
       Environment:
         Variables:
           BUCKET: !Ref DataBucket
@@ -91,6 +117,220 @@ Resources:
       AlarmActions:
         - !Ref AlertTopic
 
+  # Athena: SQL over Parquet copies of the four tables. Two Glue databases hold
+  # tables with the same names, so the queries in athena/ run unchanged on either:
+  #   mental_health_trials            the newest weekly refresh (written by RefreshFunction)
+  #   mental_health_trials_published  the published download of 1 October 2026
+  #                                   (uploaded once with tools/upload_published_parquet.py)
+  LatestDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: mental_health_trials
+        Description: Newest weekly refresh of the trials tables
+
+  PublishedDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: mental_health_trials_published
+        Description: Trials tables behind the published analysis (download of 1 October 2026)
+
+  LatestTrialsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref LatestDatabase
+      TableInput:
+        Name: trials
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/latest/trials/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: title, Type: string}
+            - {Name: start_year, Type: int}
+            - {Name: overall_status, Type: string}
+            - {Name: why_stopped, Type: string}
+            - {Name: phase, Type: string}
+            - {Name: enrollment, Type: bigint}
+            - {Name: sponsor_name, Type: string}
+            - {Name: sponsor_class, Type: string}
+            - {Name: sponsor_type, Type: string}
+            - {Name: outcome, Type: string}
+  LatestConditionsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref LatestDatabase
+      TableInput:
+        Name: conditions
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/latest/conditions/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: condition, Type: string}
+            - {Name: condition_group, Type: string}
+  LatestInterventionsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref LatestDatabase
+      TableInput:
+        Name: interventions
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/latest/interventions/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: intervention_type, Type: string}
+            - {Name: intervention_name, Type: string}
+            - {Name: psychedelic_class, Type: string}
+            - {Name: treatment_type, Type: string}
+  LatestSitesTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref LatestDatabase
+      TableInput:
+        Name: sites
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/latest/sites/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: country, Type: string}
+  PublishedTrialsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref PublishedDatabase
+      TableInput:
+        Name: trials
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/published/trials/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: title, Type: string}
+            - {Name: start_year, Type: int}
+            - {Name: overall_status, Type: string}
+            - {Name: why_stopped, Type: string}
+            - {Name: phase, Type: string}
+            - {Name: enrollment, Type: bigint}
+            - {Name: sponsor_name, Type: string}
+            - {Name: sponsor_class, Type: string}
+            - {Name: sponsor_type, Type: string}
+            - {Name: outcome, Type: string}
+  PublishedConditionsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref PublishedDatabase
+      TableInput:
+        Name: conditions
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/published/conditions/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: condition, Type: string}
+            - {Name: condition_group, Type: string}
+  PublishedInterventionsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref PublishedDatabase
+      TableInput:
+        Name: interventions
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/published/interventions/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: intervention_type, Type: string}
+            - {Name: intervention_name, Type: string}
+            - {Name: psychedelic_class, Type: string}
+            - {Name: treatment_type, Type: string}
+  PublishedSitesTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref PublishedDatabase
+      TableInput:
+        Name: sites
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: parquet
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/athena/published/sites/
+          InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+          Columns:
+            - {Name: nct_id, Type: string}
+            - {Name: country, Type: string}
+  AthenaWorkGroup:
+    Type: AWS::Athena::WorkGroup
+    Properties:
+      Name: !Ref AWS::StackName
+      Description: Queries on the trials tables; each query may scan at most 100 MB
+      RecursiveDeleteOption: true
+      WorkGroupConfiguration:
+        EnforceWorkGroupConfiguration: true
+        PublishCloudWatchMetricsEnabled: true
+        BytesScannedCutoffPerQuery: 100000000
+        EngineVersion:
+          SelectedEngineVersion: Athena engine version 3
+        ResultConfiguration:
+          OutputLocation: !Sub s3://${DataBucket}/athena-results/
+
   # One page for the weekly refresh: what each run counted, how long it took, and what failed.
   # Free tier: 3 dashboards and 10 custom metrics; this uses 1 dashboard and 4 metrics.
   RefreshDashboard:
@@ -127,8 +367,8 @@ Resources:
             {
               "type": "alarm", "x": 18, "y": 2, "width": 6, "height": 4,
               "properties": {
-                "title": "Failure alarm (emails you)",
-                "alarms": ["${RefreshFailedAlarm.Arn}"]
+                "title": "Failure alarms (email you)",
+                "alarms": ["${RefreshFailedAlarm.Arn}", "${LoadFailedAlarm.Arn}"]
               }
             },
             {
@@ -173,15 +413,16 @@ Resources:
             {
               "type": "metric", "x": 12, "y": 12, "width": 12, "height": 6,
               "properties": {
-                "title": "Runs and errors per day",
+                "title": "Refresh runs, database loads and errors per day",
                 "view": "timeSeries",
                 "region": "${AWS::Region}",
                 "stat": "Sum",
                 "period": 86400,
                 "metrics": [
-                  ["AWS/Lambda", "Invocations", "FunctionName", "${RefreshFunction}", {"label": "Runs"}],
-                  [".", "Errors", ".", ".", {"label": "Errors", "color": "#d62728"}],
-                  [".", "Throttles", ".", ".", {"label": "Throttles"}]
+                  ["AWS/Lambda", "Invocations", "FunctionName", "${RefreshFunction}", {"label": "Refresh runs"}],
+                  [".", "Errors", ".", ".", {"label": "Refresh errors", "color": "#d62728"}],
+                  [".", "Invocations", ".", "${LoadFunction}", {"label": "Database loads"}],
+                  [".", "Errors", ".", ".", {"label": "Database load errors", "color": "#ff7f0e"}]
                 ],
                 "yAxis": {"left": {"min": 0, "showUnits": false}}
               }
@@ -201,7 +442,7 @@ Resources:
                 "title": "Recent failures",
                 "region": "${AWS::Region}",
                 "view": "table",
-                "query": "SOURCE '${RefreshLogs}' | filter @message like /\\[ERROR\\]|Task timed out|Status: error/ | fields @timestamp, @message | sort @timestamp desc | limit 20"
+                "query": "SOURCE '${RefreshLogs}' | SOURCE '${LoadLogs}' | filter @message like /\\[ERROR\\]|Task timed out|Status: error/ | fields @timestamp, @log, @message | sort @timestamp desc | limit 20"
               }
             }
           ]
@@ -222,6 +463,272 @@ Resources:
                   - !Sub ${DataBucket.Arn}/latest/*
                   - !Sub ${DataBucket.Arn}/history/*
 
+  # ---------------------------------------------------------------------------
+  # PostgreSQL on RDS, loaded after each refresh, read by Power BI.
+  # Network: a small VPC with two public subnets (RDS needs subnets in two zones),
+  # an internet gateway for Power BI, and a free S3 gateway endpoint for the load
+  # function. No NAT gateway.
+  # ---------------------------------------------------------------------------
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.20.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}-vpc
+
+  SubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.20.0.0/24
+      AvailabilityZone: !Select [0, !GetAZs ""]
+
+  SubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.20.1.0/24
+      AvailabilityZone: !Select [1, !GetAZs ""]
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  GatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref InternetGateway
+
+  RouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+
+  InternetRoute:
+    Type: AWS::EC2::Route
+    DependsOn: GatewayAttachment
+    Properties:
+      RouteTableId: !Ref RouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  SubnetARoutes:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref SubnetA
+      RouteTableId: !Ref RouteTable
+
+  SubnetBRoutes:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref SubnetB
+      RouteTableId: !Ref RouteTable
+
+  S3Endpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: !Ref Vpc
+      ServiceName: !Sub com.amazonaws.${AWS::Region}.s3
+      VpcEndpointType: Gateway
+      RouteTableIds:
+        - !Ref RouteTable
+
+  LoadSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Load function (outbound only)
+      VpcId: !Ref Vpc
+
+  DatabaseSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: PostgreSQL from your home IP and from the load function only
+      VpcId: !Ref Vpc
+      SecurityGroupIngress:
+        - Description: Power BI and setup script from home
+          IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          CidrIp: !Ref HomeIpCidr
+        - Description: Load function
+          IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          SourceSecurityGroupId: !Ref LoadSecurityGroup
+
+  DatabaseSubnets:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Two public subnets for the trials database
+      SubnetIds:
+        - !Ref SubnetA
+        - !Ref SubnetB
+
+  # Admin password, generated by Secrets Manager and never written in this file
+  DatabaseSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: Admin sign-in for the trials database (used only by tools/setup_database.py)
+      GenerateSecretString:
+        SecretStringTemplate: '{"username": "trials_admin"}'
+        GenerateStringKey: password
+        PasswordLength: 32
+        ExcludePunctuation: true
+
+  Database:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Delete         # every table can be rebuilt from the S3 snapshots
+    UpdateReplacePolicy: Delete
+    DependsOn: GatewayAttachment
+    Properties:
+      Engine: postgres
+      EngineVersion: "17.9"
+      DBInstanceClass: db.t4g.micro
+      AllocatedStorage: "20"
+      StorageType: gp3
+      StorageEncrypted: true
+      MultiAZ: false
+      PubliclyAccessible: true
+      DBName: trials
+      MasterUsername: !Sub "{{resolve:secretsmanager:${DatabaseSecret}:SecretString:username}}"
+      MasterUserPassword: !Sub "{{resolve:secretsmanager:${DatabaseSecret}:SecretString:password}}"
+      EnableIAMDatabaseAuthentication: true
+      DBSubnetGroupName: !Ref DatabaseSubnets
+      VPCSecurityGroups:
+        - !Ref DatabaseSecurityGroup
+      BackupRetentionPeriod: 1
+      DeleteAutomatedBackups: true
+      DeletionProtection: false
+      AutoMinorVersionUpgrade: true
+      EnablePerformanceInsights: false
+      MonitoringInterval: 0
+
+  LoadFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: pipeline.load_rds.handler
+      Runtime: python3.12
+      MemorySize: 512
+      Timeout: 120
+      VpcConfig:
+        SubnetIds:
+          - !Ref SubnetA
+          - !Ref SubnetB
+        SecurityGroupIds:
+          - !Ref LoadSecurityGroup
+      Environment:
+        Variables:
+          BUCKET: !Ref DataBucket
+          DB_HOST: !GetAtt Database.Endpoint.Address
+          DB_PORT: !GetAtt Database.Endpoint.Port
+          DB_NAME: trials
+          DB_USER: loader
+          DB_READER: powerbi
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref DataBucket
+        - Statement:
+            - Effect: Allow
+              Action: rds-db:connect
+              Resource: !Sub arn:aws:rds-db:${AWS::Region}:${AWS::AccountId}:dbuser:${Database.DbiResourceId}/loader
+      EventInvokeConfig:
+        MaximumRetryAttempts: 0
+      Events:
+        RefreshFinished:
+          Type: EventBridgeRule
+          Properties:
+            Pattern:
+              source: [aws.s3]
+              detail-type: [Object Created]
+              detail:
+                bucket:
+                  name: [!Ref DataBucket]
+                object:
+                  key: [history/counts.csv]   # the refresh writes this file last
+
+  LoadLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${LoadFunction}
+      RetentionInDays: 90
+
+  LoadFailedAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Loading the refresh into PostgreSQL failed; see the load function's CloudWatch logs
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref LoadFunction
+      Statistic: Sum
+      Period: 3600
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlertTopic
+
+  # Weekly window: start before the Monday 06:00 refresh, stop after the load
+  DatabaseSchedulerRole:
+    Type: AWS::IAM::Role
+    Condition: WeeklyWindow
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: scheduler.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: start-stop-database
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - rds:StartDBInstance
+                  - rds:StopDBInstance
+                Resource: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:db:${Database}
+
+  StartDatabase:
+    Type: AWS::Scheduler::Schedule
+    Condition: WeeklyWindow
+    Properties:
+      Description: Start the trials database before the weekly refresh
+      ScheduleExpression: cron(0 5 ? * MON *)
+      ScheduleExpressionTimezone: America/Toronto
+      FlexibleTimeWindow:
+        Mode: "OFF"
+      Target:
+        Arn: arn:aws:scheduler:::aws-sdk:rds:startDBInstance
+        RoleArn: !GetAtt DatabaseSchedulerRole.Arn
+        Input: !Sub '{"DbInstanceIdentifier": "${Database}"}'
+        RetryPolicy:
+          MaximumRetryAttempts: 0
+
+  StopDatabase:
+    Type: AWS::Scheduler::Schedule
+    Condition: WeeklyWindow
+    Properties:
+      Description: Stop the trials database after the weekly load
+      ScheduleExpression: cron(30 7 ? * MON *)
+      ScheduleExpressionTimezone: America/Toronto
+      FlexibleTimeWindow:
+        Mode: "OFF"
+      Target:
+        Arn: arn:aws:scheduler:::aws-sdk:rds:stopDBInstance
+        RoleArn: !GetAtt DatabaseSchedulerRole.Arn
+        Input: !Sub '{"DbInstanceIdentifier": "${Database}"}'
+        RetryPolicy:
+          MaximumRetryAttempts: 0
+
 Outputs:
   BucketName:
     Value: !Ref DataBucket
@@ -230,6 +737,19 @@ Outputs:
   DashboardUrl:
     Description: CloudWatch dashboard for the weekly refresh
     Value: !Sub https://${AWS::Region}.console.aws.amazon.com/cloudwatch/home?region=${AWS::Region}#dashboards/dashboard/${RefreshDashboard}
+  AthenaWorkGroup:
+    Description: Choose this workgroup in the Athena query editor
+    Value: !Ref AthenaWorkGroup
   AppReaderUser:
     Description: IAM user whose access key goes in the Streamlit app's secrets
     Value: !Ref AppReader
+  DatabaseEndpoint:
+    Description: Server name for Power BI and tools/setup_database.py
+    Value: !GetAtt Database.Endpoint.Address
+  DatabaseId:
+    Value: !Ref Database
+  DatabaseSecretArn:
+    Description: Secrets Manager secret with the admin sign-in
+    Value: !Ref DatabaseSecret
+  LoadFunctionName:
+    Value: !Ref LoadFunction
