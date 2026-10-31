@@ -76,6 +76,22 @@ LOGISTICS    drug or device supply, site closure, technical, contract or operati
 DESIGN       protocol changed, study replaced by a new or redesigned study, or design flaws
 OTHER        anything else, or a reason too vague to tell (e.g. "terminated", "PI decision" with no cause)
 
+Rules:
+- Any reason that mentions COVID-19, coronavirus or the pandemic is COVID, even when it
+  also mentions recruitment, enrolment or funding.
+- A principal investigator or other key researcher leaving, moving, retiring or closing
+  their lab is STAFF, even when a grant could not be transferred. It is not SPONSOR.
+
+Examples:
+PI left institution|STAFF
+PI has retired|STAFF
+Recruitment closed early due to Covid-19.|COVID
+Recruitment challenges due to COVID-19 pandemic|COVID
+Run out of study grant.|FUNDING
+Company decided not to move forward with further accrual.|SPONSOR
+Application withdrawn from the IRB.|REGULATORY
+Slow enrollment|RECRUITMENT
+
 Answer with one line per input, in the same order, formatted exactly as
 ID|CATEGORY
 Write nothing else."""
