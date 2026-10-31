@@ -10,6 +10,9 @@ S3 layout (BUCKET environment variable):
   athena/latest/<table>/<table>.parquet  the newest four tables, read by Athena
   history/counts.csv                 every snapshot's counts, one block per date
 
+Each successful run also prints one line in CloudWatch embedded metric format,
+which CloudWatch turns into the custom metrics charted on the stack's dashboard.
+
 Nothing is overwritten except latest/, athena/latest/ and history/counts.csv. The published
 analysis (1 October 2026) is not in S3; it stays in the repository.
 """
@@ -27,6 +30,7 @@ from . import fetch, parquet, transform
 s3 = boto3.client("s3")
 BUCKET = os.environ["BUCKET"]
 MAX_DROP = float(os.environ.get("MAX_DROP", "0.10"))   # fail if in-window trials fall by more than this
+NAMESPACE = os.environ.get("METRICS_NAMESPACE", "trials-refresh")
 
 
 def put(key, body, content_type="text/csv"):
@@ -38,6 +42,24 @@ def get_text(key):
         return s3.get_object(Bucket=BUCKET, Key=key)["Body"].read().decode()
     except s3.exceptions.NoSuchKey:
         return None
+
+
+def metrics_line(values, units):
+    """One log line in CloudWatch embedded metric format (no API call or extra permission needed).
+
+    No dimensions, so each name is one custom metric (the free tier covers 10).
+    """
+    return json.dumps({
+        "_aws": {
+            "Timestamp": int(time.time() * 1000),
+            "CloudWatchMetrics": [{
+                "Namespace": NAMESPACE,
+                "Dimensions": [[]],
+                "Metrics": [{"Name": k, "Unit": units[k]} for k in values],
+            }],
+        },
+        **values,
+    })
 
 
 def handler(event, context):
@@ -69,6 +91,7 @@ def handler(event, context):
 
     # 3. Refuse a snapshot that lost more than MAX_DROP of the trials since the last one
     last = get_text("latest/manifest.json")
+    before = None
     if last:
         before = json.loads(last)["trials_in_window"]
         if in_window < before * (1 - MAX_DROP):
@@ -100,4 +123,12 @@ def handler(event, context):
     put("history/counts.csv", "\n".join([new[0]] + lines + new[1:]) + "\n")
 
     print(json.dumps(manifest))
+
+    # 7. Custom metrics for the dashboard. TrialsChange is left out of the first run.
+    values = {"TrialsInWindow": in_window, "ApiTotal": total, "RunSeconds": manifest["seconds"]}
+    units = {"TrialsInWindow": "Count", "ApiTotal": "Count", "RunSeconds": "Seconds",
+             "TrialsChange": "Count"}
+    if before is not None:
+        values["TrialsChange"] = in_window - before
+    print(metrics_line(values, units))
     return manifest

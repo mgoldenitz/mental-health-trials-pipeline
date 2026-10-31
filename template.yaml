@@ -67,6 +67,7 @@ Resources:
       Environment:
         Variables:
           BUCKET: !Ref DataBucket
+          METRICS_NAMESPACE: !Ref AWS::StackName
       Policies:
         - S3CrudPolicy:
             BucketName: !Ref DataBucket
@@ -329,6 +330,123 @@ Resources:
           SelectedEngineVersion: Athena engine version 3
         ResultConfiguration:
           OutputLocation: !Sub s3://${DataBucket}/athena-results/
+
+  # One page for the weekly refresh: what each run counted, how long it took, and what failed.
+  # Free tier: 3 dashboards and 10 custom metrics; this uses 1 dashboard and 4 metrics.
+  RefreshDashboard:
+    Type: AWS::CloudWatch::Dashboard
+    Properties:
+      DashboardName: !Ref AWS::StackName
+      DashboardBody: !Sub |
+        {
+          "start": "-P90D",
+          "periodOverride": "inherit",
+          "widgets": [
+            {
+              "type": "text", "x": 0, "y": 0, "width": 24, "height": 2,
+              "properties": {
+                "markdown": "## Weekly trials refresh\nRuns Mondays 06:00 Toronto time. Counts are trials that started 2010-2025; the published analysis (1 October 2026) has 14,724. A run that fails its checks saves nothing and shows up under Errors and Recent failures."
+              }
+            },
+            {
+              "type": "metric", "x": 0, "y": 2, "width": 18, "height": 4,
+              "properties": {
+                "title": "Latest run",
+                "view": "singleValue",
+                "region": "${AWS::Region}",
+                "stat": "Maximum",
+                "period": 86400,
+                "metrics": [
+                  ["${AWS::StackName}", "TrialsInWindow", {"label": "Trials 2010-2025"}],
+                  [".", "TrialsChange", {"label": "Change since last run"}],
+                  [".", "ApiTotal", {"label": "Studies the API returned"}],
+                  [".", "RunSeconds", {"label": "Run time (s)"}]
+                ]
+              }
+            },
+            {
+              "type": "alarm", "x": 18, "y": 2, "width": 6, "height": 4,
+              "properties": {
+                "title": "Failure alarms (email you)",
+                "alarms": ["${RefreshFailedAlarm.Arn}", "${LoadFailedAlarm.Arn}"]
+              }
+            },
+            {
+              "type": "metric", "x": 0, "y": 6, "width": 12, "height": 6,
+              "properties": {
+                "title": "Trials that started 2010-2025, per run",
+                "view": "timeSeries",
+                "region": "${AWS::Region}",
+                "stat": "Maximum",
+                "period": 86400,
+                "metrics": [["${AWS::StackName}", "TrialsInWindow", {"label": "Trials"}]],
+                "annotations": {"horizontal": [{"label": "Published 2026-10-01", "value": 14724}]},
+                "yAxis": {"left": {"showUnits": false}},
+                "legend": {"position": "hidden"}
+              }
+            },
+            {
+              "type": "metric", "x": 12, "y": 6, "width": 12, "height": 6,
+              "properties": {
+                "title": "Change in trials since the previous run",
+                "view": "timeSeries",
+                "region": "${AWS::Region}",
+                "stat": "Maximum",
+                "period": 86400,
+                "metrics": [["${AWS::StackName}", "TrialsChange", {"label": "Change"}]]
+              }
+            },
+            {
+              "type": "metric", "x": 0, "y": 12, "width": 12, "height": 6,
+              "properties": {
+                "title": "Run time (seconds)",
+                "view": "timeSeries",
+                "region": "${AWS::Region}",
+                "stat": "Maximum",
+                "period": 86400,
+                "metrics": [["${AWS::StackName}", "RunSeconds", {"label": "Run time"}]],
+                "annotations": {"horizontal": [{"label": "Lambda timeout", "value": 900, "color": "#d62728"}]},
+                "yAxis": {"left": {"min": 0, "showUnits": false}},
+                "legend": {"position": "hidden"}
+              }
+            },
+            {
+              "type": "metric", "x": 12, "y": 12, "width": 12, "height": 6,
+              "properties": {
+                "title": "Refresh runs, database loads and errors per day",
+                "view": "timeSeries",
+                "region": "${AWS::Region}",
+                "stat": "Sum",
+                "period": 86400,
+                "metrics": [
+                  ["AWS/Lambda", "Invocations", "FunctionName", "${RefreshFunction}", {"label": "Refresh runs"}],
+                  [".", "Errors", ".", ".", {"label": "Refresh errors", "color": "#d62728"}],
+                  [".", "Invocations", ".", "${LoadFunction}", {"label": "Database loads"}],
+                  [".", "Errors", ".", ".", {"label": "Database load errors", "color": "#ff7f0e"}]
+                ],
+                "yAxis": {"left": {"min": 0, "showUnits": false}}
+              }
+            },
+            {
+              "type": "log", "x": 0, "y": 18, "width": 24, "height": 6,
+              "properties": {
+                "title": "Recent runs",
+                "region": "${AWS::Region}",
+                "view": "table",
+                "query": "SOURCE '${RefreshLogs}' | filter ispresent(snapshot_date) | fields snapshot_date, trials_in_window, api_total, pages, seconds | sort @timestamp desc | limit 20"
+              }
+            },
+            {
+              "type": "log", "x": 0, "y": 24, "width": 24, "height": 6,
+              "properties": {
+                "title": "Recent failures",
+                "region": "${AWS::Region}",
+                "view": "table",
+                "query": "SOURCE '${RefreshLogs}' | SOURCE '${LoadLogs}' | filter @message like /\\[ERROR\\]|Task timed out|Status: error/ | fields @timestamp, @log, @message | sort @timestamp desc | limit 20"
+              }
+            }
+          ]
+        }
 
   # Read-only user for the Streamlit app. Create its access key in the IAM console.
   AppReader:
@@ -616,6 +734,9 @@ Outputs:
     Value: !Ref DataBucket
   FunctionName:
     Value: !Ref RefreshFunction
+  DashboardUrl:
+    Description: CloudWatch dashboard for the weekly refresh
+    Value: !Sub https://${AWS::Region}.console.aws.amazon.com/cloudwatch/home?region=${AWS::Region}#dashboards/dashboard/${RefreshDashboard}
   AthenaWorkGroup:
     Description: Choose this workgroup in the Athena query editor
     Value: !Ref AthenaWorkGroup

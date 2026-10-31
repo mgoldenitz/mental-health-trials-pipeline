@@ -52,7 +52,7 @@ Run it with `--profile personal`, and answer the prompts with stack name `trials
 
 AWS then sends an email asking you to confirm the SNS subscription. Confirm it, or failure alerts will not arrive.
 
-`sam deploy` prints the stack outputs: `BucketName`, `FunctionName` and `AppReaderUser`. Keep them for the next steps.
+`sam deploy` prints the stack outputs: `BucketName`, `FunctionName`, `DashboardUrl` and `AppReaderUser`. Keep them for the next steps.
 
 ## 7. Run it once now
 
@@ -183,6 +183,14 @@ Use a new report or a copy of the `.pbix`, so the published report keeps reading
 
 Run `sam deploy --guided --profile personal` again and enter the new address for `HomeIpCidr`. Only the security group rule changes.
 
+## 11. Check the dashboard
+
+Open the `DashboardUrl` output (or CloudWatch, Dashboards, `trials-refresh`). The top row has the latest run's trials in the 2010-2025 window, the change since the previous run, the API's total, the run time and the state of the two failure alarms (refresh and database load). Below that are charts of trials per run against the published 14,724, the change per run, run time against the 15-minute timeout, and refresh runs, database loads and errors per day. The last two panels list recent runs (read from the manifest line each run logs) and recent failures from either function.
+
+The four custom metrics (`TrialsInWindow`, `TrialsChange`, `ApiTotal`, `RunSeconds`, namespace `trials-refresh`) come from one line in CloudWatch embedded metric format that the function prints at the end of a successful run, so the charts fill in from the first run after this deploy. `TrialsChange` needs a previous snapshot to compare against. A failed run emits no custom metrics; it shows up in the errors chart, the alarms and the failures table.
+
+The free tier covers 3 dashboards and 10 custom metrics, so this leaves 6 metrics for later additions. The two log tables run a CloudWatch Logs Insights query each time the dashboard loads, at USD 0.005 per GB scanned; the function writes a few KB per run, so a view costs a small fraction of a cent.
+
 ## What runs and when
 
 | Piece | Setting |
@@ -193,6 +201,7 @@ Run `sam deploy --guided --profile personal` again and enter the new address for
 | Storage | S3, public access blocked; raw pages move to Standard-IA after 30 days |
 | Alerts | any function error emails `AlertEmail` |
 | Logs | CloudWatch, kept 90 days |
+| Dashboard | CloudWatch dashboard `trials-refresh`: run counts, run time, errors, recent runs and failures |
 | Athena | Parquet tables in `athena/latest/`, workgroup `trials-refresh`, 100 MB scan limit per query |
 | Database | PostgreSQL 17 on RDS db.t4g.micro, loaded after each refresh; Mondays 05:00 to 07:30 only with `DatabaseHours=weekly-window` |
 
