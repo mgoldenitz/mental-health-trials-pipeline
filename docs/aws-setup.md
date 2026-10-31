@@ -1,6 +1,6 @@
 # Setting up the weekly refresh on AWS
 
-These steps deploy `template.yaml` to a personal AWS account. They assume Windows, macOS or Linux with Python 3.12 or later. Region `ca-central-1` (Canada Central) is used throughout; any region works if you use it consistently.
+These steps deploy `template.yaml` to a personal AWS account. They assume Windows, macOS or Linux with Python 3.12 or later. Region `us-east-2` (Ohio) is used throughout, because the account's project was created there and new-experience projects are locked to one Region.
 
 ## 1. Freeze the published version
 
@@ -23,9 +23,9 @@ Streamlit Community Cloud loses track of an app whose repository is renamed, and
 
 ## 4. Install the tools
 
-1. AWS CLI version 2, then run `aws configure` (or `aws configure sso` for Identity Center) with region `ca-central-1`.
+1. AWS CLI version 2, then sign in with `aws login --region us-east-2 --profile personal`. If antivirus software inspects secure connections (Norton's Web/Mail Shield does), point the `AWS_CA_BUNDLE` environment variable at a certificate file that includes the antivirus root certificate, or the sign-in fails with `CERTIFICATE_VERIFY_FAILED`.
 2. AWS SAM CLI.
-3. Check both: `aws sts get-caller-identity` and `sam --version`.
+3. Check both: `aws sts get-caller-identity --profile personal` and `sam --version`.
 
 ## 5. Time a full download on your computer
 
@@ -48,7 +48,7 @@ sam build
 sam deploy --guided
 ```
 
-Answer the prompts with stack name `trials-refresh`, region `ca-central-1`, your email for `AlertEmail`, and yes to saving the settings. Later deploys only need `sam build && sam deploy`.
+Run it with `--profile personal`, and answer the prompts with stack name `trials-refresh`, region `us-east-2`, your email for `AlertEmail`, and yes to saving the settings. Later deploys only need `sam build && sam deploy`.
 
 AWS then sends an email asking you to confirm the SNS subscription. Confirm it, or failure alerts will not arrive.
 
@@ -72,7 +72,7 @@ Replace FUNCTION_NAME with the `FunctionName` output. The log shows one line per
 [aws]
 access_key_id = "THE_ACCESS_KEY_ID"
 secret_access_key = "THE_SECRET_ACCESS_KEY"
-region = "ca-central-1"
+region = "us-east-2"
 bucket = "THE_BUCKET_NAME"
 ```
 
