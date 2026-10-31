@@ -209,6 +209,6 @@ Setup steps for a personal AWS account are in `docs/aws-setup.md`.
 - [x] Power BI dashboard (5 pages; `.pbix` and PDF in the repo)
 - [x] Machine learning: rule checking, termination prediction, title topics (`02_machine_learning.ipynb`)
 - [x] Weekly refresh on AWS (Lambda, S3, EventBridge Scheduler)
-- [ ] SQL on AWS: Parquet in S3, Glue Data Catalog, Athena (`athena/`)
+- [x] SQL on AWS: Parquet in S3, Glue Data Catalog, Athena (`athena/`); all 11 queries match `results/` in Athena (31 Oct 2026)
       
 Data: ClinicalTrials.gov, U.S. National Library of Medicine
