@@ -80,6 +80,72 @@ bucket = "THE_BUCKET_NAME"
 
 Never commit these keys to the repository.
 
+## 9. Add the PostgreSQL database
+
+The stack also creates a PostgreSQL 17 database on RDS (db.t4g.micro, 20 GB gp3, one zone, one day of backups). After each refresh, the load function copies the newest snapshot into it, and Power BI can read it.
+
+### What it costs
+
+Approximate us-east-2 list prices, per month:
+
+| Item | Always on | Weekly window (default) |
+|---|---|---|
+| db.t4g.micro instance | USD 11.68 (730 h) | about USD 0.18 (2.5 h each Monday) |
+| 20 GB gp3 storage | USD 2.30 | USD 2.30 |
+| Public IPv4 address, charged while running | USD 3.65 | about USD 0.06 |
+| Secrets Manager secret (admin password) | USD 0.40 | USD 0.40 |
+| VPC, S3 gateway endpoint, load function, SSM parameter | 0 | 0 |
+| Total | about USD 18 | about USD 3, plus USD 0.02 per hour you run it by hand |
+
+If the account's free tier includes RDS (750 hours of db.t4g.micro and 20 GB of storage a month), the instance and storage lines are free. On the Free plan, charges come out of the credits. Check Billing and Cost Management, Free Tier, a day after deploying.
+
+There is no NAT gateway (about USD 33 a month). The load function has no internet access and does not need it.
+
+`DatabaseHours` picks the schedule. `weekly-window` starts the database Mondays at 05:00 and stops it at 07:30 Toronto time, which covers the 06:00 refresh and the load that follows. `always-on` leaves it running. RDS starts a stopped database by itself after 7 days; the Monday schedule stops it again.
+
+### Who can reach it
+
+| From | How |
+|---|---|
+| Your home IP (`HomeIpCidr`) | port 5432, TLS required; used by Power BI and the setup script |
+| The load function | port 5432 inside the VPC, IAM token instead of a password |
+| Anyone else | blocked by the security group |
+
+Database users: `trials_admin` (password in Secrets Manager, used only by the setup script), `loader` (IAM sign-in only; replaces the tables), `powerbi` (read-only; password in SSM Parameter Store at `/trials-refresh/powerbi-password`).
+
+### Deploy it
+
+1. Find your home IP address at https://checkip.amazonaws.com.
+2. From the repository root, run `sam build`, then `sam deploy --guided --profile personal`. Keep the saved answers, enter your IP with `/32` for `HomeIpCidr` (for example `203.0.113.7/32`), and press Enter for `DatabaseHours` to keep `weekly-window`. The first deploy with the database takes about 15 minutes.
+3. Create the database users and load the newest snapshot:
+
+```
+uv run --with boto3 --with pg8000 python tools/setup_database.py --profile personal
+```
+
+The script starts the database if it is stopped, creates `loader` and `powerbi`, saves the `powerbi` password, runs the load function and prints the row counts. If it fails to connect, your IP has probably changed (step 1).
+
+From then on, each Monday refresh loads the database by itself. A failed load emails `AlertEmail`, like a failed refresh.
+
+To check the database engine version is still offered before a first deploy: `aws rds describe-db-engine-versions --engine postgres --engine-version 17.9 --profile personal`. If the list is empty, change `EngineVersion` in `template.yaml` to a 17.x version that is listed.
+
+### Connect Power BI
+
+Power BI only connects to a server whose certificate it trusts, and RDS uses its own certificate authority.
+
+1. Download https://truststore.pki.rds.amazonaws.com/us-east-2/us-east-2-bundle.p7b.
+2. In PowerShell: `Import-Certificate -FilePath $HOME\Downloads\us-east-2-bundle.p7b -CertStoreLocation Cert:\CurrentUser\Root`, and answer Yes to each prompt.
+3. With the weekly window, start the database first: `aws rds start-db-instance --db-instance-identifier DATABASE_ID --profile personal` (the `DatabaseId` output), and wait about 5 minutes.
+4. Get the password: `aws ssm get-parameter --name /trials-refresh/powerbi-password --with-decryption --query Parameter.Value --output text --profile personal`.
+5. In Power BI Desktop, choose Get data, PostgreSQL database. Server: the `DatabaseEndpoint` output. Database: `trials`. Data connectivity mode: Import. On the credentials screen, choose Database and enter `powerbi` and the password.
+6. Pick the tables. Power BI finds the relationships from the foreign keys on `nct_id`.
+
+Use a new report or a copy of the `.pbix`, so the published report keeps reading the 1 October 2026 CSV files. Stop the database when you are done (`aws rds stop-db-instance` with the same identifier), or the Monday schedule stops it.
+
+### When your home IP changes
+
+Run `sam deploy --guided --profile personal` again and enter the new address for `HomeIpCidr`. Only the security group rule changes.
+
 ## What runs and when
 
 | Piece | Setting |
@@ -90,5 +156,6 @@ Never commit these keys to the repository.
 | Storage | S3, public access blocked; raw pages move to Standard-IA after 30 days |
 | Alerts | any function error emails `AlertEmail` |
 | Logs | CloudWatch, kept 90 days |
+| Database | PostgreSQL 17 on RDS db.t4g.micro, loaded after each refresh; Mondays 05:00 to 07:30 only with `DatabaseHours=weekly-window` |
 
-To pause the refresh, disable the schedule in the EventBridge Scheduler console. To remove everything except the bucket, run `sam delete --stack-name trials-refresh`; the bucket is kept so snapshots are not lost, and can be emptied and deleted in the S3 console.
+To pause the refresh, disable the schedule in the EventBridge Scheduler console. To remove everything except the bucket, run `sam delete --stack-name trials-refresh`; the database is deleted without a final snapshot (every table can be rebuilt from S3), and the bucket is kept so snapshots are not lost, and can be emptied and deleted in the S3 console.
