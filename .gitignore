@@ -2,3 +2,6 @@ __pycache__/
 .aws-sam/
 samconfig.toml
 out/
+data/raw/
+data/trials.db
+trials.db
