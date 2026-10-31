@@ -63,7 +63,7 @@
 <path d="M1576 470 H1438" class="a" marker-end="url(#head)"/>
 <text x="1508" y="446" class="l" text-anchor="middle">deploys</text>
 <text x="1508" y="461" class="l" text-anchor="middle">app.py from main</text>
-<path d="M160 880 H754" class="a" marker-end="url(#head)"/>
+<path d="M160 880 H754" class="a dash" marker-end="url(#head)"/>
 <text x="457" y="868" class="l" text-anchor="middle">sam build → sam deploy (SAM template)</text>
 <path d="M800 838 V600" class="a dash" marker-end="url(#head)"/>
 <text x="812" y="700" class="l" text-anchor="start">creates &amp; updates</text>
