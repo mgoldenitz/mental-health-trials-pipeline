@@ -59,19 +59,19 @@ All 1,213 reasons were labelled in about 30 seconds for USD 0.002, after two pro
 
 The model and the keyword rules give the same group for 850 of 1,213 trials (70.1%). The largest change is in "Other / unclear", which falls from 307 trials (25.3%) to 133 (11.0%). Of the 307 trials the keywords could not place, the model moved 44 to Logistics / drug supply, 33 to Study design change, 30 to Sponsor / business decision, 25 to Recruitment, 24 to Regulatory / ethics, 19 each to Efficacy / futility and Investigator / staff, and 9 to Funding. It left 97 as Other / unclear.
 
-| Group | Model | Keywords |
-|---|---|---|
-| Recruitment | 313 | 332 |
-| Funding | 191 | 197 |
-| COVID-19 | 135 | 146 |
-| Other / unclear | 133 | 307 |
-| Investigator / staff | 123 | 112 |
-| Sponsor / business decision | 113 | 62 |
-| Efficacy / futility | 58 | 46 |
-| Logistics / drug supply | 58 | 0 |
-| Study design change | 43 | 0 |
-| Regulatory / ethics | 34 | 0 |
-| Safety | 12 | 11 |
+Trials per group, model first and keyword rules in brackets:
+
+- Recruitment: 313 (332)
+- Funding: 191 (197)
+- COVID-19: 135 (146)
+- Other / unclear: 133 (307)
+- Investigator / staff: 123 (112)
+- Sponsor / business decision: 113 (62)
+- Efficacy / futility: 58 (46)
+- Logistics / drug supply: 58 (0)
+- Study design change: 43 (0)
+- Regulatory / ethics: 34 (0)
+- Safety: 12 (11)
 
 Sponsor / business decision almost doubles (62 to 113), and 73 of the 113 are industry trials. The keyword rules miss phrasings such as "company decided not to move forward" and "terminated by sponsor for administrative reasons".
 
