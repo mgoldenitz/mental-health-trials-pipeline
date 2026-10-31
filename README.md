@@ -187,6 +187,8 @@ Results tables are in `results/ml/`.
 
 ## Weekly refresh on AWS
 
+![AWS architecture](docs/architecture.svg)
+
 Every number above comes from the download of 1 October 2026 and stays fixed. A separate weekly job on AWS downloads the same search again so the app can show how the registry has changed since then.
 
 - `src/pipeline/`: the download, cleaning, condition grouping and drug flags from the notebook (parts B and C) as plain Python with no third-party packages. Rebuilt from the 1 October 2026 download, it reproduces all four tables in `data/powerbi/` value for value (`tools/check_against_published.py`).
