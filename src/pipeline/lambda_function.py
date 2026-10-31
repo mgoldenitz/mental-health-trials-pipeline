@@ -7,9 +7,10 @@ S3 layout (BUCKET environment variable):
   snapshots/<date>/counts.csv        headline figures (metric, category, value)
   snapshots/<date>/manifest.json     what was downloaded and checks passed
   latest/                            copies of the newest counts.csv and manifest.json
+  athena/latest/<table>/<table>.parquet  the newest four tables, read by Athena
   history/counts.csv                 every snapshot's counts, one block per date
 
-Nothing is overwritten except latest/ and history/counts.csv. The published
+Nothing is overwritten except latest/, athena/latest/ and history/counts.csv. The published
 analysis (1 October 2026) is not in S3; it stays in the repository.
 """
 
@@ -21,7 +22,7 @@ from datetime import date, datetime, timezone
 
 import boto3
 
-from . import fetch, transform
+from . import fetch, parquet, transform
 
 s3 = boto3.client("s3")
 BUCKET = os.environ["BUCKET"]
@@ -86,7 +87,12 @@ def handler(event, context):
     put("latest/counts.csv", counts_csv)
     put("latest/manifest.json", json.dumps(manifest, indent=2), "application/json")
 
-    # 5. Add this snapshot to the history, replacing an earlier run from the same day
+    # 5. Replace the Parquet copies that the Athena tables read
+    for name, rows in pb.items():
+        put(f"athena/latest/{name}/{name}.parquet", parquet.to_parquet(rows, name),
+            "application/vnd.apache.parquet")
+
+    # 6. Add this snapshot to the history, replacing an earlier run from the same day
     history = get_text("history/counts.csv") or "snapshot_date,metric,category,value\n"
     lines = [l for l in history.splitlines()[1:] if not l.startswith(today + ",")]
     dated = [dict(r, snapshot_date=today) for r in counts]
