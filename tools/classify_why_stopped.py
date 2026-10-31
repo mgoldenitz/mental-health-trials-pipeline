@@ -59,12 +59,15 @@ CATEGORIES = {
 
 SYSTEM_PROMPT = """You label why a clinical trial stopped early. Each input line is
 "ID: reason", where the reason is free text a sponsor wrote on ClinicalTrials.gov.
-Pick the ONE category that names the main cause.
+Pick the ONE category that names the main cause. If a reason gives several causes,
+pick the one that ended the study.
 
 RECRUITMENT  slow, low or no enrolment; participants hard to find or retain; eligibility problems
-FUNDING      funding ended, was not obtained, or budget ran out
-SPONSOR      sponsor, company or portfolio decision; business or strategic reasons; program cancelled
+FUNDING      funding or a grant ended, was not obtained, or the budget ran out
+SPONSOR      sponsor, company or portfolio decision; business or strategic reasons; program cancelled;
+             sponsor or company went out of business
 EFFICACY     lack of efficacy, futility, or an interim analysis showing the study would not meet its goal
+             (a report of good results is not EFFICACY; label the reason the study stopped)
 SAFETY       safety concerns or adverse events
 COVID        the COVID-19 pandemic (use this even when the pandemic caused recruitment or site problems)
 STAFF        principal investigator left, retired or died; staff or personnel shortages
