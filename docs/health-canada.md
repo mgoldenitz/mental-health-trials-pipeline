@@ -64,3 +64,7 @@ FROM mental_health_trials.hc_trials
 GROUP BY condition_group
 ORDER BY trials DESC;
 ```
+
+## In PostgreSQL and Power BI
+
+The load function copies the Health Canada tables into the RDS database as `hc_trials`, `hc_conditions`, `hc_drugs` and `hc_snapshot_counts`, next to the ClinicalTrials.gov tables, and gives the `powerbi` user read access. It runs after each refresh writes its history file: at about 06:00 for ClinicalTrials.gov and 06:30 for Health Canada, both inside the database's Monday window. Each run loads the newest snapshot of both sources. In Power BI, tick the four `hc_` tables in the PostgreSQL navigator and join them to each other on `control_number`.
