@@ -777,7 +777,8 @@ Resources:
                 bucket:
                   name: [!Ref DataBucket]
                 object:
-                  key: [history/counts.csv]   # the refresh writes this file last
+                  # each refresh writes its history file last
+                  key: [history/counts.csv, health-canada/history/counts.csv]
 
   LoadLogs:
     Type: AWS::Logs::LogGroup
