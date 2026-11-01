@@ -37,6 +37,7 @@ A five-page Power BI report built on the cleaned tables. A condition filter on e
 
 - `Goldenitz_Mental_Health_Trials_Dashboard.pbix`: the Power BI file (open with Power BI Desktop)
 - `Goldenitz_Mental_Health_Trials_Dashboard.pdf`: a static copy of all five pages
+- `Goldenitz_Mental_Health_Trials_Live.pbix`: the same pages connected to the PostgreSQL database on AWS (see Weekly refresh on AWS below), so Home > Refresh in Power BI Desktop brings in the newest weekly snapshot. A report-level filter keeps trials that started 2010–2025, and the Health Canada tables (`hc_trials`, `hc_conditions`, `hc_drugs`, `hc_snapshot_counts`) are in its model. Text boxes that quote numbers describe the 1 October 2026 download.
 - `data/powerbi/`: the four tables the dashboard reads, exported by the notebook (step C5)
 
 ![Treatments page](images/treatments.png)
@@ -195,6 +196,7 @@ Every number above comes from the download of 1 October 2026 and stays fixed. A 
 - `template.yaml`: an AWS SAM template. EventBridge Scheduler runs the Lambda function every Monday at 06:00 Toronto time. Each run saves the raw API pages, the four tables and a counts file to its own dated folder in S3, checks that every study the API reported was downloaded, and refuses a snapshot that lost more than 10% of trials since the last one. A failed run sends an email through CloudWatch and SNS, and a CloudWatch dashboard charts each run's trial counts, run time and errors.
 - `athena/`: the 11 queries from `sql/` rewritten for Amazon Athena. Each run also writes the four tables as Parquet to S3 (1.8 MB in all), and Glue Data Catalog tables point Athena at them. A second Glue database holds the published tables, so the same queries run on either; on the published tables all 11 match `results/` (`tools/run_athena.py --compare`). An Athena workgroup caps each query at 100 MB scanned.
 - PostgreSQL on RDS: after each refresh, a second Lambda function (`src/pipeline/load_rds.py`) replaces the `trials`, `conditions`, `interventions` and `sites` tables, plus a `snapshot_counts` history, in one transaction. It runs inside the database's VPC, reads S3 through a gateway endpoint and signs in with an IAM token. Power BI connects as a read-only user from one home IP address.
+- Health Canada: a third Lambda function runs every Monday at 06:30 Toronto time, downloads Health Canada's Clinical Trials Database API, and keeps the mental health trials (257 of 9,757 on 1 November 2026) with the same condition rules. The tables go to S3, Athena and PostgreSQL, and the app's Canada tab shows them. Details in `docs/health-canada.md`.
 - `data/baseline/counts_2026-10-01.csv`: the published counts in the same format, so each refresh can be compared with them.
 - The app's Latest refresh tab shows the newest counts beside the published ones for trials that started 2010–2025, and lists trials starting after 2025 separately because many of those start dates are still estimates.
 
@@ -207,6 +209,7 @@ Setup steps for a personal AWS account are in `docs/aws-setup.md`.
 - [x] SQL analysis (11 queries in `sql/`, results in `results/`)
 - [x] Validate against ClinicalTrials.gov website searches
 - [x] Power BI dashboard (5 pages; `.pbix` and PDF in the repo)
+- [x] Live Power BI report on the weekly PostgreSQL refresh (`Goldenitz_Mental_Health_Trials_Live.pbix`)
 - [x] Machine learning: rule checking, termination prediction, title topics (`02_machine_learning.ipynb`)
 - [x] Weekly refresh on AWS (Lambda, S3, EventBridge Scheduler)
 - [x] SQL on AWS: Parquet in S3, Glue Data Catalog, Athena (`athena/`); all 11 queries match `results/` in Athena (31 Oct 2026)
