@@ -35,7 +35,7 @@ Ketamine is flagged wherever it is listed as a drug, as in the ClinicalTrials.go
 | `health-canada/snapshots/<date>/hc_conditions.csv` | every condition of those trials, with its group |
 | `health-canada/snapshots/<date>/hc_drugs.csv` | every drug in those trials, with its manufacturer |
 | `health-canada/snapshots/<date>/counts.csv`, `manifest.json` | headline figures and run details |
-| `health-canada/latest/`, `health-canada/history/counts.csv` | newest counts, and every run's counts |
+| `health-canada/latest/`, `health-canada/history/counts.csv` | newest counts, manifest and `hc_trials.csv`, and every run's counts |
 | `athena/health_canada/<table>/` | Parquet copies, queried in Athena as `mental_health_trials.hc_trials`, `hc_conditions`, `hc_drugs` |
 
 A run fails, saves no snapshot and emails you through the existing alert topic if the protocol endpoint returns nothing or the number of protocols drops by more than 10% since the last run.
@@ -68,3 +68,7 @@ ORDER BY trials DESC;
 ## In PostgreSQL and Power BI
 
 The load function copies the Health Canada tables into the RDS database as `hc_trials`, `hc_conditions`, `hc_drugs` and `hc_snapshot_counts`, next to the ClinicalTrials.gov tables, and gives the `powerbi` user read access. It runs after each refresh writes its history file: at about 06:00 for ClinicalTrials.gov and 06:30 for Health Canada, both inside the database's Monday window. Each run loads the newest snapshot of both sources. In Power BI, tick the four `hc_` tables in the PostgreSQL navigator and join them to each other on `control_number`.
+
+## In the Streamlit app
+
+The Canada tab has a Health Canada approvals section below the ClinicalTrials.gov charts. It reads `health-canada/latest/counts.csv`, `manifest.json` and `hc_trials.csv` with the app's AppReader key, whose policy allows `health-canada/latest/*` and `health-canada/history/*`. It shows the number of mental health trials, all approved trials, ongoing trials and psychedelic or ketamine trials, charts by condition and by year approved, and a table of ongoing trials. The sidebar filters do not apply to it. The table appears after the first run that writes `latest/hc_trials.csv` (the Monday run after deploying, or a manual invoke).
