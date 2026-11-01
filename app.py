@@ -324,6 +324,93 @@ def load_refresh(cfg):
     return latest, manifest, history
 
 
+# Takes the secrets as an argument so a missing-secrets result is never cached.
+@st.cache_data(ttl=6 * 3600)
+def load_health_canada(cfg):
+    """Counts and the trial list from the newest weekly Health Canada download in S3."""
+    import io
+    import json
+    import boto3
+
+    s3 = boto3.client("s3", aws_access_key_id=cfg["access_key_id"],
+                      aws_secret_access_key=cfg["secret_access_key"], region_name=cfg["region"])
+
+    def read(key):
+        return s3.get_object(Bucket=cfg["bucket"], Key="health-canada/" + key)["Body"].read()
+
+    counts = pd.read_csv(io.BytesIO(read("latest/counts.csv")))
+    manifest = json.loads(read("latest/manifest.json"))
+    try:    # written from the 2026-11-02 run onward
+        trials = pd.read_csv(io.BytesIO(read("latest/hc_trials.csv")), dtype={"control_number": str})
+    except Exception:
+        trials = None
+    return counts, manifest, trials
+
+
+with tab_canada:
+    st.divider()
+    st.subheader("Health Canada approvals")
+    cfg = aws_secrets()
+    try:
+        hc = load_health_canada(cfg) if cfg else None
+    except Exception as e:
+        hc = False
+        st.error(f"Could not read the Health Canada data from S3: {e}")
+    if hc is None:
+        st.info("This section shows mental health trials approved by Health Canada. "
+                "The scheduled refresh is not connected yet.")
+    elif hc:
+        hc_counts, hc_manifest, hc_trials = hc
+        st.caption(
+            f"Health Canada Clinical Trials Database, downloaded {hc_manifest['snapshot_date']}. "
+            "It lists drug and biologic trials Health Canada approved since April 2013, including "
+            "trials not registered on ClinicalTrials.gov. A trial counts when any of its conditions "
+            "falls in one of the eight mental health groups. The sidebar filters do not apply here.")
+
+        def hc_metric(metric):
+            return hc_counts[hc_counts["metric"] == metric][["category", "value"]]
+
+        def hc_one(metric, category="All"):
+            row = hc_counts[(hc_counts["metric"] == metric) & (hc_counts["category"] == category)]
+            return int(row["value"].iloc[0]) if len(row) else 0
+
+        status = hc_metric("hc_trials_by_status").set_index("category")["value"]
+        drug = hc_metric("hc_trials_by_drug_class")
+        k1, k2, k3, k4 = st.columns(4)
+        k1.metric("Mental health trials", f"{hc_one('hc_trials'):,}")
+        k2.metric("All approved trials", f"{hc_one('hc_all_trials'):,}")
+        k3.metric("Ongoing", f"{int(status.get('Ongoing', 0)):,}")
+        k4.metric("Psychedelic & ketamine", f"{int(drug['value'].sum()):,}")
+
+        c1, c2 = st.columns(2)
+        by_cond = hc_metric("hc_trials_by_condition").sort_values("value")
+        fig = px.bar(by_cond, x="value", y="category", orientation="h",
+                     labels={"value": "Trials", "category": ""},
+                     title="Health Canada trials, by condition")
+        c1.plotly_chart(fig, width="stretch")
+        by_year = hc_metric("hc_trials_by_year").copy()
+        by_year["category"] = pd.to_numeric(by_year["category"], errors="coerce")
+        fig = px.bar(by_year.dropna(), x="category", y="value",
+                     labels={"category": "Year approved", "value": "Trials"},
+                     title="Health Canada trials, by year approved")
+        c2.plotly_chart(fig, width="stretch")
+
+        if hc_trials is not None:
+            st.markdown("Ongoing Health Canada trials")
+            ongoing = (hc_trials[hc_trials["status"] == "Ongoing"]
+                       .sort_values("approved_date", ascending=False))
+            st.dataframe(
+                ongoing[["control_number", "title", "condition_group", "approved_date",
+                         "sponsor_name", "psychedelic_class"]],
+                column_config={
+                    "control_number": "Control number",
+                    "title": st.column_config.TextColumn("Title", width="large"),
+                    "condition_group": "Condition", "approved_date": "Approved",
+                    "sponsor_name": "Sponsor", "psychedelic_class": "Drug class",
+                },
+                hide_index=True, width="stretch")
+
+
 def compare(baseline, latest, metric):
     """Published and latest values of one metric side by side."""
     b = baseline[baseline["metric"] == metric].set_index("category")["value"]

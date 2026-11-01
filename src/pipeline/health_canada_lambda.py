@@ -7,7 +7,8 @@ the ClinicalTrials.gov files:
   health-canada/snapshots/<date>/<table>.csv         hc_trials, hc_conditions, hc_drugs
   health-canada/snapshots/<date>/counts.csv          headline figures (metric, category, value)
   health-canada/snapshots/<date>/manifest.json       what was downloaded and checks passed
-  health-canada/latest/                              copies of the newest counts.csv and manifest.json
+  health-canada/latest/                              copies of the newest counts.csv, manifest.json
+                                                     and hc_trials.csv (read by the Streamlit app)
   health-canada/history/counts.csv                   every snapshot's counts, one block per date
   athena/health_canada/<table>/<table>.parquet       the newest three tables, read by Athena
 """
@@ -88,6 +89,7 @@ def handler(event, context):
     put(f"{PREFIX}snapshots/{today}/manifest.json", manifest_json, "application/json")
     put(f"{PREFIX}latest/counts.csv", counts_csv)
     put(f"{PREFIX}latest/manifest.json", manifest_json, "application/json")
+    put(f"{PREFIX}latest/hc_trials.csv", to_csv(tables["hc_trials"], hc.COLUMNS["hc_trials"]))
 
     # 4. Parquet copies for Athena
     for name, table in tables.items():

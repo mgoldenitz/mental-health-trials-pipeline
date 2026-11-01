@@ -591,6 +591,8 @@ Resources:
                 Resource:
                   - !Sub ${DataBucket.Arn}/latest/*
                   - !Sub ${DataBucket.Arn}/history/*
+                  - !Sub ${DataBucket.Arn}/health-canada/latest/*
+                  - !Sub ${DataBucket.Arn}/health-canada/history/*
 
   # ---------------------------------------------------------------------------
   # PostgreSQL on RDS, loaded after each refresh, read by Power BI.
