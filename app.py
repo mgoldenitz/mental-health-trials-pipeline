@@ -471,9 +471,27 @@ with tab_latest:
                      ", ".join(f"{r.category}: {r.value:,}" for r in later.itertuples()) +
                      ". Many of these start dates are still estimates.")
 
-        totals = history[(history["metric"] == "trials") & (history["category"] == "All")]
-        if len(totals) > 1:
+        totals = history[(history["metric"] == "trials") & (history["category"] == "All")].copy()
+        totals["snapshot_date"] = pd.to_datetime(totals["snapshot_date"])
+        totals = (totals.sort_values("snapshot_date")
+                  .drop_duplicates("snapshot_date", keep="last"))
+        if len(totals) >= 4:
             fig = px.line(totals, x="snapshot_date", y="value", markers=True,
                           labels={"snapshot_date": "Download date", "value": "Trials started 2010–2025"},
                           title="Trials in the analysis window at each weekly download")
+            fig.update_xaxes(tickformat="%b %d, %Y",
+                             tickvals=totals["snapshot_date"] if len(totals) <= 12 else None)
+            fig.update_yaxes(tickformat=",d", dtick=max(1, round((totals["value"].max()
+                                                                  - totals["value"].min()) / 5)))
             st.plotly_chart(fig, width="stretch")
+        elif len(totals):
+            last = totals.iloc[-1]
+            when = f"{last.snapshot_date:%b} {last.snapshot_date.day}"
+            text = f"{int(last.value):,} trials in the 2010–2025 window at the {when} download"
+            if len(totals) > 1:
+                prev = totals.iloc[-2]
+                diff = int(last.value - prev.value)
+                since = f"{prev.snapshot_date:%b} {prev.snapshot_date.day}"
+                text += (f", no change from {since}" if diff == 0
+                         else f", {diff:+,} from {since}")
+            st.write(text + ". A weekly chart appears here once there are four downloads.")
