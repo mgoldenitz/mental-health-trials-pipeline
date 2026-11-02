@@ -190,7 +190,7 @@ with tab_search:
                      | view["sponsor_name"].str.contains(q, case=False, na=False)]
     can_recruit = not pick_outcome or "Ongoing or unknown" in pick_outcome
     recruiting_first = st.checkbox(
-        "Show actively recruiting trials first", value=True, disabled=not can_recruit,
+        "Show trials that are actively recruiting first", value=True, disabled=not can_recruit,
         help=None if can_recruit else
         "Recruiting trials are hidden by the Outcome filter. Add \"Ongoing or unknown\" to use this.")
     recruiting_first = recruiting_first and can_recruit
