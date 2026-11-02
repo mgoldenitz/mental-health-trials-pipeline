@@ -53,6 +53,9 @@ def handler(event, context):
     for name in hc.ENDPOINTS:
         t = time.time()
         raw[name] = hc.get_json(name)
+        if not raw[name]:
+            raise ValueError(f"The {name} endpoint still returned no records after retrying; "
+                             "Health Canada's API is probably down. Nothing was saved.")
         put(f"{PREFIX}raw/{today}/{name}.json.gz",
             gzip.compress(json.dumps(raw[name]).encode()), "application/gzip")
         print(f"{name}: {len(raw[name]):,} records in {time.time() - t:.0f} s")

@@ -61,25 +61,34 @@ HC_EXCLUDE = r"post\W*traumatic(?!\W*stress)|opioid\W*induced"
 USER_AGENT = "mental-health-trials-pipeline (github.com/mgoldenitz/mental-health-trials-pipeline)"
 
 
-def get_json(endpoint, timeout=300, tries=4):
-    """Return one endpoint's full list. The protocol endpoint can take a few minutes."""
+def get_json(endpoint, timeout=300, tries=4, empty_waits=(60, 180)):
+    """Return one endpoint's full list. The protocol endpoint can take a few minutes.
+
+    On 2026-11-02 at 06:30 Toronto time all three endpoints answered with an empty list
+    for a few minutes. An empty answer is retried after each wait in empty_waits (in
+    seconds) before it is returned, so a short outage does not fail the weekly run.
+    """
     url = f"{BASE}{endpoint}/?lang=en&type=json"
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    for attempt in range(tries):
-        try:
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                data = json.load(r)
-            break
-        except OSError:
-            if attempt == tries - 1:
-                raise
-            time.sleep(2 ** (attempt + 1))   # 2, 4, 8 seconds
-    # The 2017 docs show a {"result": ...} wrapper; the live API returns a bare list
-    if isinstance(data, dict):
-        data = data.get("result", data)
-    if isinstance(data, dict):
-        data = [data]
-    return data
+    for wait in (*empty_waits, None):
+        for attempt in range(tries):
+            try:
+                with urllib.request.urlopen(req, timeout=timeout) as r:
+                    data = json.load(r)
+                break
+            except OSError:
+                if attempt == tries - 1:
+                    raise
+                time.sleep(2 ** (attempt + 1))   # 2, 4, 8 seconds
+        # The 2017 docs show a {"result": ...} wrapper; the live API returns a bare list
+        if isinstance(data, dict):
+            data = data.get("result", data)
+        if isinstance(data, dict):
+            data = [data]
+        if data or wait is None:
+            return data
+        print(f"{endpoint}: empty response, trying again in {wait} s")
+        time.sleep(wait)
 
 
 def download():
