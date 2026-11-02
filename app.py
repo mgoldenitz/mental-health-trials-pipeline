@@ -1,9 +1,9 @@
 """
-Mental health & psychedelic trial tracker (version 1)
+Mental Health & Psychedelic Trial Tracker (version 1)
 Michael Goldenitz
 
-A Streamlit app built on the cleaned outputs of the mental health clinical
-trials pipeline (data/powerbi). Run locally with:  streamlit run app.py
+A Streamlit app built on the cleaned outputs of the Mental Health Clinical
+Trials Pipeline (data/powerbi). Run locally with:  streamlit run app.py
 """
 
 from pathlib import Path
@@ -36,7 +36,7 @@ OUTCOME_LABELS = {
 }
 OUTCOME_ORDER = list(OUTCOME_LABELS.values())
 
-st.set_page_config(page_title="Mental health trial tracker", layout="wide")
+st.set_page_config(page_title="Mental Health & Psychedelic Trial Tracker", layout="wide")
 
 
 # ---------------------------------------------------------------- data
@@ -100,7 +100,7 @@ psy_only = st.sidebar.toggle("Psychedelic & ketamine trials only")
 canada_only = st.sidebar.toggle("Trials in Canada")
 
 st.sidebar.caption("Data: ClinicalTrials.gov, downloaded 1 October 2026, trials starting 2010–2025, "
-                   "processed by the mental health clinical trials pipeline.")
+                   "processed by the Mental Health Clinical Trials Pipeline.")
 
 
 def apply_filters(df):
@@ -127,7 +127,7 @@ ids = set(view["nct_id"])
 
 
 # ---------------------------------------------------------------- header
-st.title("Mental health & psychedelic trial tracker")
+st.title("Mental Health & Psychedelic Trial Tracker")
 st.caption("Search and explore mental health clinical trials registered on ClinicalTrials.gov. "
            "Use the filters on the left; every chart and table updates with them.")
 
