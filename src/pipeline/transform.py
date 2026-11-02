@@ -9,13 +9,14 @@ import io
 import re
 from collections import Counter
 
-from .rules import drug_class, group_of
+from .rules import GROUPS, NEW_GROUPS, drug_class, group_of, new_groups, suicide_flag
 
 WINDOW = (2010, 2025)   # start years of the published analysis
 
 COLUMNS = {
     "trials": ["nct_id", "title", "start_year", "overall_status", "why_stopped", "phase",
-               "enrollment", "sponsor_name", "sponsor_class", "sponsor_type", "outcome"],
+               "enrollment", "sponsor_name", "sponsor_class", "sponsor_type", "outcome",
+               "scope", "suicide_flag"],
     "conditions": ["nct_id", "condition", "condition_group"],
     "interventions": ["nct_id", "intervention_type", "intervention_name",
                       "psychedelic_class", "treatment_type"],
@@ -37,14 +38,24 @@ def g(d, *keys, default=None):
     return d
 
 
-def flatten(studies, tables=None):
-    """Add studies to the four raw tables (cell C1). Call once per API page."""
+def flatten(studies, tables=None, search="core"):
+    """Add studies to the four raw tables (cell C1). Call once per API page.
+
+    search names the API search the page came from: "core" (fetch.QUERY_COND) or
+    "extra" (fetch.EXTRA_COND). Run the core search first; a study the extra search
+    returns again is skipped, so it stays marked as core.
+    """
     tables = tables or {"trials": [], "conditions": [], "interventions": [], "sites": []}
+    seen = tables.setdefault("seen", set())
     for s in studies:
         p = s.get("protocolSection", {})
         nct = g(p, "identificationModule", "nctId")
+        if nct in seen:
+            continue
+        seen.add(nct)
         start = g(p, "statusModule", "startDateStruct", "date")
         tables["trials"].append({
+            "search": search,
             "nct_id": nct,
             "title": g(p, "identificationModule", "briefTitle"),
             "start_year": int(start[:4]) if start else None,
@@ -73,13 +84,30 @@ def _one_line(row):
 
 
 def powerbi(tables):
-    """Group conditions, flag drugs and keep in-scope trials (cells C2, C3 and C5)."""
-    conditions = [dict(c, condition_group=group_of(c["condition"])) for c in tables["conditions"]]
-    conditions = [c for c in conditions if c["condition_group"] != "Other"]
+    """Group conditions, flag drugs and keep in-scope trials (cells C2, C3 and C5).
+
+    Each condition gets its published group (rules.GROUPS, first match) and every v2
+    group it matches (rules.NEW_GROUPS), one row each. A trial's scope is "core" when
+    the core search returned it and it has a published group: exactly the trials of the
+    published analysis. All other kept trials are "extended" and have only v2 groups.
+    """
+    conditions = []
+    for c in tables["conditions"]:
+        grp = group_of(c["condition"])
+        if grp != "Other":
+            conditions.append(dict(c, condition_group=grp))
+        conditions += [dict(c, condition_group=new) for new in new_groups(c["condition"])]
     ids = {c["nct_id"] for c in conditions}
 
+    search = {t["nct_id"]: t.get("search", "core") for t in tables["trials"]}
+    core = {c["nct_id"] for c in conditions
+            if c["condition_group"] in GROUPS and search.get(c["nct_id"]) == "core"}
+    flagged = {c["nct_id"] for c in tables["conditions"] if suicide_flag(c["condition"])}
+
     trials = [dict(t, sponsor_type=SPONSOR_TYPE.get(t["sponsor_class"], "Other"),
-                   outcome=OUTCOME.get(t["overall_status"], "Ongoing or Unknown"))
+                   outcome=OUTCOME.get(t["overall_status"], "Ongoing or Unknown"),
+                   scope="core" if t["nct_id"] in core else "extended",
+                   suicide_flag=t["nct_id"] in flagged or suicide_flag(t["title"]))
               for t in tables["trials"] if t["nct_id"] in ids]
     interventions = [dict(i, psychedelic_class=drug_class(i["intervention_name"]),
                           treatment_type=TREATMENT_TYPE.get(i["intervention_type"], "Other"))
@@ -100,7 +128,10 @@ def counts(pb):
     """
     lo, hi = WINDOW
     year = {t["nct_id"]: t["start_year"] for t in pb["trials"]}
-    in_window = {n for n, y in year.items() if y is not None and lo <= y <= hi}
+    all_window = {n for n, y in year.items() if y is not None and lo <= y <= hi}
+    # The published metrics use the core trials only, so they compare with the baseline
+    core = {t["nct_id"] for t in pb["trials"] if t["scope"] == "core"}
+    in_window = all_window & core
     trials = [t for t in pb["trials"] if t["nct_id"] in in_window]
 
     rows = [("trials", "All", len(trials))]
@@ -108,7 +139,7 @@ def counts(pb):
              for y, n in sorted(Counter(t["start_year"] for t in trials).items())]
 
     by_group = {(c["nct_id"], c["condition_group"]) for c in pb["conditions"]
-                if c["nct_id"] in in_window}
+                if c["nct_id"] in in_window and c["condition_group"] in GROUPS}
     rows += [("trials_by_condition", grp, n)
              for grp, n in sorted(Counter(grp for _, grp in by_group).items())]
     rows += [("trials_by_condition_year", f"{grp}|{y}", n) for (grp, y), n in
@@ -131,8 +162,23 @@ def counts(pb):
     canada = {s["nct_id"] for s in pb["sites"] if s["country"] == "Canada" and s["nct_id"] in in_window}
     rows.append(("trials_with_canadian_site", "All", len(canada)))
 
-    later = Counter(y for y in year.values() if y is not None and y > hi)
+    later = Counter(y for n, y in year.items() if n in core and y is not None and y > hi)
     rows += [("started_after_window", str(y), n) for y, n in sorted(later.items())]
+
+    # v2 groups and the suicide flag: every kept trial in the window, core or extended
+    rows.append(("v2_trials_all_scopes", "All", len(all_window)))
+    rows.append(("v2_trials_extended", "All", len(all_window - core)))
+    new = {(c["nct_id"], c["condition_group"]) for c in pb["conditions"]
+           if c["nct_id"] in all_window and c["condition_group"] in NEW_GROUPS}
+    rows += [("v2_trials_by_new_condition", grp, n)
+             for grp, n in sorted(Counter(grp for _, grp in new).items())]
+    rows += [("v2_trials_by_new_condition_year", f"{grp}|{y}", n) for (grp, y), n in
+             sorted(Counter((grp, year[nct]) for nct, grp in new).items())]
+    flagged = {t["nct_id"] for t in pb["trials"] if t["suicide_flag"] and t["nct_id"] in all_window}
+    rows.append(("v2_trials_with_suicide_flag", "All", len(flagged)))
+    every = {(c["nct_id"], c["condition_group"]) for c in pb["conditions"] if c["nct_id"] in flagged}
+    rows += [("v2_suicide_flag_by_condition", grp, n)
+             for grp, n in sorted(Counter(grp for _, grp in every).items())]
     return [{"metric": m, "category": c, "value": v} for m, c, v in rows]
 
 

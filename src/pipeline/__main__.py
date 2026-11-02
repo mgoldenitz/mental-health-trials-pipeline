@@ -5,7 +5,8 @@ Run the pipeline on your own computer, without AWS.
       rebuild the tables from a saved download (reproduces the published tables)
 
   python -m pipeline --fetch --out ../out/today
-      download fresh data and report how long the download took
+      download fresh data (both searches: the published conditions and the v2 groups)
+      and report how long the download took
 
 Add --parquet to also write each table as Parquet, as the Lambda function does
 for Athena (needs pyarrow).
@@ -43,13 +44,16 @@ def main():
             tables = transform.flatten(json.load(f))
         manifest["source"] = args.raw
     else:
-        tables, n = None, 0
-        for page in fetch.pages(end=args.end):
-            manifest.setdefault("api_total", page.get("totalCount"))
-            tables = transform.flatten(page["studies"], tables)
-            n += len(page["studies"])
-            print(f"{n:,} downloaded ({time.time() - began:.0f} s)")
-        manifest.update(downloaded=n, end=args.end, download_seconds=round(time.time() - began))
+        tables = None
+        for search, cond, prefix in [("core", fetch.QUERY_COND, ""), ("extra", fetch.EXTRA_COND, "extra_")]:
+            n = 0
+            for page in fetch.pages(end=args.end, cond=cond):
+                manifest.setdefault(f"{prefix}api_total", page.get("totalCount"))
+                tables = transform.flatten(page["studies"], tables, search)
+                n += len(page["studies"])
+                print(f"{search} search: {n:,} downloaded ({time.time() - began:.0f} s)")
+            manifest[f"{prefix}downloaded"] = n
+        manifest.update(end=args.end, download_seconds=round(time.time() - began))
 
     pb = transform.powerbi(tables)
     for name, rows in pb.items():

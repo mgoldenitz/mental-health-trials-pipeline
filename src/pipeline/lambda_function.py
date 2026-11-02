@@ -2,7 +2,8 @@
 AWS Lambda entry point: download, clean and count, then save a dated snapshot to S3.
 
 S3 layout (BUCKET environment variable):
-  raw/<date>/page-0001.json.gz ...   API pages exactly as downloaded
+  raw/<date>/page-0001.json.gz ...   API pages exactly as downloaded (published conditions)
+  raw/<date>/extra/page-0001.json.gz ...   pages of the second search (v2 groups)
   snapshots/<date>/<table>.csv       the four Power BI tables
   snapshots/<date>/counts.csv        headline figures (metric, category, value)
   snapshots/<date>/manifest.json     what was downloaded and checks passed
@@ -67,27 +68,34 @@ def handler(event, context):
     today = datetime.now(timezone.utc).date().isoformat()
     end = os.environ.get("END_DATE") or f"{date.today().year}-12-31"
 
-    # 1. Download page by page, saving each raw page before cleaning it
-    tables, total, n = None, None, 0
-    for i, page in enumerate(fetch.pages(end=end), start=1):
-        if total is None:
-            total = page.get("totalCount")
-        put(f"raw/{today}/page-{i:04d}.json.gz",
-            gzip.compress(json.dumps(page["studies"]).encode()), "application/gzip")
-        tables = transform.flatten(page["studies"], tables)
-        n += len(page["studies"])
-        print(f"page {i}: {n:,} of {total:,} studies, {time.time() - began:.0f} s")
-        if context.get_remaining_time_in_millis() < 60_000:
-            raise TimeoutError(f"Stopped after {n:,} of {total:,} studies: under a minute left. "
-                               "Raise the function timeout or move the job to ECS Fargate.")
+    # 1. Download page by page, saving each raw page before cleaning it. The core search
+    #    (the published conditions) runs first, then the search for the v2 groups.
+    tables, searched, pages = None, {}, 0
+    for search, cond, folder in [("core", fetch.QUERY_COND, ""), ("extra", fetch.EXTRA_COND, "extra/")]:
+        total, n = None, 0
+        for i, page in enumerate(fetch.pages(end=end, cond=cond), start=1):
+            if total is None:
+                total = page.get("totalCount")
+            put(f"raw/{today}/{folder}page-{i:04d}.json.gz",
+                gzip.compress(json.dumps(page["studies"]).encode()), "application/gzip")
+            tables = transform.flatten(page["studies"], tables, search)
+            n += len(page["studies"])
+            pages += 1
+            print(f"{search} page {i}: {n:,} of {total:,} studies, {time.time() - began:.0f} s")
+            if context.get_remaining_time_in_millis() < 60_000:
+                raise TimeoutError(f"Stopped after {n:,} of {total:,} studies: under a minute left. "
+                                   "Raise the function timeout or move the job to ECS Fargate.")
 
-    # 2. The same check as the notebook: every study the API reported was downloaded
-    if n != total:
-        raise ValueError(f"Downloaded {n:,} studies but the API reported {total:,}")
+        # 2. The same check as the notebook: every study the API reported was downloaded
+        if n != total:
+            raise ValueError(f"{search} search: downloaded {n:,} studies but the API reported {total:,}")
+        searched[search] = (total, n)
+    (total, n), (extra_total, extra_n) = searched["core"], searched["extra"]
 
     pb = transform.powerbi(tables)
     counts = transform.counts(pb)
     in_window = next(r["value"] for r in counts if r["metric"] == "trials")
+    all_scopes = next(r["value"] for r in counts if r["metric"] == "v2_trials_all_scopes")
 
     # 3. Refuse a snapshot that lost more than MAX_DROP of the trials since the last one
     last = get_text("latest/manifest.json")
@@ -104,7 +112,9 @@ def handler(event, context):
     counts_csv = transform.to_csv(counts, ["metric", "category", "value"])
     manifest = {"snapshot_date": today, "start_range": ["2010-01-01", end],
                 "api_total": total, "downloaded": n, "trials_in_window": in_window,
-                "pages": i, "seconds": round(time.time() - began)}
+                "extra_api_total": extra_total, "extra_downloaded": extra_n,
+                "trials_in_window_all_scopes": all_scopes,
+                "pages": pages, "seconds": round(time.time() - began)}
     put(f"snapshots/{today}/counts.csv", counts_csv)
     put(f"snapshots/{today}/manifest.json", json.dumps(manifest, indent=2), "application/json")
     put("latest/counts.csv", counts_csv)

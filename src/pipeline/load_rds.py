@@ -48,7 +48,9 @@ CREATE TABLE trials (
     sponsor_name    text,
     sponsor_class   text,
     sponsor_type    text,
-    outcome         text
+    outcome         text,
+    scope           text,
+    suicide_flag    boolean
 );
 CREATE TABLE conditions (
     nct_id          text NOT NULL REFERENCES trials,
