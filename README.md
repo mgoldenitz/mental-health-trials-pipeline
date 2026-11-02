@@ -120,7 +120,7 @@ The fixes grew the analysis set from 14,713 to 14,724 trials; headline results b
 
 - Generic labels ("Mental Disorder", "Mood Disorders")
 - Co-occurring conditions (pain, insomnia, stress, obesity)
-- Suicidal ideation, which may become a separate yes/no flag later
+- Suicidal ideation, now a separate yes/no flag in the weekly refresh (see `docs/v2-condition-groups.md`)
 - Conditions outside the search's scope
   
 A possible upgrade is grouping by MeSH terms from the API (`conditionBrowseModule`) instead of keywords.
@@ -159,6 +159,14 @@ I compared my counts with searches on the ClinicalTrials.gov website (condition 
 
 **Eating disorders:** I downloaded the website's 154 trials and compared trial IDs. 87 of them are obesity, weight, diet and metabolic studies that the website's synonym expansion links to "eating disorder". 67 of those weren't in my download, because my search used exact phrases, and 20 were in my data but correctly not grouped as eating disorders. The check also found three wordings my rules missed (disordered eating, ARFID written out in full, feeding disorder of infancy). After adding them, all 67 genuine eating disorder trials on the website are captured. My count of 70 includes 3 trials the website search doesn't return.
 
+## Method checks
+
+Two checks on the published results, added in November 2026. Both use the 1 October 2026 download; the published numbers above are unchanged.
+
+**Ending the window in 2024** (`sql/08_sensitivity_end_2024.sql`). Trials that started in 2025 are still being registered and updated, so 2025 counts may be low. Measuring growth from 2010–12 to 2022–24 instead of 2023–25 leaves every conclusion in place: anxiety 5.3× (5.7× to 2025), eating disorders 3.4×, substance use 3.4×, depression 2.3×, schizophrenia 1.2× and bipolar disorder 1.3×. OCD and PTSD (2.1× and 2.0×) swap places, and no other group changes rank. Single-year comparisons also hold with 2024 as the end year: drug trials 277 → 240, behavioural 203 → 695, device 27 → 252, drug share 44% → 15%, industry share 24% → 8%. 2025 has as many trials as 2024 (1,453 each), so the late-registration effect is small so far.
+
+**Trials with Unknown status** (`sql/09_stop_rates_unknown_status.sql`). 2,107 analysed trials (14%) have Unknown status, which ClinicalTrials.gov assigns when a record has not been verified for two years past its completion date. The published stop rates leave them out and use only completed, terminated, withdrawn and suspended trials (12.8% of 9,975). Counting every Unknown trial as completed gives a lower bound of 10.5%; counting every one as stopped gives an upper bound of 28.0%. Academic sponsors hold 1,889 of the 2,107, against 89 for industry, so the industry–academic comparison depends on this choice: industry stops more often under the published rule (15.9% vs 12.3%) and the lower bound (14.9% vs 10.0%), but not under the upper bound (21.2% vs 29.0%). The headline rates stay on the published rule, and the industry–academic gap is a finding about reported outcomes: academic trials leave far more records unverified.
+
 ## Machine learning
 
 `02_machine_learning.ipynb` applies scikit-learn to the clean tables. All three parts are exploratory.
@@ -194,13 +202,13 @@ Every number above comes from the download of 1 October 2026 and stays fixed. A 
 
 - `src/pipeline/`: the download, cleaning, condition grouping and drug flags from the notebook (parts B and C) as plain Python with no third-party packages, except pyarrow for the Parquet files (from the AWS SDK for pandas Lambda layer). Rebuilt from the 1 October 2026 download, it reproduces all four tables in `data/powerbi/` value for value (`tools/check_against_published.py`).
 - `template.yaml`: an AWS SAM template. EventBridge Scheduler runs the Lambda function every Monday at 06:00 Toronto time. Each run saves the raw API pages, the four tables and a counts file to its own dated folder in S3, checks that every study the API reported was downloaded, and refuses a snapshot that lost more than 10% of trials since the last one. A failed run sends an email through CloudWatch and SNS, and a CloudWatch dashboard charts each run's trial counts, run time and errors.
-- `athena/`: the 11 queries from `sql/` rewritten for Amazon Athena. Each run also writes the four tables as Parquet to S3 (1.8 MB in all), and Glue Data Catalog tables point Athena at them. A second Glue database holds the published tables, so the same queries run on either; on the published tables all 11 match `results/` (`tools/run_athena.py --compare`). An Athena workgroup caps each query at 100 MB scanned.
+- `athena/`: 11 of the queries in `sql/` rewritten for Amazon Athena. Each run also writes the four tables as Parquet to S3 (1.8 MB in all), and Glue Data Catalog tables point Athena at them. A second Glue database holds the published tables, so the same queries run on either; on the published tables all 11 match `results/` (`tools/run_athena.py --compare`). An Athena workgroup caps each query at 100 MB scanned.
 - PostgreSQL on RDS: after each refresh, a second Lambda function (`src/pipeline/load_rds.py`) replaces the `trials`, `conditions`, `interventions` and `sites` tables, plus a `snapshot_counts` history, in one transaction. It runs inside the database's VPC, reads S3 through a gateway endpoint and signs in with an IAM token. Power BI connects as a read-only user from one home IP address.
 - Health Canada: a third Lambda function runs every Monday at 06:30 Toronto time, downloads Health Canada's Clinical Trials Database API, and keeps the mental health trials (257 of 9,757 on 1 November 2026) with the same condition rules. The tables go to S3, Athena and PostgreSQL, and the app's Canada tab shows them. Details in `docs/health-canada.md`.
 - Amazon Bedrock: `tools/classify_why_stopped.py` runs from a PC, not from the weekly job, and sends the free-text reasons trials stopped to Amazon Nova Micro, which sorts them into 11 categories next to the keyword groups from `sql/05b_why_stopped_grouped.sql`. Details in `docs/why-stopped-bedrock.md`.
 - `data/baseline/counts_2026-10-01.csv`: the published counts in the same format, so each refresh can be compared with them.
 - The app's Latest refresh tab shows the newest counts beside the published ones for trials that started 2010–2025, and lists trials starting after 2025 separately because many of those start dates are still estimates.
-- v2 condition groups (November 2026): a second search adds ADHD, autism spectrum, personality disorders and gambling or gaming, and every trial gets a suicide or self-harm flag. The first search and the published counts are unchanged; each trial carries a `scope` of `core` (the published analysis) or `extended`. Details in `docs/v2-condition-groups.md`.
+- v2 condition groups (November 2026): a second search adds ADHD, autism spectrum, personality disorders and gambling and gaming disorders, and every trial gets a suicide or self-harm flag. The first search and the published counts are unchanged; each trial carries a `scope` of `core` (the published analysis) or `extended`. Details in `docs/v2-condition-groups.md`.
 
 Setup steps for a personal AWS account are in `docs/aws-setup.md`.
 
@@ -208,13 +216,14 @@ Setup steps for a personal AWS account are in `docs/aws-setup.md`.
 - [x] Download from the ClinicalTrials.gov API (1 Oct 2026)
 - [x] Clean, group conditions, flag psychedelic and ketamine treatments
 - [x] Load into SQLite
-- [x] SQL analysis (11 queries in `sql/`, results in `results/`)
+- [x] SQL analysis (13 queries in `sql/`, results in `results/`)
 - [x] Validate against ClinicalTrials.gov website searches
 - [x] Power BI dashboard (5 pages; `.pbix` and PDF in the repo)
 - [x] Live Power BI report on the weekly PostgreSQL refresh (`Goldenitz_Mental_Health_Trials_Live.pbix`)
 - [x] Machine learning: rule checking, termination prediction, title topics (`02_machine_learning.ipynb`)
 - [x] Weekly refresh on AWS (Lambda, S3, EventBridge Scheduler)
 - [x] SQL on AWS: Parquet in S3, Glue Data Catalog, Athena (`athena/`); all 11 queries match `results/` in Athena (31 Oct 2026)
-- [ ] v2 condition groups: ADHD, autism spectrum, personality disorders, gambling or gaming, suicide or self-harm flag (code done; first counts after the next deploy and refresh)
+- [x] v2 condition groups: ADHD, autism spectrum, personality disorders, gambling and gaming disorders, suicide or self-harm flag (deployed 2 Nov 2026)
+- [x] Method checks: window ending 2024, stop rates with Unknown-status trials (`sql/08`, `sql/09`)
       
 Data: ClinicalTrials.gov, U.S. National Library of Medicine

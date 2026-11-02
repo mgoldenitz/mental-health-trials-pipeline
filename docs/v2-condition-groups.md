@@ -9,7 +9,7 @@ Four condition groups, matched by `rules.NEW_GROUPS`:
 - ADHD: "attention deficit" followed by "hyperactivity" or "disorder", "ADHD", "hyperkinetic disorder". "Attention deficits" on its own is a cognitive symptom (in schizophrenia, for example) and is left out, and so is a bare "hyperactivity", which also matches bladder and airway trials.
 - Autism spectrum: "autis", "Asperger", "pervasive developmental". "ASD" is left out because it also means atrial septal defect and acute stress disorder.
 - Personality disorders: "personality disorder", "borderline personality", "antisocial personality", "schizotypal personality", "psychopathy". "BPD" is left out because it also means bronchopulmonary dysplasia.
-- Gambling & gaming: "gambl", "gaming disorder", "internet gaming", "gaming addiction", "video game addiction", "internet addiction", "problematic internet use".
+- Gambling & gaming disorders: "gambl", "gaming disorder", "internet gaming", "gaming addiction", "video game addiction", "internet addiction", "problematic internet use".
 
 A suicide or self-harm flag (`rules.SUICIDE`, the `suicide_flag` column on `trials`): true when any of a trial's condition names, or its title, mentions suicide, self-harm, self-injury or NSSI. It is a flag, not a group, because DSM-5-TR lists suicidal behaviour and self-harm as conditions that may be a focus of clinical attention, not as mental disorders. It also marks self-injurious behaviour in autism trials. It covers every kept trial, in the published groups and the new ones; trials whose only condition is suicide or self-harm are not downloaded.
 
@@ -27,7 +27,7 @@ Checked on the 1 October 2026 download: `tools/check_against_published.py` still
 | Autism spectrum | 120 |
 | Personality disorders | 80 |
 | ADHD | 59 |
-| Gambling & gaming | 9 |
+| Gambling & gaming disorders | 9 |
 | Suicide or self-harm flag | 274 |
 
 The full counts come from the first weekly run after deploying, which runs both searches.
