@@ -94,12 +94,12 @@ pick_phase = st.sidebar.multiselect("Phase", phases, placeholder="All phases",
                                          "Not applicable covers trials without drug phases, such as therapy or device studies.")
 
 y_min, y_max = int(trials["start_year"].min()), int(trials["start_year"].max())
-years = st.sidebar.slider("Start year", y_min, y_max, (y_min, y_max))
+years = st.sidebar.slider("Year started", y_min, y_max, (y_min, y_max))
 
 psy_only = st.sidebar.toggle("Psychedelic & ketamine trials only")
 canada_only = st.sidebar.toggle("Trials in Canada")
 
-st.sidebar.caption("Data: ClinicalTrials.gov, downloaded 1 October 2026, trials starting 2010–2025, "
+st.sidebar.caption("Data: ClinicalTrials.gov, downloaded 1 October 2026, trials that began between 2010 and 2025, "
                    "processed by the Mental Health Clinical Trials Pipeline.")
 
 
@@ -156,8 +156,8 @@ with tab_overview:
     if pick_groups:
         by_year = by_year[by_year["condition_group"].isin(pick_groups)]
     fig = px.line(by_year, x="start_year", y="trials", color="condition_group", markers=True,
-                  labels={"start_year": "Start year", "trials": "Trials", "condition_group": "Condition"},
-                  title="Trial starts per year by condition")
+                  labels={"start_year": "Year started", "trials": "Trials", "condition_group": "Condition"},
+                  title="Trials started each year, by condition")
     c1.plotly_chart(fig, width="stretch")
 
     treat = (interventions[interventions["nct_id"].isin(ids)]
@@ -238,8 +238,8 @@ with tab_psy:
                     .merge(psy[["nct_id", "start_year"]], on="nct_id")
                     .groupby(["start_year", "psychedelic_class"]).size().reset_index(name="trials"))
         fig = px.bar(psy_year, x="start_year", y="trials", color="psychedelic_class",
-                     labels={"start_year": "Start year", "trials": "Trials", "psychedelic_class": ""},
-                     title="Psychedelic & ketamine trial starts per year")
+                     labels={"start_year": "Year started", "trials": "Trials", "psychedelic_class": ""},
+                     title="Psychedelic & ketamine trials started each year")
         c1.plotly_chart(fig, width="stretch")
 
         psy_cond = (conditions[conditions["nct_id"].isin(psy["nct_id"])]
@@ -435,7 +435,7 @@ with tab_latest:
         latest, manifest, history = refresh
         baseline = pd.read_csv(BASELINE)
         st.caption(f"Latest download: {manifest['snapshot_date']}. Published analysis: 1 October 2026. "
-                   "Both count trials that started 2010–2025, so a change means records were added, "
+                   "Both count trials that began between 2010 and 2025, so a change means records were added, "
                    "removed or edited in the registry. The sidebar filters do not apply to this tab.")
 
         def one(df, metric, category="All"):
@@ -456,8 +456,8 @@ with tab_latest:
         by_year["start_year"] = by_year["start_year"].astype(int)
         fig = px.line(by_year.melt(id_vars="start_year", value_vars=["Published", "Latest"]),
                       x="start_year", y="value", color="variable", markers=True,
-                      labels={"start_year": "Start year", "value": "Trials", "variable": ""},
-                      title="Trials started per year")
+                      labels={"start_year": "Year started", "value": "Trials", "variable": ""},
+                      title="Trials started each year")
         c1.plotly_chart(fig, width="stretch")
 
         c2.markdown("Trials by condition")
@@ -467,7 +467,7 @@ with tab_latest:
 
         later = latest[latest["metric"] == "started_after_window"]
         if len(later):
-            st.write("Trials starting after 2025 (outside the published analysis): " +
+            st.write("Trials with a start date after 2025 (outside the published analysis): " +
                      ", ".join(f"{r.category}: {r.value:,}" for r in later.itertuples()) +
                      ". Many of these start dates are still estimates.")
 
@@ -477,7 +477,7 @@ with tab_latest:
                   .drop_duplicates("snapshot_date", keep="last"))
         if len(totals) >= 4:
             fig = px.line(totals, x="snapshot_date", y="value", markers=True,
-                          labels={"snapshot_date": "Download date", "value": "Trials started 2010–2025"},
+                          labels={"snapshot_date": "Download date", "value": "Trials that began 2010–2025"},
                           title="Trials in the analysis window at each weekly download")
             fig.update_xaxes(tickformat="%b %d, %Y",
                              tickvals=totals["snapshot_date"] if len(totals) <= 12 else None)
