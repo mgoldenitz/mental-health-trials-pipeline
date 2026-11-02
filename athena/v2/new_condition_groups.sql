@@ -9,6 +9,6 @@ SELECT c.condition_group,
 FROM trials t
 JOIN conditions c ON t.nct_id = c.nct_id
 WHERE t.start_year BETWEEN 2010 AND 2025
-  AND c.condition_group IN ('ADHD', 'Autism spectrum', 'Personality disorders', 'Gambling & gaming')
+  AND c.condition_group IN ('ADHD', 'Autism spectrum', 'Personality disorders', 'Gambling & gaming disorders')
 GROUP BY c.condition_group
 ORDER BY trials DESC;

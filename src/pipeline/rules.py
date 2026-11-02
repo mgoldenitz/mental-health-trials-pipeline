@@ -35,7 +35,7 @@ NEW_GROUPS = {
     "Autism spectrum": r"autis|asperger|pervasive developmental",
     "Personality disorders": (r"personality disorder|borderline personality|antisocial personality"
                               r"|schizotypal personality|psychopathy\b"),
-    "Gambling & gaming": (r"gambl|gaming disorder|internet gaming|gaming addiction"
+    "Gambling & gaming disorders": (r"gambl|gaming disorder|internet gaming|gaming addiction"
                           r"|video game addiction|internet addiction|problematic internet use"),
 }
 
