@@ -16,7 +16,8 @@ SCHEMAS = {
     "trials": [("nct_id", "string"), ("title", "string"), ("start_year", "int"),
                ("overall_status", "string"), ("why_stopped", "string"), ("phase", "string"),
                ("enrollment", "bigint"), ("sponsor_name", "string"), ("sponsor_class", "string"),
-               ("sponsor_type", "string"), ("outcome", "string")],
+               ("sponsor_type", "string"), ("outcome", "string"),
+               ("scope", "string"), ("suicide_flag", "boolean")],
     "conditions": [("nct_id", "string"), ("condition", "string"), ("condition_group", "string")],
     "interventions": [("nct_id", "string"), ("intervention_type", "string"),
                       ("intervention_name", "string"), ("psychedelic_class", "string"),
@@ -24,7 +25,7 @@ SCHEMAS = {
     "sites": [("nct_id", "string"), ("country", "string")],
 }
 
-ARROW = {"string": pa.string(), "int": pa.int32(), "bigint": pa.int64()}
+ARROW = {"string": pa.string(), "int": pa.int32(), "bigint": pa.int64(), "boolean": pa.bool_()}
 
 
 def _value(v, kind):
@@ -34,6 +35,8 @@ def _value(v, kind):
         return None
     if kind == "string":
         return str(v)
+    if kind == "boolean":
+        return v is True or str(v).lower() == "true"   # CSV files hold "True" and "False"
     return int(float(v))   # pandas wrote enrollment as "120.0" in the published CSV files
 
 

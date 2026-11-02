@@ -32,6 +32,10 @@ def main():
     for name in SCHEMAS:
         with open(ROOT / "data" / "powerbi" / f"{name}.csv", encoding="utf-8", newline="") as f:
             rows = list(csv.DictReader(f))
+        if name == "trials":
+            # Every published trial is core scope. The suicide flag needs the full
+            # condition lists, which the published tables do not keep, so it stays empty.
+            rows = [dict(r, scope="core") for r in rows]
         key = f"athena/published/{name}/{name}.parquet"
         s3.put_object(Bucket=args.bucket, Key=key, Body=to_parquet(rows, name),
                       ContentType="application/vnd.apache.parquet")

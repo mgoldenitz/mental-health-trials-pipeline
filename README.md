@@ -200,6 +200,7 @@ Every number above comes from the download of 1 October 2026 and stays fixed. A 
 - Amazon Bedrock: `tools/classify_why_stopped.py` runs from a PC, not from the weekly job, and sends the free-text reasons trials stopped to Amazon Nova Micro, which sorts them into 11 categories next to the keyword groups from `sql/05b_why_stopped_grouped.sql`. Details in `docs/why-stopped-bedrock.md`.
 - `data/baseline/counts_2026-10-01.csv`: the published counts in the same format, so each refresh can be compared with them.
 - The app's Latest refresh tab shows the newest counts beside the published ones for trials that started 2010–2025, and lists trials starting after 2025 separately because many of those start dates are still estimates.
+- v2 condition groups (November 2026): a second search adds ADHD, autism spectrum, personality disorders and gambling or gaming, and every trial gets a suicide or self-harm flag. The first search and the published counts are unchanged; each trial carries a `scope` of `core` (the published analysis) or `extended`. Details in `docs/v2-condition-groups.md`.
 
 Setup steps for a personal AWS account are in `docs/aws-setup.md`.
 
@@ -214,5 +215,6 @@ Setup steps for a personal AWS account are in `docs/aws-setup.md`.
 - [x] Machine learning: rule checking, termination prediction, title topics (`02_machine_learning.ipynb`)
 - [x] Weekly refresh on AWS (Lambda, S3, EventBridge Scheduler)
 - [x] SQL on AWS: Parquet in S3, Glue Data Catalog, Athena (`athena/`); all 11 queries match `results/` in Athena (31 Oct 2026)
+- [ ] v2 condition groups: ADHD, autism spectrum, personality disorders, gambling or gaming, suicide or self-harm flag (code done; first counts after the next deploy and refresh)
       
 Data: ClinicalTrials.gov, U.S. National Library of Medicine

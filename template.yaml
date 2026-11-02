@@ -166,6 +166,8 @@ Resources:
             - {Name: sponsor_class, Type: string}
             - {Name: sponsor_type, Type: string}
             - {Name: outcome, Type: string}
+            - {Name: scope, Type: string}
+            - {Name: suicide_flag, Type: boolean}
   LatestConditionsTable:
     Type: AWS::Glue::Table
     Properties:
@@ -255,6 +257,8 @@ Resources:
             - {Name: sponsor_class, Type: string}
             - {Name: sponsor_type, Type: string}
             - {Name: outcome, Type: string}
+            - {Name: scope, Type: string}
+            - {Name: suicide_flag, Type: boolean}
   PublishedConditionsTable:
     Type: AWS::Glue::Table
     Properties:

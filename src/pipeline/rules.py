@@ -26,6 +26,23 @@ GROUPS = {
                          r"|avoidant\W*restrictive|disordered eating|feeding disorder,? (of )?infancy"),
 }
 
+# Added in v2 (November 2026). They are matched after GROUPS and do not change it, so
+# the published groups and counts stay as they were. A condition can match more than one
+# of these, and can match one of these as well as one of GROUPS ("Anxiety in Autism").
+NEW_GROUPS = {
+    # "attention deficits" alone is a cognitive symptom (in schizophrenia, for example)
+    "ADHD": r"attention[- ]?deficit\W*(and\W*)?(hyperactiv|disorder)|\badhd\b|hyperkinetic disorder",
+    "Autism spectrum": r"autis|asperger|pervasive developmental",
+    "Personality disorders": (r"personality disorder|borderline personality|antisocial personality"
+                              r"|schizotypal personality|psychopathy\b"),
+    "Gambling & gaming": (r"gambl|gaming disorder|internet gaming|gaming addiction"
+                          r"|video game addiction|internet addiction|problematic internet use"),
+}
+
+# A flag, not a group: DSM-5-TR lists suicidal behaviour and self-harm as conditions for
+# clinical attention, not as disorders. Matched on the condition names and the title.
+SUICIDE = r"suicid|self[- ]?harm|self[- ]?injur|\bnssi\b"
+
 PSYCHEDELIC = (
     # substances
     r"psilocybin|psilocin|mdma|midomafetamine|\blsd\b|lysergic"
@@ -52,6 +69,18 @@ def group_of(text):
         if re.search(pattern, t):
             return name
     return "Other"
+
+
+def new_groups(text):
+    """Every NEW_GROUPS name the condition matches (empty if none, or if EXCLUDE matches)."""
+    t = text.lower() if isinstance(text, str) else ""
+    if re.search(EXCLUDE, t):
+        return []
+    return [name for name, pattern in NEW_GROUPS.items() if re.search(pattern, t)]
+
+
+def suicide_flag(*texts):
+    return any(isinstance(t, str) and re.search(SUICIDE, t.lower()) for t in texts)
 
 
 def drug_class(name):

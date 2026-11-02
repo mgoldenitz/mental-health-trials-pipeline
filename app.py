@@ -471,6 +471,24 @@ with tab_latest:
                      ", ".join(f"{r.category}: {r.value:,}" for r in later.itertuples()) +
                      ". Many of these start dates are still estimates.")
 
+        new = latest[latest["metric"] == "v2_trials_by_new_condition"]
+        if len(new):
+            st.subheader("Condition groups added in November 2026")
+            st.caption("ADHD, autism spectrum, personality disorders and gambling or gaming come from a "
+                       "second ClinicalTrials.gov search, so the published counts above are unchanged. "
+                       "A trial can be in more than one group, and trials that also have a published "
+                       "condition count in both. Same 2010–2025 window; no published figures to compare with.")
+            flags = latest[latest["metric"] == "v2_suicide_flag_by_condition"].set_index("category")["value"]
+            table = (new.set_index("category")[["value"]].rename(columns={"value": "Trials"})
+                     .assign(**{"Suicide or self-harm flag": lambda d: flags.reindex(d.index).fillna(0).astype(int)}))
+            table.index.name = None
+            n1, n2 = st.columns([2, 1])
+            n1.dataframe(table, width="stretch")
+            n2.metric("Trials with only a new group", f"{one(latest, 'v2_trials_extended'):,}")
+            n2.metric("Trials flagged for suicide or self-harm", f"{one(latest, 'v2_trials_with_suicide_flag'):,}",
+                      help="Any trial in the window, published or new groups, whose conditions or title "
+                           "mention suicide, self-harm or self-injury.")
+
         totals = history[(history["metric"] == "trials") & (history["category"] == "All")].copy()
         totals["snapshot_date"] = pd.to_datetime(totals["snapshot_date"])
         totals = (totals.sort_values("snapshot_date")
