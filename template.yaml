@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  Weekly refresh of the mental health clinical trials pipeline. A Lambda function
+  Weekly refresh of the Mental Health Clinical Trials Pipeline. A Lambda function
   downloads trials from ClinicalTrials.gov, saves a dated snapshot to S3,
   refreshes the Parquet tables that Athena queries, loads the snapshot into
   PostgreSQL on RDS, and emails you if a run fails.
