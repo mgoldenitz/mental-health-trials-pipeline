@@ -925,7 +925,7 @@ with tab_new:
                               color_discrete_map=NEW_GROUP_COLOURS,
                               category_orders={"group": by_last_value(yearly, "start_year", "trials", "group")},
                               labels={"start_year": "Year started", "trials": "Trials", "group": ""},
-                              title="Trials started each year, by new group")
+                              title="Trials started each year, by New group")
                 c1.plotly_chart(fig, width="stretch")
 
             flags = (latest[latest["metric"] == "v2_suicide_flag_by_condition"]
@@ -935,7 +935,7 @@ with tab_new:
                 flags = flags.sort_values("trials")
                 fig = px.bar(flags, x="trials", y="group", orientation="h",
                              labels={"trials": "Trials", "group": ""},
-                             title="Trials flagged for suicide or self-harm, by condition group")
+                             title="Trials flagged for suicide or self-harm, by Condition group")
                 c2.plotly_chart(fig, width="stretch")
 
             m1, m2 = st.columns(2)
