@@ -14,6 +14,7 @@ import streamlit as st
 
 DATA = Path(__file__).parent / "data" / "powerbi"
 BASELINE = Path(__file__).parent / "data" / "baseline" / "counts_2026-10-01.csv"
+RESULTS = Path(__file__).parent / "results" / "10_results_reporting.csv"
 CTGOV = "https://clinicaltrials.gov/study/"
 
 # Readable phase names, in the order trials move through them
@@ -36,6 +37,67 @@ OUTCOME_LABELS = {
 }
 OUTCOME_ORDER = list(OUTCOME_LABELS.values())
 
+# Display names that differ from the names stored in the pipeline's tables
+RENAME = {"Schizophrenia & psychosis": "Schizophrenia & Psychosis"}
+
+
+def relabel(series):
+    """Condition group names as shown in the app (also inside comma-joined lists)."""
+    out = series
+    for old, new in RENAME.items():
+        out = out.str.replace(old, new, regex=False)
+    return out
+
+
+# One fixed, dark colour per condition group, so a group keeps its colour when others are filtered out
+GROUP_COLOURS = {
+    "Anxiety": "#0072B2",
+    "Bipolar disorder": "#B5397F",
+    "Depression": "#D55E00",
+    "Eating disorders": "#8C564B",
+    "OCD": "#555555",
+    "PTSD": "#009E73",
+    "Schizophrenia & Psychosis": "#6A3D9A",
+    "Substance use": "#A67C00",
+}
+NEW_GROUP_COLOURS = {
+    "ADHD": "#0072B2",
+    "Autism spectrum": "#D55E00",
+    "Gambling & gaming disorders": "#009E73",
+    "Personality disorders": "#6A3D9A",
+}
+
+
+def other_last(df, col):
+    """Rows sorted smallest to largest, with "Other" first so it is drawn at the bottom of a
+    horizontal bar chart instead of among the real categories."""
+    df = df.sort_values("trials")
+    return pd.concat([df[df[col] == "Other"], df[df[col] != "Other"]])
+
+
+def label_line_ends(fig, df, x, y, group, colours):
+    """Write each line's name just right of its last point, nudging labels apart so
+    lines that end close together stay readable, and drop the legend."""
+    ends = df.sort_values(x).groupby(group).tail(1).sort_values(y)
+    if ends.empty:
+        return fig
+    span = max(df[y].max() - df[y].min(), 1)
+    gap = span / 22
+    placed = []
+    for row in ends.itertuples():
+        pos = getattr(row, y)
+        if placed and pos - placed[-1] < gap:
+            pos = placed[-1] + gap
+        placed.append(pos)
+        fig.add_annotation(x=getattr(row, x), y=pos, text=getattr(row, group), showarrow=False,
+                           xanchor="left", xshift=8, font=dict(color=colours.get(getattr(row, group), "#333"), size=12))
+    first, last = int(df[x].min()), int(df[x].max())
+    step = 5 if last - first >= 8 else 1
+    fig.update_xaxes(range=[first - 0.5, last + (last - first) * 0.65 + 1],
+                     tickvals=list(range(first, last + 1, step)))
+    fig.update_layout(showlegend=False)
+    return fig
+
 st.set_page_config(page_title="Mental Health & Psychedelic Trial Tracker", layout="wide")
 
 
@@ -46,6 +108,7 @@ def load_data():
     conditions = pd.read_csv(DATA / "conditions.csv")
     interventions = pd.read_csv(DATA / "interventions.csv")
     sites = pd.read_csv(DATA / "sites.csv")
+    conditions["condition_group"] = relabel(conditions["condition_group"])
 
     # One row per trial: condition groups, treatment types, psychedelic class, countries
     def joined(df, col):
@@ -96,7 +159,7 @@ pick_phase = st.sidebar.multiselect("Phase", phases, placeholder="All phases",
 y_min, y_max = int(trials["start_year"].min()), int(trials["start_year"].max())
 years = st.sidebar.slider("Year started", y_min, y_max, (y_min, y_max))
 
-psy_only = st.sidebar.toggle("Psychedelic & ketamine trials only")
+psy_only = st.sidebar.toggle("Psychedelic & Ketamine trials only")
 canada_only = st.sidebar.toggle("Trials in Canada")
 
 st.sidebar.caption("Data: ClinicalTrials.gov, downloaded 1 October 2026, trials that began between 2010 and 2025, "
@@ -135,14 +198,26 @@ if view.empty:
     st.warning("No trials match these filters. Try removing one.")
     st.stop()
 
-k1, k2, k3, k4 = st.columns(4)
-k1.metric("Trials", f"{len(view):,}")
-k2.metric("Recruiting now", f"{(view['overall_status'] == 'RECRUITING').sum():,}")
-k3.metric("Psychedelic & ketamine", f"{view['psychedelic_class'].notna().sum():,}")
-k4.metric("In Canada", f"{view['in_canada'].sum():,}")
 
-tab_overview, tab_search, tab_psy, tab_canada, tab_latest = st.tabs(
-    ["Overview", "Find trials", "Psychedelic & ketamine", "Canada", "Latest refresh"])
+
+def share(part, whole, text):
+    return f"{part / whole:.1%} {text}" if whole else None
+
+
+n_view = len(view)
+k1, k2, k3, k4 = st.columns(4)
+k1.metric("Trials", f"{n_view:,}",
+          share(n_view, len(trials), f"of all {len(trials):,}") if n_view < len(trials) else None,
+          delta_color="off", delta_arrow="off")
+for col, label, count in [
+        (k2, "Recruiting now", int((view["overall_status"] == "RECRUITING").sum())),
+        (k3, "Psychedelic & Ketamine", int(view["psychedelic_class"].notna().sum())),
+        (k4, "In Canada", int(view["in_canada"].sum()))]:
+    col.metric(label, f"{count:,}", share(count, n_view, "of trials"), delta_color="off", delta_arrow="off")
+
+tab_overview, tab_search, tab_psy, tab_canada, tab_new, tab_latest = st.tabs(
+    ["Overview", "Find trials", "Psychedelic & ketamine", "Canada", "New groups (updated weekly)",
+     "Latest refresh"])
 
 
 # ---------------------------------------------------------------- overview
@@ -156,28 +231,74 @@ with tab_overview:
     if pick_groups:
         by_year = by_year[by_year["condition_group"].isin(pick_groups)]
     fig = px.line(by_year, x="start_year", y="trials", color="condition_group", markers=True,
+                  color_discrete_map=GROUP_COLOURS,
                   labels={"start_year": "Year started", "trials": "Trials", "condition_group": "Condition"},
-                  title="Trials started each year, by condition")
-    c1.plotly_chart(fig, width="stretch")
+                  title="Trials started each year, by Condition")
+    c1.plotly_chart(label_line_ends(fig, by_year, "start_year", "trials", "condition_group", GROUP_COLOURS),
+                    width="stretch")
 
-    treat = (interventions[interventions["nct_id"].isin(ids)]
-             .drop_duplicates(["nct_id", "treatment_type"])
-             .groupby("treatment_type").size().sort_values().reset_index(name="trials"))
+    treat = other_last(interventions[interventions["nct_id"].isin(ids)]
+                       .drop_duplicates(["nct_id", "treatment_type"])
+                       .groupby("treatment_type").size().reset_index(name="trials"), "treatment_type")
     fig = px.bar(treat, x="trials", y="treatment_type", orientation="h",
                  labels={"trials": "Trials", "treatment_type": ""},
-                 title="Trials by treatment type (a trial can test more than one)")
+                 title="Trials by Treatment type (a trial can test more than one)")
     c2.plotly_chart(fig, width="stretch")
 
     c3, c4 = st.columns(2)
-    spons = view.groupby("sponsor_type").size().sort_values().reset_index(name="trials")
+    spons = other_last(view.groupby("sponsor_type").size().reset_index(name="trials"), "sponsor_type")
     fig = px.bar(spons, x="trials", y="sponsor_type", orientation="h",
-                 labels={"trials": "Trials", "sponsor_type": ""}, title="Trials by sponsor type")
+                 labels={"trials": "Trials", "sponsor_type": ""}, title="Trials by Sponsor type")
     c3.plotly_chart(fig, width="stretch")
 
     outc = view.groupby("outcome").size().reset_index(name="trials")
-    fig = px.bar(outc, x="outcome", y="trials", labels={"trials": "Trials", "outcome": ""},
-                 category_orders={"outcome": OUTCOME_ORDER}, title="Trial outcomes")
+    fig = px.bar(outc, x="trials", y="outcome", orientation="h", labels={"trials": "Trials", "outcome": ""},
+                 category_orders={"outcome": OUTCOME_ORDER}, title="Trial Outcomes")
     c4.plotly_chart(fig, width="stretch")
+
+    st.subheader("Do completed trials post their results?")
+    st.caption("Completed trials in the published analysis whose primary completion date was on or before "
+               "30 September 2025 (8,230 trials), so each had at least a year to post results on "
+               "ClinicalTrials.gov before the download. US law requires results only for some trials, "
+               "so these are reporting rates, not compliance rates. Groups with fewer than 30 trials are "
+               "left out. The sidebar filters do not apply here.")
+    rr = pd.read_csv(RESULTS)
+    rr = rr[(rr["sponsor_type"] != "All") & (rr["completed_trials"] >= 30)]
+    allrow = pd.read_csv(RESULTS).query("sponsor_type == 'All'").set_index("us_site")
+    r1, r2, r3 = st.columns(3)
+    r1.metric("Posted results", f"{allrow.loc['all', 'pct_with_results']:.0f}%",
+              f"{int(allrow.loc['all', 'with_results']):,} of {int(allrow.loc['all', 'completed_trials']):,} trials",
+              delta_color="off", delta_arrow="off")
+    r2.metric("With a US site", f"{allrow.loc['yes', 'pct_with_results']:.0f}%",
+              f"{int(allrow.loc['yes', 'completed_trials']):,} trials", delta_color="off", delta_arrow="off")
+    r3.metric("Without a US site", f"{allrow.loc['no', 'pct_with_results']:.0f}%",
+              f"{int(allrow.loc['no', 'completed_trials']):,} trials", delta_color="off", delta_arrow="off")
+
+    c5, c6 = st.columns(2)
+    by_sponsor = rr[rr["us_site"] == "all"].sort_values("pct_with_results")
+    fig = px.bar(by_sponsor, x="pct_with_results", y="sponsor_type", orientation="h",
+                 text=by_sponsor["pct_with_results"].round().astype(int).astype(str) + "%",
+                 hover_data={"completed_trials": ":,", "with_results": ":,"},
+                 labels={"pct_with_results": "Posted results (%)", "sponsor_type": "",
+                         "completed_trials": "Completed trials", "with_results": "Posted results"},
+                 title="Share of completed trials that posted results, by sponsor type")
+    fig.update_xaxes(range=[0, 100])
+    c5.plotly_chart(fig, width="stretch")
+
+    by_site = rr[rr["us_site"] != "all"].copy()
+    by_site["US site"] = by_site["us_site"].map({"yes": "With a US site", "no": "Without a US site"})
+    order = by_sponsor["sponsor_type"].tolist()
+    fig = px.bar(by_site, x="pct_with_results", y="sponsor_type", color="US site", orientation="h",
+                 barmode="group", category_orders={"sponsor_type": order[::-1],
+                                                   "US site": ["With a US site", "Without a US site"]},
+                 color_discrete_map={"With a US site": "#0072B2", "Without a US site": "#9DB9D3"},
+                 hover_data={"completed_trials": ":,", "with_results": ":,"},
+                 labels={"pct_with_results": "Posted results (%)", "sponsor_type": "",
+                         "completed_trials": "Completed trials", "with_results": "Posted results"},
+                 title="With and without a US site")
+    fig.update_xaxes(range=[0, 100])
+    fig.update_layout(legend_title_text="")
+    c6.plotly_chart(fig, width="stretch")
 
 
 # ---------------------------------------------------------------- search
@@ -239,7 +360,7 @@ with tab_psy:
                     .groupby(["start_year", "psychedelic_class"]).size().reset_index(name="trials"))
         fig = px.bar(psy_year, x="start_year", y="trials", color="psychedelic_class",
                      labels={"start_year": "Year started", "trials": "Trials", "psychedelic_class": ""},
-                     title="Psychedelic & ketamine trials started each year")
+                     title="Psychedelic & Ketamine trials started each year")
         c1.plotly_chart(fig, width="stretch")
 
         psy_cond = (conditions[conditions["nct_id"].isin(psy["nct_id"])]
@@ -252,7 +373,7 @@ with tab_psy:
 
         top = psy.groupby("sponsor_name").size().nlargest(10).sort_values().reset_index(name="trials")
         fig = px.bar(top, x="trials", y="sponsor_name", orientation="h",
-                     labels={"trials": "Trials", "sponsor_name": ""}, title="Top 10 sponsors")
+                     labels={"trials": "Trials", "sponsor_name": ""}, title="Top 10 Sponsors")
         st.plotly_chart(fig, width="stretch")
 
 
@@ -268,14 +389,14 @@ with tab_canada:
                    .groupby("condition_group").size().sort_values().reset_index(name="trials"))
         fig = px.bar(ca_cond, x="trials", y="condition_group", orientation="h",
                      labels={"trials": "Trials", "condition_group": ""},
-                     title="Trials in Canada, by condition")
+                     title="Trials in Canada, by Condition")
         c1.plotly_chart(fig, width="stretch")
 
         countries = (sites[sites["nct_id"].isin(ids)].drop_duplicates()
                      .groupby("country").size().nlargest(10).sort_values().reset_index(name="trials"))
         fig = px.bar(countries, x="trials", y="country", orientation="h",
                      labels={"trials": "Trials", "country": ""},
-                     title="Top 10 countries")
+                     title="Top 10 Countries")
         c2.plotly_chart(fig, width="stretch")
 
         st.subheader("Recruiting in Canada now")
@@ -368,7 +489,9 @@ with tab_canada:
             "falls in one of the eight mental health groups. The sidebar filters do not apply here.")
 
         def hc_metric(metric):
-            return hc_counts[hc_counts["metric"] == metric][["category", "value"]]
+            out = hc_counts[hc_counts["metric"] == metric][["category", "value"]].copy()
+            out["category"] = relabel(out["category"].astype(str))
+            return out
 
         def hc_one(metric, category="All"):
             row = hc_counts[(hc_counts["metric"] == metric) & (hc_counts["category"] == category)]
@@ -380,7 +503,7 @@ with tab_canada:
         k1.metric("Mental health trials", f"{hc_one('hc_trials'):,}")
         k2.metric("All approved trials", f"{hc_one('hc_all_trials'):,}")
         k3.metric("Ongoing", f"{int(status.get('Ongoing', 0)):,}")
-        k4.metric("Psychedelic & ketamine", f"{int(drug['value'].sum()):,}")
+        k4.metric("Psychedelic & Ketamine", f"{int(drug['value'].sum()):,}")
 
         c1, c2 = st.columns(2)
         by_cond = hc_metric("hc_trials_by_condition").sort_values("value")
@@ -398,7 +521,8 @@ with tab_canada:
         if hc_trials is not None:
             st.markdown("Ongoing Health Canada trials")
             ongoing = (hc_trials[hc_trials["status"] == "Ongoing"]
-                       .sort_values("approved_date", ascending=False))
+                       .sort_values("approved_date", ascending=False)
+                       .assign(condition_group=lambda d: relabel(d["condition_group"].fillna(""))))
             st.dataframe(
                 ongoing[["control_number", "title", "condition_group", "approved_date",
                          "sponsor_name", "psychedelic_class"]],
@@ -413,8 +537,9 @@ with tab_canada:
 
 def compare(baseline, latest, metric):
     """Published and latest values of one metric side by side."""
-    b = baseline[baseline["metric"] == metric].set_index("category")["value"]
-    l = latest[latest["metric"] == metric].set_index("category")["value"]
+    b = baseline[baseline["metric"] == metric].assign(category=lambda d: relabel(d["category"]))
+    l = latest[latest["metric"] == metric].assign(category=lambda d: relabel(d["category"]))
+    b, l = b.set_index("category")["value"], l.set_index("category")["value"]
     out = pd.DataFrame({"Published": b, "Latest": l}).fillna(0).astype(int)
     out["Change"] = out["Latest"] - out["Published"]
     out.index.name = None
@@ -446,7 +571,7 @@ with tab_latest:
         for col, label, metric, category in [
                 (k1, "Trials", "trials", "All"),
                 (k2, "Psychedelic / MDMA", "trials_by_drug_class", "Psychedelic / MDMA"),
-                (k3, "Ketamine / esketamine", "trials_by_drug_class", "Ketamine / esketamine"),
+                (k3, "Ketamine / Esketamine", "trials_by_drug_class", "Ketamine / esketamine"),
                 (k4, "With a Canadian site", "trials_with_canadian_site", "All")]:
             now, then = one(latest, metric, category), one(baseline, metric, category)
             col.metric(label, f"{now:,}", f"{now - then:+,} since publication", delta_color="off")
@@ -471,23 +596,7 @@ with tab_latest:
                      ", ".join(f"{r.category}: {r.value:,}" for r in later.itertuples()) +
                      ". Many of these start dates are still estimates.")
 
-        new = latest[latest["metric"] == "v2_trials_by_new_condition"]
-        if len(new):
-            st.subheader("Condition groups added in November 2026")
-            st.caption("ADHD, autism spectrum, personality disorders and gambling or gaming come from a "
-                       "second ClinicalTrials.gov search, so the published counts above are unchanged. "
-                       "A trial can be in more than one group, and trials that also have a published "
-                       "condition count in both. Same 2010–2025 window; no published figures to compare with.")
-            flags = latest[latest["metric"] == "v2_suicide_flag_by_condition"].set_index("category")["value"]
-            table = (new.set_index("category")[["value"]].rename(columns={"value": "Trials"})
-                     .assign(**{"Suicide or self-harm flag": lambda d: flags.reindex(d.index).fillna(0).astype(int)}))
-            table.index.name = None
-            n1, n2 = st.columns([2, 1])
-            n1.dataframe(table, width="stretch")
-            n2.metric("Trials with only a new group", f"{one(latest, 'v2_trials_extended'):,}")
-            n2.metric("Trials flagged for suicide or self-harm", f"{one(latest, 'v2_trials_with_suicide_flag'):,}",
-                      help="Any trial in the window, published or new groups, whose conditions or title "
-                           "mention suicide, self-harm or self-injury.")
+        st.caption("The four condition groups added in November 2026 are on the New groups tab.")
 
         totals = history[(history["metric"] == "trials") & (history["category"] == "All")].copy()
         totals["snapshot_date"] = pd.to_datetime(totals["snapshot_date"])
@@ -513,3 +622,67 @@ with tab_latest:
                 text += (f", no change from {since}" if diff == 0
                          else f", {diff:+,} from {since}")
             st.write(text + ". A weekly chart appears here once there are four downloads.")
+
+
+with tab_new:
+    cfg = aws_secrets()
+    try:
+        refresh = load_refresh(cfg) if cfg else None
+    except Exception as e:
+        refresh = False
+        st.error(f"Could not read the latest refresh from S3: {e}")
+    if refresh is None:
+        st.info("This tab shows ADHD, autism spectrum, personality disorder and gambling or gaming "
+                "trials from the weekly download. The scheduled refresh is not connected yet.")
+    elif refresh:
+        latest, manifest, _ = refresh
+        new = latest[latest["metric"] == "v2_trials_by_new_condition"]
+        if new.empty:
+            st.info("The latest weekly download does not include the new condition groups yet.")
+        else:
+            st.markdown(f"**Updated weekly.** Latest download: {manifest['snapshot_date']}.")
+            st.caption("These four groups come from a second ClinicalTrials.gov search added in November 2026. "
+                       "They are not part of the published analysis of 1 October 2026, so the counts on the "
+                       "other tabs do not include them, and these numbers change every Monday. Trials that "
+                       "began between 2010 and 2025. A trial can be in more than one group, including a "
+                       "published one. The sidebar filters do not apply here.")
+
+            def one_new(metric, category="All"):
+                row = latest[(latest["metric"] == metric) & (latest["category"] == category)]
+                return int(row["value"].iloc[0]) if len(row) else 0
+
+            counts_new = new.set_index("category")["value"].astype(int)
+            cols = st.columns(len(counts_new))
+            for col, (grp, n) in zip(cols, counts_new.sort_values(ascending=False).items()):
+                col.metric(grp, f"{n:,}")
+
+            c1, c2 = st.columns(2)
+            yearly = latest[latest["metric"] == "v2_trials_by_new_condition_year"].copy()
+            if len(yearly):
+                yearly[["group", "start_year"]] = yearly["category"].str.split("|", n=1, expand=True)
+                yearly["start_year"] = pd.to_numeric(yearly["start_year"], errors="coerce")
+                yearly = yearly.dropna(subset=["start_year"]).rename(columns={"value": "trials"})
+                fig = px.line(yearly, x="start_year", y="trials", color="group", markers=True,
+                              color_discrete_map=NEW_GROUP_COLOURS,
+                              labels={"start_year": "Year started", "trials": "Trials", "group": ""},
+                              title="Trials started each year, by new group")
+                c1.plotly_chart(label_line_ends(fig, yearly, "start_year", "trials", "group",
+                                                NEW_GROUP_COLOURS), width="stretch")
+
+            flags = (latest[latest["metric"] == "v2_suicide_flag_by_condition"]
+                     .rename(columns={"category": "group", "value": "trials"})
+                     .assign(group=lambda d: relabel(d["group"])))
+            if len(flags):
+                flags = flags.sort_values("trials")
+                fig = px.bar(flags, x="trials", y="group", orientation="h",
+                             labels={"trials": "Trials", "group": ""},
+                             title="Trials flagged for suicide or self-harm, by condition group")
+                c2.plotly_chart(fig, width="stretch")
+
+            m1, m2 = st.columns(2)
+            m1.metric("Trials not in the published analysis", f"{one_new('v2_trials_extended'):,}",
+                      help="Trials in the 2010–2025 window that are not among the 14,724 published trials, "
+                           "most of them found by the second search.")
+            m2.metric("Trials flagged for suicide or self-harm", f"{one_new('v2_trials_with_suicide_flag'):,}",
+                      help="Any trial in the window, published or new groups, whose conditions or title "
+                           "mention suicide, self-harm or self-injury.")
