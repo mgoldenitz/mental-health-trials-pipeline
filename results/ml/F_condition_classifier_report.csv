@@ -6,7 +6,7 @@ Eating disorders,0.8,0.971,0.877,70.0
 OCD,0.955,0.875,0.913,24.0
 Other,0.996,0.987,0.992,6213.0
 PTSD,0.899,0.967,0.932,92.0
-Schizophrenia & psychosis,0.973,0.991,0.982,221.0
+Schizophrenia & Psychosis,0.973,0.991,0.982,221.0
 Substance use,0.861,0.975,0.914,197.0
 accuracy,0.984,0.984,0.984,0.984
 macro avg,0.932,0.963,0.946,7531.0

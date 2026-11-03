@@ -37,9 +37,9 @@ Time Restricted Eating,2,Other,Eating disorders,0.846
 Cannabis-Related Disorder,2,Other,Substance use,0.817
 Manic Depression,2,Bipolar disorder,Depression,0.808
 Elder Abuse,2,Other,Substance use,0.778
-Psychosomatic Disorder,2,Other,Schizophrenia & psychosis,0.751
+Psychosomatic Disorder,2,Other,Schizophrenia & Psychosis,0.751
 Emotional Eating,2,Other,Eating disorders,0.75
-Psychosomatic Disorders,2,Other,Schizophrenia & psychosis,0.638
+Psychosomatic Disorders,2,Other,Schizophrenia & Psychosis,0.638
 Alcohol Problem,2,Other,Substance use,0.63
 Central Nervous System Depressants,2,Depression,Other,0.581
 Opioid Induced Respiratory Depression,2,Other,Depression,0.526
@@ -68,13 +68,13 @@ Stimulant Abuse,1,Other,Substance use,0.792
 Depression Levels Among Individuals With Substance Addiction,1,Depression,Substance use,0.788
 Tobacco Abuse,1,Other,Substance use,0.785
 Post Operative Anxiety,1,Other,Anxiety,0.773
-Anxiety-comorbidity to Schizophrenia,1,Anxiety,Schizophrenia & psychosis,0.739
+Anxiety-comorbidity to Schizophrenia,1,Anxiety,Schizophrenia & Psychosis,0.739
 Loss of Control Eating,1,Other,Eating disorders,0.733
-"Social Cognition of Schizophrenia, Bipolas or Depressed Patients",1,Depression,Schizophrenia & psychosis,0.733
+"Social Cognition of Schizophrenia, Bipolas or Depressed Patients",1,Depression,Schizophrenia & Psychosis,0.733
 Preoperative Anxiety (Ameliyat Öncesi Anksiyete),1,Other,Anxiety,0.727
 "Behavior, Eating",1,Other,Eating disorders,0.726
 Caffeine Abuse,1,Other,Substance use,0.72
-"Sodium-glucose Transport Protein Two Inhibitor (SGLT2),Metabolic Deficits Caused by Antipsychotics",1,Schizophrenia & psychosis,Other,0.72
+"Sodium-glucose Transport Protein Two Inhibitor (SGLT2),Metabolic Deficits Caused by Antipsychotics",1,Schizophrenia & Psychosis,Other,0.72
 Music on Postoperative Anxiety,1,Other,Anxiety,0.719
 Eating Behavior Disorders,1,Other,Eating disorders,0.71
 Anxiety in Those Patients With Anorexia Nervosa,1,Anxiety,Eating disorders,0.702
@@ -83,7 +83,7 @@ Anhedonia in Healthy Volunteers,1,Depression,Other,0.697
 Deprescribing,1,Other,Depression,0.686
 Withdrawal,1,Other,Substance use,0.686
 Hispanic Americans,1,Anxiety,Other,0.669
-Foetal Differences Between Healthy and Schizophernic Parents,1,Schizophrenia & psychosis,Other,0.667
+Foetal Differences Between Healthy and Schizophernic Parents,1,Schizophrenia & Psychosis,Other,0.667
 Secondary Traumatic Stress,1,Other,PTSD,0.658
 "Diabetes, Depression, Cardiovascular Disease,Hypercholesterolemia, Osteoporosis",1,Depression,Other,0.649
 Tricyclic Antidepressant Poisoning,1,Depression,Other,0.634
@@ -103,9 +103,9 @@ Abuse Physical,1,Other,Substance use,0.564
 Mobility and Independence,1,Substance use,Other,0.546
 the Use of Antidepressants in Patients With Bipolar Depression,1,Bipolar disorder,Depression,0.543
 Traumatic Loss,1,Other,PTSD,0.542
-Psychoterapy,1,Other,Schizophrenia & psychosis,0.541
+Psychoterapy,1,Other,Schizophrenia & Psychosis,0.541
 PTSD and Substance Use Disorder,1,PTSD,Substance use,0.537
-"Manic Episode, Severe With Psychotic Symptoms",1,Bipolar disorder,Schizophrenia & psychosis,0.532
+"Manic Episode, Severe With Psychotic Symptoms",1,Bipolar disorder,Schizophrenia & Psychosis,0.532
 Traumatic Memory,1,Other,PTSD,0.528
 Pharmacogenetic Testing to Determine Pharmacological Treatment in PTSD,1,PTSD,Other,0.512
 Alcohol Aftereffects,1,Other,Substance use,0.511

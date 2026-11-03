@@ -5,7 +5,7 @@ start_year,condition_group,trials
 2010,Eating disorders,17
 2010,OCD,11
 2010,PTSD,71
-2010,Schizophrenia & psychosis,127
+2010,Schizophrenia & Psychosis,127
 2010,Substance use,25
 2011,Anxiety,85
 2011,Bipolar disorder,46
@@ -13,7 +13,7 @@ start_year,condition_group,trials
 2011,Eating disorders,15
 2011,OCD,20
 2011,PTSD,62
-2011,Schizophrenia & psychosis,136
+2011,Schizophrenia & Psychosis,136
 2011,Substance use,27
 2012,Anxiety,102
 2012,Bipolar disorder,43
@@ -21,7 +21,7 @@ start_year,condition_group,trials
 2012,Eating disorders,24
 2012,OCD,20
 2012,PTSD,86
-2012,Schizophrenia & psychosis,136
+2012,Schizophrenia & Psychosis,136
 2012,Substance use,32
 2013,Anxiety,99
 2013,Bipolar disorder,50
@@ -29,7 +29,7 @@ start_year,condition_group,trials
 2013,Eating disorders,20
 2013,OCD,19
 2013,PTSD,74
-2013,Schizophrenia & psychosis,128
+2013,Schizophrenia & Psychosis,128
 2013,Substance use,36
 2014,Anxiety,141
 2014,Bipolar disorder,61
@@ -37,7 +37,7 @@ start_year,condition_group,trials
 2014,Eating disorders,24
 2014,OCD,29
 2014,PTSD,69
-2014,Schizophrenia & psychosis,155
+2014,Schizophrenia & Psychosis,155
 2014,Substance use,30
 2015,Anxiety,163
 2015,Bipolar disorder,43
@@ -45,7 +45,7 @@ start_year,condition_group,trials
 2015,Eating disorders,36
 2015,OCD,23
 2015,PTSD,78
-2015,Schizophrenia & psychosis,125
+2015,Schizophrenia & Psychosis,125
 2015,Substance use,41
 2016,Anxiety,168
 2016,Bipolar disorder,42
@@ -53,7 +53,7 @@ start_year,condition_group,trials
 2016,Eating disorders,38
 2016,OCD,25
 2016,PTSD,96
-2016,Schizophrenia & psychosis,135
+2016,Schizophrenia & Psychosis,135
 2016,Substance use,38
 2017,Anxiety,200
 2017,Bipolar disorder,53
@@ -61,7 +61,7 @@ start_year,condition_group,trials
 2017,Eating disorders,43
 2017,OCD,23
 2017,PTSD,89
-2017,Schizophrenia & psychosis,127
+2017,Schizophrenia & Psychosis,127
 2017,Substance use,65
 2018,Anxiety,239
 2018,Bipolar disorder,49
@@ -69,7 +69,7 @@ start_year,condition_group,trials
 2018,Eating disorders,45
 2018,OCD,21
 2018,PTSD,85
-2018,Schizophrenia & psychosis,134
+2018,Schizophrenia & Psychosis,134
 2018,Substance use,58
 2019,Anxiety,258
 2019,Bipolar disorder,49
@@ -77,7 +77,7 @@ start_year,condition_group,trials
 2019,Eating disorders,47
 2019,OCD,31
 2019,PTSD,121
-2019,Schizophrenia & psychosis,158
+2019,Schizophrenia & Psychosis,158
 2019,Substance use,79
 2020,Anxiety,263
 2020,Bipolar disorder,38
@@ -85,7 +85,7 @@ start_year,condition_group,trials
 2020,Eating disorders,43
 2020,OCD,21
 2020,PTSD,118
-2020,Schizophrenia & psychosis,121
+2020,Schizophrenia & Psychosis,121
 2020,Substance use,66
 2021,Anxiety,415
 2021,Bipolar disorder,50
@@ -93,7 +93,7 @@ start_year,condition_group,trials
 2021,Eating disorders,62
 2021,OCD,33
 2021,PTSD,142
-2021,Schizophrenia & psychosis,141
+2021,Schizophrenia & Psychosis,141
 2021,Substance use,85
 2022,Anxiety,392
 2022,Bipolar disorder,67
@@ -101,7 +101,7 @@ start_year,condition_group,trials
 2022,Eating disorders,52
 2022,OCD,39
 2022,PTSD,143
-2022,Schizophrenia & psychosis,156
+2022,Schizophrenia & Psychosis,156
 2022,Substance use,104
 2023,Anxiety,477
 2023,Bipolar disorder,53
@@ -109,7 +109,7 @@ start_year,condition_group,trials
 2023,Eating disorders,70
 2023,OCD,27
 2023,PTSD,134
-2023,Schizophrenia & psychosis,165
+2023,Schizophrenia & Psychosis,165
 2023,Substance use,92
 2024,Anxiety,540
 2024,Bipolar disorder,66
@@ -117,7 +117,7 @@ start_year,condition_group,trials
 2024,Eating disorders,70
 2024,OCD,42
 2024,PTSD,156
-2024,Schizophrenia & psychosis,150
+2024,Schizophrenia & Psychosis,150
 2024,Substance use,89
 2025,Anxiety,518
 2025,Bipolar disorder,59
@@ -125,5 +125,5 @@ start_year,condition_group,trials
 2025,Eating disorders,61
 2025,OCD,36
 2025,PTSD,159
-2025,Schizophrenia & psychosis,149
+2025,Schizophrenia & Psychosis,149
 2025,Substance use,115
