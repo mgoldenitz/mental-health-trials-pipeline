@@ -479,7 +479,7 @@ with tab_overview:
                  hover_data={"completed_trials": ":,", "with_results": ":,"},
                  labels={"pct_with_results": "Posted results (%)", "sponsor_type": "",
                          "completed_trials": "Completed trials", "with_results": "Posted results"},
-                 title="Share of completed trials that posted results, by sponsor type")
+                 title="Share of completed trials that posted results, by Sponsor type")
     fig.update_xaxes(range=[0, 100])
     c5.plotly_chart(fig, width="stretch")
 
@@ -588,6 +588,8 @@ with tab_psy:
                     .drop_duplicates(["nct_id", "psychedelic_class"])
                     .merge(psy[["nct_id", "start_year"]], on="nct_id")
                     .groupby(["start_year", "psychedelic_class"]).size().reset_index(name="trials"))
+        psy_year["psychedelic_class"] = psy_year["psychedelic_class"].replace(
+            {"Ketamine / esketamine": "Ketamine / Esketamine"})
         fig = px.bar(psy_year, x="start_year", y="trials", color="psychedelic_class",
                      labels={"start_year": "Year started", "trials": "Trials", "psychedelic_class": ""},
                      title="Psychedelic & Ketamine trials started each year")
