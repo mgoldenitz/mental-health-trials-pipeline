@@ -1,3 +1,10 @@
+<p align="center"><img src="images/branding/evidence-constellation-mark.png" alt="Evidence Constellation project mark" width="150"></p>
+
+<p align="center"><strong>From registry data to evidence</strong></p>
+<p align="center">A concept storyboard of the mental-health clinical-trial research pipeline and evidence discovery.</p>
+
+<p align="center"><img src="images/branding/trial-pipeline-storyboard.png" alt="Storyboard of the clinical trials research pipeline and evidence discovery" width="900"></p>
+
 # Mental Health Clinical Trials Pipeline
 
    **Live app:** [mh-trials-tracker.streamlit.app](https://mh-trials-tracker.streamlit.app), where you can search and filter the trials interactively.
