@@ -824,9 +824,8 @@ with tab_latest:
     elif refresh:
         latest, manifest, history = refresh
         baseline = pd.read_csv(BASELINE)
-        st.caption(f"Latest download: {manifest['snapshot_date']}. Published analysis: 1 October 2026. "
-                   "Both count trials that began between 2010 and 2025, so a change means records were added, "
-                   "removed or edited in the registry. The sidebar filters do not apply to this tab.")
+        st.caption(f"Latest download: {manifest['snapshot_date']} · Published baseline: 1 October 2026 · "
+                   "Trials started 2010–2025 · Sidebar filters do not apply")
 
         def one(df, metric, category="All"):
             row = df[(df["metric"] == metric) & (df["category"] == category)]
@@ -837,9 +836,13 @@ with tab_latest:
                 (k1, "Trials", "trials", "All"),
                 (k2, "Psychedelic / MDMA", "trials_by_drug_class", "Psychedelic / MDMA"),
                 (k3, "Ketamine / Esketamine", "trials_by_drug_class", "Ketamine / esketamine"),
-                (k4, "With a Canadian site", "trials_with_canadian_site", "All")]:
+                (k4, "Canadian site", "trials_with_canadian_site", "All")]:
             now, then = one(latest, metric, category), one(baseline, metric, category)
-            col.metric(label, f"{now:,}", f"{now - then:+,} since publication", delta_color="off")
+            delta = now - then
+            with col.container(border=True):
+                col.metric(label, f"{now:,}",
+                           f"{delta:+,} since publication" if delta else None,
+                           delta_color="off")
 
         c1, c2 = st.columns(2)
         by_year = compare(baseline, latest, "trials_by_year").reset_index(names="start_year")
@@ -856,13 +859,6 @@ with tab_latest:
         c2.dataframe(compare(baseline, latest, "trials_by_outcome"), width="stretch")
 
         later = latest[latest["metric"] == "started_after_window"]
-        if len(later):
-            st.write("Trials with a start date after 2025 (outside the published analysis): " +
-                     ", ".join(f"{r.category}: {r.value:,}" for r in later.itertuples()) +
-                     ". Many of these start dates are still estimates.")
-
-        st.caption("The four condition groups added in November 2026 are on the New groups tab.")
-
         totals = history[(history["metric"] == "trials") & (history["category"] == "All")].copy()
         totals["snapshot_date"] = pd.to_datetime(totals["snapshot_date"])
         totals = (totals.sort_values("snapshot_date")
@@ -886,7 +882,16 @@ with tab_latest:
                 since = f"{prev.snapshot_date:%b} {prev.snapshot_date.day}"
                 text += (f", no change from {since}" if diff == 0
                          else f", {diff:+,} from {since}")
-            st.write(text + ". A weekly chart appears here once there are four downloads.")
+        with st.expander("Refresh notes"):
+            if len(later):
+                later_counts = ", ".join(
+                    f"{r.category}: {r.value:,}" for r in later.itertuples())
+                st.caption(
+                    f"{later_counts} trials list a start after 2025. Many dates are estimates; "
+                    "these trials are outside the published analysis.")
+            st.caption("Four newer condition groups are shown on the New groups tab.")
+            if len(totals) and len(totals) < 4:
+                st.caption(f"{text}. The weekly trend chart appears after four downloads.")
 
 
 with tab_new:
