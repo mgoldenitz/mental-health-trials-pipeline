@@ -65,7 +65,7 @@ Replace FUNCTION_NAME with the `FunctionName` output. The log shows one line per
 
 ## 8. Connect the Streamlit app
 
-1. In the IAM console, open the user named in `AppReaderUser`, choose Security credentials, and create an access key (use case: application running outside AWS). This user can only read `latest/` and `history/` in the bucket.
+1. In the IAM console, open the user named in `AppReaderUser`, choose Security credentials, and create an access key (use case: application running outside AWS). This user can read the weekly summaries and the four Parquet tables under `athena/latest/`, plus the Health Canada files used by the app.
 2. In Streamlit Community Cloud, open the app's Settings, then Secrets, and paste:
 
 ```

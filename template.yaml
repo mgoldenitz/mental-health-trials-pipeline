@@ -581,12 +581,14 @@ Resources:
           ]
         }
 
-  # Read-only user for the Streamlit app. Create its access key in the IAM console.
+  # Read-only user for the Streamlit app. Find trials reads the weekly Parquet objects directly
+  # from S3; summary views continue to use the published files or existing weekly summaries.
+  # Create its access key in the IAM console.
   AppReader:
     Type: AWS::IAM::User
     Properties:
       Policies:
-        - PolicyName: read-latest-counts
+        - PolicyName: read-weekly-app-data
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
@@ -597,6 +599,10 @@ Resources:
                   - !Sub ${DataBucket.Arn}/history/*
                   - !Sub ${DataBucket.Arn}/health-canada/latest/*
                   - !Sub ${DataBucket.Arn}/health-canada/history/*
+                  - !Sub ${DataBucket.Arn}/athena/latest/trials/*
+                  - !Sub ${DataBucket.Arn}/athena/latest/conditions/*
+                  - !Sub ${DataBucket.Arn}/athena/latest/interventions/*
+                  - !Sub ${DataBucket.Arn}/athena/latest/sites/*
 
   # ---------------------------------------------------------------------------
   # PostgreSQL on RDS, loaded after each refresh, read by Power BI.

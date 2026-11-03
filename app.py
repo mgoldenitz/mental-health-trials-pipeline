@@ -132,6 +132,66 @@ def load_data():
     return trials, conditions, interventions, sites
 
 
+def aws_secrets():
+    """The [aws] block of the app's secrets, or None if it has none."""
+    try:
+        return dict(st.secrets["aws"])
+    except Exception:
+        return None
+
+
+@st.cache_data(ttl=6 * 3600)
+def load_weekly_search_data(cfg):
+    """Load the latest S3 Parquet tables, limited to the eight published groups."""
+    import io
+    import json
+    import boto3
+
+    s3 = boto3.client("s3", aws_access_key_id=cfg["access_key_id"],
+                      aws_secret_access_key=cfg["secret_access_key"], region_name=cfg["region"])
+
+    def read(key):
+        return s3.get_object(Bucket=cfg["bucket"], Key=key)["Body"].read()
+
+    tables = {
+        name: pd.read_parquet(io.BytesIO(read(f"athena/latest/{name}/{name}.parquet")))
+        for name in ("trials", "conditions", "interventions", "sites")
+    }
+    manifest = json.loads(read("latest/manifest.json"))
+    core_ids = set(tables["trials"].loc[tables["trials"]["scope"] == "core", "nct_id"])
+    if not core_ids:
+        raise ValueError("The weekly snapshot contains no trials in the published scope")
+
+    trials = tables["trials"].loc[tables["trials"]["nct_id"].isin(core_ids)].copy()
+    conditions = tables["conditions"].copy()
+    conditions["condition_group"] = relabel(conditions["condition_group"])
+    conditions = conditions.loc[
+        conditions["nct_id"].isin(core_ids)
+        & conditions["condition_group"].isin(GROUP_COLOURS)
+    ].copy()
+    interventions = tables["interventions"].loc[
+        tables["interventions"]["nct_id"].isin(core_ids)
+    ].copy()
+    sites = tables["sites"].loc[tables["sites"]["nct_id"].isin(core_ids)].copy()
+
+    def joined(df, col):
+        return (df.dropna(subset=[col]).groupby("nct_id")[col]
+                  .agg(lambda s: ", ".join(sorted(s.unique())))
+                  )
+
+    trials = trials.set_index("nct_id")
+    trials["conditions"] = joined(conditions, "condition_group")
+    trials["treatments"] = joined(interventions, "treatment_type")
+    trials["psychedelic_class"] = joined(interventions, "psychedelic_class")
+    trials["countries"] = joined(sites, "country")
+    trials["in_canada"] = trials.index.isin(sites.loc[sites["country"] == "Canada", "nct_id"])
+    trials["phase"] = trials["phase"].map(PHASE_LABELS).fillna("Not applicable")
+    trials["status"] = trials["overall_status"].str.replace("_", " ").str.capitalize()
+    trials["outcome"] = trials["outcome"].map(OUTCOME_LABELS).fillna(trials["outcome"])
+    trials["link"] = CTGOV + trials.index
+    return trials.reset_index(), conditions, interventions, sites, manifest
+
+
 @st.cache_data(ttl=6 * 3600, max_entries=256)
 def load_trial_details(nct_id):
     """Fetch one current ClinicalTrials.gov record by its NCT identifier."""
@@ -229,6 +289,15 @@ def show_trial_details(nct_id):
 
 
 trials, conditions, interventions, sites = load_data()
+weekly_trials = weekly_conditions = weekly_interventions = weekly_sites = weekly_manifest = None
+weekly_data_error = False
+weekly_cfg = aws_secrets()
+if weekly_cfg:
+    try:
+        (weekly_trials, weekly_conditions, weekly_interventions,
+         weekly_sites, weekly_manifest) = load_weekly_search_data(weekly_cfg)
+    except Exception:
+        weekly_data_error = True
 
 
 # ---------------------------------------------------------------- sidebar filters
@@ -241,6 +310,9 @@ phases = [p for p in PHASE_ORDER if p in set(trials["phase"])]
 y_min, y_max = int(trials["start_year"].min()), int(trials["start_year"].max())
 statuses = sorted(trials["status"].dropna().unique())
 countries = sorted(sites["country"].dropna().unique())
+if weekly_trials is not None:
+    statuses = sorted(set(statuses) | set(weekly_trials["status"].dropna().unique()))
+    countries = sorted(set(countries) | set(weekly_sites["country"].dropna().unique()))
 pick_groups = st.sidebar.multiselect("Condition", groups, placeholder="All conditions",
                                      key="condition", bind="query-params")
 pick_treat = st.sidebar.multiselect("Treatment type", treat_types, placeholder="All treatment types",
@@ -269,17 +341,30 @@ psy_only = st.sidebar.toggle("Psychedelic & Ketamine trials only",
                              key="psychedelic", bind="query-params")
 canada_only = st.sidebar.toggle("Trials in Canada", key="canada", bind="query-params")
 
-st.sidebar.caption("Data: ClinicalTrials.gov, downloaded 1 October 2026, trials that began between 2010 and 2025, "
-                   "processed by the Mental Health Clinical Trials Pipeline.")
+if weekly_trials is not None:
+    st.sidebar.caption(
+        f"Overview, psychedelic and Canada summary figures use the 1 October 2026 download. "
+        f"Find trials uses the {weekly_manifest['snapshot_date']} weekly refresh, limited to the eight published groups."
+    )
+elif weekly_data_error:
+    st.sidebar.warning("Weekly trial data is unavailable; Find trials is showing the 1 October 2026 snapshot.")
+else:
+    st.sidebar.caption(
+        "Data: ClinicalTrials.gov, downloaded 1 October 2026. The weekly Find trials feed is not connected, "
+        "so it is showing the published snapshot."
+    )
 
 
-def apply_filters(df):
+def apply_filters(df, filter_conditions=None, filter_interventions=None, filter_sites=None):
+    filter_conditions = conditions if filter_conditions is None else filter_conditions
+    filter_interventions = interventions if filter_interventions is None else filter_interventions
+    filter_sites = sites if filter_sites is None else filter_sites
     mask = df["start_year"].between(*years)
     if pick_groups:
-        ids = conditions.loc[conditions["condition_group"].isin(pick_groups), "nct_id"]
+        ids = filter_conditions.loc[filter_conditions["condition_group"].isin(pick_groups), "nct_id"]
         mask &= df["nct_id"].isin(ids)
     if pick_treat:
-        ids = interventions.loc[interventions["treatment_type"].isin(pick_treat), "nct_id"]
+        ids = filter_interventions.loc[filter_interventions["treatment_type"].isin(pick_treat), "nct_id"]
         mask &= df["nct_id"].isin(ids)
     if pick_outcome:
         mask &= df["outcome"].isin(pick_outcome)
@@ -288,7 +373,7 @@ def apply_filters(df):
     if pick_status:
         mask &= df["status"].isin(pick_status)
     if pick_country:
-        ids = sites.loc[sites["country"].isin(pick_country), "nct_id"]
+        ids = filter_sites.loc[filter_sites["country"].isin(pick_country), "nct_id"]
         mask &= df["nct_id"].isin(ids)
     if psy_only:
         mask &= df["psychedelic_class"].notna()
@@ -419,14 +504,23 @@ with tab_search:
     query = st.text_input("Search trial titles, sponsors or interventions",
                           placeholder="e.g. psilocybin, sertraline, CAMH",
                           key="q", bind="query-params")
-    table = view
+    if weekly_trials is None:
+        search_trials, search_conditions = trials, conditions
+        search_interventions, search_sites = interventions, sites
+        weekly_date = None
+    else:
+        search_trials, search_conditions = weekly_trials, weekly_conditions
+        search_interventions, search_sites = weekly_interventions, weekly_sites
+        weekly_date = weekly_manifest["snapshot_date"]
+    search_view = apply_filters(search_trials, search_conditions, search_interventions, search_sites)
+    table = search_view
     if query:
         q = query.strip()
-        intervention_ids = interventions.loc[
-            interventions["intervention_name"].str.contains(q, case=False, na=False, regex=False), "nct_id"]
-        table = view[view["title"].str.contains(q, case=False, na=False, regex=False)
-                     | view["sponsor_name"].str.contains(q, case=False, na=False, regex=False)
-                     | view["nct_id"].isin(intervention_ids)]
+        intervention_ids = search_interventions.loc[
+            search_interventions["intervention_name"].str.contains(q, case=False, na=False, regex=False), "nct_id"]
+        table = search_view[search_view["title"].str.contains(q, case=False, na=False, regex=False)
+                            | search_view["sponsor_name"].str.contains(q, case=False, na=False, regex=False)
+                            | search_view["nct_id"].isin(intervention_ids)]
     can_recruit = ((not pick_outcome or "Ongoing or unknown" in pick_outcome)
                    and (not pick_status or "Recruiting" in pick_status))
     recruiting_first = st.checkbox(
@@ -442,6 +536,10 @@ with tab_search:
         table = table.sort_values("start_year", ascending=False)
 
     st.write(f"{len(table):,} trials")
+    if weekly_date:
+        st.caption(f"Latest weekly refresh: {weekly_date}. Showing the published eight condition groups only.")
+    else:
+        st.caption("Showing the published 1 October 2026 snapshot; weekly data is unavailable.")
     result_table = table[["nct_id", "link", "title", "conditions", "treatments", "phase", "status",
                           "start_year", "enrollment", "sponsor_name", "countries"]].reset_index(drop=True)
     result_key = f"trial_results_{hash(tuple(result_table['nct_id']))}"
@@ -546,14 +644,6 @@ with tab_canada:
 
 
 # ---------------------------------------------------------------- latest refresh
-def aws_secrets():
-    """The [aws] block of the app's secrets, or None if it has none."""
-    try:
-        return dict(st.secrets["aws"])
-    except Exception:
-        return None
-
-
 # Takes the secrets as an argument so a missing-secrets result is never cached.
 @st.cache_data(ttl=6 * 3600)
 def load_refresh(cfg):
@@ -669,9 +759,10 @@ with tab_canada:
 with tab_about:
     st.subheader("About the data")
     st.markdown(
-        "The **Overview**, **Find trials**, **Psychedelic & Ketamine**, and ClinicalTrials.gov "
-        "figures on the **Canada** tab use the published 1 October 2026 download. The **New groups** "
-        "and **Latest refresh** tabs show separate weekly data and do not change those published totals.")
+        "The **Overview**, **Psychedelic & Ketamine**, and ClinicalTrials.gov figures on the **Canada** tab "
+        "use the published 1 October 2026 download. **Find trials** uses the latest weekly refresh so its "
+        "recruitment statuses stay current, while keeping only trials in the eight published condition groups. "
+        "The **New groups** and **Latest refresh** tabs show separate weekly data and do not change published totals.")
 
     st.markdown("**Source and published scope**")
     st.markdown(
