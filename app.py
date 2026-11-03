@@ -840,9 +840,9 @@ with tab_latest:
             now, then = one(latest, metric, category), one(baseline, metric, category)
             delta = now - then
             with col.container(border=True):
-                col.metric(label, f"{now:,}",
-                           f"{delta:+,} since publication" if delta else None,
-                           delta_color="off")
+                st.metric(label, f"{now:,}",
+                          f"{delta:+,} since publication" if delta else None,
+                          delta_color="off")
 
         c1, c2 = st.columns(2)
         by_year = compare(baseline, latest, "trials_by_year").reset_index(names="start_year")
