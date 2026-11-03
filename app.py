@@ -501,9 +501,20 @@ with tab_overview:
 
 # ---------------------------------------------------------------- search
 with tab_search:
-    query = st.text_input("Search trial titles, sponsors or interventions",
-                          placeholder="e.g. psilocybin, sertraline, CAMH",
-                          key="q", bind="query-params")
+    can_recruit = ((not pick_outcome or "Ongoing or unknown" in pick_outcome)
+                   and (not pick_status or "Recruiting" in pick_status))
+    search_col, recruit_col = st.columns([5, 2], vertical_alignment="bottom")
+    with search_col:
+        query = st.text_input(
+            "Search trial titles, sponsors or interventions",
+            placeholder="Search titles, sponsors, or interventions…",
+            key="q", bind="query-params", label_visibility="collapsed")
+    with recruit_col:
+        recruiting_first = st.checkbox(
+            "Recruiting first", value=True, disabled=not can_recruit,
+            help=None if can_recruit else
+            "Recruiting trials are hidden by the Outcome or Recruitment status filter. Include "
+            "\"Ongoing or unknown\" and \"Recruiting\" to use this.")
     if weekly_trials is None:
         search_trials, search_conditions = trials, conditions
         search_interventions, search_sites = interventions, sites
@@ -521,13 +532,6 @@ with tab_search:
         table = search_view[search_view["title"].str.contains(q, case=False, na=False, regex=False)
                             | search_view["sponsor_name"].str.contains(q, case=False, na=False, regex=False)
                             | search_view["nct_id"].isin(intervention_ids)]
-    can_recruit = ((not pick_outcome or "Ongoing or unknown" in pick_outcome)
-                   and (not pick_status or "Recruiting" in pick_status))
-    recruiting_first = st.checkbox(
-        "Show trials that are actively recruiting first", value=True, disabled=not can_recruit,
-        help=None if can_recruit else
-        "Recruiting trials are hidden by the Outcome or Recruitment status filter. Include "
-        "\"Ongoing or unknown\" and \"Recruiting\" to use this.")
     recruiting_first = recruiting_first and can_recruit
     if recruiting_first:
         table = table.assign(_r=table["overall_status"].ne("RECRUITING")).sort_values(
@@ -535,15 +539,14 @@ with tab_search:
     else:
         table = table.sort_values("start_year", ascending=False)
 
-    st.write(f"{len(table):,} trials")
     if weekly_date:
-        st.caption(f"Latest weekly refresh: {weekly_date}. Showing the published eight condition groups only.")
+        result_note = f"Updated {weekly_date} · Eight published groups"
     else:
-        st.caption("Showing the published 1 October 2026 snapshot; weekly data is unavailable.")
+        result_note = "Published snapshot · 1 October 2026 · Weekly data unavailable"
     result_table = table[["nct_id", "link", "title", "conditions", "treatments", "phase", "status",
                           "start_year", "enrollment", "sponsor_name", "countries"]].reset_index(drop=True)
     result_key = f"trial_results_{hash(tuple(result_table['nct_id']))}"
-    st.caption("Select a trial row to view its current registry details.")
+    st.caption(f"**{len(table):,} trials** · {result_note} · Select a row for current registry details")
     selection = st.dataframe(
         result_table,
         column_config={
