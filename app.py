@@ -7,6 +7,10 @@ Trials Pipeline (data/powerbi). Run locally with:  streamlit run app.py
 """
 
 from pathlib import Path
+import json
+import re
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 import pandas as pd
 import plotly.express as px
@@ -128,6 +132,102 @@ def load_data():
     return trials, conditions, interventions, sites
 
 
+@st.cache_data(ttl=6 * 3600, max_entries=256)
+def load_trial_details(nct_id):
+    """Fetch one current ClinicalTrials.gov record by its NCT identifier."""
+    if not re.fullmatch(r"NCT\d{8}", nct_id):
+        raise ValueError("Invalid ClinicalTrials.gov identifier")
+    request = Request(
+        f"https://clinicaltrials.gov/api/v2/studies/{nct_id}",
+        headers={"User-Agent": "MentalHealthTrialTracker/1.0"},
+    )
+    with urlopen(request, timeout=10) as response:
+        return json.load(response)
+
+
+def detail_text(value):
+    """Return a displayable string for an optional registry text field."""
+    return value.strip() if isinstance(value, str) and value.strip() else "Not reported."
+
+
+def show_trial_details(nct_id):
+    """Render the selected registry record, with contact details left at the source."""
+    try:
+        record = load_trial_details(nct_id)
+    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError, ValueError):
+        st.warning(
+            "Trial details could not be loaded right now. Open the ClinicalTrials.gov record to view the latest information."
+        )
+        return
+
+    protocol = record.get("protocolSection", {})
+    ident = protocol.get("identificationModule", {})
+    status = protocol.get("statusModule", {})
+    description = protocol.get("descriptionModule", {})
+    eligibility = protocol.get("eligibilityModule", {})
+    interventions_module = protocol.get("armsInterventionsModule", {})
+    outcomes_module = protocol.get("outcomesModule", {})
+
+    with st.container(border=True):
+        st.subheader(ident.get("briefTitle") or nct_id)
+        verified = status.get("statusVerifiedDate")
+        status_text = status.get("overallStatus", "Status not reported").replace("_", " ").title()
+        st.caption(f"{nct_id} · {status_text}" + (f" · Last verified {verified}" if verified else ""))
+        st.link_button("View full record and contact details on ClinicalTrials.gov", f"{CTGOV}{nct_id}")
+
+        summary = description.get("briefSummary")
+        st.markdown("**Summary**")
+        st.markdown(detail_text(summary))
+        detailed = description.get("detailedDescription")
+        if detailed:
+            with st.expander("Detailed description"):
+                st.markdown(detailed)
+
+        st.markdown("**Interventions and dosage details reported**")
+        interventions_list = interventions_module.get("interventions", [])
+        if interventions_list:
+            for item in interventions_list:
+                name = item.get("name") or "Intervention name not reported"
+                kind = item.get("type")
+                st.markdown(f"- **{name}**" + (f" ({kind})" if kind else ""))
+                if item.get("description"):
+                    st.caption(item["description"])
+        else:
+            st.write("Not reported.")
+
+        st.markdown("**Eligibility**")
+        age = " to ".join(filter(None, [eligibility.get("minimumAge"), eligibility.get("maximumAge")]))
+        eligibility_facts = [
+            f"Age: {age}" if age else None,
+            f"Sex: {eligibility.get('sex')}" if eligibility.get("sex") else None,
+            "Accepts healthy volunteers: " + str(eligibility["healthyVolunteers"])
+            if "healthyVolunteers" in eligibility else None,
+        ]
+        facts = [fact for fact in eligibility_facts if fact]
+        if facts:
+            st.caption(" · ".join(facts))
+        st.markdown(detail_text(eligibility.get("eligibilityCriteria")))
+
+        st.markdown("**Outcomes**")
+        outcome_sections = [
+            ("Primary", outcomes_module.get("primaryOutcomes", [])),
+            ("Secondary", outcomes_module.get("secondaryOutcomes", [])),
+            ("Other", outcomes_module.get("otherOutcomes", [])),
+        ]
+        reported_outcomes = False
+        for label, items in outcome_sections:
+            for item in items:
+                reported_outcomes = True
+                measure = item.get("measure") or "Outcome measure not reported"
+                st.markdown(f"- **{label}: {measure}**")
+                if item.get("description"):
+                    st.caption(item["description"])
+                if item.get("timeFrame"):
+                    st.caption(f"Time frame: {item['timeFrame']}")
+        if not reported_outcomes:
+            st.write("Not reported.")
+
+
 trials, conditions, interventions, sites = load_data()
 
 
@@ -135,30 +235,39 @@ trials, conditions, interventions, sites = load_data()
 st.sidebar.title("Filters")
 
 groups = sorted(conditions["condition_group"].dropna().unique())
-pick_groups = st.sidebar.multiselect("Condition", groups, placeholder="All conditions")
-
 treat_types = sorted(interventions["treatment_type"].dropna().unique())
-pick_treat = st.sidebar.multiselect("Treatment type", treat_types, placeholder="All treatment types")
-
 outcomes = [o for o in OUTCOME_ORDER if o in set(trials["outcome"])]
-pick_outcome = st.sidebar.multiselect("Outcome", outcomes, placeholder="All outcomes",
-                                      help="Ongoing or unknown covers trials still recruiting or running, "
-                                           "plus trials whose status hasn't been updated in two years. "
-                                           "Completed trials finished as planned. Stopped early covers "
-                                           "trials that were terminated, suspended or withdrawn.")
-
 phases = [p for p in PHASE_ORDER if p in set(trials["phase"])]
-pick_phase = st.sidebar.multiselect("Phase", phases, placeholder="All phases",
-                                    help="Phase 1 tests safety in a small group, Phase 2 tests whether it works, "
-                                         "Phase 3 confirms it in a large group, and Phase 4 follows it after approval. "
-                                         "Combined phases (e.g. Phase 1/2) run two stages in one trial. "
-                                         "Not applicable covers trials without drug phases, such as therapy or device studies.")
-
 y_min, y_max = int(trials["start_year"].min()), int(trials["start_year"].max())
-years = st.sidebar.slider("Year started", y_min, y_max, (y_min, y_max))
-
-psy_only = st.sidebar.toggle("Psychedelic & Ketamine trials only")
-canada_only = st.sidebar.toggle("Trials in Canada")
+statuses = sorted(trials["status"].dropna().unique())
+countries = sorted(sites["country"].dropna().unique())
+pick_groups = st.sidebar.multiselect("Condition", groups, placeholder="All conditions",
+                                     key="condition", bind="query-params")
+pick_treat = st.sidebar.multiselect("Treatment type", treat_types, placeholder="All treatment types",
+                                    key="treatment", bind="query-params")
+pick_outcome = st.sidebar.multiselect(
+    "Outcome", outcomes, placeholder="All outcomes",
+    help="Ongoing or unknown covers trials still recruiting or running, "
+         "plus trials whose status hasn't been updated in two years. "
+         "Completed trials finished as planned. Stopped early covers "
+         "trials that were terminated, suspended or withdrawn.",
+    key="outcome", bind="query-params")
+pick_phase = st.sidebar.multiselect(
+    "Phase", phases, placeholder="All phases",
+    help="Phase 1 tests safety in a small group, Phase 2 tests whether it works, "
+         "Phase 3 confirms it in a large group, and Phase 4 follows it after approval. "
+         "Combined phases (e.g. Phase 1/2) run two stages in one trial. "
+         "Not applicable covers trials without drug phases, such as therapy or device studies.",
+    key="phase", bind="query-params")
+years = st.sidebar.slider("Year started", y_min, y_max, (y_min, y_max),
+                          key="years", bind="query-params")
+pick_status = st.sidebar.multiselect("Recruitment status", statuses, placeholder="All statuses",
+                                     key="status", bind="query-params")
+pick_country = st.sidebar.multiselect("Country", countries, placeholder="All countries",
+                                      key="country", bind="query-params")
+psy_only = st.sidebar.toggle("Psychedelic & Ketamine trials only",
+                             key="psychedelic", bind="query-params")
+canada_only = st.sidebar.toggle("Trials in Canada", key="canada", bind="query-params")
 
 st.sidebar.caption("Data: ClinicalTrials.gov, downloaded 1 October 2026, trials that began between 2010 and 2025, "
                    "processed by the Mental Health Clinical Trials Pipeline.")
@@ -176,6 +285,11 @@ def apply_filters(df):
         mask &= df["outcome"].isin(pick_outcome)
     if pick_phase:
         mask &= df["phase"].isin(pick_phase)
+    if pick_status:
+        mask &= df["status"].isin(pick_status)
+    if pick_country:
+        ids = sites.loc[sites["country"].isin(pick_country), "nct_id"]
+        mask &= df["nct_id"].isin(ids)
     if psy_only:
         mask &= df["psychedelic_class"].notna()
     if canada_only:
@@ -213,9 +327,9 @@ for col, label, count in [
         (k4, "In Canada", int(view["in_canada"].sum()))]:
     col.metric(label, f"{count:,}", share(count, n_view, "of trials"), delta_color="off", delta_arrow="off")
 
-tab_overview, tab_search, tab_psy, tab_canada, tab_new, tab_latest = st.tabs(
-    ["Overview", "Find trials", "Psychedelic & ketamine", "Canada", "New groups (updated weekly)",
-     "Latest refresh"])
+tab_overview, tab_search, tab_psy, tab_canada, tab_about, tab_new, tab_latest = st.tabs(
+    ["Overview", "Find trials", "Psychedelic & Ketamine", "Canada", "About the data",
+     "New groups (updated weekly)", "Latest refresh"])
 
 
 # ---------------------------------------------------------------- overview
@@ -302,17 +416,24 @@ with tab_overview:
 
 # ---------------------------------------------------------------- search
 with tab_search:
-    query = st.text_input("Search trial titles or sponsors", placeholder="e.g. psilocybin, CAMH, insomnia")
+    query = st.text_input("Search trial titles, sponsors or interventions",
+                          placeholder="e.g. psilocybin, sertraline, CAMH",
+                          key="q", bind="query-params")
     table = view
     if query:
         q = query.strip()
-        table = view[view["title"].str.contains(q, case=False, na=False)
-                     | view["sponsor_name"].str.contains(q, case=False, na=False)]
-    can_recruit = not pick_outcome or "Ongoing or unknown" in pick_outcome
+        intervention_ids = interventions.loc[
+            interventions["intervention_name"].str.contains(q, case=False, na=False, regex=False), "nct_id"]
+        table = view[view["title"].str.contains(q, case=False, na=False, regex=False)
+                     | view["sponsor_name"].str.contains(q, case=False, na=False, regex=False)
+                     | view["nct_id"].isin(intervention_ids)]
+    can_recruit = ((not pick_outcome or "Ongoing or unknown" in pick_outcome)
+                   and (not pick_status or "Recruiting" in pick_status))
     recruiting_first = st.checkbox(
         "Show trials that are actively recruiting first", value=True, disabled=not can_recruit,
         help=None if can_recruit else
-        "Recruiting trials are hidden by the Outcome filter. Add \"Ongoing or unknown\" to use this.")
+        "Recruiting trials are hidden by the Outcome or Recruitment status filter. Include "
+        "\"Ongoing or unknown\" and \"Recruiting\" to use this.")
     recruiting_first = recruiting_first and can_recruit
     if recruiting_first:
         table = table.assign(_r=table["overall_status"].ne("RECRUITING")).sort_values(
@@ -321,10 +442,14 @@ with tab_search:
         table = table.sort_values("start_year", ascending=False)
 
     st.write(f"{len(table):,} trials")
-    st.dataframe(
-        table[["link", "title", "conditions", "treatments", "phase", "status",
-               "start_year", "enrollment", "sponsor_name", "countries"]],
+    result_table = table[["nct_id", "link", "title", "conditions", "treatments", "phase", "status",
+                          "start_year", "enrollment", "sponsor_name", "countries"]].reset_index(drop=True)
+    result_key = f"trial_results_{hash(tuple(result_table['nct_id']))}"
+    st.caption("Select a trial row to view its current registry details.")
+    selection = st.dataframe(
+        result_table,
         column_config={
+            "nct_id": None,
             "link": st.column_config.LinkColumn("Trial", display_text=r"study/(NCT\d+)"),
             "title": st.column_config.TextColumn("Title", width="large"),
             "conditions": "Condition",
@@ -337,7 +462,12 @@ with tab_search:
             "countries": "Countries",
         },
         hide_index=True, width="stretch", height=520,
+        on_select="rerun", selection_mode="single-row", key=result_key,
     )
+    selected_rows = selection.selection.rows
+    if selected_rows:
+        selected_nct = result_table.iloc[selected_rows[0]]["nct_id"]
+        show_trial_details(selected_nct)
     st.download_button("Download these trials (CSV)",
                        table.drop(columns=["_r"], errors="ignore").to_csv(index=False),
                        file_name="trials_filtered.csv", mime="text/csv")
@@ -347,7 +477,7 @@ with tab_search:
 with tab_psy:
     psy = view[view["psychedelic_class"].notna()]
     if psy.empty:
-        st.info("No psychedelic & ketamine trials match the current filters.")
+        st.info("No psychedelic & Ketamine trials match the current filters.")
     else:
         st.write("Trials testing a classic psychedelic or MDMA, or ketamine / esketamine. "
                  "Classification comes from intervention names in the pipeline.")
@@ -469,7 +599,7 @@ def load_health_canada(cfg):
 
 with tab_canada:
     st.divider()
-    st.subheader("Health Canada approvals")
+    st.subheader("Trials authorized by Health Canada")
     cfg = aws_secrets()
     try:
         hc = load_health_canada(cfg) if cfg else None
@@ -477,15 +607,17 @@ with tab_canada:
         hc = False
         st.error(f"Could not read the Health Canada data from S3: {e}")
     if hc is None:
-        st.info("This section shows mental health trials approved by Health Canada. "
+        st.info("This section shows mental health trials authorized by Health Canada. "
                 "The scheduled refresh is not connected yet.")
     elif hc:
         hc_counts, hc_manifest, hc_trials = hc
         st.caption(
             f"Health Canada Clinical Trials Database, downloaded {hc_manifest['snapshot_date']}. "
-            "It lists drug and biologic trials Health Canada approved since April 2013, including "
+            "It lists drug and biologic trials authorized by Health Canada since April 2013, including "
             "trials not registered on ClinicalTrials.gov. A trial counts when any of its conditions "
             "falls in one of the eight mental health groups. The sidebar filters do not apply here.")
+        st.caption("Health Canada trial counts overlap with the ‘In Canada’ ClinicalTrials.gov count above; "
+                   "do not add the two counts together.")
 
         def hc_metric(metric):
             out = hc_counts[hc_counts["metric"] == metric][["category", "value"]].copy()
@@ -500,7 +632,7 @@ with tab_canada:
         drug = hc_metric("hc_trials_by_drug_class")
         k1, k2, k3, k4 = st.columns(4)
         k1.metric("Mental health trials", f"{hc_one('hc_trials'):,}")
-        k2.metric("All approved trials", f"{hc_one('hc_all_trials'):,}")
+        k2.metric("All authorized trials", f"{hc_one('hc_all_trials'):,}")
         k3.metric("Ongoing", f"{int(status.get('Ongoing', 0)):,}")
         k4.metric("Psychedelic & Ketamine", f"{int(drug['value'].sum()):,}")
 
@@ -532,6 +664,46 @@ with tab_canada:
                     "sponsor_name": "Sponsor", "psychedelic_class": "Drug class",
                 },
                 hide_index=True, width="stretch")
+
+
+with tab_about:
+    st.subheader("About the data")
+    st.markdown(
+        "The **Overview**, **Find trials**, **Psychedelic & Ketamine**, and ClinicalTrials.gov "
+        "figures on the **Canada** tab use the published 1 October 2026 download. The **New groups** "
+        "and **Latest refresh** tabs show separate weekly data and do not change those published totals.")
+
+    st.markdown("**Source and published scope**")
+    st.markdown(
+        "The source is the ClinicalTrials.gov API v2. The download contains 18,357 interventional "
+        "studies. The published analysis includes 14,724 (80%) that started between 2010 and 2025 "
+        "and list at least one of eight project-defined condition groups: depression, anxiety, OCD, "
+        "PTSD, bipolar disorder, schizophrenia and psychosis, substance use, and eating disorders.")
+
+    st.markdown("**How conditions are grouped**")
+    st.markdown(
+        "ClinicalTrials.gov condition names are free text. Project keyword rules exclude known "
+        "non-psychiatric uses first, then assign each condition to the first matching group. A trial "
+        "may list several conditions and belong to several groups, so group counts can add up to more "
+        "than the total number of trials.")
+
+    st.markdown("**What is outside the published analysis**")
+    st.markdown(
+        "The condition search was not designed to capture every mental or neurological condition. "
+        "For example, ADHD, autism, dementia, pain, insomnia, and studies of healthy volunteers are "
+        "not included unless a trial also lists one of the eight grouped conditions. The four newer "
+        "groups are presented separately in **New groups**.")
+
+    st.markdown("**How to interpret the numbers**")
+    st.markdown(
+        "These figures describe registered research activity; more trials do not mean better or more "
+        "effective treatments. ClinicalTrials.gov is US-based, and many trials elsewhere are recorded "
+        "in other registries. Since overall registration grew during this period, comparisons between "
+        "groups are more informative than raw growth alone.")
+    st.markdown(
+        "Results-posting figures are reporting rates, not compliance rates. Legal reporting rules apply "
+        "only to some trials, and this analysis does not determine which trials were legally required "
+        "to report results.")
 
 
 def compare(baseline, latest, metric):
