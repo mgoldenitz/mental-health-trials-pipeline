@@ -206,6 +206,8 @@ US law requires results within one year of primary completion only for "applicab
 
 ![Title topics](images/ml/title_topics.png)
 
+The same method on intervention names (notebook part H4) also shows virtual reality rising, from 0.2% to 4.4% of trials. A sensitivity check (`tools/intervention_topic_sensitivity.py`, written up in [docs/intervention-topic-checks.md](docs/intervention-topic-checks.md)) refit that model with other topic counts, seeds, thresholds and preprocessing and compared it with keyword counts. The rise in virtual reality, music and sham-controlled stimulation trials held in every run. The app, internet CBT and mindfulness topics did not hold, so their sizes are not reported.
+
 Results tables are in `results/ml/`.
 
 ## Weekly refresh on AWS
