@@ -1,14 +1,16 @@
 """
 Check that the refresh pipeline reproduces the published tables.
 
-  python tools/check_against_published.py OUT_DIR
+  python tools/check_against_published.py OUT_DIR [--sample RAW_JSON]
 
 OUT_DIR holds tables the pipeline rebuilt from the 1 October 2026 download
 (python -m pipeline --raw ... --out OUT_DIR, run from src/). Each table is
 compared with data/powerbi/ value by value, ignoring row order.
 
 Since v2 the rebuilt tables also hold extended-scope trials and the v2 condition
-groups. Only core-scope trials and the published groups are compared, using the
+groups. With --sample RAW_JSON (used by CI with tests/fixtures/sample_raw.json.gz,
+a 200-study extract of the download), the published tables are first cut to
+the studies in RAW_JSON, so a trial the pipeline drops is still caught. Only core-scope trials and the published groups are compared, using the
 published columns; the extra rows and columns are counted and reported.
 """
 
@@ -23,13 +25,15 @@ from pipeline.rules import GROUPS  # noqa: E402
 PUBLISHED = Path(__file__).resolve().parent.parent / "data" / "powerbi"
 
 
-def main(out):
+def main(out, sample=None):
     ok = True
     rebuilt = pd.read_csv(Path(out) / "trials.csv")
     core = set(rebuilt.loc[rebuilt["scope"] == "core", "nct_id"])
     print(f"core trials {len(core):,}; extended trials (not compared) {len(rebuilt) - len(core):,}")
     for name in ["trials", "conditions", "interventions", "sites"]:
         a = pd.read_csv(PUBLISHED / f"{name}.csv")
+        if sample is not None:
+            a = a[a["nct_id"].isin(sample)]
         b = pd.read_csv(Path(out) / f"{name}.csv")
         b = b[b["nct_id"].isin(core)]
         if name == "conditions":
@@ -48,4 +52,9 @@ def main(out):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    sample = None
+    if "--sample" in sys.argv:
+        import json
+        with open(sys.argv[sys.argv.index("--sample") + 1], encoding="utf-8") as f:
+            sample = {s["protocolSection"]["identificationModule"]["nctId"] for s in json.load(f)}
+    main(sys.argv[1], sample)

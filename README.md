@@ -167,6 +167,16 @@ Two checks on the published results, added in November 2026. Both use the 1 Octo
 
 **Trials with Unknown status** (`sql/09_stop_rates_unknown_status.sql`). 2,107 analysed trials (14%) have Unknown status, which ClinicalTrials.gov assigns when a record has not been verified for two years past its completion date. The published stop rates leave them out and use only completed, terminated, withdrawn and suspended trials (12.8% of 9,975). Counting every Unknown trial as completed gives a lower bound of 10.5%; counting every one as stopped gives an upper bound of 28.0%. Academic sponsors hold 1,889 of the 2,107, against 89 for industry, so the industry–academic comparison depends on this choice: industry stops more often under the published rule (15.9% vs 12.3%) and the lower bound (14.9% vs 10.0%), but not under the upper bound (21.2% vs 29.0%). The headline rates stay on the published rule, and the industry–academic gap is a finding about reported outcomes: academic trials leave far more records unverified.
 
+## Results reporting
+
+How often do completed trials post their results on ClinicalTrials.gov? `tools/results_reporting.py` reads three fields from the 1 October 2026 download that the tables don't keep (`hasResults`, the primary completion date and the date results were first submitted) and writes `results/10_results_reporting.csv`. It counts the 8,230 completed trials in the analysis set whose primary completion date was on or before 30 September 2025, so each had at least a year to report.
+
+- 27% of these trials posted results: 75% of US federal trials, 52% of company trials, 22% of university and hospital trials, and 2% of trials sponsored by other governments.
+- A US site makes the biggest difference: 49% of trials with a US site posted results, against 7% of trials without one. With a US site, companies posted for 61% and universities and hospitals for 43%.
+- Results usually arrive after the one-year mark. Among trials that posted, the median time from primary completion to submission was 13.0 months, and only 11% of all completed trials submitted within 12 months.
+
+US law requires results within one year of primary completion only for "applicable clinical trials": certain trials of drugs, biologics and devices, generally with a US site, and the deadline can be extended by up to two years ([NIH summary of the 2016 final rule, 42 CFR Part 11](https://www.nih.gov/node/31996)). Behavioural trials and most trials run outside the US are not covered, so these figures are reporting rates, not compliance rates. Determining which trials are applicable would need fields this project doesn't use.
+
 ## Machine learning
 
 `02_machine_learning.ipynb` applies scikit-learn to the clean tables. All three parts are exploratory.
@@ -200,7 +210,7 @@ Results tables are in `results/ml/`.
 
 Every number above comes from the download of 1 October 2026 and stays fixed. A separate weekly job on AWS downloads the same search again so the app can show how the registry has changed since then.
 
-- `src/pipeline/`: the download, cleaning, condition grouping and drug flags from the notebook (parts B and C) as plain Python with no third-party packages, except pyarrow for the Parquet files (from the AWS SDK for pandas Lambda layer). Rebuilt from the 1 October 2026 download, it reproduces all four tables in `data/powerbi/` value for value (`tools/check_against_published.py`).
+- `src/pipeline/`: the download, cleaning, condition grouping and drug flags from the notebook (parts B and C) as plain Python with no third-party packages, except pyarrow for the Parquet files (from the AWS SDK for pandas Lambda layer). Rebuilt from the 1 October 2026 download, it reproduces all four tables in `data/powerbi/` value for value (`tools/check_against_published.py`). A GitHub Actions workflow (`.github/workflows/check-published.yml`) runs the same check on a 200-study extract of the download (`tests/fixtures/`) for every pull request.
 - `template.yaml`: an AWS SAM template. EventBridge Scheduler runs the Lambda function every Monday at 06:00 Toronto time. Each run saves the raw API pages, the four tables and a counts file to its own dated folder in S3, checks that every study the API reported was downloaded, and refuses a snapshot that lost more than 10% of trials since the last one. A failed run sends an email through CloudWatch and SNS, and a CloudWatch dashboard charts each run's trial counts, run time and errors.
 - `athena/`: 11 of the queries in `sql/` rewritten for Amazon Athena. Each run also writes the four tables as Parquet to S3 (1.8 MB in all), and Glue Data Catalog tables point Athena at them. A second Glue database holds the published tables, so the same queries run on either; on the published tables all 11 match `results/` (`tools/run_athena.py --compare`). An Athena workgroup caps each query at 100 MB scanned.
 - PostgreSQL on RDS: after each refresh, a second Lambda function (`src/pipeline/load_rds.py`) replaces the `trials`, `conditions`, `interventions` and `sites` tables, plus a `snapshot_counts` history, in one transaction. It runs inside the database's VPC, reads S3 through a gateway endpoint and signs in with an IAM token. Power BI connects as a read-only user from one home IP address.
@@ -225,5 +235,6 @@ Setup steps for a personal AWS account are in `docs/aws-setup.md`.
 - [x] SQL on AWS: Parquet in S3, Glue Data Catalog, Athena (`athena/`); all 11 queries match `results/` in Athena (31 Oct 2026)
 - [x] v2 condition groups: ADHD, autism spectrum, personality disorders, gambling and gaming disorders, suicide or self-harm flag (deployed 2 Nov 2026)
 - [x] Method checks: window ending 2024, stop rates with Unknown-status trials (`sql/08`, `sql/09`)
+- [x] Results reporting by sponsor type and US site (`tools/results_reporting.py`)
       
 Data: ClinicalTrials.gov, U.S. National Library of Medicine

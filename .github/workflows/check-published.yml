@@ -1,0 +1,29 @@
+name: Check published numbers
+
+# Rebuilds the four tables from a 200-study extract of the 1 October 2026 download
+# and checks them against data/powerbi/, so a change to the pipeline cannot
+# silently alter the published analysis.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pandas
+        run: pip install "pandas>=2.0"
+      - name: Rebuild tables from the sample download
+        run: |
+          gunzip -c tests/fixtures/sample_raw.json.gz > "$RUNNER_TEMP/sample_raw.json"
+          cd src && python -m pipeline --raw "$RUNNER_TEMP/sample_raw.json" --out "$RUNNER_TEMP/out"
+      - name: Compare with the published tables
+        run: python tools/check_against_published.py "$RUNNER_TEMP/out" --sample "$RUNNER_TEMP/sample_raw.json"
