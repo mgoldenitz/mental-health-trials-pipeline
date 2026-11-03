@@ -95,22 +95,22 @@ start_year,condition_group,trials,prev_year,pct_change
 2023,PTSD,134,143.0,-6.3
 2024,PTSD,156,134.0,16.4
 2025,PTSD,159,156.0,1.9
-2010,Schizophrenia & psychosis,127,,
-2011,Schizophrenia & psychosis,136,127.0,7.1
-2012,Schizophrenia & psychosis,136,136.0,0.0
-2013,Schizophrenia & psychosis,128,136.0,-5.9
-2014,Schizophrenia & psychosis,155,128.0,21.1
-2015,Schizophrenia & psychosis,125,155.0,-19.4
-2016,Schizophrenia & psychosis,135,125.0,8.0
-2017,Schizophrenia & psychosis,127,135.0,-5.9
-2018,Schizophrenia & psychosis,134,127.0,5.5
-2019,Schizophrenia & psychosis,158,134.0,17.9
-2020,Schizophrenia & psychosis,121,158.0,-23.4
-2021,Schizophrenia & psychosis,141,121.0,16.5
-2022,Schizophrenia & psychosis,156,141.0,10.6
-2023,Schizophrenia & psychosis,165,156.0,5.8
-2024,Schizophrenia & psychosis,150,165.0,-9.1
-2025,Schizophrenia & psychosis,149,150.0,-0.7
+2010,Schizophrenia & Psychosis,127,,
+2011,Schizophrenia & Psychosis,136,127.0,7.1
+2012,Schizophrenia & Psychosis,136,136.0,0.0
+2013,Schizophrenia & Psychosis,128,136.0,-5.9
+2014,Schizophrenia & Psychosis,155,128.0,21.1
+2015,Schizophrenia & Psychosis,125,155.0,-19.4
+2016,Schizophrenia & Psychosis,135,125.0,8.0
+2017,Schizophrenia & Psychosis,127,135.0,-5.9
+2018,Schizophrenia & Psychosis,134,127.0,5.5
+2019,Schizophrenia & Psychosis,158,134.0,17.9
+2020,Schizophrenia & Psychosis,121,158.0,-23.4
+2021,Schizophrenia & Psychosis,141,121.0,16.5
+2022,Schizophrenia & Psychosis,156,141.0,10.6
+2023,Schizophrenia & Psychosis,165,156.0,5.8
+2024,Schizophrenia & Psychosis,150,165.0,-9.1
+2025,Schizophrenia & Psychosis,149,150.0,-0.7
 2010,Substance use,25,,
 2011,Substance use,27,25.0,8.0
 2012,Substance use,32,27.0,18.5

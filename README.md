@@ -60,7 +60,7 @@ Interventional trials that started between 2010 and 2025, for eight DSM-5-aligne
 - OCD
 - PTSD
 - Bipolar disorder
-- Schizophrenia & psychosis
+- Schizophrenia & Psychosis
 - Substance use
 - Eating disorders
 
@@ -90,7 +90,7 @@ Each trial lists one or more conditions as free text. I assigned each listed con
 |---|---|
 | Depression | 7,713 |
 | Anxiety | 4,661 |
-| Schizophrenia & psychosis | 3,021 |
+| Schizophrenia & Psychosis | 3,021 |
 | PTSD | 1,826 |
 | Substance use | 1,383 |
 | Bipolar disorder | 965 |
@@ -153,7 +153,7 @@ I compared my counts with searches on the ClinicalTrials.gov website (condition 
 
 | Check | My pipeline | Website | Result |
 |---|---|---|---|
-| Schizophrenia & psychosis, 2020 | 121 | 121 | Exact match |
+| Schizophrenia & Psychosis, 2020 | 121 | 121 | Exact match |
 | PTSD, 2022 | 143 | 149 | 96%; the website expands "PTSD" to related terms such as subclinical PTSD |
 | Eating disorders, 2024 | 70 | 154 | See below |
 

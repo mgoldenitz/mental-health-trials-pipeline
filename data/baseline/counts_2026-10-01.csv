@@ -22,7 +22,7 @@ trials_by_condition,Depression,6817
 trials_by_condition,Eating disorders,667
 trials_by_condition,OCD,420
 trials_by_condition,PTSD,1683
-trials_by_condition,Schizophrenia & psychosis,2243
+trials_by_condition,Schizophrenia & Psychosis,2243
 trials_by_condition,Substance use,982
 trials_by_condition_year,Anxiety|2010,80
 trials_by_condition_year,Anxiety|2011,85
@@ -120,22 +120,22 @@ trials_by_condition_year,PTSD|2022,143
 trials_by_condition_year,PTSD|2023,134
 trials_by_condition_year,PTSD|2024,156
 trials_by_condition_year,PTSD|2025,159
-trials_by_condition_year,Schizophrenia & psychosis|2010,127
-trials_by_condition_year,Schizophrenia & psychosis|2011,136
-trials_by_condition_year,Schizophrenia & psychosis|2012,136
-trials_by_condition_year,Schizophrenia & psychosis|2013,128
-trials_by_condition_year,Schizophrenia & psychosis|2014,155
-trials_by_condition_year,Schizophrenia & psychosis|2015,125
-trials_by_condition_year,Schizophrenia & psychosis|2016,135
-trials_by_condition_year,Schizophrenia & psychosis|2017,127
-trials_by_condition_year,Schizophrenia & psychosis|2018,134
-trials_by_condition_year,Schizophrenia & psychosis|2019,158
-trials_by_condition_year,Schizophrenia & psychosis|2020,121
-trials_by_condition_year,Schizophrenia & psychosis|2021,141
-trials_by_condition_year,Schizophrenia & psychosis|2022,156
-trials_by_condition_year,Schizophrenia & psychosis|2023,165
-trials_by_condition_year,Schizophrenia & psychosis|2024,150
-trials_by_condition_year,Schizophrenia & psychosis|2025,149
+trials_by_condition_year,Schizophrenia & Psychosis|2010,127
+trials_by_condition_year,Schizophrenia & Psychosis|2011,136
+trials_by_condition_year,Schizophrenia & Psychosis|2012,136
+trials_by_condition_year,Schizophrenia & Psychosis|2013,128
+trials_by_condition_year,Schizophrenia & Psychosis|2014,155
+trials_by_condition_year,Schizophrenia & Psychosis|2015,125
+trials_by_condition_year,Schizophrenia & Psychosis|2016,135
+trials_by_condition_year,Schizophrenia & Psychosis|2017,127
+trials_by_condition_year,Schizophrenia & Psychosis|2018,134
+trials_by_condition_year,Schizophrenia & Psychosis|2019,158
+trials_by_condition_year,Schizophrenia & Psychosis|2020,121
+trials_by_condition_year,Schizophrenia & Psychosis|2021,141
+trials_by_condition_year,Schizophrenia & Psychosis|2022,156
+trials_by_condition_year,Schizophrenia & Psychosis|2023,165
+trials_by_condition_year,Schizophrenia & Psychosis|2024,150
+trials_by_condition_year,Schizophrenia & Psychosis|2025,149
 trials_by_condition_year,Substance use|2010,25
 trials_by_condition_year,Substance use|2011,27
 trials_by_condition_year,Substance use|2012,32
