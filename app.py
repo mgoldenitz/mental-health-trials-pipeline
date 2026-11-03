@@ -871,16 +871,6 @@ with tab_latest:
             fig.update_yaxes(tickformat=",d", dtick=max(1, round((totals["value"].max()
                                                                   - totals["value"].min()) / 5)))
             st.plotly_chart(fig, width="stretch")
-        elif len(totals):
-            last = totals.iloc[-1]
-            when = f"{last.snapshot_date:%b} {last.snapshot_date.day}"
-            text = f"{int(last.value):,} trials in the 2010–2025 window at the {when} download"
-            if len(totals) > 1:
-                prev = totals.iloc[-2]
-                diff = int(last.value - prev.value)
-                since = f"{prev.snapshot_date:%b} {prev.snapshot_date.day}"
-                text += (f", no change from {since}" if diff == 0
-                         else f", {diff:+,} from {since}")
         with st.expander("Refresh notes"):
             if len(later):
                 later_counts = ", ".join(
@@ -889,8 +879,8 @@ with tab_latest:
                     f"{later_counts} trials list a start after 2025. Many dates are estimates; "
                     "these trials are outside the published analysis.")
             st.caption("Four newer condition groups are shown on the New groups tab.")
-            if len(totals) and len(totals) < 4:
-                st.caption(f"{text}. The weekly trend chart appears after four downloads.")
+            if len(totals) < 4:
+                st.caption("Weekly trend appears after four downloads.")
 
 
 with tab_new:
