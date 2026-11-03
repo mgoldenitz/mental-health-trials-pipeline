@@ -1,7 +1,3 @@
-<p align="center">A concept storyboard of the pipeline and evidence discovery.</p>
-
-<p align="center"><img src="images/branding/trial-pipeline-storyboard.png" alt="Storyboard of the clinical trials research pipeline and evidence discovery" width="900"></p>
-
 # Mental Health Clinical Trials Pipeline
 
    **Live app:** [mh-trials-tracker.streamlit.app](https://mh-trials-tracker.streamlit.app), where you can search and filter the trials interactively.
