@@ -75,12 +75,10 @@ def other_last(df, col):
     return pd.concat([df[df[col] == "Other"], df[df[col] != "Other"]])
 
 
-def label_line_ends(fig, df, x, y, group, colours):
-    """Write each line's name just right of its last point, nudging labels apart so
-    lines that end close together stay readable, and drop the legend."""
-    ends = df.sort_values(x).groupby(group).tail(1).sort_values(y)
-    if ends.empty:
-        return fig
+def by_last_value(df, x, y, group):
+    """Group names ordered by their value in the latest year, highest first, so the
+    legend lists the lines in the same order they end on the chart."""
+    return df.sort_values(x).groupby(group)[y].last().sort_values(ascending=False).index.tolist()
     span = max(df[y].max() - df[y].min(), 1)
     gap = span / 22
     placed = []
@@ -232,10 +230,11 @@ with tab_overview:
         by_year = by_year[by_year["condition_group"].isin(pick_groups)]
     fig = px.line(by_year, x="start_year", y="trials", color="condition_group", markers=True,
                   color_discrete_map=GROUP_COLOURS,
+                  category_orders={"condition_group": by_last_value(by_year, "start_year", "trials",
+                                                                    "condition_group")},
                   labels={"start_year": "Year started", "trials": "Trials", "condition_group": "Condition"},
                   title="Trials started each year, by Condition")
-    c1.plotly_chart(label_line_ends(fig, by_year, "start_year", "trials", "condition_group", GROUP_COLOURS),
-                    width="stretch")
+    c1.plotly_chart(fig, width="stretch")
 
     treat = other_last(interventions[interventions["nct_id"].isin(ids)]
                        .drop_duplicates(["nct_id", "treatment_type"])
@@ -664,10 +663,10 @@ with tab_new:
                 yearly = yearly.dropna(subset=["start_year"]).rename(columns={"value": "trials"})
                 fig = px.line(yearly, x="start_year", y="trials", color="group", markers=True,
                               color_discrete_map=NEW_GROUP_COLOURS,
+                              category_orders={"group": by_last_value(yearly, "start_year", "trials", "group")},
                               labels={"start_year": "Year started", "trials": "Trials", "group": ""},
                               title="Trials started each year, by new group")
-                c1.plotly_chart(label_line_ends(fig, yearly, "start_year", "trials", "group",
-                                                NEW_GROUP_COLOURS), width="stretch")
+                c1.plotly_chart(fig, width="stretch")
 
             flags = (latest[latest["metric"] == "v2_suicide_flag_by_condition"]
                      .rename(columns={"category": "group", "value": "trials"})
