@@ -46,7 +46,7 @@ Emotional Eating,2,Other,Eating disorders,0.755
 Children's Dental Anxiety,2,Other,Anxiety,0.649
 "Bipolar Affective Disorder, Currently Depressed, Moderate",2,Depression,Bipolar disorder,0.553
 Oral Anxiolytic,2,Anxiety,Other,0.503
-Psychosomatic Disorder,2,Other,Schizophrenia & psychosis,0.503
+Psychosomatic Disorder,2,Other,Schizophrenia & Psychosis,0.503
 Opioid Induced Respiratory Depression,2,Other,Depression,0.425
 CNS Depression,1,Other,Depression,1.0
 Presurgical Anxiety,1,Other,Anxiety,1.0
@@ -79,7 +79,7 @@ Depression Levels Among Individuals With Substance Addiction,1,Depression,Substa
 "Drug Use Complicating Pregnancy, First Trimester",1,Other,Substance use,0.828
 Binge Drinking,1,Substance use,Other,0.826
 Traumatic Disorder,1,Other,PTSD,0.825
-"Sodium-glucose Transport Protein Two Inhibitor (SGLT2),Metabolic Deficits Caused by Antipsychotics",1,Schizophrenia & psychosis,Other,0.819
+"Sodium-glucose Transport Protein Two Inhibitor (SGLT2),Metabolic Deficits Caused by Antipsychotics",1,Schizophrenia & Psychosis,Other,0.819
 Hispanic or Latino,1,Anxiety,Other,0.817
 Problematic Use of Alcohol or Other Drugs,1,Other,Substance use,0.808
 Benzodiazepine Use,1,Other,Substance use,0.802
@@ -91,7 +91,7 @@ Preoperative Anxiety (Ameliyat Öncesi Anksiyete),1,Other,Anxiety,0.749
 Loss of Control Eating,1,Other,Eating disorders,0.747
 Traumatic Stress Disorders,1,Other,PTSD,0.73
 Preoperative Anxiety Score,1,Other,Anxiety,0.714
-Anxiety-comorbidity to Schizophrenia,1,Anxiety,Schizophrenia & psychosis,0.686
+Anxiety-comorbidity to Schizophrenia,1,Anxiety,Schizophrenia & Psychosis,0.686
 Surgical Anxiety Scale for Adult Patients,1,Other,Anxiety,0.683
 "Anxiety, Surgical Preparation, and Recovery Process in Colorectal Cancer Surgery",1,Anxiety,Other,0.678
 Deprescribing,1,Other,Depression,0.67
@@ -100,10 +100,10 @@ Anxiety in Those Patients With Anorexia Nervosa,1,Anxiety,Eating disorders,0.666
 Tricyclic Antidepressant Poisoning,1,Depression,Other,0.64
 "Drug Use Complicating Pregnancy, Third Trimester",1,Other,Substance use,0.631
 "Diabetes, Depression, Cardiovascular Disease,Hypercholesterolemia, Osteoporosis",1,Depression,Other,0.629
-Foetal Differences Between Healthy and Schizophernic Parents,1,Schizophrenia & psychosis,Other,0.59
+Foetal Differences Between Healthy and Schizophernic Parents,1,Schizophrenia & Psychosis,Other,0.59
 Opiate Induced Respiratory Depression,1,Other,Depression,0.567
 "Social Functioning, Alexithymia and Sense of Coherence , Bipolar Disorders",1,Bipolar disorder,Other,0.562
-Psychoterapy,1,Other,Schizophrenia & psychosis,0.557
+Psychoterapy,1,Other,Schizophrenia & Psychosis,0.557
 Ability to Use a Smartphone,1,Other,Substance use,0.556
 Pharmacogenetic Testing to Determine Pharmacological Treatment in PTSD,1,PTSD,Other,0.554
 Stimulant-Related Disorder,1,Other,Substance use,0.543

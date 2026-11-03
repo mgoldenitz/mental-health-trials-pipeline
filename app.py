@@ -37,7 +37,7 @@ OUTCOME_LABELS = {
 }
 OUTCOME_ORDER = list(OUTCOME_LABELS.values())
 
-# Display names that differ from the names stored in the pipeline's tables
+# Old group names that can still appear in S3 files written before the November 2026 rename
 RENAME = {"Schizophrenia & psychosis": "Schizophrenia & Psychosis"}
 
 

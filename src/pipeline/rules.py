@@ -15,7 +15,7 @@ GROUPS = {
     "OCD": r"obsessive|\bocd\b",
     "PTSD": (r"ptsd|post\s*-?\s*traumatic|acute stress disorder|stress disorders?,? acute"
              r"|stress disorders?,? (post[- ]?)?traumatic|traumatic stress disorder"),
-    "Schizophrenia & psychosis": r"schizo|psychosis|psychoses|psychotic",
+    "Schizophrenia & Psychosis": r"schizo|psychosis|psychoses|psychotic",
     "Substance use": (r"substance|alcohol use|alcohol abuse|alcohol dependence|alcoholism"
                       r"|hazardous alcohol|heavy drinking|binge drinking"
                       r"|opioid|opiate|cocaine|methamphetamine|stimulant use|cannabis use"
