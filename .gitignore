@@ -5,3 +5,4 @@ out/
 data/raw/
 data/trials.db
 trials.db
+.venv/
