@@ -21,7 +21,7 @@ Based on 14,724 interventional trials that started 2010–2025 and list at least
 - **Trial termination is hard to predict, and virtual reality is the fastest-growing treatment topic.** Machine learning models predicted which trials would be terminated only modestly better than chance (ROC AUC 0.66), and topic modelling of trial titles showed virtual reality rising from 0.5% to 5.2% of trials (see Machine learning below).
 - **COVID-19 left a clear mark.** In 2020, seven of eight condition groups started fewer trials; in 2021, all eight rose. Anxiety trials stepped up in 2021 and stayed higher, and COVID-specific trials explain only a small part of that rise.
 
-**Caveats:** ClinicalTrials.gov is US-based, so many European and Asian trials register elsewhere. Overall registration grew over this period, so comparisons between groups are more reliable than raw growth. Condition groups come from my own keyword rules (see Condition grouping and Validation below).
+**Caveats:** ClinicalTrials.gov is US-based, so many trials in other continents register elsewhere. Overall registration grew over this period, so comparisons between groups are more reliable than raw growth. Condition groups come from my own keyword rules (see Condition grouping and Validation below).
 
 ## Dashboard
 
