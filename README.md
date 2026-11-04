@@ -12,7 +12,7 @@ How is mental health treatment research changing? An analysis of interventional 
 
 Based on 14,724 interventional trials that started 2010–2025 and list at least one of eight DSM-5-aligned conditions.
 
-- **Research on more prevalent disorders grew far faster than research on less prevalent mental illness.** Comparing 2010–12 with 2023–25, anxiety trials grew 5.7×, eating disorders 3.6×, substance use 3.5× and depression 2.5×, while schizophrenia and bipolar disorder grew only 1.2×.
+- **Research on more prevalent disorders grew faster than research on less prevalent mental illness.** Comparing 2010–12 with 2023–25, anxiety trials grew 5.7×, eating disorders 3.6×, substance use 3.5× and depression 2.5×, while schizophrenia and bipolar disorder grew only 1.2×.
 - **Non-drug treatments now dominate.** Drug trials stayed roughly level (277 in 2010, 251 in 2025), but behavioural trials grew 3.4× (203 → 691) and device trials 10× (27 → 272), driven by brain stimulation (TMS, tDCS) and virtual reality. Drugs fell from 44% to 15% of treatment types.
 - **Universities and hospitals now sponsor nearly 9 in 10 trials.** Industry trials halved from 2010 to 2015 (134 → 69), then recovered to 126 by 2025, while academic trials grew 3.5× (366 → 1,269). Industry's share fell from 24% to 9%.
 - **Industry and academia stop trials for different reasons.** Industry trials stop early more often (15.9% vs 12.3%), mostly because of business decisions (27% of stated reasons) or lack of efficacy (17%). Academic trials stop because of recruitment (29%), funding (19%) and COVID-19 (14%). Safety was the stated reason in fewer than 1% of cases.
