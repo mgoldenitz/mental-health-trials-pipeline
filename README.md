@@ -198,7 +198,7 @@ US law requires results within one year of primary completion only for "applicab
 
 ![Stopped-early models](images/ml/stopped_early.png)
 
-**H. Topics in trial titles.** Non-negative matrix factorisation (NMF) on title text, with condition names removed, found 16 treatment topics. Virtual reality grew fastest (0.5% of trials in 2010–12 to 5.2% in 2023–25), followed by pain and procedure-related studies (2.3% to 4.9%) and guided self-help, online and mobile approaches (3.0% to 5.0%). Drug-development wording (tolerability, pharmacokinetics, adjunctive) fell from 9.6% to 4.1%. Psychedelic trials were too few to form their own topic, so the keyword flag remains the better way to track them.
+**H. Topics in trial titles.** Non-negative matrix factorisation (NMF) on title text, with condition names removed, found 16 treatment topics. Virtual reality grew fastest (0.5% of trials in 2010–12 to 5.2% in 2023–25), followed by pain and procedure-related studies (2.3% to 4.9%) and guided self-help, online and mobile approaches (3.0% to 5.0%). Drug-development wording (tolerability, pharmacokinetics, adjunctive) fell from 9.6% to 4.1%. There aren’t enough trials on Psychedelic to form their own topic, so the keyword flag remains the better way to track them.
 
 ![Title topics](images/ml/title_topics.png)
 
