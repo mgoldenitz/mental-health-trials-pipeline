@@ -219,7 +219,7 @@ Every number above comes from the download of 1 October 2026 and stays fixed. A 
 - Health Canada: a third Lambda function runs every Monday at 06:30 Toronto time, downloads Health Canada's Clinical Trials Database API, and keeps the mental health trials (257 of 9,757 on 1 November 2026) with the same condition rules. The tables go to S3, Athena and PostgreSQL, and the app's Canada tab shows them. Details in `docs/health-canada.md`.
 - Amazon Bedrock: `tools/classify_why_stopped.py` runs from a PC, not from the weekly job, and sends the free-text reasons trials stopped to Amazon Nova Micro, which sorts them into 11 categories next to the keyword groups from `sql/05b_why_stopped_grouped.sql`. Details in `docs/why-stopped-bedrock.md`.
 - `data/baseline/counts_2026-10-01.csv`: the published counts in the same format, so each refresh can be compared with them.
-- The app's Latest refresh tab shows the newest counts beside the published ones for trials that started 2010–2025, and lists trials starting after 2025 separately because many of those start dates are still estimates.
+- The Latest refresh section of the app's Weekly updates tab shows the newest counts beside the published ones for trials that started 2010–2025, and lists trials starting after 2025 separately because many of those start dates are still estimates.
 - v2 condition groups (November 2026): a second search adds ADHD, autism spectrum, personality disorders and gambling and gaming disorders, and every trial gets a suicide or self-harm flag. The first search and the published counts are unchanged; each trial carries a `scope` of `core` (the published analysis) or `extended`. Details in `docs/v2-condition-groups.md`.
 
 Setup steps for a personal AWS account are in `docs/aws-setup.md`.

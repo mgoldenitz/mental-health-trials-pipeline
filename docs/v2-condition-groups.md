@@ -35,7 +35,7 @@ The full counts come from the first weekly run after deploying, which runs both 
 ## What changes downstream
 
 - S3: the second search's raw pages go to `raw/<date>/extra/`. The four tables hold both scopes, and `trials` has two new columns, `scope` and `suicide_flag`.
-- Streamlit: the Latest refresh tab keeps comparing the published metrics with the baseline and adds a table for the new groups and the flag.
+- Streamlit: the Weekly updates tab keeps comparing the published metrics with the baseline and adds a table for the new groups and the flag.
 - Athena: the latest database (`mental_health_trials`) now holds extended trials and v2 group rows, so the 11 queries in `athena/` return more rows there. Add `t.scope = 'core'` and leave out the v2 groups to match the published analysis. The published database is unchanged, and its trials have `scope` = `core` once `tools/upload_published_parquet.py` is run again (optional; without it `scope` is empty). `athena/v2/new_condition_groups.sql` summarises the new groups.
 - PostgreSQL and the live Power BI report: `trials` gains `scope` and `suicide_flag`. Until the report filters on `scope` = `core`, its totals will include extended trials and its condition visuals will show the four new groups.
 

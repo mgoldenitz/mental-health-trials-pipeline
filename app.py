@@ -64,12 +64,44 @@ GROUP_COLOURS = {
     "Schizophrenia & Psychosis": "#6A3D9A",
     "Substance use": "#A67C00",
 }
+# Status pills in the Find trials table, using theme colour names so they suit light and dark mode
+STATUS_COLOURS = {
+    "Recruiting": "green",
+    "Not yet recruiting": "blue",
+    "Enrolling by invitation": "blue",
+    "Active not recruiting": "violet",
+    "Completed": "gray",
+    "Suspended": "orange",
+    "Terminated": "red",
+    "Withdrawn": "red",
+    "Unknown": "gray",
+}
 NEW_GROUP_COLOURS = {
     "ADHD": "#0072B2",
     "Autism spectrum": "#D55E00",
     "Gambling & gaming disorders": "#009E73",
     "Personality disorders": "#6A3D9A",
 }
+US_SITE_COLOURS = {"With a US site": "#0072B2", "Without a US site": "#9DB9D3"}
+
+# Brighter versions of the same hues for the dark theme, so every line stays readable on charcoal
+GROUP_COLOURS_DARK = {
+    "Anxiety": "#56B4E9",
+    "Bipolar disorder": "#E07AB0",
+    "Depression": "#EE8A3C",
+    "Eating disorders": "#C49A7E",
+    "OCD": "#B0A89A",
+    "PTSD": "#2BB58A",
+    "Schizophrenia & Psychosis": "#A98BD4",
+    "Substance use": "#D8B54A",
+}
+NEW_GROUP_COLOURS_DARK = {
+    "ADHD": "#56B4E9",
+    "Autism spectrum": "#EE8A3C",
+    "Gambling & gaming disorders": "#2BB58A",
+    "Personality disorders": "#A98BD4",
+}
+US_SITE_COLOURS_DARK = {"With a US site": "#56B4E9", "Without a US site": "#4A6378"}
 
 
 def other_last(df, col):
@@ -83,24 +115,35 @@ def by_last_value(df, x, y, group):
     """Group names ordered by their value in the latest year, highest first, so the
     legend lists the lines in the same order they end on the chart."""
     return df.sort_values(x).groupby(group)[y].last().sort_values(ascending=False).index.tolist()
-    span = max(df[y].max() - df[y].min(), 1)
-    gap = span / 22
-    placed = []
-    for row in ends.itertuples():
-        pos = getattr(row, y)
-        if placed and pos - placed[-1] < gap:
-            pos = placed[-1] + gap
-        placed.append(pos)
-        fig.add_annotation(x=getattr(row, x), y=pos, text=getattr(row, group), showarrow=False,
-                           xanchor="left", xshift=8, font=dict(color=colours.get(getattr(row, group), "#333"), size=12))
-    first, last = int(df[x].min()), int(df[x].max())
-    step = 5 if last - first >= 8 else 1
-    fig.update_xaxes(range=[first - 0.5, last + (last - first) * 0.65 + 1],
-                     tickvals=list(range(first, last + 1, step)))
-    fig.update_layout(showlegend=False)
-    return fig
+
+
+def chart(where, fig):
+    """Draw a Plotly figure in the editorial style: left-aligned serif title, horizontal hairlines
+    only. Colours and body font come from the theme in .streamlit/config.toml."""
+    hairline = "rgba(120, 110, 95, 0.18)"
+    fig.update_layout(
+        title=dict(x=0, xanchor="left", font=dict(family="Newsreader, Georgia, serif", size=17)),
+        legend=dict(title_text=fig.layout.legend.title.text or ""),
+        margin=dict(t=56),
+        bargap=0.45,
+    )
+    # Hairlines run along the value axis only: vertical for horizontal bars, horizontal otherwise
+    horizontal = any(getattr(t, "orientation", None) == "h" for t in fig.data)
+    value_axis, category_axis = (fig.update_xaxes, fig.update_yaxes) if horizontal else \
+        (fig.update_yaxes, fig.update_xaxes)
+    value_axis(showgrid=True, gridcolor=hairline, zeroline=False)
+    category_axis(showgrid=False, linecolor=hairline, ticks="")
+    # Labels inside bars: white on the dark light-mode accent, charcoal on the pale dark-mode accent
+    fig.update_traces(insidetextfont_color="#1C1A17" if DARK else "#FFFFFF", selector=dict(type="bar"))
+    where.plotly_chart(fig, width="stretch")
 
 st.set_page_config(page_title="Mental Health & Psychedelic Trial Tracker", layout="wide")
+
+# Pick chart colours for the viewer's light or dark theme
+DARK = st.context.theme.type == "dark"
+if DARK:
+    GROUP_COLOURS, NEW_GROUP_COLOURS, US_SITE_COLOURS = (
+        GROUP_COLOURS_DARK, NEW_GROUP_COLOURS_DARK, US_SITE_COLOURS_DARK)
 
 
 # ---------------------------------------------------------------- data
@@ -387,6 +430,8 @@ ids = set(view["nct_id"])
 
 
 # ---------------------------------------------------------------- header
+st.logo(Path(__file__).parent / "images" / "branding" / "evidence-constellation-mark.png", size="large")
+st.caption("CLINICAL TRIALS REGISTRY ANALYSIS · 2010–2025")
 st.title("Mental Health & Psychedelic Trial Tracker")
 st.caption("Search and explore mental health clinical trials registered on ClinicalTrials.gov. "
            "Use the filters on the left; every chart and table updates with them.")
@@ -412,9 +457,8 @@ for col, label, count in [
         (k4, "In Canada", int(view["in_canada"].sum()))]:
     col.metric(label, f"{count:,}", share(count, n_view, "of trials"), delta_color="off", delta_arrow="off")
 
-tab_overview, tab_search, tab_psy, tab_canada, tab_about, tab_new, tab_latest = st.tabs(
-    ["Overview", "Find trials", "Psychedelic & Ketamine", "Canada", "About the data",
-     "New groups (updated weekly)", "Latest refresh"])
+tab_overview, tab_search, tab_psy, tab_canada, tab_weekly, tab_about = st.tabs(
+    ["Overview", "Find trials", "Psychedelic & Ketamine", "Canada", "Weekly updates", "About the data"])
 
 
 # ---------------------------------------------------------------- overview
@@ -433,7 +477,7 @@ with tab_overview:
                                                                     "condition_group")},
                   labels={"start_year": "Year started", "trials": "Trials", "condition_group": "Condition"},
                   title="Trials started each year, by Condition")
-    c1.plotly_chart(fig, width="stretch")
+    chart(c1, fig)
 
     treat = other_last(interventions[interventions["nct_id"].isin(ids)]
                        .drop_duplicates(["nct_id", "treatment_type"])
@@ -441,18 +485,18 @@ with tab_overview:
     fig = px.bar(treat, x="trials", y="treatment_type", orientation="h",
                  labels={"trials": "Trials", "treatment_type": ""},
                  title="Trials by Treatment type (a trial can test more than one)")
-    c2.plotly_chart(fig, width="stretch")
+    chart(c2, fig)
 
     c3, c4 = st.columns(2)
     spons = other_last(view.groupby("sponsor_type").size().reset_index(name="trials"), "sponsor_type")
     fig = px.bar(spons, x="trials", y="sponsor_type", orientation="h",
                  labels={"trials": "Trials", "sponsor_type": ""}, title="Trials by Sponsor type")
-    c3.plotly_chart(fig, width="stretch")
+    chart(c3, fig)
 
     outc = view.groupby("outcome").size().reset_index(name="trials")
     fig = px.bar(outc, x="trials", y="outcome", orientation="h", labels={"trials": "Trials", "outcome": ""},
                  category_orders={"outcome": OUTCOME_ORDER}, title="Trial Outcomes")
-    c4.plotly_chart(fig, width="stretch")
+    chart(c4, fig)
 
     st.subheader("Do completed trials post their results?")
     st.caption("Completed trials in the published analysis whose primary completion date was on or before "
@@ -481,7 +525,7 @@ with tab_overview:
                          "completed_trials": "Completed trials", "with_results": "Posted results"},
                  title="Share of completed trials that posted results, by Sponsor type")
     fig.update_xaxes(range=[0, 100])
-    c5.plotly_chart(fig, width="stretch")
+    chart(c5, fig)
 
     by_site = rr[rr["us_site"] != "all"].copy()
     by_site["US site"] = by_site["us_site"].map({"yes": "With a US site", "no": "Without a US site"})
@@ -489,14 +533,16 @@ with tab_overview:
     fig = px.bar(by_site, x="pct_with_results", y="sponsor_type", color="US site", orientation="h",
                  barmode="group", category_orders={"sponsor_type": order[::-1],
                                                    "US site": ["With a US site", "Without a US site"]},
-                 color_discrete_map={"With a US site": "#0072B2", "Without a US site": "#9DB9D3"},
+                 color_discrete_map=US_SITE_COLOURS,
                  hover_data={"completed_trials": ":,", "with_results": ":,"},
                  labels={"pct_with_results": "Posted results (%)", "sponsor_type": "",
                          "completed_trials": "Completed trials", "with_results": "Posted results"},
                  title="With and without a US site")
     fig.update_xaxes(range=[0, 100])
     fig.update_layout(legend_title_text="")
-    c6.plotly_chart(fig, width="stretch")
+    # Outline the pale "without" bars in the strong blue so they stand out from the background
+    fig.update_traces(marker_line_color=US_SITE_COLOURS["With a US site"], marker_line_width=1.5)
+    chart(c6, fig)
 
 
 # ---------------------------------------------------------------- search
@@ -545,24 +591,29 @@ with tab_search:
         result_note = "Published snapshot · 1 October 2026 · Weekly data unavailable"
     result_table = table[["nct_id", "link", "title", "conditions", "treatments", "phase", "status",
                           "start_year", "enrollment", "sponsor_name", "countries"]].reset_index(drop=True)
+    # Status as a one-item list so the table can draw it as a coloured pill
+    result_table["status"] = result_table["status"].map(lambda s: [s] if isinstance(s, str) else [])
+    status_options = sorted(set(statuses) | {s for row in result_table["status"] for s in row})
+    status_colours = [STATUS_COLOURS.get(s, "gray") for s in status_options]
     result_key = f"trial_results_{hash(tuple(result_table['nct_id']))}"
     st.caption(f"**{len(table):,} trials** · {result_note} · Select a row for current registry details")
     selection = st.dataframe(
         result_table,
         column_config={
             "nct_id": None,
-            "link": st.column_config.LinkColumn("Trial", display_text=r"study/(NCT\d+)"),
+            "link": st.column_config.LinkColumn("Trial", display_text=r"study/(NCT\d+)", pinned=True),
             "title": st.column_config.TextColumn("Title", width="large"),
             "conditions": "Condition",
             "treatments": "Treatment type",
             "phase": "Phase",
-            "status": "Status",
+            "status": st.column_config.MultiselectColumn("Status", options=status_options,
+                                                         color=status_colours),
             "start_year": st.column_config.NumberColumn("Start", format="%d"),
             "enrollment": st.column_config.NumberColumn("Enrolment", format="%d"),
             "sponsor_name": "Sponsor",
             "countries": "Countries",
         },
-        hide_index=True, width="stretch", height=520,
+        hide_index=True, width="stretch", height=560, row_height=30,
         on_select="rerun", selection_mode="single-row", key=result_key,
     )
     selected_rows = selection.selection.rows
@@ -593,7 +644,7 @@ with tab_psy:
         fig = px.bar(psy_year, x="start_year", y="trials", color="psychedelic_class",
                      labels={"start_year": "Year started", "trials": "Trials", "psychedelic_class": ""},
                      title="Psychedelic & Ketamine trials started each year")
-        c1.plotly_chart(fig, width="stretch")
+        chart(c1, fig)
 
         psy_cond = (conditions[conditions["nct_id"].isin(psy["nct_id"])]
                     .drop_duplicates(["nct_id", "condition_group"])
@@ -601,12 +652,12 @@ with tab_psy:
         fig = px.bar(psy_cond, x="trials", y="condition_group", orientation="h",
                      labels={"trials": "Trials", "condition_group": ""},
                      title="Conditions studied")
-        c2.plotly_chart(fig, width="stretch")
+        chart(c2, fig)
 
         top = psy.groupby("sponsor_name").size().nlargest(10).sort_values().reset_index(name="trials")
         fig = px.bar(top, x="trials", y="sponsor_name", orientation="h",
                      labels={"trials": "Trials", "sponsor_name": ""}, title="Top 10 Sponsors")
-        st.plotly_chart(fig, width="stretch")
+        chart(st, fig)
 
 
 # ---------------------------------------------------------------- canada
@@ -622,14 +673,14 @@ with tab_canada:
         fig = px.bar(ca_cond, x="trials", y="condition_group", orientation="h",
                      labels={"trials": "Trials", "condition_group": ""},
                      title="Trials in Canada, by Condition")
-        c1.plotly_chart(fig, width="stretch")
+        chart(c1, fig)
 
         countries = (sites[sites["nct_id"].isin(ids)].drop_duplicates()
                      .groupby("country").size().nlargest(10).sort_values().reset_index(name="trials"))
         fig = px.bar(countries, x="trials", y="country", orientation="h",
                      labels={"trials": "Trials", "country": ""},
                      title="Top 10 Countries")
-        c2.plotly_chart(fig, width="stretch")
+        chart(c2, fig)
 
         st.subheader("Recruiting in Canada now")
         rec = ca[ca["overall_status"] == "RECRUITING"].sort_values("start_year", ascending=False)
@@ -736,13 +787,13 @@ with tab_canada:
         fig = px.bar(by_cond, x="value", y="category", orientation="h",
                      labels={"value": "Trials", "category": ""},
                      title="Health Canada trials, by condition")
-        c1.plotly_chart(fig, width="stretch")
+        chart(c1, fig)
         by_year = hc_metric("hc_trials_by_year").copy()
         by_year["category"] = pd.to_numeric(by_year["category"], errors="coerce")
         fig = px.bar(by_year.dropna(), x="category", y="value",
                      labels={"category": "Year approved", "value": "Trials"},
                      title="Health Canada trials, by year approved")
-        c2.plotly_chart(fig, width="stretch")
+        chart(c2, fig)
 
         if hc_trials is not None:
             st.markdown("Ongoing Health Canada trials")
@@ -767,7 +818,7 @@ with tab_about:
         "The **Overview**, **Psychedelic & Ketamine**, and ClinicalTrials.gov figures on the **Canada** tab "
         "use the published 1 October 2026 download. **Find trials** uses the latest weekly refresh so its "
         "recruitment statuses stay current, while keeping only trials in the eight published condition groups. "
-        "The **New groups** and **Latest refresh** tabs show separate weekly data and do not change published totals.")
+        "The **Weekly updates** tab shows separate weekly data and does not change published totals.")
 
     st.markdown("**Source and published scope**")
     st.markdown(
@@ -788,7 +839,7 @@ with tab_about:
         "The condition search was not designed to capture every mental or neurological condition. "
         "For example, ADHD, autism, dementia, pain, insomnia, and studies of healthy volunteers are "
         "not included unless a trial also lists one of the eight grouped conditions. The four newer "
-        "groups are presented separately in **New groups**.")
+        "groups are presented separately on the **Weekly updates** tab.")
 
     st.markdown("**How to interpret the numbers**")
     st.markdown(
@@ -813,7 +864,8 @@ def compare(baseline, latest, metric):
     return out
 
 
-with tab_latest:
+with tab_weekly:
+    st.subheader("Latest refresh")
     cfg = aws_secrets()
     try:
         refresh = load_refresh(cfg) if cfg else None
@@ -821,7 +873,7 @@ with tab_latest:
         refresh = False
         st.error(f"Could not read the latest refresh from S3: {e}")
     if refresh is None:
-        st.info("This tab shows counts from the latest weekly download next to the published "
+        st.info("This section shows counts from the latest weekly download next to the published "
                 "counts from 1 October 2026. The scheduled refresh is not connected yet.")
     elif refresh:
         latest, manifest, history = refresh
@@ -852,7 +904,7 @@ with tab_latest:
                       x="start_year", y="value", color="variable", markers=True,
                       labels={"start_year": "Year started", "value": "Trials", "variable": ""},
                       title="Trials started each year")
-        c1.plotly_chart(fig, width="stretch")
+        chart(c1, fig)
 
         c2.markdown("Trials by condition")
         c2.dataframe(compare(baseline, latest, "trials_by_condition"), width="stretch")
@@ -872,7 +924,7 @@ with tab_latest:
                              tickvals=totals["snapshot_date"] if len(totals) <= 12 else None)
             fig.update_yaxes(tickformat=",d", dtick=max(1, round((totals["value"].max()
                                                                   - totals["value"].min()) / 5)))
-            st.plotly_chart(fig, width="stretch")
+            chart(st, fig)
         with st.expander("Refresh notes"):
             if len(later):
                 later_counts = ", ".join(
@@ -880,20 +932,16 @@ with tab_latest:
                 st.caption(
                     f"{later_counts} trials list a start after 2025. Many dates are estimates; "
                     "these trials are outside the published analysis.")
-            st.caption("Four newer condition groups are shown on the New groups tab.")
+            st.caption("Four newer condition groups are shown below, under New condition groups.")
             if len(totals) < 4:
                 st.caption("Weekly trend appears after four downloads.")
 
 
-with tab_new:
-    cfg = aws_secrets()
-    try:
-        refresh = load_refresh(cfg) if cfg else None
-    except Exception as e:
-        refresh = False
-        st.error(f"Could not read the latest refresh from S3: {e}")
+    # Same tab, second section: reuses the refresh loaded above (an S3 error is already shown there)
+    st.divider()
+    st.subheader("New condition groups")
     if refresh is None:
-        st.info("This tab shows ADHD, autism spectrum, personality disorder and gambling or gaming "
+        st.info("This section shows ADHD, autism spectrum, personality disorder and gambling or gaming "
                 "trials from the weekly download. The scheduled refresh is not connected yet.")
     elif refresh:
         latest, manifest, _ = refresh
@@ -928,7 +976,7 @@ with tab_new:
                               category_orders={"group": by_last_value(yearly, "start_year", "trials", "group")},
                               labels={"start_year": "Year started", "trials": "Trials", "group": ""},
                               title="Trials started each year, by New group")
-                c1.plotly_chart(fig, width="stretch")
+                chart(c1, fig)
 
             flags = (latest[latest["metric"] == "v2_suicide_flag_by_condition"]
                      .rename(columns={"category": "group", "value": "trials"})
@@ -938,7 +986,7 @@ with tab_new:
                 fig = px.bar(flags, x="trials", y="group", orientation="h",
                              labels={"trials": "Trials", "group": ""},
                              title="Trials flagged for suicide or self-harm, by Condition group")
-                c2.plotly_chart(fig, width="stretch")
+                chart(c2, fig)
 
             m1, m2 = st.columns(2)
             m1.metric("Trials not in the published analysis", f"{one_new('v2_trials_extended'):,}",

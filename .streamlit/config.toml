@@ -1,0 +1,81 @@
+# Editorial research-journal theme: warm ivory paper, near-black ink, one terracotta accent,
+# serif headings over a clean sans-serif body. Condition colours in app.py stay colourblind-safe.
+
+[theme]
+font = "'IBM Plex Sans':https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+headingFont = "Newsreader:https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
+codeFont = "'IBM Plex Mono':https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap"
+baseFontSize = 15
+headingFontSizes = ["2.6rem", "1.75rem", "1.35rem", "1.1rem", "1rem", "0.9rem"]
+headingFontWeights = [500, 500, 500, 600, 600, 600]
+codeFontSize = "0.85rem"
+baseRadius = "3px"
+buttonRadius = "3px"
+showWidgetBorder = true
+showSidebarBorder = true
+linkUnderline = false
+
+[theme.light]
+font = "'IBM Plex Sans':https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+headingFont = "Newsreader:https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
+codeFont = "'IBM Plex Mono':https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap"
+headingFontSizes = ["2.6rem", "1.75rem", "1.35rem", "1.1rem", "1rem", "0.9rem"]
+headingFontWeights = [500, 500, 500, 600, 600, 600]
+codeFontSize = "0.85rem"
+primaryColor = "#9A4220"
+backgroundColor = "#F6F2EA"
+secondaryBackgroundColor = "#EDE6D9"
+textColor = "#1F1D1A"
+linkColor = "#9A4220"
+borderColor = "#D9D1C3"
+codeTextColor = "#6E2E15"
+codeBackgroundColor = "#EDE6D9"
+dataframeBorderColor = "#E2DACC"
+dataframeHeaderBackgroundColor = "#EDE6D9"
+dataframeHeaderTextColor = "#3A362F"
+redColor = "#A8321E"
+orangeColor = "#A3510F"
+yellowColor = "#8A6A00"
+greenColor = "#2E6B4A"
+blueColor = "#1F5C8C"
+violetColor = "#5B4B8A"
+grayColor = "#6B6358"
+chartCategoricalColors = ["#9A4220", "#0072B2", "#009E73", "#6A3D9A", "#A67C00", "#B5397F", "#555555"]
+
+[theme.light.sidebar]
+backgroundColor = "#EFE9DD"
+secondaryBackgroundColor = "#E6DECF"
+borderColor = "#D9D1C3"
+
+[theme.dark]
+# Fonts repeated here: the dark variant does not inherit them from [theme]
+font = "'IBM Plex Sans':https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+headingFont = "Newsreader:https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
+codeFont = "'IBM Plex Mono':https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap"
+headingFontSizes = ["2.6rem", "1.75rem", "1.35rem", "1.1rem", "1rem", "0.9rem"]
+headingFontWeights = [500, 500, 500, 600, 600, 600]
+codeFontSize = "0.85rem"
+primaryColor = "#B85A32"
+backgroundColor = "#1C1A17"
+secondaryBackgroundColor = "#28241F"
+textColor = "#ECE6DA"
+linkColor = "#E39A72"
+borderColor = "#3A352E"
+codeTextColor = "#E9B596"
+codeBackgroundColor = "#28241F"
+dataframeBorderColor = "#3A352E"
+dataframeHeaderBackgroundColor = "#28241F"
+dataframeHeaderTextColor = "#D8D0C2"
+redColor = "#E57A63"
+orangeColor = "#E8954F"
+yellowColor = "#D8B54A"
+greenColor = "#6DBB8D"
+blueColor = "#6FA8DC"
+violetColor = "#A797D6"
+grayColor = "#A39A8C"
+chartCategoricalColors = ["#E39A72", "#56B4E9", "#2BB58A", "#A98BD4", "#D8B54A", "#E07AB0", "#A39A8C"]
+
+[theme.dark.sidebar]
+backgroundColor = "#211E1A"
+secondaryBackgroundColor = "#2D2924"
+borderColor = "#3A352E"

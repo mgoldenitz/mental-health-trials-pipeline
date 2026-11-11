@@ -76,7 +76,7 @@ region = "us-east-2"
 bucket = "THE_BUCKET_NAME"
 ```
 
-3. Save. The app restarts and the Latest refresh tab shows the counts.
+3. Save. The app restarts and the Weekly updates tab shows the counts.
 
 Never commit these keys to the repository.
 
