@@ -27,3 +27,17 @@ jobs:
           cd src && python -m pipeline --raw "$RUNNER_TEMP/sample_raw.json" --out "$RUNNER_TEMP/out"
       - name: Compare with the published tables
         run: python tools/check_against_published.py "$RUNNER_TEMP/out" --sample "$RUNNER_TEMP/sample_raw.json"
+
+  app:
+    # Runs every page of the Streamlit app headless (no AWS secrets) and checks the headline numbers
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the app's requirements
+        run: pip install -r requirements.txt pytest
+      - name: Run the app smoke test
+        run: pytest -q tests/test_app.py
