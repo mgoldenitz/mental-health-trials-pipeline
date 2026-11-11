@@ -17,6 +17,14 @@ def compare(baseline, latest, metric):
     return out
 
 
+# Same number style as the rest of the app: thousands separators, and a sign on the change
+COMPARE_COLUMNS = {
+    "Published": st.column_config.NumberColumn(format="localized"),
+    "Latest": st.column_config.NumberColumn(format="localized"),
+    "Change": st.column_config.NumberColumn(format="%+d"),
+}
+
+
 def one(df, metric, category="All"):
     row = df[(df["metric"] == metric) & (df["category"] == category)]
     return int(row["value"].iloc[0]) if len(row) else 0
@@ -58,10 +66,10 @@ else:
 
     c2.markdown("Trials by condition")
     c2.dataframe(compare(baseline, latest, "trials_by_condition"), width="stretch",
-                 alt="Table of published and latest trial counts by condition group, with the change.")
+                 column_config=COMPARE_COLUMNS, alt="Table of published and latest trial counts by condition group, with the change.")
     c2.markdown("Trials by outcome")
     c2.dataframe(compare(baseline, latest, "trials_by_outcome"), width="stretch",
-                 alt="Table of published and latest trial counts by outcome, with the change.")
+                 column_config=COMPARE_COLUMNS, alt="Table of published and latest trial counts by outcome, with the change.")
 
     later = latest[latest["metric"] == "started_after_window"]
     totals = history[(history["metric"] == "trials") & (history["category"] == "All")].copy()
