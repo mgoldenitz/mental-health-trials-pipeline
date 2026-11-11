@@ -30,8 +30,8 @@ if not view.empty:
                          .groupby("treatment_type").size().reset_index(name="trials"), "treatment_type")
     fig = px.bar(treat, x="trials", y="treatment_type", orientation="h",
                  labels={"trials": "Trials", "treatment_type": ""},
-                 title="Trials by Treatment type (a trial can test more than one)")
-    t.chart(c2, fig)
+                 title="Trials by Treatment type<br><sup>A trial can test more than one</sup>")
+    t.chart(c2, fig, alt="Bar chart: trials by treatment type. A trial can test more than one.")
 
     c3, c4 = st.columns(2)
     spons = t.other_last(view.groupby("sponsor_type").size().reset_index(name="trials"), "sponsor_type")

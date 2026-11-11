@@ -84,7 +84,7 @@ def results():
             "treatments": "Treatment type",
             "phase": "Phase",
             "status": st.column_config.MultiselectColumn("Status", options=status_options,
-                                                         color=status_colours),
+                                                         color=status_colours, width="medium"),
             "start_year": st.column_config.NumberColumn("Start", format="%d"),
             "enrollment": st.column_config.NumberColumn("Enrolment", format="%d"),
             "sponsor_name": "Sponsor",

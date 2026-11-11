@@ -18,7 +18,9 @@ ROOT = Path(__file__).parent
 DATA = ROOT / "data" / "powerbi"
 BASELINE = ROOT / "data" / "baseline" / "counts_2026-10-01.csv"
 RESULTS = ROOT / "results" / "10_results_reporting.csv"
-LOGO = ROOT / "images" / "branding" / "evidence-constellation-mark.png"
+# Transparent-background mark; the dark variant has the navy lifted so it reads on charcoal
+LOGO = ROOT / "images" / "branding" / "evidence-constellation-mark-transparent.png"
+LOGO_DARK = ROOT / "images" / "branding" / "evidence-constellation-mark-transparent-dark.png"
 CTGOV = "https://clinicaltrials.gov/study/"
 REPO = "https://github.com/mgoldenitz/mental-health-trials-pipeline"
 
@@ -146,7 +148,7 @@ def chart(where, fig, alt=None):
     fig.update_layout(
         title=dict(x=0, xanchor="left", font=dict(family="Newsreader, Georgia, serif", size=17)),
         legend=dict(title_text=fig.layout.legend.title.text or ""),
-        margin=dict(t=56),
+        margin=dict(t=56, r=28),   # room on the right so the last axis tick (100) is not clipped
         bargap=0.45,
     )
     # Hairlines run along the value axis only: vertical for horizontal bars, horizontal otherwise
@@ -563,7 +565,7 @@ def filtered_view():
 # ---------------------------------------------------------------- header
 def header():
     """Logo, kicker and title, shown on every page."""
-    st.logo(LOGO, size="large")
+    st.logo(LOGO_DARK if is_dark() else LOGO, size="large")
     st.caption("CLINICAL TRIALS REGISTRY ANALYSIS · 2010–2025")
     st.title("Mental Health & Psychedelic Trial Tracker")
 
