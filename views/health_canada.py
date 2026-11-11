@@ -26,7 +26,7 @@ else:
         f"Health Canada Clinical Trials Database, downloaded {hc_manifest['snapshot_date']}. "
         "It lists drug and biologic trials authorized by Health Canada since April 2013, including "
         "trials not registered on ClinicalTrials.gov. A trial counts when any of its conditions "
-        "falls in one of the eight mental health groups. The sidebar filters do not apply here.")
+        "falls in one of the eight mental health groups.")
     st.caption("Health Canada trial counts overlap with the ‘In Canada’ ClinicalTrials.gov count on the "
                "Explore pages; do not add the two counts together.")
 

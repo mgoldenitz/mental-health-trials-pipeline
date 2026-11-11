@@ -23,7 +23,7 @@ else:
                    "They are not part of the published analysis of 1 October 2026, so the counts on the "
                    "other pages do not include them, and these numbers change every Monday. Trials that "
                    "began between 2010 and 2025. A trial can be in more than one group, including a "
-                   "published one. The sidebar filters do not apply here.")
+                   "published one.")
 
         def one_new(metric, category="All"):
             row = latest[(latest["metric"] == metric) & (latest["category"] == category)]

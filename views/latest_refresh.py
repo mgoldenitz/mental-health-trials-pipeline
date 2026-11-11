@@ -41,7 +41,7 @@ else:
     latest, manifest, history = refresh
     baseline = t.load_baseline()
     st.caption(f"Latest download: {manifest['snapshot_date']} · Published baseline: 1 October 2026 · "
-               "Trials started 2010–2025 · Sidebar filters do not apply")
+               "Trials started 2010–2025")
 
     with st.grid(4, min_column_width=170, gap="small"):
         for label, metric, category in [

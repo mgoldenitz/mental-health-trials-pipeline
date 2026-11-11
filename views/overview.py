@@ -50,7 +50,7 @@ st.caption("Completed trials in the published analysis whose primary completion 
            "30 September 2025 (8,230 trials), so each had at least a year to post results on "
            "ClinicalTrials.gov before the download. US law requires results only for some trials, "
            "so these are reporting rates, not compliance rates. Groups with fewer than 30 trials are "
-           "left out. The sidebar filters do not apply here.")
+           "left out.")
 results = t.load_results()
 rr = results[(results["sponsor_type"] != "All") & (results["completed_trials"] >= 30)]
 allrow = results.query("sponsor_type == 'All'").set_index("us_site")
