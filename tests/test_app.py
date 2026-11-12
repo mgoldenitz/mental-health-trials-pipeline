@@ -54,3 +54,42 @@ def test_search(app):
     app.text_input(key="q").input("psilocybin").run()
     assert not app.exception
     assert any("trials" in c.value and "Published snapshot" in c.value for c in app.caption)
+
+
+def shown_count(at):
+    """The trial count in the Find trials caption, e.g. '**101 trials** · Published snapshot ...'."""
+    caption = next(c.value for c in at.caption if "Select a row" in c.value)
+    return int(caption.split("**")[1].split()[0].replace(",", ""))
+
+
+def test_search_narrows_the_results(app):
+    app.switch_page("views/find_trials.py").run()
+    everything = shown_count(app)
+    assert everything == 14724 and len(app.dataframe[0].value) == everything
+    app.text_input(key="q").input("psilocybin").run()
+    narrowed = shown_count(app)
+    assert 0 < narrowed < everything
+    assert len(app.dataframe[0].value) == narrowed      # the table and the caption agree
+    app.text_input(key="q").input("zzzzqqq").run()
+    assert any("No trials match this search" in i.value for i in app.info)
+    assert not app.dataframe
+
+
+def test_filters_and_search_load_from_the_url():
+    """A shared link restores the sidebar filters and the search box (bind="query-params")."""
+    at = AppTest.from_file(APP, default_timeout=120)
+    at.query_params["condition"] = ["Depression"]
+    at.run()
+    assert not at.exception
+    assert at.sidebar.multiselect(key="condition").value == ["Depression"]
+    assert at.metric[0].value == "6,817"
+
+    at = AppTest.from_file(APP, default_timeout=120)
+    at.query_params["q"] = "psilocybin"
+    at.query_params["psychedelic"] = "true"
+    at.run()
+    at.switch_page("views/find_trials.py").run()
+    assert not at.exception
+    assert at.text_input(key="q").value == "psilocybin"
+    assert at.sidebar.toggle(key="psychedelic").value is True
+    assert 0 < shown_count(at) <= 101   # the psychedelic filter can only remove psilocybin matches
