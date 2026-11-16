@@ -61,12 +61,14 @@ HC_EXCLUDE = r"post\W*traumatic(?!\W*stress)|opioid\W*induced"
 USER_AGENT = "mental-health-trials-pipeline (github.com/mgoldenitz/mental-health-trials-pipeline)"
 
 
-def get_json(endpoint, timeout=300, tries=4, empty_waits=(60, 180)):
+def get_json(endpoint, timeout=300, tries=4, empty_waits=(60, 180, 300)):
     """Return one endpoint's full list. The protocol endpoint can take a few minutes.
 
-    On 2026-11-02 at 06:30 Toronto time all three endpoints answered with an empty list
-    for a few minutes. An empty answer is retried after each wait in empty_waits (in
-    seconds) before it is returned, so a short outage does not fail the weekly run.
+    On 2026-11-02 and 2026-11-16 at 06:30 Toronto time the endpoints answered with an
+    empty list for longer than 4 minutes. An empty answer is retried after each wait in
+    empty_waits (in seconds) before it is returned. The waits add up to 9 minutes; a
+    Lambda function cannot run longer than 15 minutes, so they cannot grow much more.
+    A second run at 08:30 Toronto time covers longer outages.
     """
     url = f"{BASE}{endpoint}/?lang=en&type=json"
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
