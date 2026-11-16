@@ -354,6 +354,14 @@ Resources:
             ScheduleExpressionTimezone: America/Toronto
             RetryPolicy:
               MaximumRetryAttempts: 0
+        WeeklyBackup:
+          Type: ScheduleV2
+          Properties:
+            # Backup run: skips itself when the 06:30 run already saved today's snapshot
+            ScheduleExpression: cron(30 8 ? * MON *)
+            ScheduleExpressionTimezone: America/Toronto
+            RetryPolicy:
+              MaximumRetryAttempts: 0
 
   HealthCanadaLogs:
     Type: AWS::Logs::LogGroup
