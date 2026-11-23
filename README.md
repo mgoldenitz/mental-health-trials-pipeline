@@ -226,14 +226,43 @@ Setup steps for a personal AWS account are in `docs/aws-setup.md`.
 
 ## Diagrams
 
-Interactive diagrams of the project, made with [Archify](https://github.com/tt-a1i/archify). Each one opens in the browser, and each box links to the source lines it describes.
+Diagrams of the project, made with [Archify](https://github.com/tt-a1i/archify). Click an image to open the interactive version, where each box links to the source lines it describes.
 
-- [Weekly AWS refresh](https://mgoldenitz.github.io/mental-health-trials-pipeline/weekly-aws-refresh.html): the scheduler, the three Lambda functions, S3, Athena, RDS and Power BI
-- [One pipeline run](https://mgoldenitz.github.io/mental-health-trials-pipeline/pipeline-run-dataflow.html): data flow from the download to the PostgreSQL load, with the Health Canada branch
-- [Database tables](https://mgoldenitz.github.io/mental-health-trials-pipeline/database-erd.html): the PostgreSQL tables, their columns and keys
-- [Condition grouping rules](https://mgoldenitz.github.io/mental-health-trials-pipeline/condition-rules-tree.html): the rules in `src/pipeline/rules.py`, in the order they apply
-- [Trial status lifecycle](https://mgoldenitz.github.io/mental-health-trials-pipeline/trial-status-lifecycle.html): registry statuses and the outcome group each one gets
-- [Find trials page](https://mgoldenitz.github.io/mental-health-trials-pipeline/find-trials-sequence.html): what happens when you search and open a trial in the app
+### Weekly AWS refresh
+
+The scheduler, the three Lambda functions, S3, Athena, RDS and Power BI.
+
+[![Weekly AWS refresh](images/diagrams/weekly-aws-refresh.svg)](https://mgoldenitz.github.io/mental-health-trials-pipeline/weekly-aws-refresh.html)
+
+### One pipeline run
+
+Data flow from the download to the PostgreSQL load, with the Health Canada branch.
+
+[![One pipeline run](images/diagrams/pipeline-run-dataflow.svg)](https://mgoldenitz.github.io/mental-health-trials-pipeline/pipeline-run-dataflow.html)
+
+### Database tables
+
+The PostgreSQL tables, their columns and keys.
+
+[![Database tables](images/diagrams/database-erd.svg)](https://mgoldenitz.github.io/mental-health-trials-pipeline/database-erd.html)
+
+### Condition grouping rules
+
+The rules in `src/pipeline/rules.py`, in the order they apply.
+
+<a href="https://mgoldenitz.github.io/mental-health-trials-pipeline/condition-rules-tree.html"><img src="images/diagrams/condition-rules-tree.svg" alt="Condition grouping rules" width="420"></a>
+
+### Trial status lifecycle
+
+Registry statuses and the outcome group each one gets.
+
+[![Trial status lifecycle](images/diagrams/trial-status-lifecycle.svg)](https://mgoldenitz.github.io/mental-health-trials-pipeline/trial-status-lifecycle.html)
+
+### Find trials page
+
+What happens when you search and open a trial in the app.
+
+[![Find trials page](images/diagrams/find-trials-sequence.svg)](https://mgoldenitz.github.io/mental-health-trials-pipeline/find-trials-sequence.html)
 
 ## Status
 - [x] Download from the ClinicalTrials.gov API (1 Oct 2026)
