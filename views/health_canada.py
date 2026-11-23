@@ -5,6 +5,10 @@ import streamlit as st
 
 import tracker as t
 
+# The portal's trial pages use a slug made from the condition name, so they can't be
+# built from the control number alone. A control number search returns that one trial.
+HC_SEARCH = "https://clinical-trials-search.canada.ca/en/search?field_trial_status=All&search_api_fulltext="
+
 st.subheader("Trials authorized by Health Canada")
 conn = t.s3()
 hc = None
@@ -64,15 +68,18 @@ else:
         st.markdown("Ongoing Health Canada trials")
         ongoing = (hc_trials[hc_trials["status"] == "Ongoing"]
                    .sort_values("approved_date", ascending=False)
-                   .assign(condition_group=lambda d: t.relabel(d["condition_group"].fillna(""))))
+                   .assign(condition_group=lambda d: t.relabel(d["condition_group"].fillna("")),
+                           link=lambda d: HC_SEARCH + d["control_number"].astype(str)))
         st.dataframe(
-            ongoing[["control_number", "title", "condition_group", "approved_date",
+            ongoing[["link", "title", "condition_group", "approved_date",
                      "sponsor_name", "psychedelic_class"]],
             column_config={
-                "control_number": "Control number",
+                "link": st.column_config.LinkColumn("Control number", display_text=r"fulltext=(\d+)"),
                 "title": st.column_config.TextColumn("Title", width="large"),
                 "condition_group": "Condition", "approved_date": "Approved",
                 "sponsor_name": "Sponsor", "psychedelic_class": "Drug class",
             },
             hide_index=True, width="stretch",
             alt="Table of ongoing mental health trials authorized by Health Canada, newest approval first.")
+        st.caption("Each control number opens a search for that trial on the Health Canada clinical "
+                   "trial search portal, where the result links to the full trial page.")
