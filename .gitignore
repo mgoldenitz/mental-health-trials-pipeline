@@ -6,3 +6,15 @@ data/raw/
 data/trials.db
 trials.db
 .venv/
+
+# Local files
+.archify/
+AGENTS.md
+CLAUDE.md
+docs/*.json
+style-samples.md
+writing-style.md
+open-house-video/
+qr_*_labeled.png
+images/branding/linkedin-profile-cover.png
+thumbnails/
