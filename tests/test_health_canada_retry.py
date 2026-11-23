@@ -45,3 +45,17 @@ def test_backup_run_skips_when_today_is_saved(monkeypatch):
     monkeypatch.setattr(lam, "get_text", lambda key: json.dumps({"snapshot_date": today}))
     monkeypatch.setattr(lam.hc, "get_json", lambda name: (_ for _ in ()).throw(AssertionError("downloaded")))
     assert lam.handler({}, None) == {"skipped": True, "snapshot_date": today}
+
+
+def test_first_try_stops_quietly_and_backup_raises(monkeypatch):
+    import pytest
+    from unittest import mock
+
+    monkeypatch.setitem(sys.modules, "boto3", mock.MagicMock())
+    from pipeline import health_canada_lambda as lam
+
+    monkeypatch.setattr(lam, "get_text", lambda key: None)
+    monkeypatch.setattr(lam.hc, "get_json", lambda name: [])
+    assert lam.handler({"first_try": True}, None) == {"api_down": True, "endpoint": "protocol"}
+    with pytest.raises(ValueError):
+        lam.handler({}, None)

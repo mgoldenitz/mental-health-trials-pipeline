@@ -62,6 +62,11 @@ def handler(event, context):
         t = time.time()
         raw[name] = hc.get_json(name)
         if not raw[name]:
+            # The 06:30 run sends {"first_try": true}. It stops quietly so that only a
+            # failed 08:30 backup run sends an alert email.
+            if (event or {}).get("first_try"):
+                print(f"The {name} endpoint returned no records; the 08:30 backup run will try again.")
+                return {"api_down": True, "endpoint": name}
             raise ValueError(f"The {name} endpoint still returned no records after retrying; "
                              "Health Canada's API is probably down. Nothing was saved.")
         put(f"{PREFIX}raw/{today}/{name}.json.gz",
