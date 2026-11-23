@@ -224,6 +224,18 @@ Every number above comes from the download of 1 October 2026 and stays fixed. A 
 
 Setup steps for a personal AWS account are in `docs/aws-setup.md`.
 
+## Diagrams
+
+Interactive diagrams of the project, made with [Archify](https://github.com/tt-a1i/archify). Each one opens in the browser, and each box links to the source lines it describes.
+
+- [Weekly AWS refresh](https://mgoldenitz.github.io/mental-health-trials-pipeline/weekly-aws-refresh.html): the scheduler, the three Lambda functions, S3, Athena, RDS and Power BI
+- [One pipeline run](https://mgoldenitz.github.io/mental-health-trials-pipeline/pipeline-run-dataflow.html): data flow from the download to the PostgreSQL load, with the Health Canada branch
+- [Database tables](https://mgoldenitz.github.io/mental-health-trials-pipeline/database-erd.html): the PostgreSQL tables, their columns and keys
+- [Condition grouping rules](https://mgoldenitz.github.io/mental-health-trials-pipeline/condition-rules-tree.html): the rules in `src/pipeline/rules.py`, in the order they apply
+- [Trial status lifecycle](https://mgoldenitz.github.io/mental-health-trials-pipeline/trial-status-lifecycle.html): registry statuses and the outcome group each one gets
+- [Find trials page](https://mgoldenitz.github.io/mental-health-trials-pipeline/find-trials-sequence.html): what happens when you search and open a trial in the app
+- [Key findings on one page](https://mgoldenitz.github.io/mental-health-trials-pipeline/open-house-findings.html): the main results, with charts
+
 ## Status
 - [x] Download from the ClinicalTrials.gov API (1 Oct 2026)
 - [x] Clean, group conditions, flag psychedelic and ketamine treatments
