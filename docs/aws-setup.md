@@ -138,7 +138,7 @@ If the account's free tier includes RDS (750 hours of db.t4g.micro and 20 GB of 
 
 There is no NAT gateway (about USD 33 a month). The load function has no internet access and does not need it.
 
-`DatabaseHours` picks the schedule. `weekly-window` starts the database Mondays at 05:00 and stops it at 07:30 Toronto time, which covers the 06:00 refresh and the load that follows. `always-on` leaves it running. RDS starts a stopped database by itself after 7 days; the Monday schedule stops it again.
+`DatabaseHours` picks the schedule. `weekly-window` starts the database Mondays at 05:00 and stops it at 09:00 Toronto time, which covers the 06:00 refresh, the 06:30 and 08:30 Health Canada runs, and the loads that follow. `always-on` leaves it running. RDS starts a stopped database by itself after 7 days; the Monday schedule stops it again.
 
 ### Who can reach it
 
@@ -203,6 +203,6 @@ The free tier covers 3 dashboards and 10 custom metrics, so this leaves 6 metric
 | Logs | CloudWatch, kept 90 days |
 | Dashboard | CloudWatch dashboard `trials-refresh`: run counts, run time, errors, recent runs and failures |
 | Athena | Parquet tables in `athena/latest/`, workgroup `trials-refresh`, 100 MB scan limit per query |
-| Database | PostgreSQL 17 on RDS db.t4g.micro, loaded after each refresh; Mondays 05:00 to 07:30 only with `DatabaseHours=weekly-window` |
+| Database | PostgreSQL 17 on RDS db.t4g.micro, loaded after each refresh; Mondays 05:00 to 09:00 only with `DatabaseHours=weekly-window` |
 
 To pause the refresh, disable the schedule in the EventBridge Scheduler console. To remove everything except the bucket, run `sam delete --stack-name trials-refresh`; the database is deleted without a final snapshot (every table can be rebuilt from S3), and the bucket is kept so snapshots are not lost, and can be emptied and deleted in the S3 console.
