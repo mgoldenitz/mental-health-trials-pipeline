@@ -352,6 +352,8 @@ Resources:
             # Mondays at 06:30 Toronto time
             ScheduleExpression: cron(30 6 ? * MON *)
             ScheduleExpressionTimezone: America/Toronto
+            # If the API is down, this run stops without an error and the 08:30 run tries again
+            Input: '{"first_try": true}'
             RetryPolicy:
               MaximumRetryAttempts: 0
         WeeklyBackup:
