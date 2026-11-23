@@ -48,6 +48,14 @@ def handler(event, context):
     began = time.time()
     today = datetime.now(timezone.utc).date().isoformat()
 
+    # 0. The 08:30 run is a backup for the 06:30 run. Skip it when today's snapshot exists.
+    #    Send {"force": true} to run again by hand.
+    if not (event or {}).get("force"):
+        last_run = get_text(f"{PREFIX}latest/manifest.json")
+        if last_run and json.loads(last_run).get("snapshot_date") == today:
+            print(f"Snapshot for {today} already exists; nothing to do.")
+            return {"skipped": True, "snapshot_date": today}
+
     # 1. Download each endpoint and save it before doing anything else
     raw = {}
     for name in hc.ENDPOINTS:
