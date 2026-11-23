@@ -234,7 +234,6 @@ Interactive diagrams of the project, made with [Archify](https://github.com/tt-a
 - [Condition grouping rules](https://mgoldenitz.github.io/mental-health-trials-pipeline/condition-rules-tree.html): the rules in `src/pipeline/rules.py`, in the order they apply
 - [Trial status lifecycle](https://mgoldenitz.github.io/mental-health-trials-pipeline/trial-status-lifecycle.html): registry statuses and the outcome group each one gets
 - [Find trials page](https://mgoldenitz.github.io/mental-health-trials-pipeline/find-trials-sequence.html): what happens when you search and open a trial in the app
-- [Key findings on one page](https://mgoldenitz.github.io/mental-health-trials-pipeline/open-house-findings.html): the main results, with charts
 
 ## Status
 - [x] Download from the ClinicalTrials.gov API (1 Oct 2026)
