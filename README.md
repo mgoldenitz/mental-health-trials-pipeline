@@ -228,12 +228,6 @@ Setup steps for a personal AWS account are in `docs/aws-setup.md`.
 
 Diagrams of the project, made with [Archify](https://github.com/tt-a1i/archify). Click an image to open the interactive version, where each box links to the source lines it describes.
 
-### Weekly AWS refresh
-
-The scheduler, the three Lambda functions, S3, Athena, RDS and Power BI.
-
-[![Weekly AWS refresh](images/diagrams/weekly-aws-refresh.svg)](https://mgoldenitz.github.io/mental-health-trials-pipeline/weekly-aws-refresh.html)
-
 ### One pipeline run
 
 Data flow from the download to the PostgreSQL load, with the Health Canada branch.
