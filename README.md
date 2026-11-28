@@ -252,12 +252,6 @@ Registry statuses and the outcome group each one gets.
 
 [![Trial status lifecycle](images/diagrams/trial-status-lifecycle.svg)](https://mgoldenitz.github.io/mental-health-trials-pipeline/trial-status-lifecycle.html)
 
-### Find trials page
-
-What happens when you search and open a trial in the app.
-
-[![Find trials page](images/diagrams/find-trials-sequence.svg)](https://mgoldenitz.github.io/mental-health-trials-pipeline/find-trials-sequence.html)
-
 ## Status
 - [x] Download from the ClinicalTrials.gov API (1 Oct 2026)
 - [x] Clean, group conditions, flag psychedelic and ketamine treatments
